@@ -1,1 +1,1 @@
-Notes for deeplearning.ai
+Notes for deeplearning.ai. Testing mathjax: $$y = mx + b$$
