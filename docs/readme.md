@@ -347,7 +347,7 @@ Our vectors are of the dimensions: \\(w \in \mathbb R^{n_x}\\), \\(b \in \mathbb
 
 Our parameter vector, bias vector, and design matrix are,
 
-\\(w = \begin{bmatrix}w_1\\ ...\\w_{n_x}\end{bmatrix}\\), \\(b = \begin{bmatrix}b_1\\ ...\\b_{n_x}\end{bmatrix}\\), \\(X = \begin{bmatrix}x^{(1)}_1 & ... &x^{(m)}\\ ...\\x^{(1)}_{n_x}\end{bmatrix}\\)
+\\(w = \begin{bmatrix}w_1 \\\\ ... \\\\ w_{n_x}\end{bmatrix}\\), \\(b = \begin{bmatrix}b_1 \\\\ ... \\\\ b_{n_x}\end{bmatrix}\\), \\(X = \begin{bmatrix}x^{(1)}_1 & ... &x^{(m)} \\\\ ... \\\\ x^{(1)}_{n_x}\end{bmatrix}\\)
 
 So, \\(w^T \cdot X + b = w^Tx^{(i)} + b\\) (for all \\(i\\)). Thus we can compute all \\(w^Tx^{(i)}\\) in one operation if we vectorize!
 
@@ -426,7 +426,7 @@ Where \\((m, n), (1, n)\\) are matrices, and the operations are performed _eleme
 
 ##### Addition
 
-_Example 1_: \\(\begin{bmatrix}1\\2\\3\\4\end{bmatrix} + 100 == \begin{bmatrix}1\\2\\3\\4\end{bmatrix} + \begin{bmatrix}100\\100\\100\\100\end{bmatrix} = \begin{bmatrix}101\\102\\103\\104\end{bmatrix}\\)
+_Example 1_: \\(\begin{bmatrix}1 \\\\ 2 \\\\ 3 \\\\ 4\end{bmatrix} + 100 == \begin{bmatrix}1\\2\\3\\4\end{bmatrix} + \begin{bmatrix}100\\100\\100\\100\end{bmatrix} = \begin{bmatrix}101\\102\\103\\104\end{bmatrix}\\)
 
 _Example 2_: \\(\begin{bmatrix}1 & 2 & 3\\4 & 5 & 6\end{bmatrix} + \begin{bmatrix}100 & 200 & 300\end{bmatrix} == \begin{bmatrix}1 & 2 & 3\\4 & 5 & 6\end{bmatrix} + \begin{bmatrix}100 & 200 & 300\\100 & 200 & 300\end{bmatrix} = \begin{bmatrix}101 & 202 & 303\\104 & 205 & 306\end{bmatrix}\\)
 
@@ -741,9 +741,9 @@ Lets take the following network as example:
 
 Lets say we initialize our parameters as follows:
 
-\\(W^{[1]} = \begin{bmatrix}0 & 0\\0 & 0\end{bmatrix}\\), \\(b^{[1]} = \begin{bmatrix}0\\0\end{bmatrix}\\),
-\\(W^{[2]} = \begin{bmatrix}0 & 0\\0 & 0\end{bmatrix}\\),
-\\(b^{[2]} = \begin{bmatrix}0\\0\end{bmatrix}\\)
+\\(W^{[1]} = \begin{bmatrix}0 & 0 \\\\ 0 & 0 \end{bmatrix}\\), \\(b^{[1]} = \begin{bmatrix} 0 \\\\ 0 \end{bmatrix}\\),
+\\(W^{[2]} = \begin{bmatrix} 0 & 0 \\\\ 0 & 0 \end{bmatrix}\\),
+\\(b^{[2]} = \begin{bmatrix} 0 \\\\ 0 \end{bmatrix}\\)
 
 > It turns out that initializing the bias \\(b\\) with zeros is OK.
 
@@ -755,7 +755,7 @@ Similarly,
 
 \\[dz^{[1]}_i == dz^{[1]}_j\\]
 
-Thus, \\(dW^{[1]}\\) will be some matrix \\(\begin{bmatrix}u & v\\u & v\end{bmatrix}\\) and all updates to the parameters \\(W^{[1]}\\) will be identical.
+Thus, \\(dW^{[1]}\\) will be some matrix \\(\begin{bmatrix}u & v \\\\ u & v\end{bmatrix}\\) and all updates to the parameters \\(W^{[1]}\\) will be identical.
 
 > Note we are referring to our single hidden layer \\(^{[1]}\\) but this would apply to any hidden layer of any fully-connected network, no matter how large.
 
