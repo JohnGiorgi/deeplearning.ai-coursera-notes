@@ -2,10 +2,10 @@
 
 #### TOC
 
-1. [Week 1: Introduction](#week-1:-introduction)
-2. [Week 2: Neural networks basics](#week-2:-neural-networks-basics)
-3. [Week 3: Shallow neural networks](#week-3:-shallow-neural-networks)
-4. [Week 4: Deep Neural Networks](#week-4:-deep-neural-networks)
+1. [Week 1: Introduction](#week-1-introduction)
+2. [Week 2: Neural networks basics](#week-2-neural-networks-basics)
+3. [Week 3: Shallow neural networks](#week-3-shallow-neural-networks)
+4. [Week 4: Deep Neural Networks](#week-4-deep-neural-networks)
 
 #### Resources
 
@@ -56,7 +56,7 @@ It turns out, that large, complex neural networks can take advantage of these hu
 
 The interplay between these 'scales' is apparent when you consider that many of the algorithmic advances of neural networks have come from making them more computational efficient.  
 
-##### Algorithmic Advances: ReLu
+__Algorithmic Advances: ReLu__
 
 One of the huge breakthroughs in neural networks has been the seemingly simple switch from the __sigmoid__ activation function to the __rectified linear__ (ReLu) activation function.
 
@@ -66,7 +66,7 @@ With ReLu units, our gradient is equal to \\(1\\) for all positive inputs. This 
 
 ![](https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/Rectifier_and_softplus_functions.svg/640px-Rectifier_and_softplus_functions.svg.png?1514655339839.png)
 
-##### Scale Advances
+__Scale Advances__
 
 With smaller training sets, the relative ordering of the algorithms is actually not very well defined so if you don't have a lot of training data it is often up to your skill at hand engineering features that determines the
 performance. For small training sets, it's quite possible that if someone training an SVM is more motivated to hand engineer features they will outperform a powerful neural network architecture.
@@ -114,7 +114,7 @@ Thus, logistic regression attempts to learn parameters which will classify image
 
 > Note, with neural networks, it is easier to keep the weights \\(w\\) and the biases \\(b\\) separate. Another notation involves adding an extra parameters (\\(w_0\\) which plays the role of the bias.
 
-##### Loss function
+__Loss function__
 
 Our prediction for a given example \\(x^{(i)}\\) is \\(\hat y^{(i)} = \sigma(w^Tx^{(i)} + b)\\) .
 
@@ -164,7 +164,7 @@ When implementing gradient descent in code, we will use the variable \\(dw\\) to
 
 #### (ASIDE) Calculus Review
 
-##### Intuition about derivatives
+__Intuition about derivatives__
 
 ###### Linear Function Example
 
@@ -209,7 +209,7 @@ The computation graph is useful when you have some variable or output variable t
 
 A backwards pass is a natural way to represent the computation of our derivatives.  
 
-##### Derivatives with a computation graph
+__Derivatives with a computation graph__
 
 Lets take a look at our computation graph, and see how we can use it to compute the partial derivatives of \\(J\\) i.e., lets carry out backpropogation on this computation graph by hand.
 
@@ -219,7 +219,7 @@ Lets take a look at our computation graph, and see how we can use it to compute 
 
 First, we use our informal way of computing derivatives, and note that a small change to \\(v\\) results in a change to \\(J\\) of 3X that small change, and so \\(\frac{dJ}{dv} = 3\\) . This represents one step in our backward pass, the first step in backpropagation.
 
-Now let's look at another example. What is \\(\frac{dJ}{da}\\(?
+Now let's look at another example. What is \\(\frac{dJ}{da}\\)?
 
 We compute the \\(\frac{dJ}{da}\\) from the second node in the computation graph by noting that a small change to a results ina change to \\(J\\) of 3X that small  change, and so \\(\frac{dJ}{da} = 3.\\) This represents our second step in our backpropagation.
 
@@ -256,8 +256,8 @@ For this example, lets assume we have only two features: \\(x_1\\), \\(x_2\\) . 
 
 Our goal is to modify the parameters to minimize the loss \\(\ell\\) . This translates to computing derivatives \\(w.r.t\\) the loss function. Following our generic example above, we can compute all the relevant derivatives using the chain rule. The first two passes are computed by the following derivatives:
 
-1. \\(\frac{d\ell(a,y)}{da} = - \frac{y}{a} + \frac{1-y}{1-a}\\(
-2. \\(\frac{d\ell(a,y)}{dz} = \frac{d\ell(a,y)}{da} \cdot \frac{da}{dz} =  a - y\\(
+1. \\(\frac{d\ell(a,y)}{da} = - \frac{y}{a} + \frac{1-y}{1-a}\\)
+2. \\(\frac{d\ell(a,y)}{dz} = \frac{d\ell(a,y)}{da} \cdot \frac{da}{dz} =  a - y\\)
 
 > Note: You should prove these to yourself.
 
@@ -273,9 +273,9 @@ One step of gradient descent would perform the updates:
 
 - \\(w_1 := w_1 - \alpha \frac{d\ell(a,y)}{dw_1}\\)
 - \\(w_2 := w_2 - \alpha \frac{d\ell(a,y)}{dw_2}\\)
-- \\(b := b - \alpha \frac{d\ell(a,y)}{db}\\(
+- \\(b := b - \alpha \frac{d\ell(a,y)}{db}\\)
 
-##### Extending to \\(m\\) examples
+__Extending to \\(m\\) examples__
 
 Lets first remind ourself of the logistic regression __cost__ function:
 
@@ -342,13 +342,13 @@ Lets take a look at some explicit examples:
 
   > This example applies to almost all operations, `np.log(v)`, `np.abs(v)`, `np.max(v)`, etc...
 
-##### Example: Vectorization of Logistic Regression
+__Example: Vectorization of Logistic Regression__
 
 ###### Forward pass
 
 Lets first review the forward pass of logistic regression for \\(m\\) examples:
 
-\\(z^{(1)} = w^Tx^{(1)} + b\\(;  \\(a^{(1)} = \sigma(z^{1})\\), \\) ...\\) , \\(z^{(m)} = w^Tx^{(m)} + b\\(;  \\(a^{(m)} = \sigma(z^{m})\\)
+\\(z^{(1)} = w^Tx^{(1)} + b\\);  \\(a^{(1)} = \sigma(z^{1})\\), \\( ...\\) , \\(z^{(m)} = w^Tx^{(m)} + b\\);  \\(a^{(m)} = \sigma(z^{m})\\)
 
 In logistic regression, we need to compute \\(z^{(i)} = w^Tx^{(i)}+b\\) for each input example \\(x^{(i)}\\) . Instead of using a for loop over each \\(i\\) in range \\((m)\\) we can use a vectorized implementation to compute z directly.
 
@@ -356,7 +356,7 @@ Our vectors are of the dimensions: \\(w \in \mathbb R^{n_x}\\), \\(b \in \mathbb
 
 Our parameter vector, bias vector, and design matrix are,
 
-\\(w = \begin{bmatrix}w_1 \\\\ ... \\\\ w_{n_x}\end{bmatrix}\\), \\(b = \begin{bmatrix}b_1 \\\\ ... \\\\ b_{n_x}\end{bmatrix}\\), \\(X = \begin{bmatrix}x^{(1)}_1 & ... &x^{(m)} \\\\ ... \\\\ x^{(1)}_{n_x}\end{bmatrix}\\)
+\\(w = \begin{bmatrix}w_1 \\\\ ... \\\\ w_{n_x}\end{bmatrix}\\), \\(b = \begin{bmatrix}b_1 \\\\ ... \\\\ b_{n_x}\end{bmatrix}\\), \\(X = \begin{bmatrix}x^{(1)}_1 & ... & x^{(m)} \\\\ ... \\\\ x^{(1)}_{n_x}\end{bmatrix} \\)
 
 So, \\(w^T \cdot X + b = w^Tx^{(i)} + b\\) (for all \\(i\\)). Thus we can compute all \\(w^Tx^{(i)}\\) in one operation if we vectorize!
 
@@ -431,7 +431,7 @@ The general principle of broadcast can be summed up as follows:
 Where \\((m, n), (1, n)\\) are matrices, and the operations are performed _element-wise_ after broadcasting.
 
 
-##### More broadcasting examples
+__More broadcasting examples__
 
 ###### Addition
 
@@ -611,12 +611,12 @@ One disadvantage of ReLu is that the derivative is equal to \\(0\\) when \\(z\\)
 
 Sometimes, the \\(0.01\\) value is treated as an adaptive parameter of the learning algorithm. Leaky ReLu's solve a more general problem of "[dead neurons](https://www.quora.com/What-is-the-definition-of-a-dead-neuron-in-Artificial-Neural-Networks?share=1)". However, it is not used as much in practice.
 
-##### Rules of thumb for choosing activations functions
+__Rules of thumb for choosing activations functions__
 
 - _If your output is a 0/1 value_, i.e., you are performing binary classification, the sigmoid activation is a natural choice for the output layer.
 - _For all other units_, ReLu's is increasingly the default choice of activation function.
 
-##### Why do you need non-linear activation functions?
+__Why do you need non-linear activation functions?__
 
 We could imagine using some __linear__ activation function, \\(g(z) = z\\) in place of the __non-linear__ activation functions we have been using so far. Why is this a bad idea? Lets illustrate out explanation using our simple neural networks
 
@@ -647,7 +647,7 @@ There are (maybe) two cases in which you may actually want to use a linear activ
 
 When perform back-propogation on a network, we need to compute the derivatives of the activation functions. Lets take a look at our activation functions and their derivatives
 
-##### Sigmoid
+__Sigmoid__
 
 ![](https://s19.postimg.org/dy66p1jyr/sigmoid_deriv.png)
 
@@ -659,7 +659,7 @@ The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
 
 Notice that if we have already computed the value of \\(a\\), we can very cheaply compute the value of \\(g(z)'\\) .
 
-##### Tanh
+__Tanh__
 
 ![](https://s19.postimg.org/g2qjq510z/tanh_deriv.png)
 
@@ -669,7 +669,7 @@ The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
 
 > Again, we can sanity check this inspecting that the outputs for different values of \\(z\\) match our intuition about the activation function.
 
-##### ReLu
+__ReLu__
 
 ![](https://s19.postimg.org/i7awr6scz/relu_deriv.png)
 
@@ -786,7 +786,7 @@ The solution to this problem, is to initialize parameters _randomly_. Heres an e
 
 It turns out the \\(b\\) does not have this symmetry breaking problem, because as long as the hidden units are computing different functions, the network will converge on different values of \\(b\\), and so it is fine to initialize it to zeros.
 
-##### Why do we initialize to small values?
+__Why do we initialize to small values?__
 
 For a _sigmoid-like_ activation function, large parameter weights (positive or negative) will make it more likely that \\(z\\) is very large (positive or negative) and thus \\(dz\\) will approach \\(0\\), _slowing down learning dramatically_.
 
