@@ -1,13 +1,22 @@
-# Introduction
+# Course 1: Neural Networks and Deep Learning
 
-### Resources
+#### TOC
+
+1. [Week 1: Introduction](#week-1:-introduction)
+2. [Week 2: Neural networks basics](#week-2:-neural-networks-basics)
+3. [Week 3: Shallow neural networks](#week-3:-shallow-neural-networks)
+4. [Week 4: Deep Neural Networks](#week-4:-deep-neural-networks)
+
+#### Resources
 
 - [Notation cheetsheet](https://d3c33hcgiwev3.cloudfront.net/_106ac679d8102f2bee614cc67e9e5212_deep-learning-notation.pdf?Expires=1514764800&Signature=bnnZZMJUAG2PZPWezLLN6EeKjihlTdaVPo1fqHDdsPmXkLDyjVG-fBtstgOCIcFkKd8OGx845pIKDITTFGm0sMA1eGo4lAIqP7Btffy5VGBRwasKW3WCGGkP-dmq0Vw7Y83ezax4wQCzzYB6iPevY8QniePzg-iq~O5a9hJ4TRk_&Key-Pair-Id=APKAJLTNE6QMUY6HBC5A) (I recommend printing this out and sticking it on the wall where you work!)
 - Check links at end of all programming assignments, these are good resources.
 
-## What is a neural network?
+## Week 1: Introduction
 
-### Supervised Learning with Neural Networks
+### What is a neural network?
+
+#### Supervised Learning with Neural Networks
 
 In supervised learning, you have some input \\(x\\) and some output \\(y\\) . The goal is to learn a mapping \\(x \rightarrow y\\) .
 
@@ -26,7 +35,7 @@ A lot of the value generation from using neural networks have come from intellig
 
 We tend to use different architectures for different types of data. For example, __convolutional neural networks__ (CNNs) are very common for _image data_, while __recurrent neural networks__ (RNNs) are very common for _sequence data_ (such as text). Some data, such as radar data from autonomous vehicles, don't neatly fit into any particularly category and so we typical use a complex/hybrid network architecture.
 
-### Structured vs. Unstructured Data
+#### Structured vs. Unstructured Data
 
 You can think of __structured data__ as essentially meaning _databases of data_. It is data that is highly _structured_, typically with multiple, well-defined attributes for each piece of data. For example, in housing price prediction, you might have a database where the columns tells you the size and the number of bedrooms. Or in predicting whether or not a user will click on an ad, you might have information about the user, such as the age, some information about the ad, and then labels why that you're trying to predict.
 
@@ -37,7 +46,7 @@ Because people have a natural empathy to understanding unstructured data, you mi
 
  ![](https://s19.postimg.org/66pgpyd37/unstructured_vs_structured_data.png.png)
 
-## Why is Deep Learning taking off?
+### Why is Deep Learning taking off?
 
 _If the basic technical details surrounding deep learning have been around for decades, why are they just taking off now?_
 
@@ -47,7 +56,7 @@ It turns out, that large, complex neural networks can take advantage of these hu
 
 The interplay between these 'scales' is apparent when you consider that many of the algorithmic advances of neural networks have come from making them more computational efficient.  
 
-#### Algorithmic Advances: ReLu
+##### Algorithmic Advances: ReLu
 
 One of the huge breakthroughs in neural networks has been the seemingly simple switch from the __sigmoid__ activation function to the __rectified linear__ (ReLu) activation function.
 
@@ -57,7 +66,7 @@ With ReLu units, our gradient is equal to \\(1\\) for all positive inputs. This 
 
 ![](https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/Rectifier_and_softplus_functions.svg/640px-Rectifier_and_softplus_functions.svg.png?1514655339839.png)
 
-#### Scale Advances
+##### Scale Advances
 
 With smaller training sets, the relative ordering of the algorithms is actually not very well defined so if you don't have a lot of training data it is often up to your skill at hand engineering features that determines the
 performance. For small training sets, it's quite possible that if someone training an SVM is more motivated to hand engineer features they will outperform a powerful neural network architecture.
@@ -66,9 +75,9 @@ performance. For small training sets, it's quite possible that if someone traini
 
 However, for very large training sets, _we consistently see large neural networks dominating the other approaches_.
 
-# Week 1
+## Week 2: Neural networks basics
 
-## Binary Classification
+###Binary Classification
 
 First, some notation,
 
@@ -84,7 +93,7 @@ When programming neural networks, implementation details become extremely import
 
 We are going to introduce many of the key concepts of neural networks using __logistic regression__, as this will make them easier to understand. Logistic regression is an algorithm for __binary classification__. In binary classification, we have an input (_e.g_. an image) that we want to classifying as belonging to one of two classes.
 
-### Logistic Regression (Crash course)
+#### Logistic Regression (Crash course)
 
 Given an input feature vector \\(x\\) (perhaps corresponding to an images flattened pixel data), we want \\(\hat y\\) , the probability of the input examples class, \\(\hat y = P(y=1 | x)\\)
 
@@ -105,7 +114,7 @@ Thus, logistic regression attempts to learn parameters which will classify image
 
 > Note, with neural networks, it is easier to keep the weights \\(w\\) and the biases \\(b\\) separate. Another notation involves adding an extra parameters (\\(w_0\\) which plays the role of the bias.
 
-#### Loss function
+##### Loss function
 
 Our prediction for a given example \\(x^{(i)}\\) is \\(\hat y^{(i)} = \sigma(w^Tx^{(i)} + b)\\) .
 
@@ -126,7 +135,7 @@ Note that the __loss function__ measures how well we are doing on a _single exam
 
 > Note that this notation is somewhat unique, typically the cost/loss functions are just interchangeable terms. However in this course, we will define the __loss function__ as computing the error for a single training example and the __cost function__ as the average of the loss functions of the entire training set.
 
-### Gradient Descent
+#### Gradient Descent
 
 We want to find \\(w,b\\) which minimize \\(J(w,b)\\) . We can plot the __cost function__ with \\(w\\) and \\(b\\) as our horizontal axes:
 
@@ -153,11 +162,11 @@ Repeat
 
 When implementing gradient descent in code, we will use the variable \\(dw\\) to represent \\(\frac{dJ(w, b)}{dw}\\) (this size of the step for \\(w\\) and \\(db\\) to represent \\(\frac{dJ(w, b)}{db}\\) (the size of the step for \\(b\\) .
 
-### (ASIDE) Calculus Review
+#### (ASIDE) Calculus Review
 
-#### Intuition about derivatives
+##### Intuition about derivatives
 
-##### Linear Function Example
+###### Linear Function Example
 
 Take the function \\(f(a) = 3a\\). Then \\(f(a) = 6\\) when \\(a = 2\\) . If we were to give \\(a\\) a tiny nudge, say to \\(a = 2.001\\) , what happens to \\(f(a)\\) ?
 
@@ -170,7 +179,7 @@ Thus, the __derivative__ (or slope) of \\(f(a)\\) _w.r.t_ \\(a\\) is \\(3\\) . W
 > Add my calculus notes here!
 > Link to BlueBrown videos.
 
-##### Non-Linear Function Example
+###### Non-Linear Function Example
 
 Take the function \\(f(a) = a^2\\) . Then \\(f(a) = 4\\) when \\(a = 2\\) . If we were to give \\(a\\) a tiny nudge, say to \\(a = 2.001\\), what happens to \\(f(a)\\)?
 
@@ -182,7 +191,7 @@ In a similar way, we can perform this analysis for any point \\(a\\) on the plot
 
 Thus, the __derivative__ (or slope) of \\(f(a)\\) _w.r.t_ \\(a\\) is \\(2a\\) . We say that \\(\frac{df(a)}{da} = 2a\\) or \\(\frac{d}{da}f(a) = 2a\\) .
 
-### Computation Graph
+#### Computation Graph
 
 A __computation graph__ organizes a series of computations into left-to-right and right-to-left passes. Lets build the intuition behind a computation graph.
 
@@ -200,7 +209,7 @@ The computation graph is useful when you have some variable or output variable t
 
 A backwards pass is a natural way to represent the computation of our derivatives.  
 
-#### Derivatives with a computation graph
+##### Derivatives with a computation graph
 
 Lets take a look at our computation graph, and see how we can use it to compute the partial derivatives of \\(J\\) i.e., lets carry out backpropogation on this computation graph by hand.
 
@@ -230,7 +239,7 @@ If we continue performing backpropagation steps, we can determine the individual
 
 The key take away from this video is that when computing derivatives to determine the contribution of input variables to change in an output variable, the most efficient way to do so is through a right to left pass through a computation graph. In particular, we'll first compute the derivative with respect to the output of the left-most node in a backward pass, which becomes useful for computing the derivative with respect to the next node and so forth. The __chain rule__ makes the computation of these derivatives tractable.
 
-### Logistic Regression Gradient Descent
+#### Logistic Regression Gradient Descent
 
 Logistic regression recap:
 
@@ -266,7 +275,7 @@ One step of gradient descent would perform the updates:
 - \\(w_2 := w_2 - \alpha \frac{d\ell(a,y)}{dw_2}\\)
 - \\(b := b - \alpha \frac{d\ell(a,y)}{db}\\(
 
-#### Extending to \\(m\\) examples
+##### Extending to \\(m\\) examples
 
 Lets first remind ourself of the logistic regression __cost__ function:
 
@@ -313,7 +322,7 @@ This constitutes __one step__ of gradient descent.
 
 The main problem with this implementation is the nested for loops. For deep learning, which requires very large training sets, _explicit for loops_ will make our implementation very slow. Vectorizing this algorithm will greatly speed up our algorithms running time.
 
-### Vectorization
+#### Vectorization
 
 Vectorization is basically the art of getting ride of explicit for loops. In practice, deep learning requires large datasets (at least to obtain high performance). Explicit for loops lead to computational overhead that significantly slows down the training process.
 
@@ -333,9 +342,9 @@ Lets take a look at some explicit examples:
 
   > This example applies to almost all operations, `np.log(v)`, `np.abs(v)`, `np.max(v)`, etc...
 
-#### Example: Vectorization of Logistic Regression
+##### Example: Vectorization of Logistic Regression
 
-##### Forward pass
+###### Forward pass
 
 Lets first review the forward pass of logistic regression for \\(m\\) examples:
 
@@ -359,7 +368,7 @@ In numpy code:
 
 Where \\(Z\\) is a row vector \\([z^{(1)}, ..., z^{(m)}]\\) .
 
-##### Backward pass
+###### Backward pass
 
 Recall, for the gradient computation, we computed the following derivatives:
 
@@ -388,7 +397,7 @@ Non-vectorized Approach       | Vectorized Approach 	|
 |![](https://s19.postimg.org/w0z9g6nib/gd_no_vectorization.png)| ![](https://s19.postimg.org/pna6cxawj/gd_vectorization.png.png)|
 |Two for loops, one over the training examples \\(x^{(i)}\\) and a second over the features \\(x^{(i)}_j\\) . We have omitted the outermost loop that iterates over gradient steps. | Note that, we still need a single for loop to iterate over each gradient step (regardless if we are using stochastic or mini-batch gradient descent) even in our vectorized approach. |
 
-### Broadcasting
+#### Broadcasting
 
 Lets motivate the usefulness of __broadcasting__ with an example. Lets say you wanted to get the percent of total calories from carbs, proteins, and fats for multiple foods.
 
@@ -422,9 +431,9 @@ The general principle of broadcast can be summed up as follows:
 Where \\((m, n), (1, n)\\) are matrices, and the operations are performed _element-wise_ after broadcasting.
 
 
-#### More broadcasting examples
+##### More broadcasting examples
 
-##### Addition
+###### Addition
 
 _Example 1_: \\(\begin{bmatrix}1 \\\\ 2 \\\\ 3 \\\\ 4\end{bmatrix} + 100 == \begin{bmatrix}1 \\\\ 2 \\\\ 3 \\\\ 4\end{bmatrix} + \begin{bmatrix}100 \\\\ 100 \\\\ 100 \\\\ 100\end{bmatrix} = \begin{bmatrix}101 \\\\ 102 \\\\ 103 \\\\ 104\end{bmatrix}\\)
 
@@ -432,7 +441,7 @@ _Example 2_: \\(\begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6\end{bmatrix} + \begin{bm
 
 _Example 3_: \\(\begin{bmatrix}1 & 2 & 3  \\\\ 4 & 5 & 6\end{bmatrix} + \begin{bmatrix}100 \\\\ 200\end{bmatrix} == \begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6\end{bmatrix} + \begin{bmatrix}100 & 100 & 100 \\\\ 200 & 200 & 200\end{bmatrix} = \begin{bmatrix}101 & 202 & 303 \\\\ 104 & 205 & 206\end{bmatrix}\\)
 
-### (AISDE) A note on python/numpy vectors
+#### (AISDE) A note on python/numpy vectors
 
 The great flexibility of the python language paired with the numpy library is both a strength and a weakness. It is a strength because of the great expressivity of the pair, but with this comes the opportunity to intro strange, hard-to-catch bugs if you aren't familiar with the intricacies of numpy and in particular broadcasting.
 
@@ -448,9 +457,9 @@ Here are a couple of tips and tricks to minimize the number of these bugs:
 - Additionally, the reshape function runs in linear time and is thus very cheap to call, use it freely!
    - `a = a.reshape((5,1))`
 
-# Week 3: Shallow neural networks
+## Week 3: Shallow neural networks
 
-## Neural network overview
+### Neural network overview
 
 Up until this point, we have used logistic regression as a stand-in for neural networks. The "network" we have been describing looked like:
 
@@ -477,7 +486,7 @@ _The key intuition is that neural networks stack activations of inputs multiplie
 
 Similar to the 'backwards' step that we discussed for logistic regression, we will explore the backwards steps that makes learning in a neural network possible.
 
-### Neural network Representation
+#### Neural network Representation
 
 This is the canonical representation of a neural network
 
@@ -491,7 +500,7 @@ Previously, we were referring to our input examples as \\(x^{(i)}\\) and organiz
 
 Another note: the network shown above is a _2-layer_ neural network. We typically do not count the input layer. In light of this, we usually denote the input layer as \\(l=0\\).
 
-### Computing a Neural Networks Output
+#### Computing a Neural Networks Output
 
 We will use the example of a single hidden layer neural network to demonstrate the forward propagation of inputs through the network leading to the networks output.
 
@@ -503,7 +512,7 @@ We can think of each unit in the neural network as performing two steps, the _mu
 
 So, the \\(j^{th}\\) node of the \\(l^{th}\\) layer performs the computation
 
-\\[a_j^[{l}] = \sigma(w_i^{[l]^T}a^{[l-1]} + b_i^{[l]})\\]
+\\[ a_j^{[l]} = \sigma(w_i^{[l]^T}a^{[l-1]} + b_i^{[l]})\\]
 
 > Where \\(a^{[l-1]}\\) is the activation values from the precious layer.
 
@@ -525,7 +534,7 @@ We can put it all together for our two layer neural network, and outline all the
 
 ![](https://s19.postimg.org/5so4qvgab/putting_it_all_together_new_notation.png)
 
-### Vectorizing across multiple examples
+#### Vectorizing across multiple examples
 
 In the last video, we saw how to compute the prediction for a neural network with a single input example. In this video, we introduce a vectorized approach to compute predictions for many input examples.  
 
@@ -533,7 +542,7 @@ We have seen how to take a single input example \\(x\\) and compute \\(a^{[2]} =
 
 First, lets introduce a new notation. The activation values of layer \\(l\\) for input example \\(i\\) is:
 
-\\[a^{[l](i)}\\]
+\\[ a^{[l](i)} \\]
 
 The \\(m\\) predictions our 2-layered are therefore computed in the following way:
 
@@ -554,7 +563,7 @@ As an example, the result of a matrix multiplication of \\(W^{[1]}\\) by \\(X\\)
 
 ![](https://s19.postimg.org/dmoqbqt2r/vectorized_activations.png)
 
-## Activation Functions
+### Activation Functions
 
 So far, we have been using the __sigmoid__ activation function
 
@@ -562,7 +571,7 @@ So far, we have been using the __sigmoid__ activation function
 
 It turns out there are much better options.
 
-### Tanh
+#### Tanh
 
 The __hyperbolic tangent function__ is a non-linear activation function that almost always works better than the sigmoid function.
 
@@ -582,7 +591,7 @@ Where \\(p\\) is the \\(p^th\\) activation function.
 
 If \\(z\\) is either very large, or very small, the derivative of both the tanh and sigmoid functions becomes very small, and this can slow down learning.
 
-### ReLu
+#### ReLu
 
 The __rectified linear unit__ activation function solves the disappearing gradient problem faced by tanh and sigmoid activation functions. In practice, it also leads to faster learning.
 
@@ -602,12 +611,12 @@ One disadvantage of ReLu is that the derivative is equal to \\(0\\) when \\(z\\)
 
 Sometimes, the \\(0.01\\) value is treated as an adaptive parameter of the learning algorithm. Leaky ReLu's solve a more general problem of "[dead neurons](https://www.quora.com/What-is-the-definition-of-a-dead-neuron-in-Artificial-Neural-Networks?share=1)". However, it is not used as much in practice.
 
-#### Rules of thumb for choosing activations functions
+##### Rules of thumb for choosing activations functions
 
 - _If your output is a 0/1 value_, i.e., you are performing binary classification, the sigmoid activation is a natural choice for the output layer.
 - _For all other units_, ReLu's is increasingly the default choice of activation function.
 
-#### Why do you need non-linear activation functions?
+##### Why do you need non-linear activation functions?
 
 We could imagine using some __linear__ activation function, \\(g(z) = z\\) in place of the __non-linear__ activation functions we have been using so far. Why is this a bad idea? Lets illustrate out explanation using our simple neural networks
 
@@ -627,18 +636,18 @@ From which we can show that,
 
 Therefore, in the case of a _linear activation function_, the neural network is outputting a _linear function of the inputs_, no matter how many hidden layers!
 
-##### Exceptions
+###### Exceptions
 
 There are (maybe) two cases in which you may actually want to use a linear activation function.
 
 1. The output layer of a network used to perform regression, where we want \\(\hat y\\) to be a real-valued number, \\(\hat y \in \mathbb R\\)
 2. Extremely specific cases pertaining to compression.
 
-### Derivatives of activation functions
+#### Derivatives of activation functions
 
 When perform back-propogation on a network, we need to compute the derivatives of the activation functions. Lets take a look at our activation functions and their derivatives
 
-#### Sigmoid
+##### Sigmoid
 
 ![](https://s19.postimg.org/dy66p1jyr/sigmoid_deriv.png)
 
@@ -650,7 +659,7 @@ The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
 
 Notice that if we have already computed the value of \\(a\\), we can very cheaply compute the value of \\(g(z)'\\) .
 
-#### Tanh
+##### Tanh
 
 ![](https://s19.postimg.org/g2qjq510z/tanh_deriv.png)
 
@@ -660,7 +669,7 @@ The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
 
 > Again, we can sanity check this inspecting that the outputs for different values of \\(z\\) match our intuition about the activation function.
 
-#### ReLu
+##### ReLu
 
 ![](https://s19.postimg.org/i7awr6scz/relu_deriv.png)
 
@@ -670,7 +679,7 @@ The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
 
 > If \\(z = 0\\), we typically default to setting \\(g(z)\\) to either \\(0\\) or \\(1\\) . In practice this matters little.
 
-## Gradient descent for Neural Networks
+### Gradient descent for Neural Networks
 
 Lets implement gradient descent for our simple 2-layer neural network.
 
@@ -698,7 +707,7 @@ __Gradient Descent sketch__
 
 The key to gradient descent is to computation of the derivatives, \\(\frac{\partial J}{\partial W^{[l]}}\\) and \\(\frac{\partial J}{\partial b^{[l]}}\\) for all layers \\(l\\) .
 
-### Formulas for computing derivatives
+#### Formulas for computing derivatives
 
 We are going to simply present the formulas you need, and defer their explanation to the next video. Recall the computation graph for our 2-layered neural network:
 
@@ -731,7 +740,7 @@ Now we list the computations for our __backward propagation__
 5.\\[dW{[1]} = \frac{1}{m} = dZ^{[1]}X^T\\]
 6.\\[db^{[1]} = \frac{1}{m}np.sum(dZ^{[1]}, axis=1, keepdims=True)\\]
 
-## Random Initialization
+### Random Initialization
 
 When you train your neural network, it is important to initialize your parameters _randomly_. With logistic regression, we were able to initialize our weights to _zero_ because the cost function was convex. We will see that this _will not work_ with neural networks.
 
@@ -777,15 +786,15 @@ The solution to this problem, is to initialize parameters _randomly_. Heres an e
 
 It turns out the \\(b\\) does not have this symmetry breaking problem, because as long as the hidden units are computing different functions, the network will converge on different values of \\(b\\), and so it is fine to initialize it to zeros.
 
-#### Why do we initialize to small values?
+##### Why do we initialize to small values?
 
 For a _sigmoid-like_ activation function, large parameter weights (positive or negative) will make it more likely that \\(z\\) is very large (positive or negative) and thus \\(dz\\) will approach \\(0\\), _slowing down learning dramatically_.
 
 > Note this is a less of an issue when using ReLu's, however many classification problems use sigmoid activations in their output layer.
 
-# Week 4: Deep Neural Networks
+## Week 4: Deep Neural Networks
 
-## What is a deep neural network?
+### What is a deep neural network?
 
 A deep neural network is simply a network with more than 1 hidden layer. Compared to logistic regression or a simple neural network with one hidden layer (which are considered __shallow__ models) we say that a neural network with many hidden layers is a __deep__ model, hence the terms _deep learning / deep neural networks_.
 
@@ -797,7 +806,7 @@ Over the years, the machine learning and AI community has realized that deep net
 
 > Note that is difficult to know in advance how deep a neural network needs to be to learn an effective mapping.
 
-### Notation
+#### Notation
 
 Lets go over the notation we will need using an example network
 
