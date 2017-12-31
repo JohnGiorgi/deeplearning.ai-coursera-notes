@@ -62,7 +62,7 @@ One of the huge breakthroughs in neural networks has been the seemingly simple s
 
 One of the problems with using __sigmoid__ functions is that its gradients approach 0 as input to the sigmoid function approaches and \\(+\infty\\) and \\(-\infty\\) . In this case, the updates to the parameters become very small and our learning slows dramatically.
 
-With ReLu units, our gradient is equal to \\(1\\) for all positive inputs. This makes learning with gradient descent much faster. See [here](https://www.wikiwand.com/en/Rectifier_(neural_networks)) for more information on ReLu's.
+With ReLu units, our gradient is equal to \\(1\\) for all positive inputs. This makes learning with gradient descent much faster. See [here](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) for more information on ReLu's.
 
 ![](https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/Rectifier_and_softplus_functions.svg/640px-Rectifier_and_softplus_functions.svg.png?1514655339839.png)
 
@@ -227,7 +227,7 @@ One way to break this down is to say that by changing \\(a\\), we change \\(v\\)
 
 \\[\text{if } a \rightarrow v \rightarrow J \text{, then } \frac{dJ}{da} = \frac{dJ}{dv} \frac{dv}{da}\\]
 
-> Here, just take \\(\rightarrow\\) to mean 'effects'. A formal definition of the chain rule can be found [here](https://www.wikiwand.com/en/Chain_rule).
+> Here, just take \\(\rightarrow\\) to mean 'effects'. A formal definition of the chain rule can be found [here](https://en.wikipedia.org/wiki/Chain_rule).
 
 The amount \\(J\\) changes when you when you nudge \\(a\\) is the product of the amount \\(J\\) changes when you nudge \\(v\\) multiplied by the amount \\(v\\) changes when you nudge \\(a\\) .
 
@@ -840,9 +840,9 @@ When implementing a neural network, it is extremely important that we ensure our
 For a \\(l\\)-layered neural network, our dimensions are as follows:
 
 - \\(W^{[l]}: (n^{[l]}, n^{[l-1]})\\)
-- \\(b^{[l]}: (n^{[l]}, 1\\)
-- \\(Z^{[l]}, A^{[l]}: (n^{[l]}, m\\)
-- \\(A^{[0]} = X: (n^{[0]}, m\\)
+- \\(b^{[l]}: (n^{[l]}, 1)\\)
+- \\(Z^{[l]}, A^{[l]}: (n^{[l]}, m)\\)
+- \\(A^{[0]} = X: (n^{[0]}, m)\\)
 
 Where \\(n^{[l]}\\) is the number of units in layer \\(l\\).
 
