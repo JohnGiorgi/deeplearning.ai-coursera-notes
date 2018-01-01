@@ -673,7 +673,7 @@ __ReLu__
 
 ![](https://s19.postimg.org/i7awr6scz/relu_deriv.png)
 
-The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
+The derivative of \\(g(z)\\), \\(g(z)'\\) is:
 
 \\[\frac{d}{dz}g(z) = 0 \text{ if } z < 0 ; 1 \text{ if } z > 0; \text{ undefined if } z = 0\\]
 
@@ -875,3 +875,63 @@ Circuit theory also provides us with a possible explanation as to why deep netwo
 > Check out [this](https://www.coursera.org/learn/neural-networks-deep-learning/lecture/rz9xJ/why-deep-representations) video starting at 5:36 for a deeper explanation of this.
 
 ### Building blocks of deep neural networks
+
+Lets take a more holistic approach and talk about all the building blocks of deep neural networks. Here is a deep neural network with a few hidden layers
+
+![](https://s19.postimg.org/wtuvboc5v/simple_deep_nn_2.png)
+
+Lets pick one layer, \\(l\\) and look at the computations involved.
+
+For this layer \\(l\\), we have parameters \\(W^{[l]}\\) and \\(b^{[l]}\\). Our two major computation steps through this layer are:
+
+__Forward Propagation__
+
+- Input: \\(a^{[l-1]}\\)
+- Output: \\(a^{[l]}\\)
+- Linear function: \\(z^{[l]} = W^{[l]}a^{[l-1] + b^{[l]}}\\)
+- Activation function: \\(a^{[l]} = g^{[l]}(z^{[l]})\\)
+
+Because \\(z^{[l]}, W^{[l]} and b^{[l]}\\) are used in then backpropagation steps, it helps to cache theses values during forward propagation.
+
+__Backwards Propagation__
+
+- Input: \\(da^{[l]}, cache(z^{[l]})\\)
+- Output: \\(da^{[l-1]}, dW^{[l]}, db^{[l]}\\)
+
+The key insight, is that for every computation in forward propagation there is a corresponding computation in backwards propagation
+
+![](https://s19.postimg.org/m3l0v6sdv/forward_backward.png)
+
+So one iteration of training with a neural network involves feeding our inputs into the network (\\(a^{[0]})\\), performing forward propagation computing \\(\hat y\\), and using it to compute the loss and perform backpropagation through the network. This will produce all the derivatives of the parameters w.r.t the loss that we need to update the parameters for gradient descent.
+
+### Parameters vs hyperparameters
+
+The __parameters__ of your model are the _adaptive_ values, \\(W\\) and \\(b\\) which are _learned_ during training via gradient descent.
+
+In contrast, __hyperparameters__ are set before training and can be viewed as the "settings" of the learning algorithms. They have a direct effect on the eventual value of the parameters.
+
+Examples include:
+
+- number of iterations
+- learning rate
+- number of hidden layers \\(L\\)
+- number of hidden units \\(n^{[1]}, n^{[2]}, ...\\)
+- choice of activation function
+
+> the learning rate is sometimes called a parameter. We will follow the convetion of calling it a hyperparameter.
+
+It can be difficult to know the optimal hyperparameters in advance. Often, we start by simply trying out many values to see what works best, this allows us to build our intuition about the best hyperparameters to use. We will defer a deep discussion on how to choose hyperparameters to the next course.
+
+### What does this all have to do with the brain?
+
+At the risk of giving away the punch line, _not a whole lot_.
+
+The most important mathematical components of a neural networks: _forward propagation_ and _backwards propagation_ are rather complex, and it has been difficult to convey the intuition behind these methods. As a result, the phrase, "it's like the brain" has become an easy, but dramatically oversimplified explanation. It also helps that this explanation has caught the publics imagination.  
+
+There is a loose analogy to be drawn from a biological neuron and the neurons in our artificial neural networks. Both take inputs (derived from other neurons) process the information and propagate a signal forward.
+
+![]()
+
+However, even today neuroscientists don't fully understand what a neuron is doing when it receives and propagates a signal. Indeed, we have no idea on whether the biological brain is performing some algorithmic processes similar to those performed by an ANN.
+
+Deep learning is an excellent method for complex function approximation, i.e., learning mappings from inputs \\(x\\) to outputs \\(y\\). However we should be very wary about pushing the, "its like a brain!" analogy too far.
