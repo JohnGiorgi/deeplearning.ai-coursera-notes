@@ -935,3 +935,81 @@ There is a loose analogy to be drawn from a biological neuron and the neurons in
 However, even today neuroscientists don't fully understand what a neuron is doing when it receives and propagates a signal. Indeed, we have no idea on whether the biological brain is performing some algorithmic processes similar to those performed by an ANN.
 
 Deep learning is an excellent method for complex function approximation, i.e., learning mappings from inputs \\(x\\) to outputs \\(y\\). However we should be very wary about pushing the, "its like a brain!" analogy too far.
+
+# Course 3: Structuring Machine Learning Projects
+
+What is _machine learning strategy?_. Lets start with a motivating example.
+
+## Introduction to ML strategy
+
+### Why ML strategy
+
+Lets say you are working on you __cat classifier__. You have achieved 90% accuracy, but would like to improve performance even further. Your ideas for achieveing this are:
+
+- collect more data
+- collect more diverse training set
+- train algorithm longer with gradient descent
+- try adam instead of gradient descent
+- try dropout, add L2 regularization, change network architecture, ...
+
+This list is long, and so it becomes incredibly important to be able to identify ideas that are worth our time, and which ones we can likely discard.
+
+This course will attempt to introduce a framework for making these decisions. In particular, we will focus on the organization of deep learning based projects.
+
+### Orthogonalization
+
+One of the challanges with building deep learning systems is the number of things we can tune to improve performance (_many hyperparameters notwithstanding_).
+
+Take the example of an old TV. They included many nobs for tuning the display position (x-axis position, y-axis position, rotation, etc...).
+
+__Orthogonalization__ in this example refers to the TV designers decision to ensure each nob had one effect on the display and that these effects were _relative_ to one another. If these nobs did more than one action and each actions magnitude was not relative to the other, it would become nearly impossible to tune the TV.
+
+Take another example, driving a __car__. Imagine if there was multiple joysticks. One joystick modified \\(0.3\\) X steering angle \\(- 0.8\\) speed, and another \\(2\\) X steering angle \\(+ 0.9\\). In theory, by tuning these two nobs would could drive the car, but this would be _much more difficult then separating the inputs into distinct input mechanisms_.
+
+__Orthogonal__ refers to the idea that we _inputs_ aligned to the dimensions we want to control.
+
+![](https://s19.postimg.org/51dg3e5v7/speed_v_angle_orth.png)
+
+_How does this related to machine learning?_
+
+#### Chain of assumption in examples
+
+For a machine learning system to perform "well", we usually aim to make four things happen:
+
+1. Fit training set well on cost function (for some applications, this means comparing favorably to human-level performance).
+2. Fit dev set well on cost function
+3. Fit test set well on cost function
+4. Performs well in real world.
+
+If we relate back to the TV example, we wanted _one knob_ to change each attribute of the display. _In the same way, we can modify knobs for each of our four steps above_:
+
+1. Train a bigger network, change the optimization algorithm, ...
+2. Regularization, bigger training set, ...
+3. Bigger dev set, ...
+4. Change the dev set or the cost function
+
+> Andrew said when he trains neural networks, he tends __not__ to use __early stopping__. The reason being is that this is not a very __orthogonal__ "knob"; it simultaneously effects how well we fit the training set and the dev set.
+
+The whole idea here is that if we keep our "knobs" __orthogonal__, we can more easily come up with solutions to specific problems with our deep neural networks (i.e., if we are getting poor performance on the training set, we may opt to train a bigger [higher variance] network).
+
+## Setting up your goal
+
+### Single number evaluation metric
+
+When tuning neural networks (modifying hyper-parameters, trying different architectures, etc.) you will find that having a _single __evaluation metric___ will allow you to easily and quickly judge if that change improved performance.
+
+> Andrew recommends deciding on a single, real-valued evaluation metric when starting out on your deep learning project.
+
+Lets look at an example.
+
+As we discussed previously, __applied machine learning__ is a very empirical process.
+
+![](https://s19.postimg.org/3mbveorxf/using_a_single_number.png)
+
+Lets say that we start with classifier A, and end up with classifier B after some change to the model. We could look at __precision__ and __recall__ as a means of improvements. What we really want is to improve _both_ precision and recall. The problem is that it can become difficult to choose the "best" classifier if we are monitoring two different performance metrics, especially when we are making many modifications to our network.
+
+This is when it becomes important to chose a single performance metric. In this case specifically, we can chose the __F1-score__, the harmonic mean of the precision and recall (less formally, think of this as an average).
+
+![](https://s19.postimg.org/ovzhpj0ib/chosing_f1_score.png)
+
+We can see very quickly that classifier A has a better F1-score, and therefore we chose classifier A over classifier B.
