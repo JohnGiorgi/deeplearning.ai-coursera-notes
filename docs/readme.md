@@ -900,7 +900,7 @@ __Backwards Propagation__
 
 The key insight, is that for every computation in forward propagation there is a corresponding computation in backwards propagation
 
-![](https://s19.postimg.org/m3l0v6sdv/forward_backward.png)
+![](https://s19.postimg.org/nfx5yyrtf/forward_backward.png)
 
 So one iteration of training with a neural network involves feeding our inputs into the network (\\(a^{[0]})\\), performing forward propagation computing \\(\hat y\\), and using it to compute the loss and perform backpropagation through the network. This will produce all the derivatives of the parameters w.r.t the loss that we need to update the parameters for gradient descent.
 
@@ -938,11 +938,18 @@ Deep learning is an excellent method for complex function approximation, i.e., l
 
 # Course 3: Structuring Machine Learning Projects
 
-What is _machine learning strategy?_. Lets start with a motivating example.
+#### TOC
 
-## Introduction to ML strategy
+1. [Week 1: ML Strategy 1](#ml-strategy-1)
+2. [Week 1: ML Strategy 2](#ml-strategy-2)
 
-### Why ML strategy
+## Week 1: ML Strategy (1)
+
+What is _machine learning strategy?_ Lets start with a motivating example.
+
+### Introduction to ML strategy
+
+#### Why ML strategy
 
 Lets say you are working on you __cat classifier__. You have achieved 90% accuracy, but would like to improve performance even further. Your ideas for achieveing this are:
 
@@ -956,7 +963,7 @@ This list is long, and so it becomes incredibly important to be able to identify
 
 This course will attempt to introduce a framework for making these decisions. In particular, we will focus on the organization of deep learning based projects.
 
-### Orthogonalization
+#### Orthogonalization
 
 One of the challanges with building deep learning systems is the number of things we can tune to improve performance (_many hyperparameters notwithstanding_).
 
@@ -964,7 +971,7 @@ Take the example of an old TV. They included many nobs for tuning the display po
 
 __Orthogonalization__ in this example refers to the TV designers decision to ensure each nob had one effect on the display and that these effects were _relative_ to one another. If these nobs did more than one action and each actions magnitude was not relative to the other, it would become nearly impossible to tune the TV.
 
-Take another example, driving a __car__. Imagine if there was multiple joysticks. One joystick modified \\(0.3\\) X steering angle \\(- 0.8\\) speed, and another \\(2\\) X steering angle \\(+ 0.9\\). In theory, by tuning these two nobs would could drive the car, but this would be _much more difficult then separating the inputs into distinct input mechanisms_.
+Take another example, driving a __car__. Imagine if there was multiple joysticks. One joystick modified \\(0.3\\) X steering angle \\(- 0.8\\) speed, and another \\(2\\) X steering angle \\(+ 0.9\\) speed. In theory, by tuning these two nobs would could drive the car, but this would be _much more difficult then separating the inputs into distinct input mechanisms_.
 
 __Orthogonal__ refers to the idea that we _inputs_ aligned to the dimensions we want to control.
 
@@ -972,7 +979,7 @@ __Orthogonal__ refers to the idea that we _inputs_ aligned to the dimensions we 
 
 _How does this related to machine learning?_
 
-#### Chain of assumption in examples
+##### Chain of assumption in examples
 
 For a machine learning system to perform "well", we usually aim to make four things happen:
 
@@ -992,9 +999,9 @@ If we relate back to the TV example, we wanted _one knob_ to change each attribu
 
 The whole idea here is that if we keep our "knobs" __orthogonal__, we can more easily come up with solutions to specific problems with our deep neural networks (i.e., if we are getting poor performance on the training set, we may opt to train a bigger [higher variance] network).
 
-## Setting up your goal
+### Setting up your goal
 
-### Single number evaluation metric
+#### Single number evaluation metric
 
 When tuning neural networks (modifying hyper-parameters, trying different architectures, etc.) you will find that having a _single __evaluation metric___ will allow you to easily and quickly judge if that change improved performance.
 
@@ -1013,3 +1020,105 @@ This is when it becomes important to chose a single performance metric. In this 
 ![](https://s19.postimg.org/ovzhpj0ib/chosing_f1_score.png)
 
 We can see very quickly that classifier A has a better F1-score, and therefore we chose classifier A over classifier B.
+
+#### Satisficing and Optimizing metric
+
+It is not always easy to combine all the metrics we care about into a single real-numbered value. Lets introduce __satisficing__ and __optimizing__ metrics as a solution to this problem.
+
+Lets say we are building a classifier, and we care about both our __accuracy__ (measured as F1-score, traditional accuracy or some other metric) _and_ the __running time__ to classify a new example.
+
+![](https://s19.postimg.org/px8x67gur/two_metrics_optimize.png)
+
+One thing we can do, is to combine accuracy and run-time into a __single-metric__, possibly by taking a weighted linear sum of the two metrics. As it turns out this is a rather artificial solution (no pun intended).
+
+Another way, is to attempt to _maximize accuracy_ while subject to the restraint that \\(\text{running time} \le 100\\)ms. In this case, we say that _accuracy_ is an __optimizing__ metric (because we want to maximize or minimize it) and _running time_ is a __satisficing__ metric (because it just needs to meet a certain constraint, i.e., be "good enough").
+
+More generally, if we have \\(m\\) metrics that we care about, it is reasonable to choose _one_ to be our __optimizing metric__, and \\(m-1\\) to be __satisficing metrics__.
+
+##### Example: Wake words
+
+We can take a concrete example to illustrate this: __wake words__ for __intelligent voice assistants__. We might chose the accuracy of the model (i.e., what percent of the time does it "wake" when a wake word is said) to be out __optimizing metric__ s.t. we have \\(\le 1\\) false-positives per 24 hours of operation (our __satisficing metric__).
+
+##### Summary
+
+To summarize, if there are multiple things you care about, we can set one as the __optimizing metric__ that you want to do as well as possible on and one or more as __satisficing metrics__ were you'll be satisfied. This idea goes hand-in-hand with the idea of having a single real-valued performance metric whereby we can _quickly_ and _easily_ chose the best model given a selection of models.
+
+### Train/dev/test distributions
+
+The way you set up your train, dev (sometimes called valid) and test sets can have a large impact on your development times and even model performance.
+
+In this video, we are going to focus on the __dev__ (sometimes called the __valid__ or __hold out__ set) and the __test set__. The general workflow in machine learning is to train on the __train__ set and test out model performance (e.g., different hyper-parameters or model architectures) on the __dev__ set.
+
+Lets look at an example. Say we had data from multiple regions:
+
+- US
+- UK
+- Other European countries
+- South America
+- India
+- China
+- Other Asian countries
+- Australia
+
+If we were to build our dev set by choosing data from the first four regions and our test set from the last four regions, our data would likely be __skewed__ and our model would likely perform poorly (at least on the __test__ set). _Why?_
+
+Imagine the __dev__ set as a target, and our job as machine learning engineers is to hit a bullseye on a (with a bow, if you care to follow the analogy through). _A dev set that is not representative of the overall general distribution is analogous to a moving the bullseye away from its original location moments after we fire our bow_. An ML team could spend months optimizing the model on a dev set, only to achieve very poor performance on a test set!
+
+So for our data above, a much better idea would be to sample data randomly from all regions to build our __dev__ and __test__ set.
+
+#### Guidelines
+
+Choose a __dev__ set and __test__ set (from the same distribution) to reflect data you expect to _get in the future_ and _consider important to do well on_.
+
+### Size of the dev and test sets
+
+In the last lecture we saw that the dev and test sets should come from the same distributions. _But how large should they be?_
+
+#### Size of the dev/test sets
+
+The rule of thumb in machine learning is typically 60% __training__, 20% __dev__, and 20% __test__ (or 70/30 __train__/__test__). In earlier eras of machine learning, this was pretty reasonable. In the modern machine learning era, we are used to working with _much_ larger data set sizes.
+
+For example, imagine we have $1,000,000$ examples. It might be totally reasonable for us to use 98% as our test set, 1% for dev and 1% for __test__.
+
+> Note that 1% of $10^6$ is $10^4$!
+
+#### Guidelines
+
+Set your __test__ set to be big enough to give high confidence in the overall performance of your system.
+
+### When to change dev/test sets and metrics
+
+Sometimes during the course of a machine learning project, you will realize that you want to change your evaluation metric (i.e., move the "goal posts"). Lets illustrate this with an example:
+
+#### Example 1
+
+Imagine we have two models for image classification, and we are using classification performance as our evaluation metric:
+
+- Algorithm A has a __3%__ error, but sometimes shows users pornographic images.
+- Algorithm B has a __5%__ error.
+
+Cleary, algorithm A performs better by our original evaluation metric (classification performance), but showing users pornographic images is _unacceptable_.
+
+$$Error = \frac{1}{m_{dev}}\sum^{m_{dev}}_{i=1} \ell \{ y_{pred}^{(i)} \ne y^{(i)} \}$$
+
+> Our error treats all incorrect predictions the same, pornographic or otherwise.
+
+We can think of it like this: our evaluation metric _prefers_ algorithm A, but _we_ (and our users) prefer algorithm B. When our evaluation metric is no longer ranking the algorithms in the order we would like, it is a sign that we may want to change our evaluation metric. In our specific example, we could solve this by weighting misclassifications
+
+$$Error = \frac{1}{w^{(i)}}\sum^{m_{dev}}_{i=1} w^{(i)}\ell \{ y_{pred}^{(i)} \ne y^{(i)} \}$$
+
+where $w^{(i)}$ is 1 if $x^{(i)}$ is non-porn and 10 (or even 100 or larger) if $x^{(i)}$ is porn.
+
+This is actually an example of __orthogonalization__. We,
+
+1. Define a metric to evaluate our model ("placing the target")
+2. (In a completely separate step) Worry about how to do well on this metric.
+
+#### Example 2
+
+Take the same example as above, but with a new twist. Say we train our classifier on a data set of high quality images. Then, when we deploy our model we notice it performs poorly. We narrow the problem down to the low quality images users are "feeding" to the model. What do we do?
+
+_If doing well on your metric + dev/test set does not correspond to doing well on your application, change your metric and/or dev/test set_.
+
+
+## Week 1: ML Strategy (2)
