@@ -512,7 +512,7 @@ We can think of each unit in the neural network as performing two steps, the _mu
 
 So, the \\(j^{th}\\) node of the \\(l^{th}\\) layer performs the computation
 
-\\[ a_j^{[l]} = \sigma(w_i^{[l]^T}a^{[l-1]} + b_i^{[l]})\\]
+\\[ a_j^{[l]} = \sigma(w_i^{[l]^T}a^{[l-1]} + b_i^{[l]}) \\]
 
 > Where \\(a^{[l-1]}\\) is the activation values from the precious layer.
 
@@ -718,14 +718,14 @@ And the vectorized implementation of our computations in our __forward propagati
 1.\\[Z^{[1]} = W^{[1]}X + b^{[1]}\\]
 2.\\[A^{[1]} = g^{[1]}(z^{[1]})\\]
 3.\\[Z^{[2]} = W^{[2]}X + b^{[2]}\\]
-4.\\[A^{[2]} = g^{[2]}(z^{[2]})\\]
+4.\\ß[A^{[2]} = g^{[2]}(z^{[2]})\\]
 
 > Where \\(g^{[2]}\\) would likely be the sigmoid function if we are doing binary classification.
 
 Now we list the computations for our __backward propagation__
 
-1.\\[dZ^{[2]} = A^{[2]} - Y\\]
-2.\\[dW^{[2]} = \frac{1}{m}dZ^{[2]}A^{[1]T}\\]
+1.\\[ dZ^{[2]} = A^{[2]} - Y \\]
+2.\\[ dW^{[2]} = \frac{1}{m}dZ^{[2]}A^{[1]T} \\]
 
 > Transpose of A accounts for the fact that W is composed of transposed column vectors of parameters.
 
@@ -951,29 +951,29 @@ What is _machine learning strategy?_ Lets start with a motivating example.
 
 #### Why ML strategy
 
-Lets say you are working on you __cat classifier__. You have achieved 90% accuracy, but would like to improve performance even further. Your ideas for achieveing this are:
+Lets say you are working on a __cat classifier__. You have achieved 90% accuracy, but would like to improve performance even further. Your ideas for achieveing this are:
 
 - collect more data
 - collect more diverse training set
-- train algorithm longer with gradient descent
-- try adam instead of gradient descent
+- train the algorithm longer with gradient descent
+- try adam (or other optimizers) instead of gradient descent
 - try dropout, add L2 regularization, change network architecture, ...
 
 This list is long, and so it becomes incredibly important to be able to identify ideas that are worth our time, and which ones we can likely discard.
 
-This course will attempt to introduce a framework for making these decisions. In particular, we will focus on the organization of deep learning based projects.
+This course will attempt to introduce a framework for making these decisions. In particular, we will focus on the organization of _deep learning-based projects_.
 
 #### Orthogonalization
 
-One of the challanges with building deep learning systems is the number of things we can tune to improve performance (_many hyperparameters notwithstanding_).
+One of the challenges with building deep learning systems is the number of things we can tune to improve performance (_many hyperparameters notwithstanding_).
 
 Take the example of an old TV. They included many nobs for tuning the display position (x-axis position, y-axis position, rotation, etc...).
 
 __Orthogonalization__ in this example refers to the TV designers decision to ensure each nob had one effect on the display and that these effects were _relative_ to one another. If these nobs did more than one action and each actions magnitude was not relative to the other, it would become nearly impossible to tune the TV.
 
-Take another example, driving a __car__. Imagine if there was multiple joysticks. One joystick modified \\(0.3\\) X steering angle \\(- 0.8\\) speed, and another \\(2\\) X steering angle \\(+ 0.9\\) speed. In theory, by tuning these two nobs would could drive the car, but this would be _much more difficult then separating the inputs into distinct input mechanisms_.
+Take another example, driving a __car__. Imagine if there was multiple joysticks. One joystick modified \\(0.3\\) X steering angle \\(- 0.8\\) speed, and another \\(2\\) X steering angle \\(+ 0.9\\) speed. In theory, by tuning these two nobs we could drive the car, but this would be _much more difficult then separating the inputs into distinct input mechanisms_.
 
-__Orthogonal__ refers to the idea that we _inputs_ aligned to the dimensions we want to control.
+__Orthogonal__ refers to the idea that the _inputs_ are aligned to the dimensions we want to control.
 
 ![](https://s19.postimg.org/51dg3e5v7/speed_v_angle_orth.png)
 
@@ -1029,7 +1029,9 @@ Lets say we are building a classifier, and we care about both our __accuracy__ (
 
 ![](https://s19.postimg.org/px8x67gur/two_metrics_optimize.png)
 
-One thing we can do, is to combine accuracy and run-time into a __single-metric__, possibly by taking a weighted linear sum of the two metrics. As it turns out this is a rather artificial solution (no pun intended).
+One thing we can do, is to combine accuracy and run-time into a __single-metric__, possibly by taking a weighted linear sum of the two metrics.
+
+> As it turns out, this tends to produce a rather artificial solution (no pun intended).
 
 Another way, is to attempt to _maximize accuracy_ while subject to the restraint that \\(\text{running time} \le 100\\)ms. In this case, we say that _accuracy_ is an __optimizing__ metric (because we want to maximize or minimize it) and _running time_ is a __satisficing__ metric (because it just needs to meet a certain constraint, i.e., be "good enough").
 
@@ -1062,7 +1064,7 @@ Lets look at an example. Say we had data from multiple regions:
 
 If we were to build our dev set by choosing data from the first four regions and our test set from the last four regions, our data would likely be __skewed__ and our model would likely perform poorly (at least on the __test__ set). _Why?_
 
-Imagine the __dev__ set as a target, and our job as machine learning engineers is to hit a bullseye on a (with a bow, if you care to follow the analogy through). _A dev set that is not representative of the overall general distribution is analogous to a moving the bullseye away from its original location moments after we fire our bow_. An ML team could spend months optimizing the model on a dev set, only to achieve very poor performance on a test set!
+Imagine the __dev__ set as a target, and our job as machine learning engineers is to hit a bullseye. _A dev set that is not representative of the overall general distribution is analogous to moving the bullseye away from its original location moments after we fire our bow_. An ML team could spend months optimizing the model on a dev set, only to achieve very poor performance on a test set!
 
 So for our data above, a much better idea would be to sample data randomly from all regions to build our __dev__ and __test__ set.
 
@@ -1107,7 +1109,7 @@ We can think of it like this: our evaluation metric _prefers_ algorithm A, but _
 
 $$Error = \frac{1}{w^{(i)}}\sum^{m_{dev}}_{i=1} w^{(i)}\ell \{ y_{pred}^{(i)} \ne y^{(i)} \}$$
 
-where $w^{(i)}$ is 1 if $x^{(i)}$ is non-porn and 10 (or even 100 or larger) if $x^{(i)}$ is porn.
+where \\(w^{(i)}\\) is 1 if \\(x^{(i)}\\) is non-porn and 10 (or even 100 or larger) if \\(x^{(i)}\\) is porn.
 
 This is actually an example of __orthogonalization__. We,
 
@@ -1118,7 +1120,124 @@ This is actually an example of __orthogonalization__. We,
 
 Take the same example as above, but with a new twist. Say we train our classifier on a data set of high quality images. Then, when we deploy our model we notice it performs poorly. We narrow the problem down to the low quality images users are "feeding" to the model. What do we do?
 
-_If doing well on your metric + dev/test set does not correspond to doing well on your application, change your metric and/or dev/test set_.
+In general: _if doing well on your metric + dev/test set does not correspond to doing well on your application, change your metric and/or dev/test set_.
+
+### Comparing to human-level performance
+
+In the last few years, comparing machine learning systems to human level performance have become common place. The reasons for this include:
+
+1. Deep learning based approaches are making extraordinary gains in performance, so our baseline needs to be more stringent.
+2. Many of the tasks deep learning is performing well at were thought to be very difficult for machines (e.g. NLP, computer vision). Comparing performance on these tasks to a human baseline is natural.
+
+It is also instructive to look at the performance of machine learning over time (note this is an obvious abstraction)
+
+![](https://s19.postimg.org/8ij85de7n/ai_progress_over_time.png)
+
+Roughly speaking, performance (e.g., in a research domain or for a certain task) progresses quickly until we reach human-level performance, and tails off quickly. _Why?_ mainly because human level performance is typically very close to the __Bayes optimal error__. Bayes optimal error is the best possible error; there is no way for any function mapping from \\(x \rightarrow y\\) to do any better. A second reason is that so long as ML performs worse than humans for a given task, we can:
+
+- get labeled data from humans
+- gain insight from manual error analysis (e.g., why did a person get this right?)
+- better analysis of bias/variance
+
+### Avoidable bias
+
+Of course, we want our learning algorithm to perform well on the training set, but not _too well_. Knowing where human level performance is can help us decide how well we want to perform on the training set.
+
+Let us again take the example of an image classifier. For this particular data set, assume:
+
+- human-level performance is an error of 1%.
+- our classifier is currently achieving 8% classification error on the training set and
+- 10% classification on the dev set.
+
+_Clearly, it has plenty of room to improve_. Specifically, we would want to try to _increase_ **variance** and _reduce_ __bias__.
+
+> For the purposes of computer vision, assume that human-level performance \\(\approx\\) Bayes error.
+
+Now, lets take the same example, but instead, we assume that human-level performance is an error of 7.5% (this example is very contrived, as humans are extremely good at image classification). In this case, we note that our classifier performances nearly as well as a human baseline. We would likely want to to _decrease_ **variance** and _increase_ __bias__ (in order to improve performance on the __dev__ set.)
+
+So what did this example show us? When human-level performance (where we are using human-level performance as a proxy for Bayes error) is _very high_ relative to our models performance on the train set, we likely want to focus on reducing  _"avoidable"_ bias (or increasing variance) in order to improve performance on the training set (e.g., by using a bigger network.) When human-level performance is _comparable_ to our models performance on the train set, we likely want to focus on increasing bias (or decreasing variance) in order to improve performance on the dev set (e.g., by using a regularization technique or gathering more training data.)
+
+### Understanding human-level performance
+
+The term _human-level performance_ is used quite casually in many research articles. Lets attempt to define this term more precisely.
+
+Recall from the last lecture that **human-level performance** can be used as a proxy for **Bayes error**. Lets revisit that idea with another example.
+
+Suppose, for a medical image classification example,
+
+- Typical human: 3% error
+- Typical doctor: 1% error
+- Experienced doctor: 0.7% error
+- Team of experienced doctors: 0.5% error
+
+_What is "human-level" error?_ Most likely, we would say __0.5%__, and thus Bayes error is \\(\le 0.05%\\).  However, in certain contexts we may only wish to perform as well as the typical doctor (i.e., 1% error) and we may deem this _"human-level error"_. The takeaway is that there is sometimes more than one way to determine human-level performance; which way is appropriate will depend on the context in which we expect our algorithm to be deployed. We also note that as the performance of our algorithm improves, we may decide to move the goal posts for human-level performance higher, e.g., in this example by choosing a team of experienced doctors as the baseline. This is useful for solving the problem introduced in the previous lecture: _should I focus on reducing avoidable bias? or should I focus on reducing variance between by training and dev errors._
+
+#### Summary
+
+Lets summarize: if you are trying to understand bias and variance when you have a human-level performance baseline:
+
+- Human-level error can be used as a proxy for Bayes' error
+- The difference between the training error and the human-level error can be thought of as the __avoidable bias__.
+- The difference between the training and dev errors can be thought of as __variance__.
+- Which type of error you should focus on reducing depends on how well your model perform compares to (an estimate of) human-level error.
+- As our model approaches human-level performance, it becomes harder to determine where we should focus our efforts.
+
+### Surpassing human-level performance
+
+Surpassing human-level performance is what many teams in machine learning / deep learning are inevitably trying to do. Lets take a look at a harder example to further develop our intuition for an approach to _matching_ or _surpassing_ human-level performance.
+
+- team of humans: 0.5% error
+- one human: 1.0% error
+- training error: 0.3% error
+- dev error: 0.4% error
+
+Notice that training error < team of humans error. Does this mean we have _overfit_ the data by 0.2%? Or, does this means Bayes' error is actually lower than the team of humans error? We don't really know based on the information given, as to whether we should focus on __bias__ or __variance__. This example is meant to illustrate that once we surpass human-level performance, it becomes much less clear how to improve performance further.
+
+#### Problems where ML significantly surpasses human-level performance
+
+Some example where ML _significantly surpasses human-level performance_ include:
+
+- Online advertising,
+- Product recommendations
+- Logistics (predicting transit time)
+- Load approvals
+
+Notice that many of these tasks are learned on __structured data__ and do not involve __natural perception tasks__. This appeals to our intuition, as we know humans are _excellent_ at natural perception tasks.
+
+> We also note that these four tasks have immensely large datasets for learning.
+
+### Improving your model performance
+
+You have heard about orthogonalization. How to set up your dev and test sets, human level performance as a proxy for Bayes's error and how to estimate your avoidable bias and variance. Let's pull it all together into a set of guidelines for how to improve the performance of your learning algorithm.
+
+#### The two fundamental assumptions of supervised learning
+
+1. You can fit the training set (pretty) well, i.e., we can achieve _low avoidable bias_.
+2. The training set performance generalizes pretty well to the dev/test set, i.e., variance is _not too bad_.
+
+In the spirit of orthogonalization, there are a certain set of (separate) knobs we can use to improve bias and variance. Often, the difference between the training error and Bayes error (or a human-level proxy) is often illuminating in terms of where large improvement remain to be made.
+
+_For reducing bias_
+
+- Train a bigger model
+- Train longer/better optimization algorithms
+- Change/tweak NN architecture/hyperparameter search.
+
+_For reducing variance_
+
+- Collect more data
+- Regularization (L2, dropout, data augmentation)
+- Change/tweak NN architecture/hyperparameter search.
+
+
+
+
+
+
+
+
+
+
 
 
 ## Week 1: ML Strategy (2)
