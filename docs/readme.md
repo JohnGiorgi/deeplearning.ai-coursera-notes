@@ -1229,15 +1229,109 @@ _For reducing variance_
 - Regularization (L2, dropout, data augmentation)
 - Change/tweak NN architecture/hyperparameter search.
 
+## Week 2: ML Strategy (2)
+
+### Error Analysis
+
+If you're trying to get a learning algorithm to do a task that humans can do, and if your learning algorithm is not yet at the performance of a human, then manually examining mistakes that your algorithm is making, can give you insights into what to do next. This process is called error analysis. Let's start with an example.
+
+#### Carrying out error analysis
+
+Lets say we are working on our __cat classifier__ and we obtain 90% accuracy 10% error on our test set, much worse than we were hoping to do. Assume further that a colleague notices some of the misclassified examples are actually pictures of dogs. The question becomes, _should you try to make your cat classifier do better on dogs?_
+
+This is where error analysis comes in. In this example, we might:
+
+- collect ~100 mislabeled dev set examples
+- count up how any are dogs
+
+Lets say we find 5/100 (5%) mislabeled dev set example are dogs. Thus, the best we could hope to do (if we completely solve the dog problem) is decrease our error from 10% to 9.5% (a 5% relative drop in error.) We conclude that _this is likely not the best use of our time_. Sometimes, this is called the __ceiling__, i.e., the maximum amount of improvement we can expect from some change to our algorithm.
+
+Suppose instead we find 50/500 (50%) mislabeled dev set examples are dogs. Thus, if we solve the dog problem, we could decrease our error from 10% to 5% (a 50% relative drop in error.) We conclude that _solving the dog problem is likely a good use of our time_.
+
+> Notice the disproportionate 'payoff' here. It may take < 10 min to manually examine 100 examples from our dev set, but offer major clues as to where to focus our efforts.
+
+##### Evaluate multiple ideas in parallel
+
+Continuing with our cat detection example, sometimes we might want to evaluate multiple ideas in __parallel__. For example, say we have the following ideas:
+
+- fix pictures of dogs being recognized as cats
+- fix great cats (lions, panthers, etc..) being misrecognized
+- improve performance on blurry images
+
+What can do is create a table, where the rows represent the images we plan on evaluating manually, and the columns represent the categorizes we think the algorithm may be misrecognizing. It is also helpful to add comments describing the the misclassified example.
+
+![]()
+
+As you are part-way through this process, you may also notice another common category of mistake, which you can add to this manual evaluation and repeat.
+
+_The conclusion of this process is estimates for:_
+
+- which errors we should direct our attention to solving
+- how much we should expect performance to improve if reduce the number of errors in each category
+
+##### Summary
+
+So to summarize, to carry out error analysis, you should find a set of mislabeled examples and look at these examples for false positives and false negatives. Counting up the number of errors that fall into various different categories will often this will help you prioritize, or give you inspiration for new directions to go in for improving your algorithm.
+
+Three numbers to keep your eye on
+
+1. Overall dev set error
+2. Errors due to cause of interest / Overall dev set error
+3. Error due to other causes / Overall dev set error
+
+If the errors due to other causes >> errors due to cause of interest, it will likely be more productive to ignore our cause of interest for the time being and seek another source of error we can try to minimize.
+
+Now as you're doing error analysis, sometimes you notice that some of your examples in your dev sets are mislabeled. So what do you do about that? Let's discuss that in the next video.
+
+#### Cleaning up incorrectly labeled data
+
+In supervised learning, we have (typically) hand-labeled training data. What if we realize that some examples are _incorrectly labeled?_ First, lets consider our training set.
+
+> In an effort to be clear, we use __mislabeled__ when we are referring to examples the ML algo labeled incorrectly and **incorrectly** labeled when we are referring to examples in the training data set with the wrong label.
+
+##### Training set
+
+Deep learning algorithms are quite robust to **random** errors in the training set. If the errors are reasonably **random** and the dataset is big enough (i.e., the errors make up only a tiny proportion of all example) performance of our algorithm is unlikely to be affected.
+
+**Systematic error** are much more of a problem. Taking as example our cat classifier again, if labelers mistakingly label all white dogs as cats, this will dramatically impact performance of our classifier, which is likely to labels white dogs as cats with high degree of confidence.
+
+##### Dev/test set
+
+If you suspect that our many _incorrectly_ labeled examples in your dev or test set, you can add another column to your error analysis table where you track these incorrectly labeled examples. Depending on the total percentage of these examples, you can decide if it is worth the time to go through and correct all _incorrectly_ labeled examples in your dev or test set.
+
+There are some special considerations when correcting incorrect dev/test set examples, namely:
+
+- apply the same process to your dev and test sets to make sure they continue to come from the same distribution.
+- considering examining examples your algorithm got right as well as ones it got wrong
+- train and dev/test data may now come from different distributions - this is not necessarily a problem.
+
+#### Build quickly, then iterate
+
+If you are working on a brand new ML system, it is recommended to _build quickly_, then _iterate_. For many problems, there are often tens or hundreds of directions we could reasonably choose to go in.
 
 
+Building a system quickly breaks down to the following tasks:
 
+- set up a dev/test set and metric
+- build the initial system quickly and deploy
+- use bias/variance analysis & error analysis to prioritize next steps
 
+A lot of value in the approach lies in the fact that we can quickly build insight to our problem.
 
+> Note that this advice applies less when we have significant expertise in a given area and/or there is a significant body of academic work for the same or a very similar task (i.e., face recognition).
 
+### Mismatched training and dev/test set
 
+Deep learning algorithms are _extremely data hungry_. Because of this, some teams are tempted into shoving as much information into their training sets as possible. However, this poses a problem when the data sources do not come from the same distributions.
 
+Lets illustrate this again with an example. Take our cat classifier. Say we have ~10,000 images from a **mobile app**, and these are the images (or _type_ of images) we hope to do well on. Assume as well that we have ~200,000 images from **webpages**, which have a slightly different underlying distribution than the mobile app images (say, for example, that they are generally higher quality.) _How do we combine these data sets?_
 
+#### Option 1
 
+We could take the all datasets, combine them, and shuffle them randomly into train/dev/test sets. However, this poses the obvious problem that _many of the examples in our dev set (~95% of them) will be from the webpage dataset_. We are effectively tuning our algorithm to a distribution that is _slightly different_ than our target distribution --- data from the mobile app.
 
-## Week 1: ML Strategy (2)
+#### Option 2
+
+The second, recommended option, is to comprise the dev/test sets of images _entirely from the target (i.e., mobile data) distribution_. The advantage, is that we are now "aiming the target" in the right place, i.e., the distribution we hope to perform well on. The disadvantage of course, is that the training set comes from a different distribution than our target (dev/test) sets. However, this method is still superior to __option 1__, and we will discuss laters further ways of dealing with this difference in distributions.
+
+> Note, we can still include examples from the distribution we care about in our training set, assuming we have enough data from this distribution.
