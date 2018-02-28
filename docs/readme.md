@@ -1080,9 +1080,9 @@ In the last lecture we saw that the dev and test sets should come from the same 
 
 The rule of thumb in machine learning is typically 60% __training__, 20% __dev__, and 20% __test__ (or 70/30 __train__/__test__). In earlier eras of machine learning, this was pretty reasonable. In the modern machine learning era, we are used to working with _much_ larger data set sizes.
 
-For example, imagine we have $1,000,000$ examples. It might be totally reasonable for us to use 98% as our test set, 1% for dev and 1% for __test__.
+For example, imagine we have \\(1,000,000\\) examples. It might be totally reasonable for us to use 98% as our test set, 1% for dev and 1% for __test__.
 
-> Note that 1% of $10^6$ is $10^4$!
+> Note that 1% of \\(10^6\\) is \\(10^4\\)!
 
 #### Guidelines
 
@@ -1101,13 +1101,13 @@ Imagine we have two models for image classification, and we are using classifica
 
 Cleary, algorithm A performs better by our original evaluation metric (classification performance), but showing users pornographic images is _unacceptable_.
 
-$$Error = \frac{1}{m_{dev}}\sum^{m_{dev}}_{i=1} \ell \{ y_{pred}^{(i)} \ne y^{(i)} \}$$
+\\[Error = \frac{1}{m_{dev}}\sum^{m_{dev}}_{i=1} \ell \{ y_{pred}^{(i)} \ne y^{(i)} \}\\]
 
 > Our error treats all incorrect predictions the same, pornographic or otherwise.
 
 We can think of it like this: our evaluation metric _prefers_ algorithm A, but _we_ (and our users) prefer algorithm B. When our evaluation metric is no longer ranking the algorithms in the order we would like, it is a sign that we may want to change our evaluation metric. In our specific example, we could solve this by weighting misclassifications
 
-$$Error = \frac{1}{w^{(i)}}\sum^{m_{dev}}_{i=1} w^{(i)}\ell \{ y_{pred}^{(i)} \ne y^{(i)} \}$$
+\\[Error = \frac{1}{w^{(i)}}\sum^{m_{dev}}_{i=1} w^{(i)}\ell \{ y_{pred}^{(i)} \ne y^{(i)} \}\\]
 
 where \\(w^{(i)}\\) is 1 if \\(x^{(i)}\\) is non-porn and 10 (or even 100 or larger) if \\(x^{(i)}\\) is porn.
 
@@ -1260,7 +1260,7 @@ Continuing with our cat detection example, sometimes we might want to evaluate m
 
 What can do is create a table, where the rows represent the images we plan on evaluating manually, and the columns represent the categorizes we think the algorithm may be misrecognizing. It is also helpful to add comments describing the the misclassified example.
 
-![]()
+![](https://s19.postimg.org/thwsxyhrn/Screen_Shot_2018-02-24_at_9.39.51_AM.png)
 
 As you are part-way through this process, you may also notice another common category of mistake, which you can add to this manual evaluation and repeat.
 
@@ -1335,3 +1335,209 @@ We could take the all datasets, combine them, and shuffle them randomly into tra
 The second, recommended option, is to comprise the dev/test sets of images _entirely from the target (i.e., mobile data) distribution_. The advantage, is that we are now "aiming the target" in the right place, i.e., the distribution we hope to perform well on. The disadvantage of course, is that the training set comes from a different distribution than our target (dev/test) sets. However, this method is still superior to __option 1__, and we will discuss laters further ways of dealing with this difference in distributions.
 
 > Note, we can still include examples from the distribution we care about in our training set, assuming we have enough data from this distribution.
+
+### Bias and Variance with mismatched data distributions
+
+Estimating the **bias** and **variance** of your learning algorithm really helps you prioritize what to work on next. But the way you analyze bias and variance changes when your training set comes from a different distribution than your dev and test sets. Let's see how.
+
+Let's keep using our cat classification example and let's say humans get near perfect performance on this. So, Bayes error, or Bayes optimal error, we know is nearly 0% on this problem. Assume further:
+
+- training error: 1%
+- dev error: 10%
+
+If your **dev** data came from the _same distribution_ as your **training** set, you would say that you have a large _variance_ problem, that your algorithm's just not generalizing well from the training set which it's doing well on to the dev set, which it's suddenly doing much worse on. But in the setting where your training data and your dev data comes from a _different distribution_, you can no longer safely draw this conclusion. In particular, maybe it's doing _just fine_ on the dev set, it's just that the training set was really easy because it was high res, very clear images, and maybe the dev set is just much harder.
+
+The key thing to understand is that if the training and dev data come from different underlying distributions, then by comparing the training set to the dev set we are actually observing two different changes at the same time:
+
+1. The algorithm _saw_ the training data. It did not _see_ the dev data
+2. The data do not come from the same underlying distribution.
+
+In order to tease out these two effects it will be useful to define a new piece of data which we'll call the **training-dev** set: a new subset of data with the same distribution as the training set, but not used for training.
+
+Heres what we mean, previously we had train/dev/test sets. What we are going to do instead is randomly shuffle the training set and carve out a part of this shuffled set to be the **training-dev**.
+
+![](https://s19.postimg.org/hytnawr6r/Screen_Shot_2018-02-25_at_12.10.35_PM.png)
+
+> Just as the dev/test sets have the same distribution, the train-dev set and train set have the same distribution.
+
+Now, say we have the following errors:
+
+- training error: 1%
+- train-dev error: 9%
+- dev error: 10%
+
+We see that training error \\(\lt \lt\\) train-dev error \\(\approx\\) dev error. Because the train and train-dev sets come from the same underlying distribution, we can safely conclude that the large increase in error from the train set to the dev set is due to _variance_ (i.e., are network is not generalizing well)
+
+Lets look at a counter example. Say we have the following errors:
+
+- training error: 1%
+- train-dev error: 1.5%
+- dev error: 10%
+
+This is much more likely to be a _data mismatch problem_. Specifically, the algorithm is performing extremely well on the train and train-dev sets, but poorly on the dev set, hinting that the train/train-dev sets likely come from different underlying distributions than the dev set.
+
+Finally, one last example. Say we have the following errors:
+
+- Bayes error: \\(\approx\\) 0%
+- training error: 10%
+- train-dev error: 11%
+- dev error: 20%
+
+Here, we likely have two problems. First, we notice an _avoidable bias_ problem, suggested by the fact that our training error \\(\gt \gt\\) Bayes error. We also have a _data mismatch problem_, suggested by the fact that our training error \\(\approx\\) train-dev error by both are \\(\lt \lt\\) our dev error.
+
+So let's take what we've done and write out the general principles. The _key quantities_ your want to look at are: human-level error (or Bayes error), training set error, training-dev set error and the dev set error.
+
+The differences between these errors give us a sense about the **avoidable bias**, the **variance**, and the **data mismatch problem**. Generally,
+
+- training error \\(\gt \gt\\) Bayes error: avoidable bias problem
+- training error \\(\lt \lt\\) train-dev error: variance problem
+- training error \\(\approx\\) train-dev error \\(\lt \lt\\) dev error: data mismatch problem.
+
+#### More general formation
+
+We can organize this metrics into a table; where the columns are different datasets (if you have more than one) and the rows are the error for examples the algorithm _was_ trained on and examples the algorithm _was not_ trained on.
+
+!()[]
+
+### Addressing data mismatch
+
+If your training set comes from a different distribution, than your dev and test set, and if error analysis shows you that you have a data mismatch problem, what can you do? Unfortunately, there are not (completely) systematic solutions to this, but let's look at some things you could try.
+
+_Some recommendations:_
+
+- carry out manual error analysis to try to understand different between training and dev/test sets.
+  - _for example, you may find that many of the examples in your dev set are noisy when compared to those in your training set._
+- make training data more similar; or collect more data similar to dev/test sets.
+  - _for example, you may simulate noise in the training set_
+
+The second point leads us into the idea of __artificial data synthesis__
+
+#### Artificial data synthesis
+
+In some cases, we may be able to artificially synthesis data to make up for a lack of real data. For example, we can imagine synthesizing images of cars to supplement a dataset of car images for the task of car recognition in photos
+
+![](https://s19.postimg.org/ntqi7b5s3/Screen_Shot_2018-02-27_at_2.27.27_PM.png)
+
+While artificial data synthesis can be a powerful technique for increasing the size of our dataset (and thus the performance of our learning algorithm), we must be wary of overfitting to the synthesized data. Say for example, the set of "all cars" and "synthesized cars" looked as follows:
+
+![](https://s19.postimg.org/8l0ktioyb/Screen_Shot_2018-02-27_at_2.28.55_PM.png)
+
+In this case, we run a real risk of our algorithm overfitting to the synthesized images.
+
+#### Summary
+
+So, to summarize, if you think you have a data mismatch problem, I recommend you do error analysis, or look at the training set, or look at the dev set to try this figure out, to try to gain insight into how these two distributions of data might differ. And then see if you can find some ways to get more training data that looks a bit more like your dev set. One of the ways we talked about is artificial data synthesis. And artificial data synthesis does work. In speech recognition, I've seen artificial data synthesis significantly boost the performance of what were already very good speech recognition system. So, it can work very well. But, if you're using artificial data synthesis, just be cautious and bear in mind whether or not you might be accidentally simulating data only from a tiny subset of the space of all possible examples. So, that's it for how to deal with data mismatch.
+
+## Learning from multiple tasks
+
+### Transfer learning
+
+One of the most powerful ideas in deep learning is that you can take knowledge the neural network has learned from _one task_ and apply that knowledge to a _separate task_. So for example, maybe you could have the neural network learn to recognize objects like cats and then use parts of that knowledge to help you do a better job reading X-ray scans. This is called **transfer learning**. Let's take a look.
+
+Lets say you have trained a neural network for __image recognition__. If you want to take this neural network and _transfer_ it to a different task, say radiology diagnosis, one method would be to _delete_ the last layer, and re-randomly initialize the weights feeding into the output layer.
+
+To be concrete:
+
+- during the first phase of training when you're training on an image recognition task, you train all of the usual parameters for the neural network, all the weights, all the layers
+- having trained that neural network, what you now do to implement transfer learning is swap in a new data set \\(X,Y\\), where now these are radiology images and diagnoses pairs.
+- finally, initialize the last layers' weights randomly and retrain the neural network on this new data set.
+
+We have a couple options on how we retrain the dataset.
+
+- If the radiology dataset is **small**: we should likely _"freeze"_ the transferred layers and only train the output layer.
+- If the radiology dataset is __large__: we should likely train all layers.
+
+> Sometimes, we call the process of training on the first dataset __pre-training__, and the process of training on the second dataset __fine-tuning__.
+
+![](https://s19.postimg.org/ale9bpes3/Screen_Shot_2018-02-26_at_6.26.15_PM.png)
+
+The idea is that learning from a very large image data set allows us to transfer some fundamental knowledge for the task of computer vision (i.e., extracting features such as lines/edges, small objects, etc.)
+
+> Note that transfer learning is __not__ confined to computer vision examples, recent research has shown much success deploying transfer learning for NLP tasks.
+
+#### When does transfer learning make sense?
+
+Transfer learning makes sense when you have a _lot of data for the problem you're transferring **from** and usually relatively less data for the problem you're transferring **to**_.
+
+So for our example, let's say you have a _million_ examples for image recognition task. Thats a lot of data to learn low level features or to learn a lot of useful features in the earlier layers in neural network. But for the radiology task, assume we only a hundred examples. So a lot of knowledge you learn from image recognition can be transferred and can really help you get going with radiology recognition even if you don't have enough data to perform well for the radiology diagnosis task.
+
+If you're trying to learn from some **Task A** and transfer some of the knowledge to some **Task B**, then transfer learning makes sense when:
+
+- Task A and B have the same input X.
+- you have a lot more data for Task A than for Task B --- all this is under the assumption that what you really want to do well on is Task B.
+- transfer learning will tend to make more sense if you suspect that low level features from Task A could be helpful for learning Task B.
+
+### Multi-task learning
+
+Whereas in transfer learning, you have a sequential process where you learn from task A and then transfer that to task B. In multi-task learning, you start off simultaneously, trying to have one neural network do several things at the same time. And then each of these task helps hopefully all of the other task. Let's look at an example.
+
+#### Simplified autonomous driving example
+
+Let's say you're building an autonomous vehicle. Then your self driving car would need to detect several different things such as _pedestrians_, _other cars_, _stop signs_, _traffic lights_ etc.
+
+Our input to the learning algorithm could be a single image, our our label for that example, \\(y^{(i)}\\) might be a four-dimensional column vector, where \\(0\\) at position \\(j\\) represents absence of that object from the image and \\(1\\) represents presence.
+
+> E.g., a \\(0\\) at the first index of \\(y^{(i)}\\) might specify absence of a pedestrian in the image.
+
+Our neural network architecture would then involve a single input and output layer. The twist is that the output layer would have \\(j\\) number of nodes, one per object we want to recognize.
+
+![](https://s19.postimg.org/et91kny9v/Screen_Shot_2018-02-26_at_7.23.04_PM.png)
+
+To account for this, our cost function will need to sum over the individual loss functions for each of the objects we wish to recongize:
+
+\\[Cost = \frac{1}{m}\sum^m_{i=1}\sum^m_{j=1}\ell(\hat y_j^{(i)}, y_j^{(i)})\\]
+
+> Were \\(\ell\\) is our logisitc loss.
+
+Unlike traditional softmax regression, one image can have multiple labels. This, in essense, is __multi-task__ learning, as we are preforming multiple tasks with the same neural network (sets of weights/biases).
+
+#### When does multi-task learning make sense?
+
+Typically (but with some exceptions) when the following hold:
+
+- Training on a set of tasks that could benefit from having shared lower-level features.
+- Amount of data you have for each task is quite similar.
+- Can train a big enough neural network to do well on all the tasks
+
+> The last point is important. We typically need to "scale-up" the neural network in multi-task learning, as we will need a high variance model to be able to perform well on multiple tasks and typically more data --- as opposed to single tasks.
+
+## End-to-end deep learning
+
+One of the most exciting recent developments in deep learning, has been the rise of end-to-end deep learning. So what is the end-to-end learning? Briefly, there have been some data processing systems, or learning systems that require multiple stages of processing. And what end-to-end deep learning does, is it can take all those multiple stages, and replace it usually with just a single neural network. Let's look at some examples.
+
+### What is end-to-end deep learning?
+
+#### Speech recognition example
+
+At a high level, the task of speech recognition requires receiving as input some audio singles containing spoken words, and mapping that to a transcript containing those words.
+
+Traditionally, speech recognition involved many stages of processing:
+
+1. First, you would extract "hand-designed" features from the audio clip
+2. Feed these features into a ML algorithm which would extract phonemes
+3. Concatenate these phonemes to form words and then transcripts
+
+In contrast to this step-by-step pipeline, __end-to-end deep learning__ seeks to model all these tasks with a single network given a set of inputs.
+
+![](https://s19.postimg.org/cg5t1jlur/Screen_Shot_2018-02-27_at_8.53.09_PM.png)
+
+As we have discussed before, the more traditional, hand-crafted approach tends to outperform the end-to-end approach when our dataset is small, but this relationship flips as the dataset grows larger. Indeed, one of the biggest barriers to using end-to-end deep learning approaches is that large datasets which map our input to our final downstream task are _rare_.
+
+> Think about this a second and it makes perfect sense, its only recently in the era of deep learning that datasets have begun to map inputs to downstream outputs, skipping many of the intermediate levels of representation (images \\(\Rightarrow\\) labels, audio clips \\(\Rightarrow\\) transcripts.)
+
+One example where end-to-end deep learning currently works very well is **machine translation** (massive, parallel corpuses have made end-to-end solutions feasible.)
+
+### Summary
+
+When end-to-end deep learning works, it can work really well and it can really simplify the system and not require you to build so many hand-designed individual components. But it's also not panacea, it doesn't always work.
+
+### Whether or not to use end-to-end learning
+
+Let's say in building a machine learning system you're trying to decide whether or not to use an end-to-end approach. Let's take a look at some of the pros and cons of end-to-end deep learning so that you can come away with some guidelines on whether or not an end-to-end approach seems promising for your application.
+
+#### Pros and cons of end-to-end deep learning
+
+__Pros__:
+
+1. _let the data speak_: if you have enough labeled data, your network (given that it is large enough) should be able to a mapping from \\(x \rightarrow  y\\), with out having to rely on a humans preconceived notions or forcing the model to use some representation of the relationship between inputs an outputs.
+2. _less hand-designing of components needed_: end-to-end deep learning seeks to model the entire task with a single learning algorithm, which typically involves little in the way of hand-designing components. 
