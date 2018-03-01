@@ -1003,7 +1003,7 @@ The whole idea here is that if we keep our "knobs" __orthogonal__, we can more e
 
 #### Single number evaluation metric
 
-When tuning neural networks (modifying hyper-parameters, trying different architectures, etc.) you will find that having a _single __evaluation metric___ will allow you to easily and quickly judge if that change improved performance.
+When tuning neural networks (modifying hyper-parameters, trying different architectures, etc.) you will find that having a _single __evaluation metric___ will allow you to easily and quickly judge if a certain change improved performance.
 
 > Andrew recommends deciding on a single, real-valued evaluation metric when starting out on your deep learning project.
 
@@ -1133,7 +1133,7 @@ It is also instructive to look at the performance of machine learning over time 
 
 ![](https://s19.postimg.org/8ij85de7n/ai_progress_over_time.png)
 
-Roughly speaking, performance (e.g., in a research domain or for a certain task) progresses quickly until we reach human-level performance, and tails off quickly. _Why?_ mainly because human level performance is typically very close to the __Bayes optimal error__. Bayes optimal error is the best possible error; there is no way for any function mapping from \\(x \rightarrow y\\) to do any better. A second reason is that so long as ML performs worse than humans for a given task, we can:
+Roughly speaking, performance (e.g., in a research domain or for a certain task) progresses quickly until we reach human-level performance, and tails off quickly. _Why?_ mainly because human level performance is typically very close to the [__Bayes optimal error__](http://www.wikiwand.com/en/Bayes_error_rate). Bayes optimal error is the best possible error; there is no way for any function mapping from \\(x \rightarrow y\\) to do any better. A second reason is that so long as ML performs worse than humans for a given task, we can:
 
 - get labeled data from humans
 - gain insight from manual error analysis (e.g., why did a person get this right?)
@@ -1233,32 +1233,32 @@ _For reducing variance_
 
 ### Error Analysis
 
-If you're trying to get a learning algorithm to do a task that humans can do, and if your learning algorithm is not yet at the performance of a human, then manually examining mistakes that your algorithm is making, can give you insights into what to do next. This process is called error analysis. Let's start with an example.
+Manually examining mistakes that your algorithm is making can give you insights into what to do next (_especially if your learning algorithm is not yet at the performance of a human_). This process is called **error analysis**. Let's start with an example.
 
 #### Carrying out error analysis
 
-Lets say we are working on our __cat classifier__ and we obtain 90% accuracy 10% error on our test set, much worse than we were hoping to do. Assume further that a colleague notices some of the misclassified examples are actually pictures of dogs. The question becomes, _should you try to make your cat classifier do better on dogs?_
+Take for example our __cat image classifier__, and say we obtain 10% error on our **test set**, much worse than we were hoping to do. Assume further that a colleague notices some of the misclassified examples are actually pictures of dogs. The question becomes, _should you try to make your cat classifier do better on dogs?_
 
-This is where error analysis comes in. In this example, we might:
+This is where **error analysis** is particularly useful. In this example, we might:
 
 - collect ~100 mislabeled dev set examples
-- count up how any are dogs
+- count up how any many dogs
 
-Lets say we find 5/100 (5%) mislabeled dev set example are dogs. Thus, the best we could hope to do (if we completely solve the dog problem) is decrease our error from 10% to 9.5% (a 5% relative drop in error.) We conclude that _this is likely not the best use of our time_. Sometimes, this is called the __ceiling__, i.e., the maximum amount of improvement we can expect from some change to our algorithm.
+Lets say we find that 5/100 (5%) mislabeled dev set example are dogs. Thus, the best we could hope to do (if we were to _completely_ solve the dog problem) is decrease our error from 10% to 9.5% (a 5% relative drop in error.) We conclude that _this is likely not the best use of our time_. Sometimes, this is called the __ceiling__, i.e., the _maximum_ amount of improvement we can expect from _some change_ to our algorithm/dataset.
 
 Suppose instead we find 50/500 (50%) mislabeled dev set examples are dogs. Thus, if we solve the dog problem, we could decrease our error from 10% to 5% (a 50% relative drop in error.) We conclude that _solving the dog problem is likely a good use of our time_.
 
-> Notice the disproportionate 'payoff' here. It may take < 10 min to manually examine 100 examples from our dev set, but offer major clues as to where to focus our efforts.
+> Notice the disproportionate 'payoff' here. It may take < 10 min to manually examine 100 examples from our dev set, but the exercise offers _major_ clues as to where to focus our efforts.
 
 ##### Evaluate multiple ideas in parallel
 
-Continuing with our cat detection example, sometimes we might want to evaluate multiple ideas in __parallel__. For example, say we have the following ideas:
+Lets, continue with our cat detection example. Sometimes we might want to evaluate **multiple** ideas in __parallel__. For example, say we have the following ideas:
 
 - fix pictures of dogs being recognized as cats
 - fix great cats (lions, panthers, etc..) being misrecognized
 - improve performance on blurry images
 
-What can do is create a table, where the rows represent the images we plan on evaluating manually, and the columns represent the categorizes we think the algorithm may be misrecognizing. It is also helpful to add comments describing the the misclassified example.
+What can do is create a table, where the _rows_ represent the images we plan on evaluating manually, and the _columns_ represent the categorizes we think the algorithm may be misrecognizing. It is also helpful to add comments describing the the misclassified example.
 
 ![](https://s19.postimg.org/thwsxyhrn/Screen_Shot_2018-02-24_at_9.39.51_AM.png)
 
@@ -1271,7 +1271,7 @@ _The conclusion of this process is estimates for:_
 
 ##### Summary
 
-So to summarize, to carry out error analysis, you should find a set of mislabeled examples and look at these examples for false positives and false negatives. Counting up the number of errors that fall into various different categories will often this will help you prioritize, or give you inspiration for new directions to go in for improving your algorithm.
+To summarize: when carrying out error analysis, you should find a set of _mislabeled_ examples and look at these examples for _false positives_ and _false negatives_. Counting up the number of errors that fall into various different categories will often this will help you prioritize, or give you inspiration for new directions to go in for improving your algorithm.
 
 Three numbers to keep your eye on
 
@@ -1281,29 +1281,29 @@ Three numbers to keep your eye on
 
 If the errors due to other causes >> errors due to cause of interest, it will likely be more productive to ignore our cause of interest for the time being and seek another source of error we can try to minimize.
 
-Now as you're doing error analysis, sometimes you notice that some of your examples in your dev sets are mislabeled. So what do you do about that? Let's discuss that in the next video.
+> In this case, _cause of interest_ is just our idea for improving our leaning algorithm, e.g., _fix pictures of dogs being recognized as cats_
 
-#### Cleaning up incorrectly labeled data
+### Cleaning up incorrectly labeled data
 
-In supervised learning, we have (typically) hand-labeled training data. What if we realize that some examples are _incorrectly labeled?_ First, lets consider our training set.
+In supervised learning, we (typically) have hand-labeled training data. What if we realize that some examples are _incorrectly labeled?_ First, lets consider our training set.
 
-> In an effort to be clear, we use __mislabeled__ when we are referring to examples the ML algo labeled incorrectly and **incorrectly** labeled when we are referring to examples in the training data set with the wrong label.
+> In an effort to be less ambiguous, we use __mislabeled__ when we are referring to examples the ML algo labeled incorrectly and **incorrectly** labeled when we are referring to examples in the training data set with the wrong label.
 
-##### Training set
+#### Training set
 
-Deep learning algorithms are quite robust to **random** errors in the training set. If the errors are reasonably **random** and the dataset is big enough (i.e., the errors make up only a tiny proportion of all example) performance of our algorithm is unlikely to be affected.
+Deep learning algorithms are quite robust to **random** errors in the training set. If the errors are reasonably **random** and the dataset is big enough (i.e., the errors make up only a tiny proportion of all examples) performance of our algorithm is unlikely to be affected.
 
-**Systematic error** are much more of a problem. Taking as example our cat classifier again, if labelers mistakingly label all white dogs as cats, this will dramatically impact performance of our classifier, which is likely to labels white dogs as cats with high degree of confidence.
+**Systematic errors** are much more of a problem. Taking as example our cat classifier again, if labelers mistakingly label all white dogs as cats, this will dramatically impact performance of our classifier, which is likely to labels white dogs as cats with _high degree of confidence_.
 
-##### Dev/test set
+#### Dev/test set
 
-If you suspect that our many _incorrectly_ labeled examples in your dev or test set, you can add another column to your error analysis table where you track these incorrectly labeled examples. Depending on the total percentage of these examples, you can decide if it is worth the time to go through and correct all _incorrectly_ labeled examples in your dev or test set.
+If you suspect that there are many _incorrectly_ labeled examples in your dev or test set, you can add another column to your error analysis table where you track these incorrectly labeled examples. Depending on the total percentage of these examples, you can decide if it is worth the time to go through and correct all _incorrectly_ labeled examples in your dev or test set.
 
 There are some special considerations when correcting incorrect dev/test set examples, namely:
 
-- apply the same process to your dev and test sets to make sure they continue to come from the same distribution.
+- apply the same process to your dev and test sets to make sure they continue to come from the same distribution
 - considering examining examples your algorithm got right as well as ones it got wrong
-- train and dev/test data may now come from different distributions - this is not necessarily a problem.
+- train and dev/test data may now come from different distributions --- this is not necessarily a problem
 
 #### Build quickly, then iterate
 
@@ -1312,11 +1312,11 @@ If you are working on a brand new ML system, it is recommended to _build quickly
 
 Building a system quickly breaks down to the following tasks:
 
-- set up a dev/test set and metric
-- build the initial system quickly and deploy
-- use bias/variance analysis & error analysis to prioritize next steps
+1. set up a dev/test set and metric
+2. build the initial system quickly and deploy
+3. use bias/variance analysis & error analysis to prioritize next steps
 
-A lot of value in the approach lies in the fact that we can quickly build insight to our problem.
+A lot of value in this approach lies in the fact that we can quickly build insight to our problem.
 
 > Note that this advice applies less when we have significant expertise in a given area and/or there is a significant body of academic work for the same or a very similar task (i.e., face recognition).
 
@@ -1338,21 +1338,19 @@ The second, recommended option, is to comprise the dev/test sets of images _enti
 
 ### Bias and Variance with mismatched data distributions
 
-Estimating the **bias** and **variance** of your learning algorithm really helps you prioritize what to work on next. But the way you analyze bias and variance changes when your training set comes from a different distribution than your dev and test sets. Let's see how.
+Estimating the **bias** and **variance** of your learning algorithm can really help you prioritize what to work on next. The way you analyze bias and variance changes when your training set comes from a different distribution than your dev and test sets. Let's see how.
 
 Let's keep using our cat classification example and let's say humans get near perfect performance on this. So, Bayes error, or Bayes optimal error, we know is nearly 0% on this problem. Assume further:
 
 - training error: 1%
 - dev error: 10%
 
-If your **dev** data came from the _same distribution_ as your **training** set, you would say that you have a large _variance_ problem, that your algorithm's just not generalizing well from the training set which it's doing well on to the dev set, which it's suddenly doing much worse on. But in the setting where your training data and your dev data comes from a _different distribution_, you can no longer safely draw this conclusion. In particular, maybe it's doing _just fine_ on the dev set, it's just that the training set was really easy because it was high res, very clear images, and maybe the dev set is just much harder.
-
-The key thing to understand is that if the training and dev data come from different underlying distributions, then by comparing the training set to the dev set we are actually observing two different changes at the same time:
+If your **dev** data came from the _same distribution_ as your **training** set, you would say that you have a large **variance** problem, i.e., your algorithm is not generalizing well from the training set to the dev set. But in the setting where your training data and your dev data comes from a _different distribution_, you can no longer safely draw this conclusion. If the training and dev data come from _different underlying distributions_, then by comparing the training set to the dev set we are actually observing two different changes at the same time:
 
 1. The algorithm _saw_ the training data. It did not _see_ the dev data
-2. The data do not come from the same underlying distribution.
+2. The data do not come from the same underlying distribution
 
-In order to tease out these two effects it will be useful to define a new piece of data which we'll call the **training-dev** set: a new subset of data with the same distribution as the training set, but not used for training.
+In order to tease out these which of these is conributing to the drop in perfromsnce from our train to dev set, it will be useful to define a new piece of data which we'll call the **training-dev** set: a new subset of data with the same distribution as the training set, but not used for training.
 
 Heres what we mean, previously we had train/dev/test sets. What we are going to do instead is randomly shuffle the training set and carve out a part of this shuffled set to be the **training-dev**.
 
@@ -1366,7 +1364,7 @@ Now, say we have the following errors:
 - train-dev error: 9%
 - dev error: 10%
 
-We see that training error \\(\lt \lt\\) train-dev error \\(\approx\\) dev error. Because the train and train-dev sets come from the same underlying distribution, we can safely conclude that the large increase in error from the train set to the dev set is due to _variance_ (i.e., are network is not generalizing well)
+We see that training error \\(\lt \lt\\) train-dev error \\(\approx\\) dev error. Because the train and train-dev sets come from the same underlying distribution, we can safely conclude that the large increase in error from the train set to the dev set is due to _variance_ (i.e., our network is not generalizing well)
 
 Lets look at a counter example. Say we have the following errors:
 
@@ -1395,9 +1393,9 @@ The differences between these errors give us a sense about the **avoidable bias*
 
 #### More general formation
 
-We can organize this metrics into a table; where the columns are different datasets (if you have more than one) and the rows are the error for examples the algorithm _was_ trained on and examples the algorithm _was not_ trained on.
+We can organize these metrics into a table; where the columns are different datasets (if you have more than one) and the rows are the error for examples the algorithm _was_ trained on and examples the algorithm _was not_ trained on.
 
-!()[]
+![](https://s19.postimg.org/bfl8ak6xv/Screen_Shot_2018-02-25_at_4.34.00_PM.png)
 
 ### Addressing data mismatch
 
@@ -1414,19 +1412,15 @@ The second point leads us into the idea of __artificial data synthesis__
 
 #### Artificial data synthesis
 
-In some cases, we may be able to artificially synthesis data to make up for a lack of real data. For example, we can imagine synthesizing images of cars to supplement a dataset of car images for the task of car recognition in photos
+In some cases, we may be able to artificially synthesis data to make up for a lack of real data. For example, we can imagine synthesizing images of cars to supplement a dataset of car images for the task of car recognition in photos.
 
-![](https://s19.postimg.org/ntqi7b5s3/Screen_Shot_2018-02-27_at_2.27.27_PM.png)
+![](https://s19.postimg.org/dk5lbp60j/artificial_car_images.png)
 
 While artificial data synthesis can be a powerful technique for increasing the size of our dataset (and thus the performance of our learning algorithm), we must be wary of overfitting to the synthesized data. Say for example, the set of "all cars" and "synthesized cars" looked as follows:
 
-![](https://s19.postimg.org/8l0ktioyb/Screen_Shot_2018-02-27_at_2.28.55_PM.png)
+![](https://s19.postimg.org/ojqsnbrar/artificial_data_venn.png)
 
 In this case, we run a real risk of our algorithm overfitting to the synthesized images.
-
-#### Summary
-
-So, to summarize, if you think you have a data mismatch problem, I recommend you do error analysis, or look at the training set, or look at the dev set to try this figure out, to try to gain insight into how these two distributions of data might differ. And then see if you can find some ways to get more training data that looks a bit more like your dev set. One of the ways we talked about is artificial data synthesis. And artificial data synthesis does work. In speech recognition, I've seen artificial data synthesis significantly boost the performance of what were already very good speech recognition system. So, it can work very well. But, if you're using artificial data synthesis, just be cautious and bear in mind whether or not you might be accidentally simulating data only from a tiny subset of the space of all possible examples. So, that's it for how to deal with data mismatch.
 
 ## Learning from multiple tasks
 
@@ -1469,7 +1463,7 @@ If you're trying to learn from some **Task A** and transfer some of the knowledg
 
 ### Multi-task learning
 
-Whereas in transfer learning, you have a sequential process where you learn from task A and then transfer that to task B. In multi-task learning, you start off simultaneously, trying to have one neural network do several things at the same time. And then each of these task helps hopefully all of the other task. Let's look at an example.
+Whereas in transfer learning, you have a sequential process where you learn from task A and then transfer that to task B --- in multi-task learning, you start off simultaneously, trying to have one neural network do several things at the same time. The idea is that shared information from each of these tasks improves performance on _all_ tasks. Let's look at an example.
 
 #### Simplified autonomous driving example
 
@@ -1503,7 +1497,7 @@ Typically (but with some exceptions) when the following hold:
 
 ## End-to-end deep learning
 
-One of the most exciting recent developments in deep learning, has been the rise of end-to-end deep learning. So what is the end-to-end learning? Briefly, there have been some data processing systems, or learning systems that require multiple stages of processing. And what end-to-end deep learning does, is it can take all those multiple stages, and replace it usually with just a single neural network. Let's look at some examples.
+One of the most exciting recent developments in deep learning has been the rise of **end-to-end deep** learning. So what is the end-to-end learning? Briefly, there have been some data processing systems, or learning systems that require _multiple stages of processing_. In contrast, end-to-end deep learning attempts to replace those multiple stages with a single neural network. Let's look at some examples.
 
 ### What is end-to-end deep learning?
 
@@ -1540,4 +1534,19 @@ Let's say in building a machine learning system you're trying to decide whether 
 __Pros__:
 
 1. _let the data speak_: if you have enough labeled data, your network (given that it is large enough) should be able to a mapping from \\(x \rightarrow  y\\), with out having to rely on a humans preconceived notions or forcing the model to use some representation of the relationship between inputs an outputs.
-2. _less hand-designing of components needed_: end-to-end deep learning seeks to model the entire task with a single learning algorithm, which typically involves little in the way of hand-designing components. 
+2. _less hand-designing of components needed_: end-to-end deep learning seeks to model the entire task with a single learning algorithm, which typically involves little in the way of hand-designing components.
+
+__Cons__:
+
+1. _likely need a large amount of data for end-to-end learning to work well_
+2. _excludes potentially useful hand-designed components_: if we have only a small training set, our learning algorithm likely does not have enough examples to learn representations that perform well. Although deep learning practitioners often speak despairingly about hand-crafted features or components, they allow us to inject priors into our model, which is particularly useful when we do not have a lot of labeled data.
+
+> Note: hand-designed components and features are a double-edged sword. Poorly designed components may actually harm performance of the model by forcing the model to obey incorrect assumptions about the data.
+
+#### Should I use end-to-end deep learning?
+
+The key question we need to ask ourselves when considering on using end-to-end deep learning is:
+
+_Do you have sufficient data to learn a function of the complexity needed to map \\(x\\) to \\(y\\)?_
+
+Unfortunately, we do not have a formal definition of __complexity__ --- we have to rely on our intuition.
