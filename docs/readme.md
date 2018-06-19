@@ -2201,7 +2201,7 @@ We want to find \\(e_w \approx e_{king} - e_{man} + e_{woman}\\). Our algorithm 
 
 The most commonly used similarity function, \\(sim\\) is the _cosine similarity_:
 
-\\[sim(u, v) = \frac{u^Tv}{{||u||}_2{||v||}_2}\\]
+\\[sim(u, v) = \frac{u^Tv}{||u||_2||v||_2}\\]
 
 Which represents the **cosine** of the angle between the two vectors \\(u, v\\).
 
