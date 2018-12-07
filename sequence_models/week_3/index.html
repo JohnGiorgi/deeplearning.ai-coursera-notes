@@ -1,0 +1,1263 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/sequence_models/week_3/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+    
+    
+      
+        <title>Week 3 - Deeplearning.ai - Coursera Course Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#week-3-sequence-models-attention-mechanism" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Deeplearning.ai - Coursera Course Notes
+              </span>
+              <span class="md-header-nav__topic">
+                Week 3
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Deeplearning.ai - Coursera Course Notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Structuring Machine Learning Projects
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Structuring Machine Learning Projects
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../structuring_machine_learning_projects/week_1.md" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Sequence Models
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Sequence Models
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 3
+      </label>
+    
+    <a href="./" title="Week 3" class="md-nav__link md-nav__link--active">
+      Week 3
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-basic-models" title="Sequence models &amp; Attention mechanism: Basic Models" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Basic Models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine-translation" title="Machine translation" class="md-nav__link">
+    Machine translation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image-captioning" title="Image captioning" class="md-nav__link">
+    Image captioning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-picking-the-most-likely-sentence" title="Sequence models &amp; Attention mechanism: Picking the most likely sentence" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Picking the most likely sentence
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine-translation-as-a-conditional-language-model" title="Machine translation as a conditional language model" class="md-nav__link">
+    Machine translation as a conditional language model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-the-most-likely-translation" title="Finding the most likely translation" class="md-nav__link">
+    Finding the most likely translation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-beam-search" title="Sequence models &amp; Attention mechanism: Beam Search" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Beam Search
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beam-search-algorithm" title="Beam search algorithm" class="md-nav__link">
+    Beam search algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-refinements-to-beam-search" title="Sequence models &amp; Attention mechanism: Refinements to Beam Search" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Refinements to Beam Search
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#length-normalization" title="Length normalization" class="md-nav__link">
+    Length normalization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beam-search-recap" title="Beam search recap" class="md-nav__link">
+    Beam search recap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beam-width-discussion" title="Beam width discussion" class="md-nav__link">
+    Beam width discussion
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-error-analysis-on-beam-search" title="Sequence models &amp; Attention mechanism: Error analysis on beam search" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Error analysis on beam search
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-analysis-applied-to-machine-translation" title="Error analysis applied to machine translation" class="md-nav__link">
+    Error analysis applied to machine translation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-1-92py-x92-92phat-y-x92" title="Case 1: \(P(y* | x)\) &gt; \(P(\hat y | x)\)" class="md-nav__link">
+    Case 1: \(P(y* | x)\) &gt; \(P(\hat y | x)\)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-2-92py-x-le-phat-y-x92" title="Case 2: \(P(y* | x) \le P(\hat y | x)\)" class="md-nav__link">
+    Case 2: \(P(y* | x) \le P(\hat y | x)\)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-attention-model-intuition" title="Sequence models &amp; Attention mechanism: Attention Model Intuition" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Attention Model Intuition
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-of-long-sequences" title="The problem of long sequences" class="md-nav__link">
+    The problem of long sequences
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attention-model-intuition" title="Attention model intuition" class="md-nav__link">
+    Attention model intuition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-attention-model" title="Sequence models &amp; Attention mechanism: Attention Model" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Attention Model
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attention-model" title="Attention model" class="md-nav__link">
+    Attention model
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computing-attentions-92alpha92" title="Computing attentions \(\alpha^{}\)" class="md-nav__link">
+    Computing attentions \(\alpha^{}\)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speech-recognition-audio-data-speech-recognition" title="Speech recognition - Audio data: Speech recognition" class="md-nav__link">
+    Speech recognition - Audio data: Speech recognition
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#speech-recognition-problem" title="Speech recognition problem" class="md-nav__link">
+    Speech recognition problem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attention-model-for-speech-recognition" title="Attention model for speech recognition" class="md-nav__link">
+    Attention model for speech recognition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ctc-cost-for-speech-recognition" title="CTC cost for speech recognition" class="md-nav__link">
+    CTC cost for speech recognition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speech-recognition-audio-data-trigger-word-detection" title="Speech recognition - Audio data: Trigger word detection" class="md-nav__link">
+    Speech recognition - Audio data: Trigger word detection
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-basic-models" title="Sequence models &amp; Attention mechanism: Basic Models" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Basic Models
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine-translation" title="Machine translation" class="md-nav__link">
+    Machine translation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#image-captioning" title="Image captioning" class="md-nav__link">
+    Image captioning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-picking-the-most-likely-sentence" title="Sequence models &amp; Attention mechanism: Picking the most likely sentence" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Picking the most likely sentence
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#machine-translation-as-a-conditional-language-model" title="Machine translation as a conditional language model" class="md-nav__link">
+    Machine translation as a conditional language model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-the-most-likely-translation" title="Finding the most likely translation" class="md-nav__link">
+    Finding the most likely translation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-beam-search" title="Sequence models &amp; Attention mechanism: Beam Search" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Beam Search
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#beam-search-algorithm" title="Beam search algorithm" class="md-nav__link">
+    Beam search algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-refinements-to-beam-search" title="Sequence models &amp; Attention mechanism: Refinements to Beam Search" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Refinements to Beam Search
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#length-normalization" title="Length normalization" class="md-nav__link">
+    Length normalization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beam-search-recap" title="Beam search recap" class="md-nav__link">
+    Beam search recap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beam-width-discussion" title="Beam width discussion" class="md-nav__link">
+    Beam width discussion
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-error-analysis-on-beam-search" title="Sequence models &amp; Attention mechanism: Error analysis on beam search" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Error analysis on beam search
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-analysis-applied-to-machine-translation" title="Error analysis applied to machine translation" class="md-nav__link">
+    Error analysis applied to machine translation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-1-92py-x92-92phat-y-x92" title="Case 1: \(P(y* | x)\) &gt; \(P(\hat y | x)\)" class="md-nav__link">
+    Case 1: \(P(y* | x)\) &gt; \(P(\hat y | x)\)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-2-92py-x-le-phat-y-x92" title="Case 2: \(P(y* | x) \le P(\hat y | x)\)" class="md-nav__link">
+    Case 2: \(P(y* | x) \le P(\hat y | x)\)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-attention-model-intuition" title="Sequence models &amp; Attention mechanism: Attention Model Intuition" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Attention Model Intuition
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problem-of-long-sequences" title="The problem of long sequences" class="md-nav__link">
+    The problem of long sequences
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attention-model-intuition" title="Attention model intuition" class="md-nav__link">
+    Attention model intuition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sequence-models-attention-mechanism-attention-model" title="Sequence models &amp; Attention mechanism: Attention Model" class="md-nav__link">
+    Sequence models &amp; Attention mechanism: Attention Model
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attention-model" title="Attention model" class="md-nav__link">
+    Attention model
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computing-attentions-92alpha92" title="Computing attentions \(\alpha^{}\)" class="md-nav__link">
+    Computing attentions \(\alpha^{}\)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speech-recognition-audio-data-speech-recognition" title="Speech recognition - Audio data: Speech recognition" class="md-nav__link">
+    Speech recognition - Audio data: Speech recognition
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#speech-recognition-problem" title="Speech recognition problem" class="md-nav__link">
+    Speech recognition problem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attention-model-for-speech-recognition" title="Attention model for speech recognition" class="md-nav__link">
+    Attention model for speech recognition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ctc-cost-for-speech-recognition" title="CTC cost for speech recognition" class="md-nav__link">
+    CTC cost for speech recognition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speech-recognition-audio-data-trigger-word-detection" title="Speech recognition - Audio data: Trigger word detection" class="md-nav__link">
+    Speech recognition - Audio data: Trigger word detection
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/edit/master/docs/sequence_models/week_3.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="week-3-sequence-models-attention-mechanism">Week 3: Sequence models &amp; Attention mechanism</h1>
+<p>In this series, we will look primarily at sequence models, which are useful for everything from machine translation to speech recognition. We will also look at attention models.</p>
+<h2 id="sequence-models-attention-mechanism-basic-models">Sequence models &amp; Attention mechanism: Basic Models</h2>
+<h3 id="machine-translation">Machine translation</h3>
+<p>Lets say we want to translate from <em>french</em> to <em>english</em>. We will use the following examples:</p>
+<p>\[x: \text{"Jane visite l'Afrique en septembre"}\]
+\[y: \text{"Jane is visiting Africa in September"}\]</p>
+<p>Recall that we represent individual elements in the input sequence as \(x^{<t>}\), and in the output sequence as \(y^{<t>}\).</p>
+<blockquote>
+<p>Most of the ideas presented in this lecture are from this <a href="http://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks">paper</a> and this <a href="https://arxiv.org/abs/1406.1078">paper</a>.</p>
+</blockquote>
+<p>First, we build our <strong>encoder</strong>, an RNN (LSTM or GRU) which processes the <em>input</em> sequence. The encoder outputs a vector that represents the learned representation of the input sequence. A <strong>decoder</strong> takes this <em>output</em> sequence, and outputs the translation one word at a time.</p>
+<p><img alt="" src="https://s19.postimg.cc/585mhn4nn/Screen_Shot_2018-06-01_at_1.55.13_PM.png" /></p>
+<blockquote>
+<p>Note that the outputs from each timestep in the decoder network are actually passed as input for the next timestep in the case of language modelling.</p>
+</blockquote>
+<p>Given enough data, this <strong>sequence to sequence</strong> architecture actually works quite well.</p>
+<h3 id="image-captioning">Image captioning</h3>
+<p>The task of <strong>image captioning</strong> involves inputing an image, and having the network generate a natural language caption.</p>
+<p>\[x: \text{an image of a cat of a chair}\]
+\[y: \text{"A cat sitting on a chair"}\]</p>
+<p>Typically, we use a CNN as our <strong>encoder</strong>, without any classification layer at the end. We feed the learned representation to a <strong>decoder</strong>, an RNN, which generates and output sequence which is our image caption.</p>
+<p><a href="https://postimg.cc/image/w49o0izm7/"><img alt="image_captioning.png" src="https://s19.postimg.cc/hxtx5aor7/image_captioning.png" /></a></p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>Simple sequence to sequence (seq2seq) models are comprised of an <strong>encoder</strong> and <strong>decoder</strong>, which themselves are neural networks (typically recurrent or convolutional).</li>
+<li>Seq2seq architectures are able to preform reasonably well when given enough data. With certain modifications (attention) and additions (beam search), they are able to achieve state-of-the-art performance on tasks like <strong>machine translation</strong> and <strong>image captioning</strong>.</li>
+<li>These architecture difference slightly to some of the sequence generation architectures we saw previously however, and we will explore the difference in the next lecture.</li>
+</ul>
+<h2 id="sequence-models-attention-mechanism-picking-the-most-likely-sentence">Sequence models &amp; Attention mechanism: Picking the most likely sentence</h2>
+<p>While there are some similarities between the <strong>sequence to sequence machine translation model</strong> and the <strong>language models</strong> that you have worked within the first week of this course, there are some significant differences as well.</p>
+<h3 id="machine-translation-as-a-conditional-language-model">Machine translation as a conditional language model</h3>
+<p>We can think of machine translation as building a <em>conditional language model</em>. First, recall the language model we worked with previously:</p>
+<p><img alt="" src="https://s19.postimg.cc/driq0vq0j/recall_language_model.png" /></p>
+<p>The machine translation model looks like:</p>
+<p><img alt="" src="https://s19.postimg.cc/derbupfgj/recall_machine_translation.png" /></p>
+<p>Notice that the decoder network looks pretty much identical to the language model. However, instead of the initial hidden state being \(a^{<t>} = 0\), the initial hidden state is initialized with the learned representation from the encoder. That is why we can think of this as a <em>conditional language model</em>. Instead of modeling the probability of any sentence, it is now modeling the probability of say, the output English translation, conditioned on some input French sentence.</p>
+<h3 id="finding-the-most-likely-translation">Finding the most likely translation</h3>
+<p>So how does this work in practice? Our model produces the following:</p>
+<p>\[P(y^{&lt;1&gt;}, ..., y^{<T_y>} | x)\]</p>
+<p>The probability of different corresponding translated sentences based on the input sentence, \(x\). Unlike the language model we saw earlier, we <em>do not want to sample words randomly</em>. Instead, we want to choose the sentence \(y\) that maximizes \(P(y^{&lt;1&gt;}, ..., y^{<T_y>} | x)\),</p>
+<p>\[argmax_y P(y^{&lt;1&gt;}, ..., y^{<T_y>} | x)\]</p>
+<p>The most common algorithm for solving this problem is called the <strong>beam search</strong>, which we will look at in the next lecture. Before we look at beam search, you might be wondering, why not use a <strong>greedy search</strong>? In our case, this would involve choosing the most likely output, \(\hat y^{<t>}\) at each timestep, one timestep at a time, starting from \(t=1\).</p>
+<p>In simple terms, this approach does <em>not</em> maximize the <strong>joint probability</strong> \(P(y^{&lt;1&gt;}, ..., y^{<T_y>} | x)\), which is what we are really after. To see why this so, take our input example:</p>
+<p>\[x: \text{"Jane visite l'Afrique en septembre"}\]</p>
+<p>And our outputs generated by <strong>beam search</strong> and <strong>greedy search</strong> respectively:</p>
+<p>\[beam: \text{"Jane is visiting Africa in September"}\]
+\[greedy: \text{"Jane is going to be visiting Africa in September"}\]</p>
+<p>In greedy search, we are optimizing the output at each timestep without regard for the overall sequence. As such, we will often produce less succicent, and more verbose sentences. In this case, \(p(\text{"Jane is"} | \text{"going"})\) &gt; \(p(\text{"Jane is"} | \text{"visiting"})\), which is why we produce the more verbose "<em>is going to be visiting</em>" as opposed to "<em>is visiting</em>".</p>
+<blockquote>
+<p>While this is a contrived example, it captures a larger phenomena. When generating sequences, it is often a good idea to maximize the joint probability across the entire sequence. Otherwise, we end up with sub-optimal performance tasks in which there is strong dependencies between elements of a sequence.</p>
+</blockquote>
+<p>Another important point, is that the space of all possible output sentences is huge. For a ten-word sentence drawn and a vocabulary of 10,000 words, we have \(10,000^{10}\) possible sentences. For this reason, we need an <strong>approximate search algorithm</strong> (a <a href="http://www.wikiwand.com/en/Heuristic_(computer_science)">heuristic</a>). While this won't always succeed in finding the sentence \(\hat y\) that maximizes that conditional probability, it will typically do a "good enough" job without needed to enumerating all possible sentences.</p>
+<h3 id="summary_1">Summary</h3>
+<ul>
+<li>In this lecture, you saw how machine translation can be posed as a <em>conditional language modeling problem</em>.</li>
+<li>One major difference between this and the earlier language modeling problems is rather than generating a sentence at random, you try to find the most likely translation.</li>
+<li>The set of all sentences of a certain length is too large to exhaustively enumerate. So, we have to resort to an approximate search algorithm.</li>
+</ul>
+<h2 id="sequence-models-attention-mechanism-beam-search">Sequence models &amp; Attention mechanism: Beam Search</h2>
+<p>Recall that, for a machine translation system given an input French sentence, you don't want to output a random English translation, you want to output the best and the most likely English translation. The same is also true for <strong>speech recognition</strong> where, given an input audio clip, you don't want to output a <em>random</em> text transcript of that audio, you want to output the <em>best</em>, maybe the <em>most likely</em>, text transcript. Beam search is the most widely used algorithm to do this.</p>
+<h3 id="beam-search-algorithm">Beam search algorithm</h3>
+<p><strong>Step 1</strong></p>
+<p>The first thing beam search needs to do is pick the first word, \(\hat y^{&lt;1&gt;}\) of the translation given our input sequence \(x\), \(P(\hat y^{&lt;1&gt;} | x)\). Contrary to greedy search however, we can evaluate multiple choices at the same time. The number of choices is designated by a parameter of the algorithm, the <strong>beam width</strong> \(B\). Lets say for our purposes that we choose \(B = 3\).</p>
+<p>In practice, we run our sentence to be translated through the encoder-decoder network and store in memory the three most likely, first words of the translated sentence.</p>
+<p><strong>Step 2</strong></p>
+<p>For each of these three choices, we consider what should be the second word in the translated output sequence, \(\hat y^{&lt;2&gt;}\). Recall that the previously selected output, \(\hat y^{&lt;1&gt;}\) is fed as input to the next timestep in the decoder network.</p>
+<p>In practice, we are looking to compute:</p>
+<p>\[P(\hat y^{&lt;1&gt;},\;  \hat y^{&lt;2&gt;} | x) = P(\hat y^{&lt;1&gt;}| x) P(\hat y^{&lt;2&gt;} | x, \; \hat y^{&lt;1&gt;})\]</p>
+<p>Where \(P(\hat y^{&lt;1&gt;}| x)\) is computed by the decoder network in the first step and \(P(\hat y^{&lt;2&gt;} | x, \; \hat y^{&lt;1&gt;})\) computed by the decoder network in the second step. In total, we evaluate \(B \cdot |V|\) possible choices for the second word, but we only save the top \(B\) most likely choices for \(\hat y^{&lt;1&gt;},\;  \hat y^{&lt;2&gt;}\). We may actually end up dropping one or more possible choices we previously made for \(\hat y^{&lt;1&gt;}\).</p>
+<p>An implementation detail: we instantiate \(B\) copies of the seq2seq model to compute \(P(\hat y^{&lt;1&gt;}| x) P(\hat y^{&lt;2&gt;} | x, \; \hat y^{&lt;1&gt;})\), one for each choice of \(\hat y^{&lt;1&gt;}\).</p>
+<p><strong>Step n</strong></p>
+<p>We continue this process, at each step \(n\) computing \(P(\hat y^{&lt;1&gt;},\hat y^{&lt;2&gt;}, ... \hat y^{<n>}| x)\) using the chain rule for conditional probabilities:</p>
+<p>\[P(\hat y^{&lt;1&gt;},\hat y^{&lt;2&gt;}, ... \hat y^{<n>}| x) = P(\hat y^{<n>} | \hat y^{&lt;1&gt;}, ... , \hat y^{<n-1>}, x) ... P(\hat y^{&lt;1&gt;} | x) \]</p>
+<p>We store the top \(B\) most likely sequences \(\hat y^{&lt;1&gt;},\hat y^{&lt;2&gt;}, ... \hat y^{<n-1>}\) and their corresponsding seq2seq model to use in the next step, where we again evaluate \(|V|\) possible words for our \(B\) number of previous choices.</p>
+<p>The outcome of this process, hopefully, is a prediction which is terminated by the special <EOS> token. Notice that, when \(B = 1\), this process essentially becomes the greedy search algorithm seen previously.</p>
+<h2 id="sequence-models-attention-mechanism-refinements-to-beam-search">Sequence models &amp; Attention mechanism: Refinements to Beam Search</h2>
+<p>In the last lecture, we saw the basic beam search algorithm. In this lecture, we will look at some little changes that make it work even better.</p>
+<h3 id="length-normalization">Length normalization</h3>
+<p>Recall that in beam search, we are trying to compute the following:</p>
+<p>\[argmax_y \prod_{t=1}^{T_y}P(y^{<t>} | x, y^{&lt;1&gt;}, ..., y^{<t-1>})\]</p>
+<p>The product term is capturing the idea that \(P(y^{&lt;1&gt;}, ..., y^{<T_y>} | x) = P(y^{&lt;1&gt;} | x) ... P(y^{<T_y>} | x, y^{&lt;1&gt;}, ..., y^{<T_y-1>})\), which itself is just the chain rule for conditional probabilities.</p>
+<p>The problem here, is that many many small probabilities can lead to <a href="http://www.wikiwand.com/en/Arithmetic_underflow">numerical underflow</a>. For this reason, we take the log of the product (which becomes the sum of the log of the individual elements):</p>
+<p>\[argmax_y \sum_{t=1}^{T_y} \log P(y^{<t>} | x, y^{&lt;1&gt;}, ..., y^{&lt;t-1})\]</p>
+<p>This leads to a more numerically stable algorithm, which reduces the chance of rounding errors.</p>
+<blockquote>
+<p>Because \(\log P(y|x)\) and \(P(y|x)\) are monotonically increasing functions, the value that maximizes one also maximizes the other.</p>
+</blockquote>
+<p>Notice as well that the optimization objective actually favors short sentences (this is true of both formulations listed above). In machine translation, for example, This has the negative consequence of promoting short translated sentences over long translated sentences even when the longer sentence is preferable. A solution to this problem is to <em>normalize</em> our objective objective with respect to output length:</p>
+<p>\[ argmax_y \frac{1}{T_y^{\alpha}} \sum_{t=1}^{T_y} \log P(y^{<t>} | x, y^{&lt;1&gt;}, ..., y^{&lt;t-1})\]</p>
+<p>In practice, we typically introduce a new parameter \(\alpha\) which <em>softens</em> the length normalization, to retain a penalty on very very long output sequences.</p>
+<h3 id="beam-search-recap">Beam search recap</h3>
+<p>So, in full:</p>
+<p>As you run beam search you see a lot of sentences with length equal 1, 2, 3, and so on. Maybe you run beam search for 30 steps and you consider output sentences up to length 30, let's say. With a beam width of 3, you will be keeping track of the top three possibilities for each of these possible sentence lengths, 1, 2, 3, 4 and so on, up to 30. Then, you would look at all of the output sentences and score them against our objective:</p>
+<p>\[ argmax_y \frac{1}{T_y^{\alpha}} \sum_{t=1}^{T_y} \log P(y^{<t>} | x, y^{&lt;1&gt;}, ..., y^{&lt;t-1})\]</p>
+<p>Finally, of all of these sentences that we encounter through beam search, we pick the one that achieves the highest value on this normalized log probability objective (sometimes called a <strong>normalized log likelihood objective</strong>). This brings us to the final translation, your outputs.</p>
+<h3 id="beam-width-discussion">Beam width discussion</h3>
+<p>Finally, an implementational detail. <em>How do you choose the beam width</em> \(B\)? The larger \(B\) is, the more possibilities you're considering, and thus the better the sentence you will probably find. But the larger \(B\) is, the more computationally expensive your algorithm is, because you're also keeping a lot more possibilities around.</p>
+<p>So here are the pros and cons of setting \(B\) to be very large versus very small:</p>
+<ul>
+<li>If the beam width is very large, then you consider a lot of possibilities, and so you tend to get a better result, <em>but</em> it will be slower, the memory requirements will also grow, and it will also be computationally slower.</li>
+<li>If you use a small beam width, then you are likely to get a worse result because you're keeping less possibilities in mind as the algorithm is running. But you get a result faster and the memory requirements will be lower.</li>
+</ul>
+<p>In the previous video, we used in our running example a beam width of three. In practice, that is on the small side. In production systems, it's not uncommon to see a beam width maybe around 10 -- 100 would be considered very large for a production system. For research systems, where people want to squeeze out every last drop of performance in order to publish a paper, tt's not uncommon to see people use beam widths of 1,000 to 3,000. In truth, you just need to try a variety of values of \(B\) as you work through your application. Beware that as \(B\) gets very large, there is often diminishing returns.</p>
+<blockquote>
+<p>Expect to see a huge gain as you go from a beam width of 1, which is essentially greedy search, to 3, to maybe 10, but gains may diminish from there on out.</p>
+</blockquote>
+<h2 id="sequence-models-attention-mechanism-error-analysis-on-beam-search">Sequence models &amp; Attention mechanism: Error analysis on beam search</h2>
+<p>In the third course of this sequence of five courses, we saw how <strong>error analysis</strong> can help you focus your time on doing the most useful work for your project. Because <strong>beam search</strong> is an approximate search algorithm, also called a <a href="http://www.wikiwand.com/en/Heuristic_(computer_science)"><em>heuristic</em></a>, it doesn't always output the most likely sentence. <em>So what if beam search makes a mistake?</em> In this lecture, you'll learn how error analysis interacts with beam search and how you can figure out whether it is the beam search algorithm that's causing problems and worth spending time on, <em>or</em> whether it might be your RNN model that is causing problems and worth spending time on.</p>
+<p>Lets use the following, simple example to see how error analysis works with beam search:</p>
+<p>\[x: \text{"Jane visite l'Afrique en septembre"}\]</p>
+<p>Assume further that our human-provided (\(y*)\) and machine provided (\(\hat y\)) translations for this sentence are:</p>
+<p>\[y*: \text{"Jane is visiting Africa in September"}\]
+\[\hat y: \text{"Jane visited Africa last September"}\]</p>
+<p>Our model has to two main components: our encoder-decoder architecture (which we will simply refer to as our 'RNN' from here on out) and the beam search algorithm applied to the outputs of this RNN. It would be extremely helpful if we could assign blame to <em>one of these components individually</em> when we get a bad translation, like our example \(\hat y\).</p>
+<p>Similar to how it may be tempting to collect more training data when our models underperform (it 'never hurts'!) it is also tempting in this case to increase the beam width (again, it never seems to hurt!). Error analysis is a more principled way to improve our model, by helping us focus our attention on what is currently hurting performance the most.</p>
+<h3 id="error-analysis-applied-to-machine-translation">Error analysis applied to machine translation</h3>
+<p>Recall that the RNN computes \(P(y | x)\). The first step in our analysis is to compute \(P(y* | x)\) and \(P(\hat y | x)\). We then ask, which probability is larger? If</p>
+<h4 id="case-1-92py-x92-92phat-y-x92">Case 1: \(P(y* | x)\) &gt; \(P(\hat y | x)\)</h4>
+<p>Beam search chose \(\hat y\) (recall, its optimization objective is \(\hat y  = argmax_y P(y|x)\)), but \(y*\) is more likely according to your model.</p>
+<p><strong>Conclusion</strong>: We conclude that beam search is at fault. It faild to find a value for \(y\) which maximizes \(P(y|x)\).</p>
+<h4 id="case-2-92py-x-le-phat-y-x92">Case 2: \(P(y* | x) \le P(\hat y | x)\)</h4>
+<p>\(y<em>\) is a better translation than \(\hat y\). But our RNN predicted \(P(y</em> | x) \le P(\hat y | x)\)</p>
+<p><strong>Conclusion</strong>: We conclude that RNN model is at fault. It failed to model a better translation as being more likely than a worse translation for a given input sentence.</p>
+<blockquote>
+<p>Note, we are ignoring length normalization here for simplicity. In reality, you would use the entire optimization objective with length normalization instead of just \(P(y|x)\) in your error analysis.</p>
+</blockquote>
+<p>In practice, we might collect some examples of our gold translations (provided by a human) and compare them in a table to the corresponding machine-provided translations, tallying \(P(y* | x)\) and \(P(\hat y | x)\) for each example. We can then use the rules provided above to assign blame to either the RNN or to beam search in each case:</p>
+<p><a href="https://postimg.cc/image/nxz4orzxr/"><img alt="beam_search_error_analysis.png" src="https://s19.postimg.cc/vdyeaknn7/beam_search_error_analysis.png" /></a></p>
+<p>Through this process, you can carry out error analysis to figure out what fraction of errors are due to <em>beam search</em> versus the <em>RNN model</em>. For every example in your dev sets where the algorithm gives a much worse output than the human translation, you can try to ascribe the error to either the search algorithm or to the objective function, or to the RNN model that generates the objective function that beam search is supposed to be maximizing. If you find that beam search is responsible for a lot of errors, then maybe it is worth increasing the beam width. Whereas in contrast, if you find that the RNN model is at fault, you could do a deeper layer of analysis to try to figure out if you want to add regularization, or get more training data, or try a different network architecture, or something else.</p>
+<h2 id="sequence-models-attention-mechanism-attention-model-intuition">Sequence models &amp; Attention mechanism: Attention Model Intuition</h2>
+<p>For most of this week, we have been looking at seq2seq models. A simple modification to this architecture makes it much more powerful, lets take a look.</p>
+<h3 id="the-problem-of-long-sequences">The problem of long sequences</h3>
+<p>Given a very long French sentence, the encoder in a seq2seq network must read in the whole sentence and then, essentially memorize it by storing its learned representation the activations values. Then the decoder network will then generate the English translation.</p>
+<p>\[x: \text{"Jane went to Africa last September and enjoyed the culture and met many wonderful people; she came back raving about how wonderful her trip was, and is tempting me to go too."}\]</p>
+<blockquote>
+<p>Example output (translated sentence)</p>
+</blockquote>
+<p>Now, the way a human translator would translate this sentence is <em>not</em> by reading and memorizing the entire sentence before beginning translation. Instead, the human translator would read the sentence bit-by-bit, translating words as they go, and paying special attention to certain parts of the input sentence when deciding what the ouput sentence should be. For the seq2seq architecture we introduced earlier, we finde that it works quite well for short sentences, but for very long sentences (maybe longer than 30 or 40 words) performance drops.</p>
+<p><a href="https://postimg.cc/image/4meyki473/"><img alt="bleu_score_with_attention.png" src="https://s19.postimg.cc/n1zfhwibn/bleu_score_with_attention.png" /></a></p>
+<blockquote>
+<p>Short sentences are just hard to translate in general due to the lack of context. For long sentences, the vanilla seq2seq model doesn't do well because it's difficult to for the network to memorize a very long sentence. Blue line: seq2seq architectures without attention, Green line: seq2seq architectures with attention.</p>
+</blockquote>
+<p>In this and the next lecture, you'll see the <strong>Attention Model</strong> which translates maybe a bit more like humans might, by looking at part of the sentence at a time. With an Attention model, machine translation systems performance stabilizes across sentence lengths. This is mostly due to the fact that, without attention, we are inadvertantly measuring the ability of a neural network to <em>memorize</em> a long sentence which isn't what is most important.</p>
+<h3 id="attention-model-intuition">Attention model intuition</h3>
+<p>Lets build our intuition for the <strong>attention model</strong> with a simple example:</p>
+<p>\[x: \text{"Jane visite l'Afrique en septembre"}\]</p>
+<blockquote>
+<p>Attention was first introduced <a href="https://arxiv.org/abs/1409.0473">here</a>.</p>
+</blockquote>
+<p>Note that attention is typically more useful for longer sequences, but for the purposes of illustration we will use a rather short one.</p>
+<p>Say that we use a bi-directional RNN to compute some sort of rich feature set for a given input. Lets introduce a new notation: \(\alpha^{<i, j>}\) can be thought of as an attention measure, e.g., when we are looking to produce the translated word \(i\) in the output sequence, how much <em>attention</em> should we pay to the word \(j\) in the input sequence? Broadly speaking, our decoder takes these measures of attention, along with the output from the encoder network to compute a new input that it uses when determining its outputs. More specifically, \(\alpha^{<i, j>}\) is influenced by the forward and backward activations of the encoder network at timestep \(i\) and the output from the previous timestep of the decoder network, \(S^{<t-1>}\).</p>
+<p><a href="https://postimg.cc/image/q3zv301j3/"><img alt="attention_model_intuition.png" src="https://s19.postimg.cc/sy30gg3pf/attention_model_intuition.png" /></a></p>
+<blockquote>
+<p>Note, we have denoted the activations of the decoder network as \(S^{<t>}\) to avoid confusion.</p>
+</blockquote>
+<p>The key intuition is that the decoder network marches away, generating an output at every timestep. The attention weights help the decoder determine what information to pay attention to in the encoders output, as opposed to using all information in the learned representation from the entire input sequence.</p>
+<h2 id="sequence-models-attention-mechanism-attention-model">Sequence models &amp; Attention mechanism: Attention Model</h2>
+<p>In the last lecture, we saw how the attention model allows a neural network to pay attention to only part of an input sentence while it's generating a translation, much like a human translator might. Let's now formalize that intuition, and see how we might implement this attention model ourselves.</p>
+<h3 id="attention-model">Attention model</h3>
+<p>Similar to the last lecture, lets assume we have a bi-directional RNN (be it LSTM or GRU) that we use to compute features for the input sequence.</p>
+<p><a href="https://postimg.cc/image/qt5scfldr/"><img alt="attention_detail_fb.png" src="https://s19.postimg.cc/w4kox57gj/attention_detail_fb.png" /></a></p>
+<p>To simplify the notation, at every timestep we are going to denote the activations for both the forward and backward recurrent networks as \(a^{<t>}\), such that:</p>
+<p>\[a^{<t'>} = (\overrightarrow{a}^{<t'>}, \overleftarrow{a}^{<t'>})\]</p>
+<p>We also have a second RNN (in the forward direction only) with states \(S^{<t>}\) which takes as input some context \(c\), where \(c\) depends on the attention parameters (\(\alpha^{&lt;1,1&gt;}, \alpha^{&lt;1,2&gt;}, etc)\). These \(\alpha\) parameters tell us how much the context \(c\) should depend on the learned features across the timesteps, which is a weighted sum. More formally:</p>
+<p>\[\sum_{t'} \alpha^{&lt;1, t'&gt;} = 1\]
+\[c^{&lt;1&gt;} = \sum_{t'} \alpha^{&lt;1, t'&gt;}a^{<t'>}\]</p>
+<p>In plain english, \(\alpha^{<t, t'>}\) is the amount of "attention" that \(y^{<t>}\) should pay to \(a^{<t'>}\). We compute the context for the second timestep, \(c^{&lt;2&gt;}\) in a similar manner:</p>
+<p>\[c^{&lt;2&gt;} = \sum_{t'} \alpha^{&lt;2, t'&gt;}a^{<t'>}\]</p>
+<p>And so forth and so on.</p>
+<p><a href="https://postimg.cc/image/obu155m1r/"><img alt="attention_detail_complete.png" src="https://s19.postimg.cc/j0f4kfzz7/attention_detail_complete.png" /></a></p>
+<p>The only thing left to define is how we <em>actually</em> compute the attention weights, \(\alpha^{<t, t'>}\)</p>
+<h4 id="computing-attentions-92alpha92">Computing attentions \(\alpha^{<t, t'>}\)</h4>
+<p>Let us first present the formula and then explain it:</p>
+<p>\[\alpha^{<t, t'>} = \frac{exp(e^{<t, t'>})}{\sum_{t'=1}^{T_x}exp(e^{<t, t'>})}\]</p>
+<blockquote>
+<p>It is helpful to keep in mind that \(\alpha^{<t, t'>}\) is the amount of "attention" that \(y^{<t>}\) should pay to \(a^{<t'>}\)</p>
+</blockquote>
+<p>We first compute \(e^{<t, t'>}\) and then use what is essentially a softmax over all \(t'\) to guarantee that \(\alpha^{<t, t'>}\) sums to zero over all \(t'\). But how do we compute \(e^{<t, t'>}\)? Typically we use a small neural network that looks something like the following:</p>
+<p><a href="https://postimg.cc/image/whc33auv3/"><img alt="attention_how_to_learn_attention_weights.png" src="https://s19.postimg.cc/vrtaqxubn/attention_how_to_learn_attention_weights.png" /></a></p>
+<p>The intuition is, if you want to decide how much attention to pay to the activation of \(t'\), we should depend on the hidden state activation from the previous time step, \(S^{<t-1>}\) and the learned features of the word at \(t'\), \(a^{<t'>}\). What we don't know is the exact function which takes in (\(S^{<t-1>}, a^{<t'>}\)) and maps it to \(e^{<t, t'>}\). Therefore, we use a small neural network to learn this function for us.</p>
+<blockquote>
+<p>The network MUST be small as we need to use it to make a prediction at every timestep \(t\).</p>
+<p>Further reading: <a href="https://arxiv.org/abs/1409.0473">Neural machine translation by jointly learning to align and translate</a> and <a href="https://arxiv.org/pdf/1502.03044.pdf">Show, attend and tell: Neural image caption generation with visual attention</a>.</p>
+</blockquote>
+<h2 id="speech-recognition-audio-data-speech-recognition">Speech recognition - Audio data: Speech recognition</h2>
+<p>One of the most exciting developments with <strong>sequence-to-sequence models</strong> has been the rise of very accurate speech recognition. We will spend the last two lectures building a sense of how these sequence-to-sequence models are applied to audio data, such as the speech.</p>
+<h3 id="speech-recognition-problem">Speech recognition problem</h3>
+<p>In speech recognition, produce a transcript \(y\) given an audio clip, \(x\). The audio transcript is generated from a microphone (i.e., someone speaks into a microphone, speech, like all sound, is a pressure wave which the microphone pics up on and generates a spectrum).</p>
+<p>In truth, even the human brain doesn't process <em>raw sound</em>. We typically perform a series of pre-processing steps, eventually generating a spectrogram, a 3D representation of sound (x: time, y: frequency, z: amplitude)</p>
+<p><a href="https://postimg.cc/image/eh2vywn8f/"><img alt="speech_recognition_problem.png" src="https://s19.postimg.cc/rxzuhrxk3/speech_recognition_problem.png" /></a></p>
+<blockquote>
+<p>The human ear performs something similar to this preprocessing.</p>
+</blockquote>
+<p>Traditionally, speech recognition was solved by first learning to classify <strong>phonemes</strong> (typically we expensive feature engineering), the individual units of speech. However, with more powerful end-to-end architectures we are finding that explicit phoneme recognition is no longer necessary, or even a good idea. With these arcitectures, a large amount of data is especially important. A large academic dataset may be around 3000h of speech, while commercial systems (e.g. Alex) may be trained on datasets containing as many as 100,000h of speech.</p>
+<h3 id="attention-model-for-speech-recognition">Attention model for speech recognition</h3>
+<p>One way to build a speech recognition system is to use the seq2seq model with attention that we explored previously, where the audio clip (divided into small timeframes) is the input and the audio transcript is the output</p>
+<p><a href="https://postimg.cc/image/yboxl07kv/"><img alt="seq2seq_attention_model_clean.png" src="https://s19.postimg.cc/us2zv74v7/seq2seq_attention_model_clean.png" /></a></p>
+<h3 id="ctc-cost-for-speech-recognition">CTC cost for speech recognition</h3>
+<p>Lets say our audio clip is someone saying the sentence "the quick brown fox". Typically in speech recognition, the length of our input sequence is much much larger than the length of our output sequence.</p>
+<blockquote>
+<p>For example, a 10 second, 100 Hz audio clip becomes a 1000 inputs.</p>
+</blockquote>
+<p><strong>Connectionist temporal classification</strong> (CTC) allows us use a bi-directional RNN where \(T_x == T_y\), by allowing the model to predict both repeated characters and "blanks". For our examples, the predicted transcript might look like:</p>
+<p>\[\text{ttt _ h _ eee _ <em> _ </em> <SPACE> _ <em> _ qqq _ </em> ...}\]</p>
+<blockquote>
+<p>Where _ denotes a "blank".</p>
+</blockquote>
+<p>The basic rule is to <em>collapse repeated characters not separated by a "blank"</em>.</p>
+<blockquote>
+<p>This idea was originally introduced <a href="http://www.cs.toronto.edu/~graves/icml_2006.pdf">here</a></p>
+</blockquote>
+<h3 id="summary_2">Summary</h3>
+<p>In this lecture we tried to get a rough sense of how speech recognition models work. We saw:</p>
+<ul>
+<li>two methods for building a speech recognition system (both involved bi-directional RNNs): a <strong>seq2seq model with attention</strong> and a <strong>CTC model</strong>.</li>
+<li>that deep learning has had a dramatic impact of the viability of commercial speech recognition systems.</li>
+<li>building effective speech recognition system is still requires a very significant effort and a very large data set.</li>
+</ul>
+<h2 id="speech-recognition-audio-data-trigger-word-detection">Speech recognition - Audio data: Trigger word detection</h2>
+<p><strong>Trigger word detection</strong> systems are used to identify <strong>wake</strong> (or trigger) <strong>words</strong> (e.g. "Hey Google", "Alexa"), typically for digital assistants like Alexa, Google Home and Siri.</p>
+<p>The literature on trigger word detection is still evolving, and there is not widespread consensus or a universally agreed upon algorithm for trigger detection. We are just going to look at one example.</p>
+<p>Our task is to take an audio clip, possibly perform preprocessing to compute a spectrogram and then the features that we will eventually pass to an RNN, and predict at which timesteps the wake word was uttered. One strategy, is to have the neural network output the label 0 for all timesteps before a wake word is mentioned and then 1 directly after it is mentioned. The slight problem with this is that our training set becomes very unbalanced (many more 0's than 1's). Instead, we typically have the model predict a few 1's for the timesteps that come directly after the wake word was mentioned.</p>
+<p><a href="https://postimg.cc/image/7dv0j8s2n/"><img alt="trigger_word_detection.png" src="https://s19.postimg.cc/sar8nwq3n/trigger_word_detection.png" /></a></p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../week_2/" title="Week 2" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Week 2
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

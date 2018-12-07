@@ -1,0 +1,1389 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/sequence_models/week_2/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+    
+    
+      
+        <title>Week 2 - Deeplearning.ai - Coursera Course Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#week-2-natural-language-processing-word-embeddings" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Deeplearning.ai - Coursera Course Notes
+              </span>
+              <span class="md-header-nav__topic">
+                Week 2
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Deeplearning.ai - Coursera Course Notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Structuring Machine Learning Projects
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Structuring Machine Learning Projects
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../structuring_machine_learning_projects/week_1.md" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Sequence Models
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Sequence Models
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 2
+      </label>
+    
+    <a href="./" title="Week 2" class="md-nav__link md-nav__link--active">
+      Week 2
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-word-embeddings-word-representation" title="Introduction to word embeddings: Word Representation" class="md-nav__link">
+    Introduction to word embeddings: Word Representation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-word-embeddings" title="Visualizing word embeddings" class="md-nav__link">
+    Visualizing word embeddings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-word-embeddings-using-word-embeddings" title="Introduction to word embeddings: Using word embeddings" class="md-nav__link">
+    Introduction to word embeddings: Using word embeddings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#named-entity-recognition-example" title="Named entity recognition example" class="md-nav__link">
+    Named entity recognition example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-learning-and-word-embeddings" title="Transfer learning and word embeddings" class="md-nav__link">
+    Transfer learning and word embeddings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-word-embeddings-properties-of-word-embeddings" title="Introduction to word embeddings: Properties of word embeddings" class="md-nav__link">
+    Introduction to word embeddings: Properties of word embeddings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analogies" title="Analogies" class="md-nav__link">
+    Analogies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introduction-to-word-embeddings-embedding-matrix" title="Introduction to word embeddings: Embedding matrix" class="md-nav__link">
+    Introduction to word embeddings: Embedding matrix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-word-embeddings-learning-word-embeddings" title="Learning word embeddings: Learning word embeddings" class="md-nav__link">
+    Learning word embeddings: Learning word embeddings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithm-1" title="Algorithm 1" class="md-nav__link">
+    Algorithm 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generalizing" title="Generalizing" class="md-nav__link">
+    Generalizing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-word-embeddings-word2vec" title="Learning Word Embeddings: Word2vec" class="md-nav__link">
+    Learning Word Embeddings: Word2vec
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#skip-gram" title="Skip-gram" class="md-nav__link">
+    Skip-gram
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-details" title="Model details" class="md-nav__link">
+    Model details
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problems-with-softmax-classification" title="Problems with softmax classification" class="md-nav__link">
+    Problems with softmax classification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-sample-the-context-c" title="How to sample the context c?" class="md-nav__link">
+    How to sample the context c?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-word-embeddings-negative-sampling" title="Learning Word Embeddings: Negative Sampling" class="md-nav__link">
+    Learning Word Embeddings: Negative Sampling
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-details_1" title="Model details" class="md-nav__link">
+    Model details
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selecting-negative-examples" title="Selecting negative examples" class="md-nav__link">
+    Selecting negative examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-word-embeddings-glove-word-vectors" title="Learning Word Embeddings: GloVe word vectors" class="md-nav__link">
+    Learning Word Embeddings: GloVe word vectors
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model" title="Model" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-note-of-the-featurization-view-of-word-embeddings" title="A note of the featurization view of word embeddings" class="md-nav__link">
+    A note of the featurization view of word embeddings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications-using-word-embeddings-sentiment-classification" title="Applications using Word Embeddings: Sentiment Classification" class="md-nav__link">
+    Applications using Word Embeddings: Sentiment Classification
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-sentiment-classification-model" title="Simple sentiment classification model" class="md-nav__link">
+    Simple sentiment classification model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn-sentiment-classification-model" title="RNN sentiment classification model" class="md-nav__link">
+    RNN sentiment classification model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_3" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications-using-word-embeddings-debiasing-word-embeddings" title="Applications using Word Embeddings: Debiasing word embeddings" class="md-nav__link">
+    Applications using Word Embeddings: Debiasing word embeddings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#addressing-bias-in-word-embeddings" title="Addressing bias in word embeddings" class="md-nav__link">
+    Addressing bias in word embeddings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_4" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-word-embeddings-word-representation" title="Introduction to word embeddings: Word Representation" class="md-nav__link">
+    Introduction to word embeddings: Word Representation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualizing-word-embeddings" title="Visualizing word embeddings" class="md-nav__link">
+    Visualizing word embeddings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-word-embeddings-using-word-embeddings" title="Introduction to word embeddings: Using word embeddings" class="md-nav__link">
+    Introduction to word embeddings: Using word embeddings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#named-entity-recognition-example" title="Named entity recognition example" class="md-nav__link">
+    Named entity recognition example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer-learning-and-word-embeddings" title="Transfer learning and word embeddings" class="md-nav__link">
+    Transfer learning and word embeddings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-word-embeddings-properties-of-word-embeddings" title="Introduction to word embeddings: Properties of word embeddings" class="md-nav__link">
+    Introduction to word embeddings: Properties of word embeddings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analogies" title="Analogies" class="md-nav__link">
+    Analogies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introduction-to-word-embeddings-embedding-matrix" title="Introduction to word embeddings: Embedding matrix" class="md-nav__link">
+    Introduction to word embeddings: Embedding matrix
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-word-embeddings-learning-word-embeddings" title="Learning word embeddings: Learning word embeddings" class="md-nav__link">
+    Learning word embeddings: Learning word embeddings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#algorithm-1" title="Algorithm 1" class="md-nav__link">
+    Algorithm 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generalizing" title="Generalizing" class="md-nav__link">
+    Generalizing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-word-embeddings-word2vec" title="Learning Word Embeddings: Word2vec" class="md-nav__link">
+    Learning Word Embeddings: Word2vec
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#skip-gram" title="Skip-gram" class="md-nav__link">
+    Skip-gram
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-details" title="Model details" class="md-nav__link">
+    Model details
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problems-with-softmax-classification" title="Problems with softmax classification" class="md-nav__link">
+    Problems with softmax classification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-sample-the-context-c" title="How to sample the context c?" class="md-nav__link">
+    How to sample the context c?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-word-embeddings-negative-sampling" title="Learning Word Embeddings: Negative Sampling" class="md-nav__link">
+    Learning Word Embeddings: Negative Sampling
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model-details_1" title="Model details" class="md-nav__link">
+    Model details
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#selecting-negative-examples" title="Selecting negative examples" class="md-nav__link">
+    Selecting negative examples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-word-embeddings-glove-word-vectors" title="Learning Word Embeddings: GloVe word vectors" class="md-nav__link">
+    Learning Word Embeddings: GloVe word vectors
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#model" title="Model" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-note-of-the-featurization-view-of-word-embeddings" title="A note of the featurization view of word embeddings" class="md-nav__link">
+    A note of the featurization view of word embeddings
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications-using-word-embeddings-sentiment-classification" title="Applications using Word Embeddings: Sentiment Classification" class="md-nav__link">
+    Applications using Word Embeddings: Sentiment Classification
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simple-sentiment-classification-model" title="Simple sentiment classification model" class="md-nav__link">
+    Simple sentiment classification model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rnn-sentiment-classification-model" title="RNN sentiment classification model" class="md-nav__link">
+    RNN sentiment classification model
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_3" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applications-using-word-embeddings-debiasing-word-embeddings" title="Applications using Word Embeddings: Debiasing word embeddings" class="md-nav__link">
+    Applications using Word Embeddings: Debiasing word embeddings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#addressing-bias-in-word-embeddings" title="Addressing bias in word embeddings" class="md-nav__link">
+    Addressing bias in word embeddings
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_4" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/edit/master/docs/sequence_models/week_2.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="week-2-natural-language-processing-word-embeddings">Week 2: Natural Language Processing &amp; Word Embeddings</h1>
+<p>Natural language processing and deep learning is an <em>important combination</em>. Using word vector representations and embedding layers, you can train recurrent neural networks with outstanding performances in a wide variety of industries. Examples of applications are <strong>sentiment analysis</strong>, <strong>named entity recognition</strong> (<strong>NER</strong>) and <strong>machine translation</strong>.</p>
+<h2 id="introduction-to-word-embeddings-word-representation">Introduction to word embeddings: Word Representation</h2>
+<p>Last week, we learned about RNNs, GRUs, and LSTMs. In this week, you see how many of these ideas can be applied to <strong>Natural Language Processing</strong> (<strong>NLP</strong>), which is one of the areas of AI being revolutionized by deep learning. One of the key ideas you learn about is <strong>word embeddings</strong>, which is a way of representing words.</p>
+<p>So far, we have been representing words with a vocabulary, \(V\), of one-hot-encoded vectors. Lets quickly introduce a new notation. If the token "<em>Man</em>" is in position 5391 in our vocabulary \(V\) then we denote the corresponding one-hot-encoded vector as \(O_{5391}\).</p>
+<p>One of the weaknesses of this representation is that it treats each word as a "thing" onto itself, and doesn't allow a language model to generalize between words. Take the following examples:</p>
+<p>\[x_1: \text{"I want a glass of orange juice"}\]
+\[x_2: \text{"I want a glass of apple juice"}\]</p>
+<p>Cleary, the example sentences are extremely semantically similar. However, in a one-hot encoding scheme, a model which has learned that \(x_1\) is a likely sentence is unable to fully generalize to example \(x_2\), as the relationship between "<em>apple</em>" and "<em>orange</em>" is not any closer than the relationship between "<em>orange</em>" and any other word in the vocabulary.</p>
+<p>Notice, in fact, that the <a href="http://www.wikiwand.com/en/Dot_product">inner product</a> between any two one-hot encoded vectors:</p>
+<p>\[O_i \times O_j = \vec 0 \text{ for } \forall i,j\]</p>
+<p>And similarly, the <a href="http://www.wikiwand.com/en/Euclidean_distance">euclidean distance</a> between any two one-hot encoded vectors is identical:</p>
+<p>\[||O_i - O_j|| = \sqrt{|V|}\text{ for } \forall i,j\]</p>
+<p>To build our intuition of word embeddings, image a contrived example where we represent each word with some <strong>feature representation</strong>:</p>
+<p><a href="https://postimg.cc/image/5mcil7jcf/"><img alt="word_embeddings_intro.png" src="https://s19.postimg.cc/6bvaxkjw3/word_embeddings_intro.png" /></a></p>
+<p>We could imagine many features (with values -1 to 1, say) that can be used to build up a featue representation, an \(f_n\)-dimensional vector, of each word. Similarly to our one-hot representations, lets introduce a new notation \(e_i\) to represent the <em>embedding</em> of token \(i\) in our vocabulary \(V\).</p>
+<blockquote>
+<p>Where \(f_n\) is the number of features.</p>
+</blockquote>
+<p>Thinking back to our previous example, notice that our representations for the tokens "<em>apple</em>" and "<em>orange</em>" become quite similar. This is the critical point, and what allows our language model to generalize between word tokens and even entire sentences.</p>
+<blockquote>
+<p>In the later videos, we will see how to learn these embeddings. Note that the learned representations do not have an easy interpretation like the dummy embeddings we presented above.</p>
+</blockquote>
+<h3 id="visualizing-word-embeddings">Visualizing word embeddings</h3>
+<p>Once these feature vectors or <em>embeddings</em> are learned, a popular thing to do is to use dimensionality reduction to <em>embed</em> them into a 2D geometric space for easy visualization. An example of this using our word representations presented above:</p>
+<p><a href="https://postimg.cc/image/ofybhwcbz/"><img alt="visualize_embeddings.png" src="https://s19.postimg.cc/e5vwinmgj/visualize_embeddings.png" /></a></p>
+<p>We notice that semantically similar words tend to cluster together, and that each cluster seems to roughly represent some idea or concept (i.e., numbers typically cluster together). This demonstrates our ability to learn <em>similar</em> feature vectors for <em>similar</em> tokens and will allow our models to generalize between words and even sentences.</p>
+<blockquote>
+<p>A common algorithm for doing this is the <a href="http://www.wikiwand.com/en/T-distributed_stochastic_neighbor_embedding">t-SNE</a> algorithm.</p>
+</blockquote>
+<p>The reason this feature representations are called <em>embeddings</em> is because we imagine that we are <em>embedding</em> each word into a geometric space (say, of 300 dimensions). If you imagine a cube, we can think of giving each word a single unit of space within this cube.</p>
+<p><a href="https://postimg.cc/image/llv64kzwv/"><img alt="why_embeddings.png" src="https://s19.postimg.cc/ofybi1237/why_embeddings.png" /></a></p>
+<h2 id="introduction-to-word-embeddings-using-word-embeddings">Introduction to word embeddings: Using word embeddings</h2>
+<p>In the last lecture, you saw what it might mean to learn a featurized representations of different words. In this lecture, you see how we can take these representations and plug them into NLP applications.</p>
+<h3 id="named-entity-recognition-example">Named entity recognition example</h3>
+<p>Take again the example of named entity recognition, and image we have the following example:</p>
+<p><a href="https://postimg.cc/image/9clc5o29r/"><img alt="ner_word_emb_example.png" src="https://s19.postimg.cc/btx3cxm6b/ner_word_emb_example.png" /></a></p>
+<p>Let's assume we correctly identify "<em>Sally Johnson</em>" as a PERSON entity. Now imagine we see the following sequence:</p>
+<p>\[x: \text{"Robert Lin is a durian cultivator"}\]</p>
+<blockquote>
+<p>Note that durian is a type of fruit.</p>
+</blockquote>
+<p>In all likelihood, a model using word embeddings as input should be able to generalize between the two input examples, a take advantage of the fact that it previously labeled the first two tokens of a similar training example ("<em>Sally Johnson</em>") as a PERSON entity. But how does the model generalize between "<em>orange farmer</em>" and "<em>durian cultivator</em>"?</p>
+<p>Because word embeddings are typically trained on <em>massive</em> unlabeled text corpora, on the scale of 1 - 100 billion words. Thus, it is likely that the word embeddings would have seen and learned the similarity between word pairs ("<em>orange</em>", "<em>durian</em>") and ("<em>farmer</em>", "<em>cultivator</em>").</p>
+<p>In truth, this method of <strong>transfer learning</strong> is typically how we use word embeddings in NLP tasks.</p>
+<h3 id="transfer-learning-and-word-embeddings">Transfer learning and word embeddings</h3>
+<p>How exactly do we utilize transfer learning of word embeddings for NLP tasks?</p>
+<ol>
+<li>Learn word embeddings from large text corpus (1-100B words), OR, download pre-trained embeddings online.</li>
+<li>Transfer the embedding to a new task with a (much) smaller training set (say, 100K words).</li>
+<li>(Optional): Continue to fine-tune the word embeddings with new data. In practice, this is only advisable if your training dataset is quite large.</li>
+</ol>
+<p>This method of transfer learning with word embeddings has found use in NER, text summarization, co-reference resolution, and parsing. However, it has been less useful for language modeling and machine translation (especially when a lot of data for these tasks is available).</p>
+<p>One major advantage to using word embeddings to represent tokens is that it reduces the dimensionality of our inputs, compared to the one-hot encoding scheme. For example, a typical vocabulary may be 10,000 or more word types, while a typical word embedding may be around 300 dimensions.</p>
+<h2 id="introduction-to-word-embeddings-properties-of-word-embeddings">Introduction to word embeddings: Properties of word embeddings</h2>
+<p>By now, you should have a sense of how word embeddings can help you build NLP applications. One of the most fascinating properties of word embeddings is that they can also help with <strong>analogy reasoning</strong>. And while reasoning by analogy may not be, by itself, the most important NLP application, it helps to convey a sense of what information these word embeddings are capturing.</p>
+<h3 id="analogies">Analogies</h3>
+<p>Let us return to our previous example:</p>
+<p><a href="https://postimg.cc/image/wglsy3sof/"><img alt="word_emb_analogies.png" src="https://s19.postimg.cc/b6y6n9cdv/word_emb_analogies.png" /></a></p>
+<p>Say we post the question: "<em>Man is to women as king is to <strong>what</strong>?</em>"</p>
+<p>Many of us would agree that the answer to this question is "Queen" (in part because of humans remarkable ability to <a href="https://plato.stanford.edu/entries/reasoning-analogy/">reason by analogy</a>). But can we have a computer arrive at the same answer using embeddings?</p>
+<p>First, lets simplify our earlier notation and allow \(e_{man}\) to denote the learned embedding for the token "<em>man</em>". Now, if we take the difference \(e_{man} - e_{woman}\), the resulting vector is closest to \(e_{king} - e_{queen}\).</p>
+<blockquote>
+<p>Note you can confirm this using our made up embeddings in the table.</p>
+</blockquote>
+<p>Explicitly, an algorithm to answer the question "<em>Man is to women as king is to <strong>what</strong>?</em>" would involve computing \(e_{man} - e_{woman}\), and then finding the token \(w\) that produces \(e_{man} - e_{woman} \approx e_{king} - e_{w}\).</p>
+<blockquote>
+<p>This ability to mimic analogical reasoning and other interesting properties of word embeddings were introduced in this <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/rvecs.pdf">paper</a>.</p>
+</blockquote>
+<p>Lets try to visualize why this makes sense. Imagine our word embedding plotted as vectors in a 300D space (represented here in 2 dimensions for visualization). We would expect our vectors to line up in a parallelogram:</p>
+<p><a href="https://postimg.cc/image/c1kq9ipfz/"><img alt="visualize_word_emb_300d.png" src="https://s19.postimg.cc/f8f9t59w3/visualize_word_emb_300d.png" /></a></p>
+<p>Note that in reality, if you use a dimensionality reduction algorithm such as t-SNE, you will find that this expected relationship between words in an analogy does not hold:</p>
+<p><a href="https://postimg.cc/image/if9tcrmm7/"><img alt="t-sne_visulize_word_emb.png" src="https://s19.postimg.cc/xb8ckcy0z/t-sne_visulize_word_emb.png" /></a></p>
+<p>We want to find \(e_w \approx e_{king} - e_{man} + e_{woman}\). Our algorithm is thus:</p>
+<p>\[argmax_w \; sim(e_w, e_{king} - e_{man} + e_{woman})\]</p>
+<p>The most commonly used similarity function, \(sim\) is the <em>cosine similarity</em>:</p>
+<p>\[sim(u, v) = \frac{u^Tv}{||u||_2||v||_2}\]</p>
+<p>Which represents the <strong>cosine</strong> of the angle between the two vectors \(u, v\).</p>
+<blockquote>
+<p>Note that we can also use <strong>euclidian distance</strong>, although this is technically a measure of dissimilarity, so we need to take its negative. See <a href="http://blog.christianperone.com/2013/09/machine-learning-cosine-similarity-for-vector-space-models-part-iii/">here</a> for an intuitive explanation of the cosine similarity measure.</p>
+</blockquote>
+<h3 id="introduction-to-word-embeddings-embedding-matrix">Introduction to word embeddings: Embedding matrix</h3>
+<p>Let's start to formalize the problem of learning a good word embedding. When we implement an algorithm to learn word embeddings, what we actually end up learning is an <strong>embedding matrix</strong>.</p>
+<p>Say we are using a vocabulary \(V\) where \(||V|| = 10,000\). We want to learn an embedding matrix \(E\) of shape \((300, 10000)\) (i.e., the dimension of our word embeddings by the number of words in our vocabulary).</p>
+<p>\[E = \begin{bmatrix}e_{1, 1} &amp; ... &amp; e_{10000, 1}\\ ... &amp; ... \\ e_{1, 300} &amp; &amp; ...\end{bmatrix}\]</p>
+<blockquote>
+<p>Where \(e_{i, j}\) is the \(j-th\) feature in the \(i-th\) token.</p>
+</blockquote>
+<p>Recall that we used the notation \(o_i\) to represent the one-hot encoded representation of the \(i-th\) word in our vocabulary.</p>
+<p>\[o_i = \begin{bmatrix}0 \\ ... \\ 1 \\ ... \\ 0\end{bmatrix}\]</p>
+<p>If we take \(E \cdot o_i\) then we are retrieving the embedding for the \(i-th\) word in \(V\), \(e_i \in \mathbb R^{300 \times 1}\).</p>
+<h3 id="summary">Summary</h3>
+<p>The  import thing to remember is that our goal will be to learn an <strong>embedding matrix</strong> \(E\). To do this, we initialize \(E\) randomly and learn all the parameters of this, say, 300 by 10,000 dimensional matrix. Finally, \(E\) multiplied by our one-hot vector \(o_i\) gives you the embedding vector for token \(i\), \(e_i\).</p>
+<blockquote>
+<p>Note that while this method of retrieving embeddings from the embedding matrix is intuitive, the matrix-vector multiplication is not efficient. In practice, we use a specialized function to lookup a column \(i\) of the matrix \(E\), an embedding \(e_i\).</p>
+</blockquote>
+<h2 id="learning-word-embeddings-learning-word-embeddings">Learning word embeddings: Learning word embeddings</h2>
+<p>Lets begin to explore some concrete algorithms for learning word embeddings. In the history of deep learning as applied to learning word embeddings, people actually started off with relatively <em>complex</em> algorithms. And then over time, researchers discovered they can use simpler and simpler algorithms and still get <em>very good</em> results, especially for a large dataset. Some of the algorithms that are most popular today are so simple that they almost seem little bit magical. For this reason, it's actually easier to develop our intuition by introducing some of the more complex algorithms first.</p>
+<blockquote>
+<p>Note that a lot of the ideas from this lecture came from <a href="http://jmlr.org/papers/volume3/bengio03a/bengio03a.pdf">Bengio et. al., 2003</a>.</p>
+</blockquote>
+<h3 id="algorithm-1">Algorithm 1</h3>
+<p>We will introduce an early algorithm for learning word embeddings, which was very successful, with an example. Lets say you are building a <strong>neural language model</strong>. We want to be able to predict the next word for any given sequence of words. For example:</p>
+<blockquote>
+<p>Note that, another common strategy is to pick a fixed window of words before the word we need to predict. The window size becomes a hyperparameter of the algorithm.</p>
+</blockquote>
+<p>\[x: \text{"I want a glass of orange ____"}\]</p>
+<p>One way to approach this problem is to lookup the embeddings for each word in the given sequence, and feed this to a densely connected layer which itself feeds to a single output unit with <strong>softmax</strong>.</p>
+<p><a href="https://postimg.cc/image/78tghnh27/"><img alt="neural_language_model_ex.png" src="https://s19.postimg.cc/f1k49mn1f/neural_language_model_ex.png" /></a></p>
+<p>Imagine our embeddings are 300 dimensions. Then our input layer is \(\mathbb R^{6 \times 300}\). Our dense layer and output softmax layer have their own parameters, \(W^{[1]}, b^{[1]}\) and \(W^{[2]}, b^{[2]}\). We can then use back-propagation to learn these parameters along with the embedding matrix. The reason this works is because the algorithm is incentivized to learn good word embeddings in order to generalize and perform well when predicting the next word in a sequence.</p>
+<h3 id="generalizing">Generalizing</h3>
+<p>Imagine we wanted to learn the word "<em>juice</em>" in the following sentence:</p>
+<p>\[x: \text{"I want a glass of orange <em>juice</em> to go along with my cereal"}\]</p>
+<p>Typically, we would provide a neural language model with some <em>context</em> and have it predict this missing word from that context. There are many choices here:</p>
+<ul>
+<li>\(n\) words on the left &amp; right of the word to predict</li>
+<li>last \(n\) word before the word to predict</li>
+<li>a single, <em>nearby</em> word</li>
+</ul>
+<p>What researchers have noticed is that if your goal is to build a robust language model, choosing some \(n\) number of words before the target word as the context works best. However, if you goal is simply to learn word embeddings, then choosing other, simpler contexts (like a single, <em>nearby</em> word) work quite well.</p>
+<p>To summarize, by posing the language modeling problem in which some <strong>context</strong> (such as the last four words) is used to predict some <strong>target</strong> word, we can effectively learn the input word embeddings via backprogopogation.</p>
+<h2 id="learning-word-embeddings-word2vec">Learning Word Embeddings: Word2vec</h2>
+<p>In the last lecture, we used a neural language model in order to learn good word embeddings. Let's take a look at the the <strong>Word2Vec</strong> algorithm, which is a simpler and more computational efficient way to learn word embeddings.</p>
+<blockquote>
+<p>Most of the ideas in this lecture come from this paper: <a href="https://arxiv.org/abs/1301.3781">Mikolov et al., 2013</a>.</p>
+</blockquote>
+<p>We are going to discuss the word2Vec <strong>skip-gram</strong> model for learning word embeddings.</p>
+<h3 id="skip-gram">Skip-gram</h3>
+<p>Let say we have the following example:</p>
+<p>\[x: \text{"I want a glass of orange juice to go along with my cereal"}\]</p>
+<p>In the skip-gram model, we choose (<em>context</em>, <em>target</em>) pairs in order to create the data needed for our supervised setting. To do this, for each <em>context</em> word we randomly choose a <em>target</em> word within some window (say, +/- 5 words).</p>
+<p><em>Our learning problem:</em></p>
+<p>\[x \rightarrow y\]
+\[\text{Context }, c\;(\text{"orange"}) \rightarrow \text{Target}, t\; (\text{"juice"})\]</p>
+<p>The learning problem then, is to choose the correct <em>target</em> word within a window around the <em>context</em> word. Clearly, this is a very challenging task. However, remember that the goal is <em>not</em> to perform well on this prediction task, but to use the task along with backprogpogation to force the model to learn good word embeddings.</p>
+<h4 id="model-details">Model details</h4>
+<p>Lets take \(||V|| = 10000\). Our neural network involves an embedding layer, \(E\) followed by a softmax layer, similar to the one we saw in the previous lecture:</p>
+<p>\[E \cdot o_c \rightarrow e_c \rightarrow softmax \rightarrow \hat y\]</p>
+<p>Our softmax layer computes:</p>
+<p>\[p(t | c) = \frac{e^{\theta_t^Te_c}}{\sum^{10000}_{j=1}e^{\theta_j^Te_c}}\]</p>
+<blockquote>
+<p>where \(\theta_t\) is the parameters associated with output \(t\) and the bias term has been omitted.</p>
+</blockquote>
+<p>Which is a \(|V|\) dimensional vector containing the probability distribution of the target word being any word in the vocabulary for a given context word.</p>
+<p>Our loss is the familiar negative log-likelihood:</p>
+<p>\[\ell (\hat y, y) = -\sum^{10000}_{i=1} y_i \log \hat y_i\]</p>
+<p>To <em>summarize</em>, our model looks up an embeddings in the embedding matrix which contains our word embeddings and is updated by backpropagation during learning. These embeddings are used by a softmax layer to predict a target word for a given context.</p>
+<h4 id="problems-with-softmax-classification">Problems with softmax classification</h4>
+<p>It turns out, there are a couple problems with the algorithm as we have described it, primarily due to the expensive computation of the <em>softmax</em> layer. Recall our softmax calculation:</p>
+<p>\[p(t | c) = \frac{e^{\theta_t^Te_c}}{\sum^{10000}_{j=1}e^{\theta_j^Te_c}}\]</p>
+<p>Every time we wish to perform this softmax classification (that is, every step during training or testing), we need to perform a sum over \(|V|\) elements. This quickly becomes a problem when our vocabulary reaches sizes in the milllions or even billions.</p>
+<p>One solution is to use a <strong>hierarchial softmax</strong> classifier. The basic idea is to build a Huffman tree based on word frequencies. In this scheme, the number of computations to perform in the softmax layers scales as \(\log |V|\) instead of \(V\).</p>
+<blockquote>
+<p>I don't really understand this.</p>
+</blockquote>
+<h4 id="how-to-sample-the-context-c">How to sample the context c?</h4>
+<p>Sampling our target words, \(t\) is straightforward once we have sampled their context, \(c\), but how do we choose \(c\) itself?</p>
+<p>Once solution is to sample uniform randomly. However, this leads to us choosing extremely common words (such as <em>the</em>, <em>a</em>, <em>of</em>, <em>and</em>, also known as stop words) much too often. This is a problem, as many updates would be made to \(e_c\) for these common words and many less updates would be made for less common words.</p>
+<p>In practice, we use different heuristics to balance the sampling between very common and less common words.</p>
+<h3 id="summary_1">Summary</h3>
+<p>In the original word2vec paper, you will find two versions of the word2vec model: the <strong>skip-gram</strong> one introduced here and another called <strong>CBow</strong>, the continuous bag-of-words model. This model takes the surrounding contexts from a middle word, and uses them to try to predict the middle word. Each model has its advantages and disadvantages.</p>
+<p>The key problem with the <strong>skip-gram</strong> model as presented so far is that the softmax step is <em>very expensive</em> to calculate because it sums over the entire vocabulary size.</p>
+<h2 id="learning-word-embeddings-negative-sampling">Learning Word Embeddings: Negative Sampling</h2>
+<p>In the last lecture, we saw how the <strong>skip-gram</strong> model allows you to construct a supervised learning task by mapping from contexts to targets, and how this in turn allows us to learn a useful word embeddings. The major the downside of this approach was that was the <strong>softmax</strong> objective was <em>very slow to compute</em>.</p>
+<p>Lets take a look at a modified learning problem called <strong>negative sampling</strong>, which allows us to do something similar to the skip-gram model but with a much more efficient learning algorithm.</p>
+<blockquote>
+<p>Again, most of the ideas in this lecture come from this paper: <a href="https://arxiv.org/abs/1301.3781">Mikolov et al., 2013</a>.</p>
+</blockquote>
+<p>Similar to the skip-gram model, we are going to create a supervised learning setting from unlabeled data. Explicitly, the problem is to predict whether or not a given pair of words is a  <em>context</em>, <em>target</em> pair.</p>
+<p>First, we need to generate training examples:</p>
+<ul>
+<li><strong>Positive</strong> examples are generated exactly how we saw with the skip-gram model, i.e., by sampling a context word and choosing a target word within some window around the context.</li>
+<li>To generate the <strong>negative examples</strong>, we take a sampled context word and then for some \(k\) number of times, we choose a target word <em>randomly</em> from our vocabulary (under the assumption that this random word <em>won't</em> be associated with our sampled <em>context</em> word).</li>
+</ul>
+<p>As an example, take the following sentence:</p>
+<p>\[x: \text{"I want a glass of orange juice to go along with my cereal"}\]</p>
+<p>Then we might construct the following (context, target) training examples:</p>
+<ul>
+<li>\((orange, juice, 1)\)</li>
+<li>\((orange, king, 0)\)</li>
+<li>\((orange, book, 0)\)</li>
+<li>\((orange, the, 0)\)</li>
+<li>\((orange, of, 0)\)</li>
+</ul>
+<p>Where 1 denotes a <strong>positive</strong> example and 0 a <strong>negative</strong> example.</p>
+<blockquote>
+<p>Note that this leads to an obvious problem: some of our randomly chosen target words in our generated negative examples will in fact be within the context of the sampled context word. It turns out this is OK, as much more often than not our generated negative examples are truly negative examples.</p>
+</blockquote>
+<p>Next, we define a supervised learning problem, where our inputs \(x\) are these generated positive and negative examples, and our targets \(y\) are whether or not the input represents a true (<em>context</em>, <em>target</em>) pair (1) or not (0):</p>
+<p>\[x \rightarrow y\]
+\[(context, target) \rightarrow 1 \text{ or } 0\]</p>
+<blockquote>
+<p>Explicitly, we are asking the model to predict whether or not the two words came from a distribution generated by sampling from within a context (defined3 as some window around the words) or a distribution generated by sampling words from the vocabulary at random.</p>
+</blockquote>
+<p>How do you choose \(k\)? Mikolov <em>et. al</em> suggest \(k=5-20\) for small datasets, and \(k=2-5\) for large datasets. You can think of \(k\) as a 1:\(k\) ratio of <strong>positive</strong> to <strong>negative</strong> examples.</p>
+<h4 id="model-details_1">Model details</h4>
+<p>Recall the softmax classifier from the skip-gram model:</p>
+<p>\[\text{Softmax: } p(t | c) = \frac{e^{\theta_t^Te_c}}{\sum^{10000}_{j=1}e^{\theta_j^Te_c}}\]</p>
+<p>For our model which uses negative sampling, first define each input, output pair as \(c, t\) and \(y\) respectively. Then, we define a logistic regression classifier:</p>
+<p>\[p(y = 1 | c, t) = \sigma(\theta_t^Te_c)\]</p>
+<p>Where \(\theta_t\) represents the parameter vector for a possible target word \(t\), and \(e_c\) the embedding for each possible context word.</p>
+<blockquote>
+<p>NOTE: totally lost around the 7 min mark. Review this.</p>
+</blockquote>
+<p>This technique is called <strong>negative sampling</strong> because we generate our training data for the supervised learning setting by first creating a positive example and then <em>sampling</em> \(k\) <em>negative</em> examples.</p>
+<h4 id="selecting-negative-examples">Selecting negative examples</h4>
+<p>The final import point is how we <em>actually</em> sample <strong>negative</strong> examples in <em>practice</em>.</p>
+<ul>
+<li>One option is to sample the target word based on the empirical frequency of words in your training corpus. The problem of this solution is that we end up sampling many highly frequent stop words, such as "and", "of", "or", "but", etc.</li>
+<li>Another extreme is to sample the negative examples uniformly random. However, this also leads to a very non-representive sampling of target words.</li>
+</ul>
+<p>What the <a href="https://arxiv.org/abs/1301.3781">authors</a> found to work best is something in between:</p>
+<p>\[P(w_i) = \frac{f(w_i)^{\frac{3}{4}}}{\sum^{|V|}_{j=1}f(w_j)^{\frac{3}{4}}}\]</p>
+<p>Here, we sample proportional to the frequency of a word to the power of \(\frac{3}{4}\). This is somewhere between the two extremes of sampling words by their frequency and sampling words at uniform random.</p>
+<h3 id="summary_2">Summary</h3>
+<p>To summarize,</p>
+<ul>
+<li>we've seen how to learn word vectors with a <strong>softmax classier</strong>, but it's very computationally expensive.</li>
+<li>we've seen that by changing from a softmax classification to a bunch of binary classification problems, we can very efficiently learn words vectors.</li>
+<li>as is the case in other areas of deep learning, there are open source implementations of the discussed algorithms you can use to learn these embeddings. There are also pre-trained word vectors that others have trained and released online under permissive licenses.</li>
+</ul>
+<h2 id="learning-word-embeddings-glove-word-vectors">Learning Word Embeddings: GloVe word vectors</h2>
+<p>The final algorithm we will look at for learning word embeddings is <strong>global vectors for word representation</strong> (<strong>GloVe</strong>). While not used as much as <strong>word2vec</strong> models, it has its enthusiasts -- in part because of its simplicity.</p>
+<blockquote>
+<p>This algorithm was original presented <a href="http://www.aclweb.org/anthology/D14-1162">here</a>.</p>
+</blockquote>
+<p>Previously, we were sampling pairs of words (<em>context</em>, <em>target</em>) by picking two words that appear in close proximity to one another in our text corpus. In the GloVe algorithm, we define:</p>
+<ul>
+<li>\(X_{ij}\): the number of times word \(i\) appears in the context of word \(j\).</li>
+<li>\(X_{ij}\) == \(X_{ji}\)</li>
+</ul>
+<blockquote>
+<p>Note that \(X_{ij}\) == \(X_{ji}\) is not necessarily true in other algorithms (e.g., if we were to define the context as being the immediate next word). Notice that \(i\) and \(j\) play the role of \(c\) and \(t\).</p>
+</blockquote>
+<h3 id="model">Model</h3>
+<p>The models objective is as follows:</p>
+<p>Minimize \(\sum^{|V|}<em>{i=1} \sum^{|V|}</em>{j=1} f(X_{ij}) (\theta_i^Te_j + b_i + b_j' - \log X_{ij})^2\)</p>
+<ul>
+<li>Think of \(\theta_i^Te_j\) as a measure of how similar two words are, based on how often the occur together: \(\log X_{ij}\). More specifically, we are trying to minimize this difference using gradient descent by searching for the pair of words \(i, j\) whose inner product \(\theta_i^Te_j\) is a good predictor of how often they are going to appear together, \(\log X_{ij}\).</li>
+<li>If \(X_{ij} = 0\), \(\log X_{ij} = \log 0 = - \infty\) which is undefined. We use \(f(X_{ij})\) as weighting term, which is 0 when \(X_{ij}\) = 0, so we don't sum over pairs of words \(i, j\) when \(X_{ij} = 0\). \(f(X_{ij})\) is also used to weight words, such that extremely common words don't "drown" out uncommon words. There are various heuristics for choosing \(f(X_{ij})\). You can look at the <a href="http://www.aclweb.org/anthology/D14-1162">original paper</a> for details for how to choose this heuristic.</li>
+</ul>
+<blockquote>
+<p>Note, we use the convention \(0 \log 0 = 0\)</p>
+</blockquote>
+<p>Something to note about this algorithm is that the roles of \(theta\) and \(e\) are now completely <em>symmetric</em>. So, \(\theta_i\) and \(e_j\) are symmetric in that, if you look at the math, they play pretty much the same role and you could reverse them or sort them around, and they actually end up with the same optimization objective. In fact, one way to train the algorithm is to initialize \(\theta\) and \(e\) both uniformly and use gradient descent to minimize its objective, and then when you're done for every word, to then take the average:</p>
+<p>\[e_w^{final} = \frac{e_w + \theta_w}{2}\]</p>
+<p>because \(theta\) and \(e\) in this particular formulation play symmetric roles unlike the earlier models we saw in the previous videos, where \(theta\) and \(e\) actually play different roles and couldn't just be averaged like that.</p>
+<h3 id="a-note-of-the-featurization-view-of-word-embeddings">A note of the featurization view of word embeddings</h3>
+<p>Recall that when we first introduced the idea of word embeddings, we used a sort of <em>featurization view</em> to motivate the reason why we learn word embeddings in the first place. We said, "Well, maybe the first dimension of the vector captures gender, the second, age...", so forth and so on.</p>
+<p>However in practice, we cannot guarantee that the individual components of the embeddings are interpretable. Why? Lets say that there is some "space" where the first axis of the embedding vector is gender, and the second age. There is no way to guarantee that the actual dimension for each "feature" that the algorithm arrives at will be easily interpretable by humans. Indeed, if we consider the learned representation of each context, target pair, we note that:</p>
+<p>\[\theta_i^Te_j = (A\theta_i)^T(A^{-T}e_j) = \theta_i^TA^TA^{-T}e_j\]</p>
+<p>Where \(A\) is some arbitrary invertible matrix. The key take away is that the dimensions learned by the algorithm are not human interpretable, and each dimension typically encodes <em>some part</em> of what we might think of a feature, as opposed to encoding an entire feature itself.</p>
+<h2 id="applications-using-word-embeddings-sentiment-classification">Applications using Word Embeddings: Sentiment Classification</h2>
+<p><strong>Sentiment classification</strong> is the task of looking at a piece of text and telling if someone likes or dislikes the thing they're talking about. It is one of the most important building blocks in NLP and is used in many applications. One of the challenges of sentiment classification is a lack of labeled data. However, with word embeddings, you're able to build good sentiment classifiers even with only modest-size label training sets. Lets look at an example:</p>
+<p>\[x: \text{"The dessert is excellent.", } y: 4/5 \text{ stars}\]
+\[x: \text{"Service was quite slow.", } y: 2/5 \text{ stars}\]
+\[x: \text{"Good for a quick meal, but nothing special.", } y: 3/5 \text{ stars}\]
+\[x: \text{"Completely lacking in good taste, good service, and good ambience.", } y: 1/5 \text{ stars}\]</p>
+<blockquote>
+<p>While we are using restaurant reviews as an example, sentiment analysis is often applied to <a href="http://www.wikiwand.com/en/Voice_of_the_customer">voice of the customer</a> materials such as reviews and social media.</p>
+</blockquote>
+<p>Common training set sizes for sentiment classification would be around 10,000 to 100,000 words. Given these small training set sizes, word embeddings can be extremely useful. Lets use the above examples to introduce a couple of different algorithms</p>
+<h3 id="simple-sentiment-classification-model">Simple sentiment classification model</h3>
+<p>Take,</p>
+<p>\[x: \text{"The dessert is excellent.", } y: 4/5 \text{ stars}\]</p>
+<p>As usual, we map the tokens in the input examples to one-hot vectors, multiply this by a pre-trained embedding matrix and obtain our embeddings, \(e_w\). Using a pre-trained matrix is essentially a form of transfer learning, as we are able to encode information learned on a much larger corpus (say, 100B tokens) and use it for learning on a much smaller corpus (say, 10,000 tokens).</p>
+<p>We could then <em>average</em> or <em>sum</em> these embeddings, and pass the result to a <em>softmax</em> classifier which outputs \(\hat y\), the probability of the review being rated as 1, 2, 3, 4 or 5 stars.</p>
+<p>This algorithm will work OK, but fails to capture <em>negation</em> of positive words (as it does not take into account word order). For example:</p>
+<p>\[x: \text{"Completely lacking in good taste, good service, and good ambience.", } y: 1/5 stars\]</p>
+<p>might incorrectly be predicted to correspond with a high star rating, because of the appearance of "good" three times.</p>
+<h3 id="rnn-sentiment-classification-model">RNN sentiment classification model</h3>
+<p>A more sophisticated model involves using the embeddings as inputs to an RNN, which uses a softmax layer at the last timestep to predict a star rating:</p>
+<p><a href="https://postimg.cc/image/5zlev64mn/"><img alt="Screen_Shot_2018-06-14_at_7.18.52_PM.png" src="https://s19.postimg.cc/kisjwkxrn/Screen_Shot_2018-06-14_at_7.18.52_PM.png" /></a></p>
+<p>Recall that we actually saw this example when discussing many-to-one RNN architectures. Unlike the previous, simpler model, this model takes into account word order and performs much better on examples such as:</p>
+<p>\[x: \text{"Completely lacking in good taste, good service, and good ambience.", } y: 1/5 \text{ stars}\]</p>
+<p>which contain many negated, positive words. When paired with pre-trained word embeddings, this model works quite while.</p>
+<h3 id="summary_3">Summary</h3>
+<p>Pre-trained word embeddings are especially useful for NLP tasks where we don't have a lot of training data. In this lecture, we motivated that idea by showing how pre-trained word embeddings can be used as inputs to very simple models to perform sentiment classification.</p>
+<h2 id="applications-using-word-embeddings-debiasing-word-embeddings">Applications using Word Embeddings: Debiasing word embeddings</h2>
+<p>Machine learning and AI algorithms are increasingly trusted to help with, or to make, extremely important decisions. As such, we would like to make sure that, as much as possible, they're free of undesirable forms of bias, such as gender bias, ethnicity bias and so on. Lets take a look at reducing bias in word embeddings.</p>
+<blockquote>
+<p>Most of the ideas in this lecture came from this <a href="http://papers.nips.cc/paper/6228-man-is-to-computer-programmer-as-woman-is-to-homemaker-debiasing-word-embeddings.pdf">paper</a>.</p>
+</blockquote>
+<p>When we first introduced the idea of word embeddings, we leaned heavily on the idea of analogical reasoning to build our intuition. For example, we were able to ask "Man is to woman as king is to ____?" and using word emebddings, arrive at the example queen. However, we can also ask other questions that reveal a <em>bias</em> in embeddings. Take the following analogies encoding in some learned word embeddings:</p>
+<p>\[\text{"Man is to computer programmer as woman is to homemaker"}\]
+\[\text{"Father is to doctor as mother is to nurse"}\]</p>
+<p>Clearly, these embeddings are encoding unfortunate gender stereotypes. Note that these are only examples, biases against ethnicity, age, sexual orientation, etc. can also become encoded by the learned word embeddings. In order for these biases to be learned by the model, they must first exist in the data used to train it.</p>
+<h3 id="addressing-bias-in-word-embeddings">Addressing bias in word embeddings</h3>
+<p>Lets say we have already learned 300D embeddings. We are going to stick to gender bias for simplicities sake. The process for debiasing these embeddings is as follows:</p>
+<p>1 <strong>Identify bias direction</strong>:</p>
+<p>Take a few examples where the only difference (or only major difference) between word embeddings is gender, and subtract them:
+  - \(e_{he} - e_{she}\)
+  - \(e_{male} - e_{female}\)
+  - ...</p>
+<p>Average the differences. The resulting vector encodes a 1D subspace that may be the <strong>bias</strong> axis. The remaining 299 axes are the <strong>non-bias direction</strong></p>
+<blockquote>
+<p>Note in the original paper, averaging is replaced by SVD, and the <strong>bias</strong> axis is not necessarily 1D.</p>
+</blockquote>
+<p>2 <strong>Neutralize</strong>:</p>
+<p>For every word that is not definitional, project them onto <strong>non-bias direction</strong> or axis to get rid of bias. These do <strong>not</strong> include words that have a legitimate gender component, such as <em>"grandmother"</em> but <strong>do</strong> include words for which we want to eliminate a learned bias, such as <em>"doctor"</em> or <em>"babysitter"</em> (in this case a gender bias, but it could also be a sexual orientation bias, for example).</p>
+<p>Choosing which words to neutralize is challenging. For example, <em>"beard"</em> is characteristically male, so its likely not a good idea to neutralize it with respect to gender. The authors of the original paper actually trained a classifier to determine which words were definitional with respect to the bias (in our case gender). It turns out that english does not contain many words that are definitional with respect to gender.</p>
+<p>3 <strong>Equalize pairs</strong>:</p>
+<p>Take pairs of definitional words (such as <em>"grandmother"</em> and <em>"grandfather"</em> and equalize their difference to the <strong>non-bias direction</strong> or axis. This ensures that these words are equidistant to all other words for which we have "neturalized" and encoded bias.</p>
+<p>This process is a little complicated, but the end results is that these pairs of words, (e.g. <em>"grandmother"</em> and <em>"grandfather"</em>) are moved to a pair of points that are equidistant from the <strong>non-bias direction</strong> or axis.</p>
+<p>It turns out, the number of these pairs is very small. It is quite feasible to pick this out by hand.</p>
+<p><a href="https://postimg.cc/image/g3h2n9z33/"><img alt="biased_embeddings.png" src="https://s19.postimg.cc/m4erkclpf/biased_embeddings.png" /></a></p>
+<h3 id="summary_4">Summary</h3>
+<p>Reducing or eliminating bias of our learning algorithms is a very important problem because these algorithms are being asked to help with or to make more and more important decisions in society. In this lecture we saw just one set of ideas for how to go about trying to address this problem, but this is still a very much an ongoing area of active research by many researchers.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Week 1
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../week_3/" title="Week 3" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Week 3
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
