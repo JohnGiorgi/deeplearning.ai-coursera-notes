@@ -1,0 +1,1506 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/mathematics-for-machine-learning/sequence_models/week_1/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+    
+    
+      
+        <title>Week 1 - Deeplearning.ai - Coursera Course Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.451f80e5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../../#week-1-recurrent-neural-networks" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/mathematics-for-machine-learning/" title="Deeplearning.ai - Coursera Course Notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Deeplearning.ai - Coursera Course Notes
+              </span>
+              <span class="md-header-nav__topic">
+                Week 1
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/mathematics-for-machine-learning/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/mathematics-for-machine-learning/" title="Deeplearning.ai - Coursera Course Notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Deeplearning.ai - Coursera Course Notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/mathematics-for-machine-learning/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Sequence Models
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Sequence Models
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 1
+      </label>
+    
+    <a href="./" title="Week 1" class="md-nav__link md-nav__link--active">
+      Week 1
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-sequence-models" title="Why sequence models?" class="md-nav__link">
+    Why sequence models?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notation" title="Notation" class="md-nav__link">
+    Notation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representing-words" title="Representing words" class="md-nav__link">
+    Representing words
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recurrent-neural-network-model" title="Recurrent Neural Network Model" class="md-nav__link">
+    Recurrent Neural Network Model
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-not-a-standard-network" title="Why not a standard network?" class="md-nav__link">
+    Why not a standard network?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recurrent-neural-networks" title="Recurrent Neural Networks" class="md-nav__link">
+    Recurrent Neural Networks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn-computation" title="RNN Computation" class="md-nav__link">
+    RNN Computation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simplified-rnn-notation" title="Simplified RNN Notation" class="md-nav__link">
+    Simplified RNN Notation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backpropagation-through-time" title="Backpropagation through time" class="md-nav__link">
+    Backpropagation through time
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-propagation" title="Forward propagation" class="md-nav__link">
+    Forward propagation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-propogation-through-time-bptt" title="Backward propogation through time (BPTT)" class="md-nav__link">
+    Backward propogation through time (BPTT)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-types-of-rnns" title="Different types of RNNs" class="md-nav__link">
+    Different types of RNNs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-rnn-types" title="Summary of RNN types" class="md-nav__link">
+    Summary of RNN types
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#language-model-and-sequence-generation" title="Language model and sequence generation" class="md-nav__link">
+    Language model and sequence generation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-a-language-modeling" title="What is a language modeling?" class="md-nav__link">
+    What is a language modeling?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-modeling-with-an-rnn" title="Language modeling with an RNN" class="md-nav__link">
+    Language modeling with an RNN
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn-model" title="RNN model" class="md-nav__link">
+    RNN model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sampling-novel-sequences" title="Sampling novel sequences" class="md-nav__link">
+    Sampling novel sequences
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#word-level-models" title="Word-level models" class="md-nav__link">
+    Word-level models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#character-level-models" title="Character-level models" class="md-nav__link">
+    Character-level models
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vanishing-gradients-with-rnns" title="Vanishing gradients with RNNs" class="md-nav__link">
+    Vanishing gradients with RNNs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gated-recurrent-unit-gru" title="Gated Recurrent Unit (GRU)" class="md-nav__link">
+    Gated Recurrent Unit (GRU)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vanishing-gradient-problem" title="Vanishing gradient problem" class="md-nav__link">
+    Vanishing gradient problem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-details" title="Implementation details" class="md-nav__link">
+    Implementation details
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-gru-unit" title="Full GRU unit" class="md-nav__link">
+    Full GRU unit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#long-short-term-memory-lstm" title="Long Short Term Memory (LSTM)" class="md-nav__link">
+    Long Short Term Memory (LSTM)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modifications-to-lstms" title="Modifications to LSTMs" class="md-nav__link">
+    Modifications to LSTMs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bidirectional-rnns-brnns" title="Bidirectional RNNs (BRNNs)" class="md-nav__link">
+    Bidirectional RNNs (BRNNs)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deep-rnns" title="Deep RNNs" class="md-nav__link">
+    Deep RNNs
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_2.md" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_3.md" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Multivariate Calculus
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Multivariate Calculus
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../multivariate_calculus/course_resources.md" title="Course Resources" class="md-nav__link">
+      Course Resources
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../multivariate_calculus/week_1.md" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../multivariate_calculus/week_2.md" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-sequence-models" title="Why sequence models?" class="md-nav__link">
+    Why sequence models?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notation" title="Notation" class="md-nav__link">
+    Notation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representing-words" title="Representing words" class="md-nav__link">
+    Representing words
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recurrent-neural-network-model" title="Recurrent Neural Network Model" class="md-nav__link">
+    Recurrent Neural Network Model
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-not-a-standard-network" title="Why not a standard network?" class="md-nav__link">
+    Why not a standard network?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recurrent-neural-networks" title="Recurrent Neural Networks" class="md-nav__link">
+    Recurrent Neural Networks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn-computation" title="RNN Computation" class="md-nav__link">
+    RNN Computation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simplified-rnn-notation" title="Simplified RNN Notation" class="md-nav__link">
+    Simplified RNN Notation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backpropagation-through-time" title="Backpropagation through time" class="md-nav__link">
+    Backpropagation through time
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-propagation" title="Forward propagation" class="md-nav__link">
+    Forward propagation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-propogation-through-time-bptt" title="Backward propogation through time (BPTT)" class="md-nav__link">
+    Backward propogation through time (BPTT)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-types-of-rnns" title="Different types of RNNs" class="md-nav__link">
+    Different types of RNNs
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-rnn-types" title="Summary of RNN types" class="md-nav__link">
+    Summary of RNN types
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#language-model-and-sequence-generation" title="Language model and sequence generation" class="md-nav__link">
+    Language model and sequence generation
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-a-language-modeling" title="What is a language modeling?" class="md-nav__link">
+    What is a language modeling?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#language-modeling-with-an-rnn" title="Language modeling with an RNN" class="md-nav__link">
+    Language modeling with an RNN
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rnn-model" title="RNN model" class="md-nav__link">
+    RNN model
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sampling-novel-sequences" title="Sampling novel sequences" class="md-nav__link">
+    Sampling novel sequences
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#word-level-models" title="Word-level models" class="md-nav__link">
+    Word-level models
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#character-level-models" title="Character-level models" class="md-nav__link">
+    Character-level models
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vanishing-gradients-with-rnns" title="Vanishing gradients with RNNs" class="md-nav__link">
+    Vanishing gradients with RNNs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gated-recurrent-unit-gru" title="Gated Recurrent Unit (GRU)" class="md-nav__link">
+    Gated Recurrent Unit (GRU)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vanishing-gradient-problem" title="Vanishing gradient problem" class="md-nav__link">
+    Vanishing gradient problem
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-details" title="Implementation details" class="md-nav__link">
+    Implementation details
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-gru-unit" title="Full GRU unit" class="md-nav__link">
+    Full GRU unit
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#long-short-term-memory-lstm" title="Long Short Term Memory (LSTM)" class="md-nav__link">
+    Long Short Term Memory (LSTM)
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modifications-to-lstms" title="Modifications to LSTMs" class="md-nav__link">
+    Modifications to LSTMs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bidirectional-rnns-brnns" title="Bidirectional RNNs (BRNNs)" class="md-nav__link">
+    Bidirectional RNNs (BRNNs)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deep-rnns" title="Deep RNNs" class="md-nav__link">
+    Deep RNNs
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/mathematics-for-machine-learning/edit/master/docs/sequence_models/week_1.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="week-1-recurrent-neural-networks">Week 1: Recurrent Neural Networks</h1>
+<p>Recurrent neural networks have been proven to perform extremely well on temporal data. This model has several variants including LSTMs, GRUs and Bidirectional RNNs, which you are going to learn about in this section.</p>
+<h2 id="why-sequence-models">Why sequence models?</h2>
+<p>Recurrent neural networks (RNNs) have proven to be incredibly powerful networks for sequence modelling tasks (where the inputs <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>, outputs <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> or both are sequences) including:</p>
+<ul>
+<li>speech recognition</li>
+<li>music generation</li>
+<li>sentiment classification</li>
+<li>DNA sequence analysis</li>
+<li>machine translation</li>
+<li>video activity recognition</li>
+<li>named entity recognition</li>
+</ul>
+<h3 id="notation">Notation</h3>
+<p>As a motivating example, we will "build" a model that performs <strong>named entity recognition</strong> (<strong>NER</strong>).</p>
+<p><em>Example input</em>:</p>
+<div>
+<div class="MathJax_Preview">x: \text{Harry Potter and Hermione Granger invented a new spell.} </div>
+<script type="math/tex; mode=display">x: \text{Harry Potter and Hermione Granger invented a new spell.} </script>
+</div>
+<p>We want our model to output a target vector with the same number elements as our input sequence <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>, representing the <strong>named entities</strong> in <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
+<p>We will refer to each element in our input (<span><span class="MathJax_Preview">x)</span><script type="math/tex">x)</script></span> and output (<span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span>) sequences with angled brackets, so for example, <span><span class="MathJax_Preview">x^{&lt;1&gt;}</span><script type="math/tex">x^{<1>}</script></span> would refer to "Harry". Because we have multiple input sequences, we denote the <span><span class="MathJax_Preview">i-th</span><script type="math/tex">i-th</script></span> sequence <span><span class="MathJax_Preview">x^{(i)}</span><script type="math/tex">x^{(i)}</script></span> (and its corresponding output sequence <span><span class="MathJax_Preview">y^{(i)}</span><script type="math/tex">y^{(i)}</script></span>). The <span><span class="MathJax_Preview">t-th</span><script type="math/tex">t-th</script></span> element of the <span><span class="MathJax_Preview">i-th</span><script type="math/tex">i-th</script></span> input sequence is therefore <span><span class="MathJax_Preview">x^{(i)&lt;t&gt;}</span><script type="math/tex">x^{(i)<t>}</script></span>.</p>
+<p>Let <span><span class="MathJax_Preview">T_x</span><script type="math/tex">T_x</script></span> be the length of the input sequence and <span><span class="MathJax_Preview">T_y</span><script type="math/tex">T_y</script></span> the length of the output sequence.</p>
+<blockquote>
+<p>In our example, <span><span class="MathJax_Preview">T_x</span><script type="math/tex">T_x</script></span> == <span><span class="MathJax_Preview">T_y</span><script type="math/tex">T_y</script></span></p>
+</blockquote>
+<h3 id="representing-words">Representing words</h3>
+<p>For NLP application, we have to decide on some way to represent words. Typically, we start by generating a <strong>vocabulary</strong> (a dictionary of all the words that appear in our corpus).</p>
+<blockquote>
+<p>Note that in modern applications, a vocabulary of 30-50K is common and massive vocabularies (&gt;1 million word types) are often used in commercial applications, especially by big tech.</p>
+</blockquote>
+<p>A common way to represent each word is to use a <strong>one-hot</strong> encoding. In this way, we represent each token by a vector of dimension <span><span class="MathJax_Preview">||V||</span><script type="math/tex">||V||</script></span> (our vocabulary size).</p>
+<p><em>Example</em>:</p>
+<div>
+<div class="MathJax_Preview">x^{&lt;1&gt;} = \begin{pmatrix} 0 \\\ ..\\\ 1 \\ ... \\\ 0 \end{pmatrix}</div>
+<script type="math/tex; mode=display">x^{<1>} = \begin{pmatrix} 0 \\\ ..\\\ 1 \\ ... \\\ 0 \end{pmatrix}</script>
+</div>
+<p><span><span class="MathJax_Preview">x^{&lt;1&gt;}</span><script type="math/tex">x^{<1>}</script></span> of our sequence (i.e. the token <em>Harry</em>) is represented as a vector which contains all zeros except for a single value of one at row <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span>, where <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> is its position in <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>.</p>
+<blockquote>
+<p>"One-hot" refers to the fact that each vector contains only a single 1.</p>
+</blockquote>
+<p>The goal is to learn a mapping from each <span><span class="MathJax_Preview">x^{&lt;t&gt;}</span><script type="math/tex">x^{<t>}</script></span> to some <strong>tag</strong> (i.e. PERSON).</p>
+<blockquote>
+<p>Note that for out-of-vocabulary tokens, we typically assign a special value <em>\&lt;UNK></em> and a corresponding vector.</p>
+</blockquote>
+<h2 id="recurrent-neural-network-model">Recurrent Neural Network Model</h2>
+<h3 id="why-not-a-standard-network">Why not a standard network?</h3>
+<p>In our previous example, we had 9 input words. You could imagine taking these 9 input words (represented are one-hot encoded vectors) as inputs to a "standard" neural network</p>
+<p><img alt="" src="https://s19.postimg.cc/x6zs848qr/Screen_Shot_2018-05-31_at_7.33.26_PM.png" /></p>
+<p>This turns out <em>not</em> to work well. There are two main problems:</p>
+<ol>
+<li>Inputs, outputs can be different <strong>lengths</strong> in different examples (its not as if every <span><span class="MathJax_Preview">T_x, T_y</span><script type="math/tex">T_x, T_y</script></span> pair is of the same length).</li>
+<li>A "standard" network doesn't <strong>share features</strong> learned across different positions of text. This is a problem for multiple reasons, but a big one is that this network architecture doesn't capture dependencies between elements in the sequence (e.g., the information that is a word in its context is not captured).</li>
+</ol>
+<h3 id="recurrent-neural-networks">Recurrent Neural Networks</h3>
+<p>Unlike a "standard" neural network, <strong>recurrent neural networks</strong> (<strong>RNN</strong>) accept input from the <em>previous</em> timestep in a sequence. For our example <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> above, the <em>unrolled</em> RNN diagram might look like the following:</p>
+<p><img alt="" src="https://s19.postimg.cc/zaa7gd103/Screen_Shot_2018-05-31_at_7.56.19_PM.png" /></p>
+<blockquote>
+<p>Timestep 0 is usually initialized with a fake vector of 0's</p>
+</blockquote>
+<p>Note that the diagram is sometimes drawn like this:</p>
+<p><img alt="" src="https://s19.postimg.cc/db3st5rvn/Screen_Shot_2018-05-31_at_7.50.01_PM.png" /></p>
+<p>Where the little black box represented a delay of <em>1 timestep</em>. Andrew prefers the unrolled diagrams (so do I!).</p>
+<p>A RNN learns on a sequence from <em>left to right</em>, <strong>sharing</strong> the parameters from <strong>each timestep</strong>.</p>
+<ul>
+<li>the parameters governing the connection from <span><span class="MathJax_Preview">x^{&lt;t&gt;}</span><script type="math/tex">x^{<t>}</script></span> to the hidden layer will be some set of the parameters we're going to write as <span><span class="MathJax_Preview">W_{ax}</span><script type="math/tex">W_{ax}</script></span>.</li>
+<li>the activations, the horizontal connections, will be governed by some set of parameters <span><span class="MathJax_Preview">W_{aa}</span><script type="math/tex">W_{aa}</script></span></li>
+<li><span><span class="MathJax_Preview">W_{ya}</span><script type="math/tex">W_{ya}</script></span>, governs the output predictions</li>
+</ul>
+<blockquote>
+<p>Note: we take the notation <span><span class="MathJax_Preview">W_{ya}</span><script type="math/tex">W_{ya}</script></span>, to mean (for example) the parameters for variable <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> obtained by multiplying some quantity <span><span class="MathJax_Preview">a</span><script type="math/tex">a</script></span>.</p>
+</blockquote>
+<p>Notice, this parameter sharing means that when we make the prediction for, say <span><span class="MathJax_Preview">y^{&lt;3&gt;}</span><script type="math/tex">y^{<3>}</script></span>, the RNN gets the information not only from <span><span class="MathJax_Preview">x^{&lt;3&gt;}</span><script type="math/tex">x^{<3>}</script></span> but also from the all the previous timesteps.</p>
+<p>Note a potential weakness here. We don't incorporate information from previous timesteps in our predictions. This problem is solved by using <strong>bidirectional</strong> RNNs (BRNNs) which we discuss in a future video.</p>
+<p><em>Example</em>:</p>
+<p>Given the sentences:</p>
+<p><span><span class="MathJax_Preview">x^{(1)}</span><script type="math/tex">x^{(1)}</script></span>: <em>He said, "Teddy Roosevelt was a great President"</em></p>
+<p><span><span class="MathJax_Preview">x^{(2)}</span><script type="math/tex">x^{(2)}</script></span>: <em>He said, "Teddy bears are on sale!"</em></p>
+<p>And the task of <strong>named entity recognition</strong> (<strong>NER</strong>), it would be really useful to know that the word "<em>President</em>" follows the name "<em>Teddy Roosevelt</em>" because as the second example suggest, using only <em>previous</em> information in the sequence might not be enough to make a classification decision about an entity.</p>
+<h4 id="rnn-computation">RNN Computation</h4>
+<p>Lets dig deeper into how a RNN works. First, lets start with a cleaned up depiction of our network</p>
+<p><img alt="" src="https://s19.postimg.cc/67vxdf4er/Screen_Shot_2018-06-01_at_10.06.12_AM.png" /></p>
+<p><strong>Forward Propagation</strong></p>
+<p>Typically, we start off with the input <span><span class="MathJax_Preview">a^{&lt;0&gt;} = \vec 0</span><script type="math/tex">a^{<0>} = \vec 0</script></span>. Then we perform our forward pass</p>
+<ul>
+<li>Compute our activation for timestep 1: <span><span class="MathJax_Preview">a^{&lt;1&gt;} = g(W_{aa}a^{&lt;0&gt;} + W_{ax}x^{&lt;1&gt;} + b_a)</span><script type="math/tex">a^{<1>} = g(W_{aa}a^{<0>} + W_{ax}x^{<1>} + b_a)</script></span></li>
+<li>Compute our prediction for timestep 1: <span><span class="MathJax_Preview">\hat y^{&lt;1&gt;} = g(W_{ya}a^{&lt;1&gt;} + b_y)</span><script type="math/tex">\hat y^{<1>} = g(W_{ya}a^{<1>} + b_y)</script></span></li>
+</ul>
+<p>More generally:
+- <span><span class="MathJax_Preview">a^{&lt;t&gt;} = g(W_{aa}a^{&lt;t-1&gt;} + W_{ax}x^{&lt;t&gt;} + b_a)</span><script type="math/tex">a^{<t>} = g(W_{aa}a^{<t-1>} + W_{ax}x^{<t>} + b_a)</script></span>
+- <span><span class="MathJax_Preview">\hat y^{&lt;t&gt;} = g(W_{ya}a^{&lt;t-1&gt;} + b_y)</span><script type="math/tex">\hat y^{<t>} = g(W_{ya}a^{<t-1>} + b_y)</script></span></p>
+<blockquote>
+<p>Where <span><span class="MathJax_Preview">b_a</span><script type="math/tex">b_a</script></span> is our bias vector.</p>
+</blockquote>
+<p>The activation function used for the units of a RNN is most commonly <strong>tanh</strong>, although <strong>ReLU</strong> is sometimes used. For the output units, it depends on our problem. Often <strong>sigmoid</strong> / <strong>softmax</strong> are used for binary and multi-class classification problems respectively.</p>
+<h3 id="simplified-rnn-notation">Simplified RNN Notation</h3>
+<p>Lets take the general equations for forward propagation we developed above:</p>
+<ul>
+<li><span><span class="MathJax_Preview">a^{&lt;t&gt;} = g(W_{aa}a^{&lt;t-1&gt;} + W_{ax}x^{&lt;t&gt;} + b_a)</span><script type="math/tex">a^{<t>} = g(W_{aa}a^{<t-1>} + W_{ax}x^{<t>} + b_a)</script></span></li>
+<li>
+<p><span><span class="MathJax_Preview">\hat y^{&lt;t&gt;} = g(W_{ya}a^{&lt;t-1&gt;} + b_y)</span><script type="math/tex">\hat y^{<t>} = g(W_{ya}a^{<t-1>} + b_y)</script></span></p>
+</li>
+<li>
+<p>We define our simplified <strong>hidden activation</strong> formulation:</p>
+</li>
+</ul>
+<div>
+<div class="MathJax_Preview">a^{&lt;t&gt;} = g(W_a[a^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_a)</div>
+<script type="math/tex; mode=display">a^{<t>} = g(W_a[a^{<t-1>}, x^{<t>}] + b_a)</script>
+</div>
+<p>Where
+- <span><span class="MathJax_Preview">W_a = \begin{pmatrix} W_{aa} &amp; | &amp; W_{ax} \end{pmatrix}</span><script type="math/tex">W_a = \begin{pmatrix} W_{aa} & | & W_{ax} \end{pmatrix}</script></span>
+- <span><span class="MathJax_Preview">[a^{&lt;t-1&gt;}, x^{&lt;t&gt;}] = \begin{pmatrix} a^{&lt;t-1&gt;} \\\ x^{&lt;t&gt;} \end{pmatrix}</span><script type="math/tex">[a^{<t-1>}, x^{<t>}] = \begin{pmatrix} a^{<t-1>} \\\ x^{<t>} \end{pmatrix}</script></span></p>
+<blockquote>
+<p>Note that <span><span class="MathJax_Preview">W_a[a^{&lt;t-1&gt;}, x^{&lt;t&gt;}] = W_{aa}a^{&lt;t-1&gt;} + W_{ax}x^{&lt;t&gt;}</span><script type="math/tex">W_a[a^{<t-1>}, x^{<t>}] = W_{aa}a^{<t-1>} + W_{ax}x^{<t>}</script></span></p>
+</blockquote>
+<p>The advantages of this notation is that we can compress two parameter matrices into one.</p>
+<ol>
+<li>And our simplified <strong>output activation</strong> formulation:</li>
+</ol>
+<div>
+<div class="MathJax_Preview">\hat y^{&lt;t&gt;} = g(W_{y}a^{&lt;t-1&gt;} + b_y)</div>
+<script type="math/tex; mode=display">\hat y^{<t>} = g(W_{y}a^{<t-1>} + b_y)</script>
+</div>
+<h2 id="backpropagation-through-time">Backpropagation through time</h2>
+<h3 id="forward-propagation">Forward propagation</h3>
+<p>We have seen at a high-level how forward propagation works for an RNN. Essentially, we forward propagate the input, multiplying it by our weight matrices and applying our activation for each timestep until we have outputted a prediction for each timestep in the input sequence.</p>
+<p>More explicitly, we can represent the process of foward propogation as a series of matrix multiplications in diagram form:</p>
+<p><img alt="" src="https://s19.postimg.cc/u058ol3r7/Screen_Shot_2018-06-01_at_1.06.39_PM.png" /></p>
+<h3 id="backward-propogation-through-time-bptt">Backward propogation through time (BPTT)</h3>
+<p>In order to perform <strong>backward propagation through time</strong> (<strong>BPTT</strong>), we first have to specify a loss function. We will choose <strong>cross-entropy</strong> loss (we also saw this when discussing logisitc regression):</p>
+<p><em>For a single prediction (timestep)</em></p>
+<div>
+<div class="MathJax_Preview">\ell^{&lt;t&gt;}(\hat y^{&lt;t&gt;}, y^{&lt;t&gt;}) = -y^{&lt;t&gt;} \log \hat y^{&lt;t&gt;} - (1 - y^{&lt;t&gt;}) \log(1- \hat y^{&lt;t&gt;})</div>
+<script type="math/tex; mode=display">\ell^{<t>}(\hat y^{<t>}, y^{<t>}) = -y^{<t>} \log \hat y^{<t>} - (1 - y^{<t>}) \log(1- \hat y^{<t>})</script>
+</div>
+<p><em>For all predictions</em></p>
+<div>
+<div class="MathJax_Preview">\ell = \sum_{t=1}^{T_y}\ell^{&lt;t&gt;}(\hat y^{&lt;t&gt;}, y^{&lt;t&gt;})</div>
+<script type="math/tex; mode=display">\ell = \sum_{t=1}^{T_y}\ell^{<t>}(\hat y^{<t>}, y^{<t>})</script>
+</div>
+<p>While not covered in detail here, BPTT simply involves applying our loss function to each prediction at each timestep, and then using this information along with the chain rule to compute the gradients we will need to update our parameters and <em>assign blame proportionally</em>. The entire process might look something like the following:</p>
+<p><img alt="" src="https://s19.postimg.cc/44li5lc9v/Screen_Shot_2018-06-01_at_1.17.38_PM.png" /></p>
+<h2 id="different-types-of-rnns">Different types of RNNs</h2>
+<p>So far, we have only seen an RNN where the input and output are both sequences of lengths &gt; 1. Particularly, our input and output sequences were of the same length (<span><span class="MathJax_Preview">T_x == T_y</span><script type="math/tex">T_x == T_y</script></span>), For many applications, <span><span class="MathJax_Preview">T_x \not = T_y</span><script type="math/tex">T_x \not = T_y</script></span>.</p>
+<p>Take <strong>sentiment classification</strong> for example, where the input is typically a sequence (of text) and the output a integer scale (a 1-5 star review, for example).</p>
+<p><em>Example</em>:</p>
+<p><span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>: "There is nothing to like in this movie"</p>
+<p>We want our network to output a single prediction from 1-5. This is an example of a <strong>many-to-one</strong> architecture.</p>
+<p><img alt="" src="https://s19.postimg.cc/qukmyfy0j/Screen_Shot_2018-06-01_at_1.32.36_PM.png" /></p>
+<p>Another type of RNN architecture is <strong>one-to-many</strong>. An example of this architecture is <strong>music generation</strong>, where we might input an integer (indicating a genre) or the 0-vector (no input) and generate musical notes as our output. In this case, we input a single value to the network at timestep 1, and then propagate that input through the network (the remaining timesteps), with the caveat that in this architecture, we often take the ouput from the previous timestep and feed it to the next timestep:</p>
+<p><img alt="" src="https://s19.postimg.cc/4imu5141f/Screen_Shot_2018-06-01_at_1.39.52_PM.png" /></p>
+<p>The final example is a <strong>many-to-many</strong> architecture. Unlike our previous example where <span><span class="MathJax_Preview">T_x == T_y</span><script type="math/tex">T_x == T_y</script></span>, in machine translation <span><span class="MathJax_Preview">T_x \not = T_y</span><script type="math/tex">T_x \not = T_y</script></span>, as the number of words in the input sentence (say, in <em>english</em>) is not necessarily the same as the output sentence (say, in <em>french</em>). These problems are typicaly solved with <strong>sequence to sequence models</strong>, that are composed of distinct <strong>encoder</strong> and <strong>decoder</strong> RNNs.</p>
+<p><img alt="" src="https://s19.postimg.cc/mlfwwes83/Screen_Shot_2018-06-01_at_1.47.32_PM.png" /></p>
+<h3 id="summary-of-rnn-types">Summary of RNN types</h3>
+<ol>
+<li><strong>One-to-one</strong>: a standard, generic neural network. Strictly speaking, you wouldn't model this problem with an RNN.</li>
+</ol>
+<p><img alt="" src="https://s19.postimg.cc/g7qtta5df/Screen_Shot_2018-06-01_at_1.49.36_PM.png" /></p>
+<ol>
+<li><strong>One-to-many</strong>: Where our input is a single value (or in some cases, a null input represented by the 0-vector) which propogates through the network and our output is a sequence. Often, we use the prediction from the previous timestep when computing the hidden activations. An example is <em>music generation</em> or <em>sequence generation</em> more generally.</li>
+</ol>
+<p><img alt="" src="https://s19.postimg.cc/efxuyd6kz/Screen_Shot_2018-06-01_at_1.51.52_PM.png" /></p>
+<ol>
+<li><strong>Many-to-one</strong>: Where our input is a sequence and our output is a single value. Typically we take the prediction from the last timestep of the RNN. An example is <em>sentiment classification</em></li>
+</ol>
+<p><img alt="" src="https://s19.postimg.cc/9u1qq0dc3/Screen_Shot_2018-06-01_at_1.53.11_PM.png" /></p>
+<ol>
+<li>
+<p><strong>Many-to-many</strong>: Where both our input and outputs are sequences. These sequence are not necessarily the same length (<span><span class="MathJax_Preview">T_x \not = T_y</span><script type="math/tex">T_x \not = T_y</script></span>).</p>
+</li>
+<li>
+<p>When <span><span class="MathJax_Preview">T_x == T_y</span><script type="math/tex">T_x == T_y</script></span> our architecture looks like a standard RNN:</p>
+</li>
+</ol>
+<p><img alt="" src="https://s19.postimg.cc/5xoetzxhf/Screen_Shot_2018-06-01_at_1.55.17_PM.png" /></p>
+<ul>
+<li>and when <span><span class="MathJax_Preview">T_x \not = T_y</span><script type="math/tex">T_x \not = T_y</script></span> are architecture is a <em>sequence to sequence</em> model which looks like:</li>
+</ul>
+<p><img alt="" src="https://s19.postimg.cc/585mhn4nn/Screen_Shot_2018-06-01_at_1.55.13_PM.png" /></p>
+<h2 id="language-model-and-sequence-generation">Language model and sequence generation</h2>
+<p><strong>Language modeling</strong> is one of the most basic and important tasks in natural language processing. It's also one that RNNs handle very well.</p>
+<h3 id="what-is-a-language-modeling">What is a language modeling?</h3>
+<p>Let's say you are building a <strong>speech recognition</strong> system and you hear the sentence:</p>
+<div>
+<div class="MathJax_Preview">\text{"The apple and pear/pair salad"}</div>
+<script type="math/tex; mode=display">\text{"The apple and pear/pair salad"}</script>
+</div>
+<p>How does a neural network determine whether the speaker said <em>pear</em> or <em>pair</em> (never mind that the correct answer is obvious to us). The answer is that the network encodes a <strong>language model</strong>. This language model is able to determine the <em>probability</em> of a given sentence (think of this as a measure of "correctness" or "goodness"). For example, our language model might output:</p>
+<div>
+<div class="MathJax_Preview">P(\text{The apple and pair salad}) = 3.2 \times 10^{-13}$$
+$$P(\text{The apple and pear salad}) = 5.7 \times 10^{-10}</div>
+<script type="math/tex; mode=display">P(\text{The apple and pair salad}) = 3.2 \times 10^{-13}$$
+$$P(\text{The apple and pear salad}) = 5.7 \times 10^{-10}</script>
+</div>
+<p>This system would then pick the much more likely second option.</p>
+<h3 id="language-modeling-with-an-rnn">Language modeling with an RNN</h3>
+<p>We start with a large corpus of english text. The first step is to <strong>tokenize</strong> the text in order to form a vocabulary</p>
+<div>
+<div class="MathJax_Preview">\text{"Cats average 15 hours of sleep a day"} \rightarrow \text{["Cats", "average", "15", "hours", "of", "sleep", "a", "day", "."]}</div>
+<script type="math/tex; mode=display">\text{"Cats average 15 hours of sleep a day"} \rightarrow \text{["Cats", "average", "15", "hours", "of", "sleep", "a", "day", "."]}</script>
+</div>
+<p>These tokens are then <strong>one-hot encoded</strong> or mapped to <strong>indices</strong>. Sometimes, a special end-of-sentence token is appended to each sequence (\&lt;EOS>).</p>
+<blockquote>
+<p>What if some of the words we encounter are not in our vocabulary? Typically we add a special token, \&lt;UNK> to deal with this problem.</p>
+</blockquote>
+<p>Finally, we build an RNN to model the likelihood of any given sentence, learned from the training corpus.</p>
+<h4 id="rnn-model">RNN model</h4>
+<p>At time 0, we compute some activation <span><span class="MathJax_Preview">a^{&lt;1&gt;}</span><script type="math/tex">a^{<1>}</script></span> as a function of some inputs <span><span class="MathJax_Preview">x^{&lt;1&gt;}</span><script type="math/tex">x^{<1>}</script></span>. In this case, <span><span class="MathJax_Preview">x^{&lt;1&gt;}</span><script type="math/tex">x^{<1>}</script></span> will just be set to the zero vector. Similarly, <span><span class="MathJax_Preview">a^{&lt;0&gt;}</span><script type="math/tex">a^{<0>}</script></span>, by convention, is also set to the zero vector.</p>
+<p><span><span class="MathJax_Preview">a^{&lt;1&gt;}</span><script type="math/tex">a^{<1>}</script></span> will make a <em>softmax</em> prediction over the entire vocabulary to determine <span><span class="MathJax_Preview">\hat y^{&lt;1&gt;}</span><script type="math/tex">\hat y^{<1>}</script></span> (the probability of observing any of the tokens in your vocabulary as the <em>first</em> word in a sentence).</p>
+<p>At the second timestep, we will actually feed the first token in the sequence as the input (<span><span class="MathJax_Preview">x^{&lt;2&gt;} = y^{&lt;1&gt;}</span><script type="math/tex">x^{<2>} = y^{<1>}</script></span>). This occurs, so forth and so on, such that the input to each timestep are the tokens for all previous timesteps. Our outputs <span><span class="MathJax_Preview">\hat y^{&lt;t&gt;}</span><script type="math/tex">\hat y^{<t>}</script></span> are therefore  <span><span class="MathJax_Preview">P(x^{&lt;t&gt;}|x^{&lt;t-1&gt;}, x^{&lt;t-2&gt;}, ..., x^{&lt;t-n&gt;})</span><script type="math/tex">P(x^{<t>}|x^{<t-1>}, x^{<t-2>}, ..., x^{<t-n>})</script></span> where <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> is the length of the sequence.</p>
+<blockquote>
+<p>Just a note here, we are choosing <span><span class="MathJax_Preview">x^{&lt;t&gt;} = y^{&lt;t-1&gt;}</span><script type="math/tex">x^{<t>} = y^{<t-1>}</script></span> <em>NOT</em> <span><span class="MathJax_Preview">x^{&lt;t&gt;} = \hat y^{&lt;t-1&gt;}</span><script type="math/tex">x^{<t>} = \hat y^{<t-1>}</script></span></p>
+</blockquote>
+<p>The full model looks something like:</p>
+<p><a href="https://postimg.cc/image/sqgm18ty7/"><img alt="Screen_Shot_2018-06-01_at_6.40.05_PM.png" src="https://s19.postimg.cc/5c8mpbc0z/Screen_Shot_2018-06-01_at_6.40.05_PM.png" /></a></p>
+<p>There are two important steps in this process:</p>
+<p>1) Estimate <span><span class="MathJax_Preview">\hat y^{&lt;t&gt;} = P(y^{&lt;t&gt;} | y^{&lt;1&gt;}, y^{&lt;2&gt;}, ..., y^{&lt;t-1&gt;})</span><script type="math/tex">\hat y^{<t>} = P(y^{<t>} | y^{<1>}, y^{<2>}, ..., y^{<t-1>})</script></span>
+2) Then pass the ground-truth word from the training set to the next time-step.</p>
+<p>The <strong>loss function</strong> is simply the <strong>cross-entropy</strong> lost function that we saw earlier:</p>
+<ul>
+<li>For single examples: <span><span class="MathJax_Preview">\ell(\hat y^{&lt;t&gt;}, y^{&lt;t&gt;}) = - \sum_i y_i^{&lt;t&gt;} \log \hat y_i^{&lt;t&gt;}</span><script type="math/tex">\ell(\hat y^{<t>}, y^{<t>}) = - \sum_i y_i^{<t>} \log \hat y_i^{<t>}</script></span></li>
+<li>For the entire training set: <span><span class="MathJax_Preview">\ell = \sum_i \ell^{&lt;t&gt;}(\hat y^{&lt;t&gt;}, y^{&lt;t&gt;})</span><script type="math/tex">\ell = \sum_i \ell^{<t>}(\hat y^{<t>}, y^{<t>})</script></span></li>
+</ul>
+<p>Once trained, the RNN will be able to predict the probability of any given sentence (we simply multiply the probabilities output by the RNN at each timestep).</p>
+<h2 id="sampling-novel-sequences">Sampling novel sequences</h2>
+<p>After you train a sequence model, one of the ways you can get an informal sense of what is learned is to sample novel sequences (also known as an <em>intrinsic evaluation</em>). Let's take a look at how you could do that.</p>
+<h3 id="word-level-models">Word-level models</h3>
+<p>Remember that a sequence model models the probability of any given sequence of words. What we would like to to is to <em>sample</em> from this distribution to generate <em>novel</em> sequence of words.</p>
+<blockquote>
+<p>At this point, Andrew makes a distinction between the architecture used for <em>training</em> a language modeling and the architecture used for <em>sampling</em> from a language model. The distinction is completely lost on me.</p>
+</blockquote>
+<p>We start by computing the activation <span><span class="MathJax_Preview">a^{&lt;1&gt;}</span><script type="math/tex">a^{<1>}</script></span> as a function of some inputs <span><span class="MathJax_Preview">x^{&lt;1&gt;}</span><script type="math/tex">x^{<1>}</script></span> and <span><span class="MathJax_Preview">a^{&lt;0&gt;}</span><script type="math/tex">a^{<0>}</script></span> (again, these are set to the zero vector by convention). The <strong>softmax</strong> function is used to generate a probability distribution over all words in the vocabulary, representing the likelihood of seeing each at the first position of a word sequence. We then randomly sample from this distribution, choosing a single token (<span><span class="MathJax_Preview">\hat y^{&lt;1&gt;}</span><script type="math/tex">\hat y^{<1>}</script></span>), and pass it as input for the next timestep.</p>
+<blockquote>
+<p>For example, if we sampled "the" in the first timestep, we would set <span><span class="MathJax_Preview">\hat y^{&lt;1&gt;} = the = x^{&lt;2&gt;}</span><script type="math/tex">\hat y^{<1>} = the = x^{<2>}</script></span>. This means that at the second timestep, we are computing a probability distribution <span><span class="MathJax_Preview">P(v | the)</span><script type="math/tex">P(v | the)</script></span> over all tokens <span><span class="MathJax_Preview">v</span><script type="math/tex">v</script></span> in our vocabulary <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span>.</p>
+</blockquote>
+<p>The entire procedure looks something like:</p>
+<p><a href="https://postimg.cc/image/cf7rww47z/"><img alt="Screen_Shot_2018-06-02_at_12.31.59_PM.png" src="https://s19.postimg.cc/c2gdqplyb/Screen_Shot_2018-06-02_at_12.31.59_PM.png" /></a></p>
+<p><em>How do we know when the sequence ends</em>?</p>
+<p>If we included the \&lt;EOS> token in our training procedure (and this included it in our vocabulary) the sequence ends when and \&lt;EOS> token is generated. Otherwise, stop when a pre-determined number of tokens has been reached.</p>
+<p><em>What if we generate an \&lt;UNK> token</em>?</p>
+<p>We can simply re-sample until we generate a non-\&lt;UNK> token.</p>
+<h3 id="character-level-models">Character-level models</h3>
+<p>We could also build a <strong>character-level language model</strong>. The only major difference is that we train on a sequence of <em>characters</em> as opposed to <em>tokens</em>, and therefore our vocabulary consists of individual <em>characters</em> (which typically include digits, punctuation, etc.)</p>
+<p><em>Character</em>-level language models are more computational expensive, and because a sequence of characters is typically much longer than a sequence of words (obviously) it is more difficult to capture the long range dependencies (as they are longer, of course).</p>
+<p>However, using a <em>character</em>-level language models has the benefit of avoiding the problem of out-of-vocabulary tokens, as we can build a non-zero vector representation of <em>any</em> token using the learned character representations.</p>
+<blockquote>
+<p>Note, you can also combine word-level and character-level language models!</p>
+</blockquote>
+<h2 id="vanishing-gradients-with-rnns">Vanishing gradients with RNNs</h2>
+<p>One of the problems with the basic RNN algorithm is the <strong>vanishing gradient problem</strong>. The RNN architecture as we have described it so far:</p>
+<p><a href="https://postimg.cc/image/th0lz2be7/"><img alt="Screen_Shot_2018-06-02_at_12.57.39_PM.png" src="https://s19.postimg.cc/xddxv1wdv/Screen_Shot_2018-06-02_at_12.57.39_PM.png" /></a></p>
+<p>Take the following two input examples:</p>
+<div>
+<div class="MathJax_Preview">x^{(1)} = \text{The cat, which already ate ..., was full}$$
+$$x^{(2)} = \text{The cats, which already ate ..., were full}</div>
+<script type="math/tex; mode=display">x^{(1)} = \text{The cat, which already ate ..., was full}$$
+$$x^{(2)} = \text{The cats, which already ate ..., were full}</script>
+</div>
+<blockquote>
+<p>Take the "..." to be an sequence of english words of arbitrary length.</p>
+</blockquote>
+<p>Cleary, there is a long range-dependency here between the <em>grammatical number</em> of the <strong>noun</strong> "cat" and the <em>grammatical tense</em> of the <strong>verb</strong> "was".</p>
+<blockquote>
+<p>It is important to note that while this is a contrived example, language very often contains long-range dependencies.</p>
+</blockquote>
+<p>It turns out that the basic RNN that we have described thus far is not good at capturing such long-range dependencies. To explain why, think back to our earlier discussions about the <em>vanishing gradient problems</em> in very deep neural networks. The basic idea is that in a network with many layers, the gradient becomes increasingly smaller as it is backpropagated through a very deep network, effectively "vanishing". RNNs face the same problem, leading to errors in the outputs of later timesteps having little effect on the gradients of earlier timesteps. This leads to a failure to capture long-range dependencies.</p>
+<blockquote>
+<p>Because of this problem, a basic RNN captures mainly local influences.</p>
+</blockquote>
+<p>Recall that <em>exploding gradients</em> are a similar yet opposite problem. It turns out that <em>vanishing gradients</em> are a bigger problems for RNNs, but <em>exploding gradients</em> do occur. However,  <em>exploding gradients</em> are typically easier to catch as we simply need to look for gradients that become very very large (also, they usually lead to computational overflow, and generate NaNs). The solution to <em>exploding gradient</em> problems is fairly straightforward however, as we can use a technique like <strong>gradient clipping</strong> to scale our gradients according to some maximum values.</p>
+<h2 id="gated-recurrent-unit-gru">Gated Recurrent Unit (GRU)</h2>
+<p>You've seen how a basic RNN works. In this video, you learn about the <strong>Gated Recurrent Unit</strong> (<strong>GRU</strong>) which is a modification to the RNN hidden layer that makes it much better capturing long range connections and helps a lot with the vanishing gradient problems.</p>
+<p>Recall the activation function for an RNN at timestep <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>:</p>
+<div>
+<div class="MathJax_Preview">a^{&lt;t&gt;} = g(W_a[a^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_a)</div>
+<script type="math/tex; mode=display">a^{<t>} = g(W_a[a^{<t-1>}, x^{<t>}] + b_a)</script>
+</div>
+<p>As a picture:</p>
+<p><a href="https://postimg.cc/image/ceczul8fj/"><img alt="rnn_unit_hand_drawn.png" src="https://s19.postimg.cc/5nwil5l9v/rnn_unit_hand_drawn.png" /></a></p>
+<blockquote>
+<p>Two papers were important for the development of GRUs: <a href="https://arxiv.org/pdf/1406.1078v3.pdf">Cho et al., 2014</a> and <a href="https://arxiv.org/pdf/1412.3555.pdf">Chung et al., 2014</a>.</p>
+</blockquote>
+<p>Lets define a new variable, <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> for the <strong>memory cell</strong>. The job of the memory cell is to remember information earlier in a sequence. So at time <span><span class="MathJax_Preview">&lt;t&gt;</span><script type="math/tex"><t></script></span> the memory cell will have some value <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span>. In GRUs, it turns out that <span><span class="MathJax_Preview">c^{&lt;t&gt;} == a^{&lt;t&gt;}</span><script type="math/tex">c^{<t>} == a^{<t>}</script></span>.</p>
+<blockquote>
+<p>It will be useful to use the distinct variables however, as in LSTM networks <span><span class="MathJax_Preview">c^{&lt;t&gt;} \not = a^{&lt;t&gt;}</span><script type="math/tex">c^{<t>} \not = a^{<t>}</script></span></p>
+</blockquote>
+<p>At every timestep <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>, we are going to consider overwriting the value of the memory cell <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span> with a new value, computed with an activation function:</p>
+<div>
+<div class="MathJax_Preview">\text{Candidate memory: }\tilde c^{&lt;t&gt;} = tanh(W_c[c^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_c)</div>
+<script type="math/tex; mode=display">\text{Candidate memory: }\tilde c^{<t>} = tanh(W_c[c^{<t-1>}, x^{<t>}] + b_c)</script>
+</div>
+<p>The most important idea in the GRU is that of an <strong>update gate</strong>, <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span>, which always has a value between 0 and 1:</p>
+<div>
+<div class="MathJax_Preview">\Gamma_u = \sigma(W_u[c^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_u)</div>
+<script type="math/tex; mode=display">\Gamma_u = \sigma(W_u[c^{<t-1>}, x^{<t>}] + b_u)</script>
+</div>
+<blockquote>
+<p>Subscript <span><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> stands for update.</p>
+</blockquote>
+<p>To build our intuition, think about the example we introduced earlier:</p>
+<div>
+<div class="MathJax_Preview">x^{(1)} = \text{The cat, which already ate ..., was full}</div>
+<script type="math/tex; mode=display">x^{(1)} = \text{The cat, which already ate ..., was full}</script>
+</div>
+<p>We noted that here, the fact that the word <em>"cat"</em> was singular was a huge hint that the verb <em>"was"</em> would also be singular in number. We can imagine <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span> as <em>memorizing</em> the case of the noun "<em>cat</em>" until it reached the verb "<em>was</em>". The job of the <strong>gate</strong> would be to <em>remember</em> this information between "<em>... cat ... were ...</em>" and <em>forget</em> it afterwords.</p>
+<p>To compute <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span>:</p>
+<div>
+<div class="MathJax_Preview">c^{&lt;t&gt;} = \Gamma_u * \tilde c^{&lt;t&gt;} + (1 - \Gamma_u) * c^{&lt;t&gt;}</div>
+<script type="math/tex; mode=display">c^{<t>} = \Gamma_u * \tilde c^{<t>} + (1 - \Gamma_u) * c^{<t>}</script>
+</div>
+<p>There is a very intuitive understanding of this computation. When <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span> is 1, we simply <em>forget</em> the old value of <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span> by overwriting it with <span><span class="MathJax_Preview">\tilde c^{&lt;t&gt;}</span><script type="math/tex">\tilde c^{<t>}</script></span>. When <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span> is 0, we do the opposite (completely diregard the new candidate memory <span><span class="MathJax_Preview">\tilde c^{&lt;t&gt;}</span><script type="math/tex">\tilde c^{<t>}</script></span> in favour of the old memory cell value <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span>).</p>
+<blockquote>
+<p>Remember that <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span> can take on any value between 0 and 1. The larger the value, the more weight that the candidate memory cell value takes over the old memory cell value.</p>
+</blockquote>
+<p>For our example sentence above, we might hope that the GRU would set <span><span class="MathJax_Preview">\Gamma_u = 1</span><script type="math/tex">\Gamma_u = 1</script></span> once it reached "<em>cats</em>", and then <span><span class="MathJax_Preview">\Gamma_u = 0</span><script type="math/tex">\Gamma_u = 0</script></span> for every other timestep until it reached "<em>was</em>", where it might set <span><span class="MathJax_Preview">\Gamma_u = 1</span><script type="math/tex">\Gamma_u = 1</script></span> again. Think of this as the network memorizing the grammatical number of the <strong>subject</strong> of the sentence in order to determine the number of its verb, a concept known as <strong>agreement</strong>.</p>
+<p>As a picture:</p>
+<p><a href="https://postimg.cc/image/v83e5cj6n/"><img alt="gru_unit_hand_drawn.png" src="https://s19.postimg.cc/3xi2xfg9v/gru_unit_hand_drawn.png" /></a></p>
+<blockquote>
+<p>The purple box just represents our calculation of <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span></p>
+</blockquote>
+<p>GRUs are remarkably good at determining when to update the memory cell in order to <strong>memorize</strong> or <strong>forget</strong> information in the sequence.</p>
+<h3 id="vanishing-gradient-problem">Vanishing gradient problem</h3>
+<p>The way a GRU solves the vanishing gradient problem is straightforward: the <strong>memory cell</strong> <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span> is able to retain information over many timesteps. Even if <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span> becomes very very small, <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span> will essentially retain its value across many many timesteps.</p>
+<h3 id="implementation-details">Implementation details</h3>
+<p><span><span class="MathJax_Preview">c^{&lt;t&gt;}, \tilde c^{&lt;t&gt;} \text{ and } \Gamma_u</span><script type="math/tex">c^{<t>}, \tilde c^{<t>} \text{ and } \Gamma_u</script></span> are all vectors of the same dimension. This means that in the computation of:</p>
+<div>
+<div class="MathJax_Preview">c^{&lt;t&gt;} = \Gamma_u \ast \tilde c^{&lt;t&gt;} + (1 - \Gamma_u) \ast c^{&lt;t&gt;}</div>
+<script type="math/tex; mode=display">c^{<t>} = \Gamma_u \ast \tilde c^{<t>} + (1 - \Gamma_u) \ast c^{<t>}</script>
+</div>
+<p><span><span class="MathJax_Preview">\ast</span><script type="math/tex">\ast</script></span> are <em>element-wise</em> multiplications. Thus, if <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span> is a 100-dimensional vector, it is really a 100-dimensional vector of <em>bits</em> which tells us of the 100-dimensional memory cell <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span>, which are the <em>bits</em> we want to <em>update</em>.</p>
+<blockquote>
+<p>Of course, in practice <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span> will take on values that are not <em>exactly</em> 0 or 1, but its helpful to image it as a bit vector to build our intuition.</p>
+</blockquote>
+<p>Invoking our earlier example one more time:</p>
+<div>
+<div class="MathJax_Preview">x^{(1)} = \text{The cat, which already ate ..., was full}</div>
+<script type="math/tex; mode=display">x^{(1)} = \text{The cat, which already ate ..., was full}</script>
+</div>
+<p>we could imagine representing the grammatical number of the noun "<em>cat</em>" as a single <em>bit</em> in the memory cell.</p>
+<h3 id="full-gru-unit">Full GRU unit</h3>
+<p>The description of a GRU unit provided above is actually somewhat simplified. Below is the computations for the <em>full</em> GRU unit:</p>
+<div>
+<div class="MathJax_Preview">\Gamma_r = \sigma(W_r[c^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_r)$$
+$$\tilde c^{&lt;t&gt;} = tanh(W_c[\Gamma_r \ast c^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_c)$$
+$$\Gamma_u = \sigma(W_u[c^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_u)$$
+$$c^{&lt;t&gt;} = \Gamma_u * \tilde c^{&lt;t&gt;} + (1 - \Gamma_u) * c^{&lt;t-1&gt;}</div>
+<script type="math/tex; mode=display">\Gamma_r = \sigma(W_r[c^{<t-1>}, x^{<t>}] + b_r)$$
+$$\tilde c^{<t>} = tanh(W_c[\Gamma_r \ast c^{<t-1>}, x^{<t>}] + b_c)$$
+$$\Gamma_u = \sigma(W_u[c^{<t-1>}, x^{<t>}] + b_u)$$
+$$c^{<t>} = \Gamma_u * \tilde c^{<t>} + (1 - \Gamma_u) * c^{<t-1>}</script>
+</div>
+<p>We introduce another gate, <span><span class="MathJax_Preview">\Gamma_r</span><script type="math/tex">\Gamma_r</script></span>. Where we can think of this gate as capturing how relevant <span><span class="MathJax_Preview">c^{&lt;t-1&gt;}</span><script type="math/tex">c^{<t-1>}</script></span> is for computing the next candidate <span><span class="MathJax_Preview">c^{&lt;t&gt;}</span><script type="math/tex">c^{<t>}</script></span>.</p>
+<blockquote>
+<p>You can think of <span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span> as standing for relevance.</p>
+</blockquote>
+<p>Note that Andrew tried to establish a consistent notation to use for explaining both GRUs and LSTMs. In the academic literature, you might often see:</p>
+<ul>
+<li><span><span class="MathJax_Preview">\tilde c^{&lt;t&gt;} : \tilde h</span><script type="math/tex">\tilde c^{<t>} : \tilde h</script></span></li>
+<li><span><span class="MathJax_Preview">\Gamma_u : u</span><script type="math/tex">\Gamma_u : u</script></span></li>
+<li><span><span class="MathJax_Preview">\Gamma_u : r</span><script type="math/tex">\Gamma_u : r</script></span></li>
+<li><span><span class="MathJax_Preview">c^{&lt;t&gt;} : h</span><script type="math/tex">c^{<t>} : h</script></span></li>
+</ul>
+<blockquote>
+<p>(our notation : common academic notation)</p>
+</blockquote>
+<h2 id="long-short-term-memory-lstm">Long Short Term Memory (LSTM)</h2>
+<p>In the last video, you learned about the <strong>GRU</strong>, and how that can allow you to learn very long range dependencies in a sequence. The other type of unit that allows you to do this very well is the <strong>LSTM</strong> or the <strong>long short term memory</strong> units, and is even more powerful than the GRU.</p>
+<p>Recall the full set of equations defining a GRU above:</p>
+<div>
+<div class="MathJax_Preview">\Gamma_r = \sigma(W_r[c^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_r)$$
+$$\tilde c^{&lt;t&gt;} = tanh(W_c[\Gamma_r \ast c^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_c)$$
+$$\Gamma_u = \sigma(W_u[c^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_u)$$
+$$c^{&lt;t&gt;} = \Gamma_u * \tilde c^{&lt;t&gt;} + (1 - \Gamma_u) * c^{&lt;t-1&gt;}$$
+$$a^{&lt;t&gt;} = c^{&lt;t&gt;}</div>
+<script type="math/tex; mode=display">\Gamma_r = \sigma(W_r[c^{<t-1>}, x^{<t>}] + b_r)$$
+$$\tilde c^{<t>} = tanh(W_c[\Gamma_r \ast c^{<t-1>}, x^{<t>}] + b_c)$$
+$$\Gamma_u = \sigma(W_u[c^{<t-1>}, x^{<t>}] + b_u)$$
+$$c^{<t>} = \Gamma_u * \tilde c^{<t>} + (1 - \Gamma_u) * c^{<t-1>}$$
+$$a^{<t>} = c^{<t>}</script>
+</div>
+<p>The LSTM unit is a more powerful and slightly more general version of the GRU (in truth, the LSTM was defined before the GRU). Its computations are defined as follows:</p>
+<div>
+<div class="MathJax_Preview">\tilde c^{&lt;t&gt;} = tanh(W_c[a^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_c)$$
+$$\Gamma_u = \sigma(W_u[a^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_u)$$
+$$\Gamma_f = \sigma(W_f[a^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_f)$$
+$$\Gamma_o = \sigma(W_o[a^{&lt;t-1&gt;}, x^{&lt;t&gt;}] + b_o)$$
+$$c^{&lt;t&gt;} = \Gamma_u * \tilde c^{&lt;t&gt;} + \Gamma_f * c^{&lt;t-1&gt;}$$
+$$a^{&lt;t&gt;} = \Gamma_o  * tanh(c^{&lt;t&gt;})</div>
+<script type="math/tex; mode=display">\tilde c^{<t>} = tanh(W_c[a^{<t-1>}, x^{<t>}] + b_c)$$
+$$\Gamma_u = \sigma(W_u[a^{<t-1>}, x^{<t>}] + b_u)$$
+$$\Gamma_f = \sigma(W_f[a^{<t-1>}, x^{<t>}] + b_f)$$
+$$\Gamma_o = \sigma(W_o[a^{<t-1>}, x^{<t>}] + b_o)$$
+$$c^{<t>} = \Gamma_u * \tilde c^{<t>} + \Gamma_f * c^{<t-1>}$$
+$$a^{<t>} = \Gamma_o  * tanh(c^{<t>})</script>
+</div>
+<blockquote>
+<p><a href="https://dl.acm.org/citation.cfm?id=1246450">Original LSTM paper</a>.</p>
+</blockquote>
+<p>Notice that with LSTMs, <span><span class="MathJax_Preview">a^{&lt;t&gt;} \not = c^{&lt;t&gt;}</span><script type="math/tex">a^{<t>} \not = c^{<t>}</script></span>. One new property of the LSTM is that instead of <em>one</em> update gate, <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span>, we have <em>two</em> update gates, <span><span class="MathJax_Preview">\Gamma_u</span><script type="math/tex">\Gamma_u</script></span> and <span><span class="MathJax_Preview">\Gamma_f</span><script type="math/tex">\Gamma_f</script></span> (for <strong>update</strong> and <strong>forget</strong> respectively). This gives the memory cell the option of keeping the old memory cell information <span><span class="MathJax_Preview">c^{&lt;t-1&gt;}</span><script type="math/tex">c^{<t-1>}</script></span> and just adding to it some new information <span><span class="MathJax_Preview">\tilde c^{&lt;t&gt;}</span><script type="math/tex">\tilde c^{<t>}</script></span>.</p>
+<p>We can represent the LSTM unit in diagram form as follows:</p>
+<p><a href="https://postimg.cc/image/f6gixd127/"><img alt="lstm_unit_clean.png" src="https://s19.postimg.cc/6bfomuc9v/lstm_unit_clean.png" /></a></p>
+<blockquote>
+<p>See <a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">here</a> for an more detailed explanation of an LSTM unit.</p>
+</blockquote>
+<p>One thing you may notice is that if we draw out multiple units in temporal succession, it becomes clear how the LSTM is able to achieve something akin to "memory" over a sequence:</p>
+<p><a href="https://postimg.cc/image/mz76pcer3/"><img alt="multiple_lstm_units_clean.png" src="https://s19.postimg.cc/iq2gn6bhv/multiple_lstm_units_clean.png" /></a></p>
+<h3 id="modifications-to-lstms">Modifications to LSTMs</h3>
+<p>There are many modifications to the LSTM described above. One involves including <span><span class="MathJax_Preview">c^{&lt;t-1&gt;}</span><script type="math/tex">c^{<t-1>}</script></span> along with <span><span class="MathJax_Preview">a^{&lt;t-1&gt;}, x^{&lt;t&gt;}</span><script type="math/tex">a^{<t-1>}, x^{<t>}</script></span> in the gate computations, known as a <strong>peephole connection</strong>. This allows for the gate values to depend not just on the input and the previous timesteps activation, but also on the previous timesteps value of the memory cell.</p>
+<h2 id="bidirectional-rnns-brnns">Bidirectional RNNs (BRNNs)</h2>
+<p>By now, you've seen most of the building blocks of RNNs. There are two more ideas that let you build much more powerful models. One is <strong>bidirectional RNNs</strong> (<strong>BRNNs</strong>), which lets you at a point in time to take information from both earlier and later in the sequence. And second, is deep RNNs, which you'll see in the next video.</p>
+<p>To motivate bidirectional RNNs, we will look at an example we saw previously:</p>
+<p><span><span class="MathJax_Preview">x^{(1)}</span><script type="math/tex">x^{(1)}</script></span>: <em>He said, "Teddy Roosevelt was a great President"</em></p>
+<p><span><span class="MathJax_Preview">x^{(2)}</span><script type="math/tex">x^{(2)}</script></span>: <em>He said, "Teddy bears are on sale!"</em></p>
+<p>Recall, that for the task of NER we established that correctly predicting the token <em>Teddy</em> as a <em>person</em> entity without seeing the words that follow it would be difficult.</p>
+<p><a href="https://postimg.cc/image/m0vf0q67j/"><img alt="rnn_teddy_example.png" src="https://s19.postimg.cc/i4i34ql83/rnn_teddy_example.png" /></a></p>
+<blockquote>
+<p>Note: this problem is independent of whether these are standard RNN, GRU, or LSTM units.</p>
+</blockquote>
+<p>A solution to this problem is to introduce another RNN in the opposite direction, going <em>backwards</em> in time.</p>
+<p><a href="https://postimg.cc/image/o5fs1t04f/"><img alt="bidirectional_rnn.png" src="https://s19.postimg.cc/99h8u7opv/bidirectional_rnn.png" /></a></p>
+<p>During forward propogation, we compute activations as we have seen previously, with key difference being that we learn two series of activations: one from <em>left-to-right</em> <span><span class="MathJax_Preview">\overrightarrow a^{&lt;t&gt;}</span><script type="math/tex">\overrightarrow a^{<t>}</script></span> and one from <em>right-to-left</em> <span><span class="MathJax_Preview">\overleftarrow a^{&lt;t&gt;}</span><script type="math/tex">\overleftarrow a^{<t>}</script></span>. What this allows us to do is learn the representation of each element in the sequence <em>within its context</em>. Explicitly, this is done by using the output of both the forward and backward units at each time step in order to make a prediction <span><span class="MathJax_Preview">\hat y^{&lt;t&gt;}</span><script type="math/tex">\hat y^{<t>}</script></span>:</p>
+<div>
+<div class="MathJax_Preview">\hat y^{&lt;t&gt;} = g(W_y[\overrightarrow a^{&lt;t&gt;}, \overleftarrow a^{&lt;t&gt;}] + b_y)</div>
+<script type="math/tex; mode=display">\hat y^{<t>} = g(W_y[\overrightarrow a^{<t>}, \overleftarrow a^{<t>}] + b_y)</script>
+</div>
+<p>For the example given above, this means that our prediction for the token <em>Teddy</em>, <span><span class="MathJax_Preview">y^{&lt;3&gt;}</span><script type="math/tex">y^{<3>}</script></span>, is able to makes use of information seen previously in the sequence (<span><span class="MathJax_Preview">t = 3, 2, ...</span><script type="math/tex">t = 3, 2, ...</script></span>) and future information in the sequence (<span><span class="MathJax_Preview">t = 4, 5, ...</span><script type="math/tex">t = 4, 5, ...</script></span>)</p>
+<blockquote>
+<p>Note again that we can build bidirectional networks with standard RNN, GRU and LSTM units. Bidirectional LSTMs are extremely common.</p>
+</blockquote>
+<p>The disadvantage of BRNNs is that we need to see the <em>entire</em> sequence before we can make any predictions. This can be a problem in applications such as real-time speech recognition.</p>
+<blockquote>
+<p>the BRNN will let you take into account the entire speech utterance but if you use our straightforward implementation, you need to wait for the person to stop talking to get the entire utterance before you can actually process it and make a speech recognition prediction</p>
+</blockquote>
+<p>For applications like these, there exists somewhat more complex modules that allow predictions to be made before the full sequence has been seen. bidirectional RNN as you've seen here. For many NLP applications where you can get the entire sentence all the same time, our standard BRNN algorithm is actually very effective.</p>
+<h2 id="deep-rnns">Deep RNNs</h2>
+<p>The different versions of RNNs you've seen so far will already work quite well by themselves. But for learning very complex functions sometimes is useful to stack multiple layers of RNNs together to build even deeper versions of these models.</p>
+<p>Recall, that for a standard neural network we have some input <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> which is fed to a hidden layer with activations <span><span class="MathJax_Preview">a^{[l]}</span><script type="math/tex">a^{[l]}</script></span> which are in turn fed to the next layer to produce activations <span><span class="MathJax_Preview">a^{[l+1]}</span><script type="math/tex">a^{[l+1]}</script></span>. In this was, we can stack as many layers as we like. The same is true of RNNs. Lets use the notation <span><span class="MathJax_Preview">a^{[l]&lt;t&gt;}</span><script type="math/tex">a^{[l]<t>}</script></span> to denote the activations of layer <span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> for timestep <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span>.</p>
+<p>A stacked RNN would thus look something like the following:</p>
+<p><a href="https://postimg.cc/image/mg6otn4yn/"><img alt="deep_rnn_clean.png" src="https://s19.postimg.cc/qck0pmpyb/deep_rnn_clean.png" /></a></p>
+<p>The computation of, for example, <span><span class="MathJax_Preview">a^{[2]&lt;3&gt;}</span><script type="math/tex">a^{[2]<3>}</script></span> would be:</p>
+<div>
+<div class="MathJax_Preview">a^{[2]&lt;3&gt;} = g(W_a^{[2]}[a^{[2]&lt;2&gt;}, a^{[1]&lt;3&gt;}] + b_a^{[2]})</div>
+<script type="math/tex; mode=display">a^{[2]<3>} = g(W_a^{[2]}[a^{[2]<2>}, a^{[1]<3>}] + b_a^{[2]})</script>
+</div>
+<p>Notice that the second layer has parameters <span><span class="MathJax_Preview">W_a^{[2]}</span><script type="math/tex">W_a^{[2]}</script></span> and <span><span class="MathJax_Preview">b_a^{[2]}</span><script type="math/tex">b_a^{[2]}</script></span> which are shared across all timesteps, but <em>not</em> across the layers (which have their own corresponding set of parameters).</p>
+<p>Unlike standard neural networks, we rarely stack RNNs very deep. Part of the reason is that RNNs are already quite large due to their temporal dimension.</p>
+<blockquote>
+<p>A common depth would be 2 stacked RNNs.</p>
+</blockquote>
+<p>Something that has become more common is to apply deep neural networks to the output of each timestep. In this approach, the <em>same</em> deep neural network is typically applied to each output of the final RNN layer.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../.." title="About" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                About
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.583bbe55.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../javascripts/extra.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>
