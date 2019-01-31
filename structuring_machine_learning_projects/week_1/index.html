@@ -1,0 +1,1285 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/structuring_machine_learning_projects/week_1/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Week 1 - Deeplearning.ai - Coursera Course Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#week-1-ml-strategy-1" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Deeplearning.ai - Coursera Course Notes
+              </span>
+              <span class="md-header-nav__topic">
+                Week 1
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Deeplearning.ai - Coursera Course Notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Course 1 - Neural Networks and Deep Learning
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Course 1 - Neural Networks and Deep Learning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../neural_networks_and_deep_learning/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../neural_networks_and_deep_learning/week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../neural_networks_and_deep_learning/week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../neural_networks_and_deep_learning/week_4/" title="Week 4" class="md-nav__link">
+      Week 4
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Course 2 - Structuring Machine Learning Projects
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Course 2 - Structuring Machine Learning Projects
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 1
+      </label>
+    
+    <a href="./" title="Week 1" class="md-nav__link md-nav__link--active">
+      Week 1
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-ml-strategy" title="Introduction to ML strategy" class="md-nav__link">
+    Introduction to ML strategy
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-ml-strategy" title="Why ML strategy" class="md-nav__link">
+    Why ML strategy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orthogonalization" title="Orthogonalization" class="md-nav__link">
+    Orthogonalization
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain-of-assumption-in-examples" title="Chain of assumption in examples" class="md-nav__link">
+    Chain of assumption in examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-your-goal" title="Setting up your goal" class="md-nav__link">
+    Setting up your goal
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-number-evaluation-metric" title="Single number evaluation metric" class="md-nav__link">
+    Single number evaluation metric
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#satisficing-and-optimizing-metric" title="Satisficing and Optimizing metric" class="md-nav__link">
+    Satisficing and Optimizing metric
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-wake-words" title="Example: Wake words" class="md-nav__link">
+    Example: Wake words
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traindevtest-distributions" title="Train/dev/test distributions" class="md-nav__link">
+    Train/dev/test distributions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guidelines" title="Guidelines" class="md-nav__link">
+    Guidelines
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#size-of-the-dev-and-test-sets" title="Size of the dev and test sets" class="md-nav__link">
+    Size of the dev and test sets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#size-of-the-devtest-sets" title="Size of the dev/test sets" class="md-nav__link">
+    Size of the dev/test sets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guidelines_1" title="Guidelines" class="md-nav__link">
+    Guidelines
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-change-devtest-sets-and-metrics" title="When to change dev/test sets and metrics" class="md-nav__link">
+    When to change dev/test sets and metrics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" title="Example 1" class="md-nav__link">
+    Example 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2" title="Example 2" class="md-nav__link">
+    Example 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparing-to-human-level-performance" title="Comparing to human-level performance" class="md-nav__link">
+    Comparing to human-level performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avoidable-bias" title="Avoidable bias" class="md-nav__link">
+    Avoidable bias
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-human-level-performance" title="Understanding human-level performance" class="md-nav__link">
+    Understanding human-level performance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#surpassing-human-level-performance" title="Surpassing human-level performance" class="md-nav__link">
+    Surpassing human-level performance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problems-where-ml-significantly-surpasses-human-level-performance" title="Problems where ML significantly surpasses human-level performance" class="md-nav__link">
+    Problems where ML significantly surpasses human-level performance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#improving-your-model-performance" title="Improving your model performance" class="md-nav__link">
+    Improving your model performance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-two-fundamental-assumptions-of-supervised-learning" title="The two fundamental assumptions of supervised learning" class="md-nav__link">
+    The two fundamental assumptions of supervised learning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Course 5 - Sequence Models
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Course 5 - Sequence Models
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-ml-strategy" title="Introduction to ML strategy" class="md-nav__link">
+    Introduction to ML strategy
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-ml-strategy" title="Why ML strategy" class="md-nav__link">
+    Why ML strategy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orthogonalization" title="Orthogonalization" class="md-nav__link">
+    Orthogonalization
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chain-of-assumption-in-examples" title="Chain of assumption in examples" class="md-nav__link">
+    Chain of assumption in examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-your-goal" title="Setting up your goal" class="md-nav__link">
+    Setting up your goal
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-number-evaluation-metric" title="Single number evaluation metric" class="md-nav__link">
+    Single number evaluation metric
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#satisficing-and-optimizing-metric" title="Satisficing and Optimizing metric" class="md-nav__link">
+    Satisficing and Optimizing metric
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-wake-words" title="Example: Wake words" class="md-nav__link">
+    Example: Wake words
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#traindevtest-distributions" title="Train/dev/test distributions" class="md-nav__link">
+    Train/dev/test distributions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guidelines" title="Guidelines" class="md-nav__link">
+    Guidelines
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#size-of-the-dev-and-test-sets" title="Size of the dev and test sets" class="md-nav__link">
+    Size of the dev and test sets
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#size-of-the-devtest-sets" title="Size of the dev/test sets" class="md-nav__link">
+    Size of the dev/test sets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guidelines_1" title="Guidelines" class="md-nav__link">
+    Guidelines
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-to-change-devtest-sets-and-metrics" title="When to change dev/test sets and metrics" class="md-nav__link">
+    When to change dev/test sets and metrics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1" title="Example 1" class="md-nav__link">
+    Example 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2" title="Example 2" class="md-nav__link">
+    Example 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparing-to-human-level-performance" title="Comparing to human-level performance" class="md-nav__link">
+    Comparing to human-level performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avoidable-bias" title="Avoidable bias" class="md-nav__link">
+    Avoidable bias
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-human-level-performance" title="Understanding human-level performance" class="md-nav__link">
+    Understanding human-level performance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#surpassing-human-level-performance" title="Surpassing human-level performance" class="md-nav__link">
+    Surpassing human-level performance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problems-where-ml-significantly-surpasses-human-level-performance" title="Problems where ML significantly surpasses human-level performance" class="md-nav__link">
+    Problems where ML significantly surpasses human-level performance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#improving-your-model-performance" title="Improving your model performance" class="md-nav__link">
+    Improving your model performance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-two-fundamental-assumptions-of-supervised-learning" title="The two fundamental assumptions of supervised learning" class="md-nav__link">
+    The two fundamental assumptions of supervised learning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/edit/master/docs/structuring_machine_learning_projects/week_1.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="week-1-ml-strategy-1">Week 1: ML Strategy (1)</h1>
+<p>What is <em>machine learning strategy?</em> Lets start with a motivating example.</p>
+<h2 id="introduction-to-ml-strategy">Introduction to ML strategy</h2>
+<h3 id="why-ml-strategy">Why ML strategy</h3>
+<p>Lets say you are working on a <strong>cat classifier</strong>. You have achieved 90% accuracy, but would like to improve performance even further. Your ideas for achieveing this are:</p>
+<ul>
+<li>collect more data</li>
+<li>collect more diverse training set</li>
+<li>train the algorithm longer with gradient descent</li>
+<li>try adam (or other optimizers) instead of gradient descent</li>
+<li>try dropout, add L2 regularization, change network architecture, ...</li>
+</ul>
+<p>This list is long, and so it becomes incredibly important to be able to identify ideas that are worth our time, and which ones we can likely discard.</p>
+<p>This course will attempt to introduce a framework for making these decisions. In particular, we will focus on the organization of <em>deep learning-based projects</em>.</p>
+<h3 id="orthogonalization">Orthogonalization</h3>
+<p>One of the challenges with building deep learning systems is the number of things we can tune to improve performance (<em>many hyperparameters notwithstanding</em>).</p>
+<p>Take the example of an old TV. They included many nobs for tuning the display position (x-axis position, y-axis position, rotation, etc...).</p>
+<p><strong>Orthogonalization</strong> in this example refers to the TV designers decision to ensure each nob had one effect on the display and that these effects were <em>relative</em> to one another. If these nobs did more than one action and each actions magnitude was not relative to the other, it would become nearly impossible to tune the TV.</p>
+<p>Take another example, driving a <strong>car</strong>. Imagine if there was multiple joysticks. One joystick modified \(0.3\) X steering angle \(- 0.8\) speed, and another \(2\) X steering angle \(+ 0.9\) speed. In theory, by tuning these two nobs we could drive the car, but this would be <em>much more difficult then separating the inputs into distinct input mechanisms</em>.</p>
+<p><strong>Orthogonal</strong> refers to the idea that the <em>inputs</em> are aligned to the dimensions we want to control.</p>
+<p><a href="https://postimg.cc/image/t547roobz/"><img alt="speed_v_angle_orth.png" src="https://s19.postimg.cc/51dg3e5v7/speed_v_angle_orth.png" /></a></p>
+<p><em>How does this related to machine learning?</em></p>
+<h4 id="chain-of-assumption-in-examples">Chain of assumption in examples</h4>
+<p>For a machine learning system to perform "well", we usually aim to make four things happen:</p>
+<ol>
+<li>Fit training set well on cost function (for some applications, this means comparing favorably to human-level performance).</li>
+<li>Fit dev set well on cost function</li>
+<li>Fit test set well on cost function</li>
+<li>Performs well in real world.</li>
+</ol>
+<p>If we relate back to the TV example, we wanted <em>one knob</em> to change each attribute of the display. <em>In the same way, we can modify knobs for each of our four steps above</em>:</p>
+<ol>
+<li>Train a bigger network, change the optimization algorithm, ...</li>
+<li>Regularization, bigger training set, ...</li>
+<li>Bigger dev set, ...</li>
+<li>Change the dev set or the cost function</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Andrew said when he trains neural networks, he tends <strong>not</strong> to use <strong>early stopping</strong>. The reason being is that this is not a very <strong>orthogonal</strong> "knob"; it simultaneously effects how well we fit the training set and the dev set.</p>
+</div>
+<p>The whole idea here is that if we keep our "knobs" <strong>orthogonal</strong>, we can more easily come up with solutions to specific problems with our deep neural networks (i.e., if we are getting poor performance on the training set, we may opt to train a bigger [higher variance] network).</p>
+<h2 id="setting-up-your-goal">Setting up your goal</h2>
+<h3 id="single-number-evaluation-metric">Single number evaluation metric</h3>
+<p>When tuning neural networks (modifying hyper-parameters, trying different architectures, etc.) you will find that having a _single __evaluation metric___ will allow you to easily and quickly judge if a certain change improved performance.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Andrew recommends deciding on a single, real-valued evaluation metric when starting out on your deep learning project.</p>
+</div>
+<p>Lets look at an example.</p>
+<p>As we discussed previously, <strong>applied machine learning</strong> is a very empirical process.</p>
+<p><a href="https://postimg.cc/image/6t6eybcdb/"><img alt="using_a_single_number.png" src="https://s19.postimg.cc/3mbveorxf/using_a_single_number.png" /></a></p>
+<p>Lets say that we start with classifier A, and end up with classifier B after some change to the model. We could look at <strong>precision</strong> and <strong>recall</strong> as a means of improvements. What we really want is to improve <em>both</em> precision and recall. The problem is that it can become difficult to choose the "best" classifier if we are monitoring two different performance metrics, especially when we are making many modifications to our network.</p>
+<p>This is when it becomes important to chose a single performance metric. In this case specifically, we can chose the <strong>F1-score</strong>, the harmonic mean of the precision and recall (less formally, think of this as an average).</p>
+<p><a href="https://postimg.cc/image/uwx6mln4f/"><img alt="chosing_f1_score.png" src="https://s19.postimg.cc/ovzhpj0ib/chosing_f1_score.png" /></a></p>
+<p>We can see very quickly that classifier A has a better F1-score, and therefore we chose classifier A over classifier B.</p>
+<h3 id="satisficing-and-optimizing-metric">Satisficing and Optimizing metric</h3>
+<p>It is not always easy to combine all the metrics we care about into a single real-numbered value. Lets introduce <strong>satisficing</strong> and <strong>optimizing</strong> metrics as a solution to this problem.</p>
+<p>Lets say we are building a classifier, and we care about both our <strong>accuracy</strong> (measured as F1-score, traditional accuracy or some other metric) <em>and</em> the <strong>running time</strong> to classify a new example.</p>
+<p><a href="https://postimg.cc/image/aoizsfn67/"><img alt="two_metrics_optimize.png" src="https://s19.postimg.cc/px8x67gur/two_metrics_optimize.png" /></a></p>
+<p>One thing we can do, is to combine accuracy and run-time into a <strong>single-metric</strong>, possibly by taking a weighted linear sum of the two metrics.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As it turns out, this tends to produce a rather artificial solution (no pun intended).</p>
+</div>
+<p>Another way, is to attempt to <em>maximize accuracy</em> while subject to the restraint that \(\text{running time} \le 100\)ms. In this case, we say that <em>accuracy</em> is an <strong>optimizing</strong> metric (because we want to maximize or minimize it) and <em>running time</em> is a <strong>satisficing</strong> metric (because it just needs to meet a certain constraint, i.e., be "good enough").</p>
+<p>More generally, if we have \(m\) metrics that we care about, it is reasonable to choose <em>one</em> to be our <strong>optimizing metric</strong>, and \(m-1\) to be <strong>satisficing metrics</strong>.</p>
+<h4 id="example-wake-words">Example: Wake words</h4>
+<p>We can take a concrete example to illustrate this: <strong>wake words</strong> for <strong>intelligent voice assistants</strong>. We might chose the accuracy of the model (i.e., what percent of the time does it "wake" when a wake word is said) to be out <strong>optimizing metric</strong> s.t. we have \(\le 1\) false-positives per 24 hours of operation (our <strong>satisficing metric</strong>).</p>
+<h4 id="summary">Summary</h4>
+<p>To summarize, if there are multiple things you care about, we can set one as the <strong>optimizing metric</strong> that you want to do as well as possible on and one or more as <strong>satisficing metrics</strong> were you'll be satisfied. This idea goes hand-in-hand with the idea of having a single real-valued performance metric whereby we can <em>quickly</em> and <em>easily</em> chose the best model given a selection of models.</p>
+<h2 id="traindevtest-distributions">Train/dev/test distributions</h2>
+<p>The way you set up your train, dev (sometimes called valid) and test sets can have a large impact on your development times and even model performance.</p>
+<p>In this video, we are going to focus on the <strong>dev</strong> (sometimes called the <strong>valid</strong> or <strong>hold out</strong> set) and the <strong>test set</strong>. The general workflow in machine learning is to train on the <strong>train</strong> set and test out model performance (e.g., different hyper-parameters or model architectures) on the <strong>dev</strong> set.</p>
+<p>Lets look at an example. Say we had data from multiple regions:</p>
+<ul>
+<li>US</li>
+<li>UK</li>
+<li>Other European countries</li>
+<li>South America</li>
+<li>India</li>
+<li>China</li>
+<li>Other Asian countries</li>
+<li>Australia</li>
+</ul>
+<p>If we were to build our dev set by choosing data from the first four regions and our test set from the last four regions, our data would likely be <strong>skewed</strong> and our model would likely perform poorly (at least on the <strong>test</strong> set). <em>Why?</em></p>
+<p>Imagine the <strong>dev</strong> set as a target, and our job as machine learning engineers is to hit a bullseye. <em>A dev set that is not representative of the overall general distribution is analogous to moving the bullseye away from its original location moments after we fire our bow</em>. An ML team could spend months optimizing the model on a dev set, only to achieve very poor performance on a test set!</p>
+<p>So for our data above, a much better idea would be to sample data randomly from all regions to build our <strong>dev</strong> and <strong>test</strong> set.</p>
+<h3 id="guidelines">Guidelines</h3>
+<p>Choose a <strong>dev</strong> set and <strong>test</strong> set (from the same distribution) to reflect data you expect to <em>get in the future</em> and <em>consider important to do well on</em>.</p>
+<h2 id="size-of-the-dev-and-test-sets">Size of the dev and test sets</h2>
+<p>In the last lecture we saw that the dev and test sets should come from the same distributions. <em>But how large should they be?</em></p>
+<h3 id="size-of-the-devtest-sets">Size of the dev/test sets</h3>
+<p>The rule of thumb in machine learning is typically 60% <strong>training</strong>, 20% <strong>dev</strong>, and 20% <strong>test</strong> (or 70/30 <strong>train</strong>/<strong>test</strong>). In earlier eras of machine learning, this was pretty reasonable. In the modern machine learning era, we are used to working with <em>much</em> larger data set sizes.</p>
+<p>For example, imagine we have \(1,000,000\) examples. It might be totally reasonable for us to use 98% as our test set, 1% for dev and 1% for <strong>test</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that 1% of \(10^6\) is \(10^4\)!</p>
+</div>
+<h3 id="guidelines_1">Guidelines</h3>
+<p>Set your <strong>test</strong> set to be big enough to give high confidence in the overall performance of your system.</p>
+<h2 id="when-to-change-devtest-sets-and-metrics">When to change dev/test sets and metrics</h2>
+<p>Sometimes during the course of a machine learning project, you will realize that you want to change your evaluation metric (i.e., move the "goal posts"). Lets illustrate this with an example:</p>
+<h3 id="example-1">Example 1</h3>
+<p>Imagine we have two models for image classification, and we are using classification performance as our evaluation metric:</p>
+<ul>
+<li>Algorithm A has a <strong>3%</strong> error, but sometimes shows users pornographic images.</li>
+<li>Algorithm B has a <strong>5%</strong> error.</li>
+</ul>
+<p>Cleary, algorithm A performs better by our original evaluation metric (classification performance), but showing users pornographic images is <em>unacceptable</em>.</p>
+<p>\[Error = \frac{1}{m_{dev}}\sum^{m_{dev}}<em>{i=1} \ell { y</em>{pred}^{(i)} \ne y^{(i)} }\]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Our error treats all incorrect predictions the same, pornographic or otherwise.</p>
+</div>
+<p>We can think of it like this: our evaluation metric <em>prefers</em> algorithm A, but <em>we</em> (and our users) prefer algorithm B. When our evaluation metric is no longer ranking the algorithms in the order we would like, it is a sign that we may want to change our evaluation metric. In our specific example, we could solve this by weighting misclassifications</p>
+<p>\[Error = \frac{1}{w^{(i)}}\sum^{m_{dev}}<em>{i=1} w^{(i)}\ell { y</em>{pred}^{(i)} \ne y^{(i)} }\]</p>
+<p>where \(w^{(i)}\) is 1 if \(x^{(i)}\) is non-porn and 10 (or even 100 or larger) if \(x^{(i)}\) is porn.</p>
+<p>This is actually an example of <strong>orthogonalization</strong>. We,</p>
+<ol>
+<li>Define a metric to evaluate our model ("placing the target")</li>
+<li>(In a completely separate step) Worry about how to do well on this metric.</li>
+</ol>
+<h3 id="example-2">Example 2</h3>
+<p>Take the same example as above, but with a new twist. Say we train our classifier on a data set of high quality images. Then, when we deploy our model we notice it performs poorly. We narrow the problem down to the low quality images users are "feeding" to the model. What do we do?</p>
+<p>In general: <em>if doing well on your metric + dev/test set does not correspond to doing well on your application, change your metric and/or dev/test set</em>.</p>
+<h2 id="comparing-to-human-level-performance">Comparing to human-level performance</h2>
+<p>In the last few years, comparing machine learning systems to human level performance have become common place. The reasons for this include:</p>
+<ol>
+<li>Deep learning based approaches are making extraordinary gains in performance, so our baseline needs to be more stringent.</li>
+<li>Many of the tasks deep learning is performing well at were thought to be very difficult for machines (e.g. NLP, computer vision). Comparing performance on these tasks to a human baseline is natural.</li>
+</ol>
+<p>It is also instructive to look at the performance of machine learning over time (note this is an obvious abstraction)</p>
+<p><a href="https://postimg.cc/image/wm9ztnwof/"><img alt="ai_progress_over_time.png" src="https://s19.postimg.cc/8ij85de7n/ai_progress_over_time.png" /></a></p>
+<p>Roughly speaking, performance (e.g., in a research domain or for a certain task) progresses quickly until we reach human-level performance, and tails off quickly. <em>Why?</em> mainly because human level performance is typically very close to the <a href="http://www.wikiwand.com/en/Bayes_error_rate"><strong>Bayes optimal error</strong></a>. Bayes optimal error is the best possible error; there is no way for any function mapping from \(x \rightarrow y\) to do any better. A second reason is that so long as ML performs worse than humans for a given task, we can:</p>
+<ul>
+<li>get labeled data from humans</li>
+<li>gain insight from manual error analysis (e.g., why did a person get this right?)</li>
+<li>better analysis of bias/variance</li>
+</ul>
+<h2 id="avoidable-bias">Avoidable bias</h2>
+<p>Of course, we want our learning algorithm to perform well on the training set, but not <em>too well</em>. Knowing where human level performance is can help us decide how well we want to perform on the training set.</p>
+<p>Let us again take the example of an image classifier. For this particular data set, assume:</p>
+<ul>
+<li>human-level performance is an error of 1%.</li>
+<li>our classifier is currently achieving 8% classification error on the training set and</li>
+<li>10% classification on the dev set.</li>
+</ul>
+<p><em>Clearly, it has plenty of room to improve</em>. Specifically, we would want to try to <em>increase</em> <strong>variance</strong> and <em>reduce</em> <strong>bias</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the purposes of computer vision, assume that human-level performance \(\approx\) Bayes error.</p>
+</div>
+<p>Now, lets take the same example, but instead, we assume that human-level performance is an error of 7.5% (this example is very contrived, as humans are extremely good at image classification). In this case, we note that our classifier performances nearly as well as a human baseline. We would likely want to to <em>decrease</em> <strong>variance</strong> and <em>increase</em> <strong>bias</strong> (in order to improve performance on the <strong>dev</strong> set.)</p>
+<p>So what did this example show us? When human-level performance (where we are using human-level performance as a proxy for Bayes error) is <em>very high</em> relative to our models performance on the train set, we likely want to focus on reducing  <em>"avoidable"</em> bias (or increasing variance) in order to improve performance on the training set (e.g., by using a bigger network.) When human-level performance is <em>comparable</em> to our models performance on the train set, we likely want to focus on increasing bias (or decreasing variance) in order to improve performance on the dev set (e.g., by using a regularization technique or gathering more training data.)</p>
+<h2 id="understanding-human-level-performance">Understanding human-level performance</h2>
+<p>The term <em>human-level performance</em> is used quite casually in many research articles. Lets attempt to define this term more precisely.</p>
+<p>Recall from the last lecture that <strong>human-level performance</strong> can be used as a proxy for <strong>Bayes error</strong>. Lets revisit that idea with another example.</p>
+<p>Suppose, for a medical image classification example,</p>
+<ul>
+<li>Typical human: 3% error</li>
+<li>Typical doctor: 1% error</li>
+<li>Experienced doctor: 0.7% error</li>
+<li>Team of experienced doctors: 0.5% error</li>
+</ul>
+<p><em>What is "human-level" error?</em> Most likely, we would say <strong>0.5%</strong>, and thus Bayes error is \(\le 0.05%\).  However, in certain contexts we may only wish to perform as well as the typical doctor (i.e., 1% error) and we may deem this <em>"human-level error"</em>. The takeaway is that there is sometimes more than one way to determine human-level performance; which way is appropriate will depend on the context in which we expect our algorithm to be deployed. We also note that as the performance of our algorithm improves, we may decide to move the goal posts for human-level performance higher, e.g., in this example by choosing a team of experienced doctors as the baseline. This is useful for solving the problem introduced in the previous lecture: <em>should I focus on reducing avoidable bias? or should I focus on reducing variance between by training and dev errors.</em></p>
+<h3 id="summary_1">Summary</h3>
+<p>Lets summarize: if you are trying to understand bias and variance when you have a human-level performance baseline:</p>
+<ul>
+<li>Human-level error can be used as a proxy for Bayes' error</li>
+<li>The difference between the training error and the human-level error can be thought of as the <strong>avoidable bias</strong>.</li>
+<li>The difference between the training and dev errors can be thought of as <strong>variance</strong>.</li>
+<li>Which type of error you should focus on reducing depends on how well your model perform compares to (an estimate of) human-level error.</li>
+<li>As our model approaches human-level performance, it becomes harder to determine where we should focus our efforts.</li>
+</ul>
+<h2 id="surpassing-human-level-performance">Surpassing human-level performance</h2>
+<p>Surpassing human-level performance is what many teams in machine learning / deep learning are inevitably trying to do. Lets take a look at a harder example to further develop our intuition for an approach to <em>matching</em> or <em>surpassing</em> human-level performance.</p>
+<ul>
+<li>team of humans: 0.5% error</li>
+<li>one human: 1.0% error</li>
+<li>training error: 0.3% error</li>
+<li>dev error: 0.4% error</li>
+</ul>
+<p>Notice that training error &lt; team of humans error. Does this mean we have <em>overfit</em> the data by 0.2%? Or, does this means Bayes' error is actually lower than the team of humans error? We don't really know based on the information given, as to whether we should focus on <strong>bias</strong> or <strong>variance</strong>. This example is meant to illustrate that once we surpass human-level performance, it becomes much less clear how to improve performance further.</p>
+<h3 id="problems-where-ml-significantly-surpasses-human-level-performance">Problems where ML significantly surpasses human-level performance</h3>
+<p>Some example where ML <em>significantly surpasses human-level performance</em> include:</p>
+<ul>
+<li>Online advertising,</li>
+<li>Product recommendations</li>
+<li>Logistics (predicting transit time)</li>
+<li>Load approvals</li>
+</ul>
+<p>Notice that many of these tasks are learned on <strong>structured data</strong> and do not involve <strong>natural perception tasks</strong>. This appeals to our intuition, as we know humans are <em>excellent</em> at natural perception tasks.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We also note that these four tasks have immensely large datasets for learning.</p>
+</div>
+<h2 id="improving-your-model-performance">Improving your model performance</h2>
+<p>You have heard about orthogonalization. How to set up your dev and test sets, human level performance as a proxy for Bayes's error and how to estimate your avoidable bias and variance. Let's pull it all together into a set of guidelines for how to improve the performance of your learning algorithm.</p>
+<h3 id="the-two-fundamental-assumptions-of-supervised-learning">The two fundamental assumptions of supervised learning</h3>
+<ol>
+<li>You can fit the training set (pretty) well, i.e., we can achieve <em>low avoidable bias</em>.</li>
+<li>The training set performance generalizes pretty well to the dev/test set, i.e., variance is <em>not too bad</em>.</li>
+</ol>
+<p>In the spirit of orthogonalization, there are a certain set of (separate) knobs we can use to improve bias and variance. Often, the difference between the training error and Bayes error (or a human-level proxy) is often illuminating in terms of where large improvement remain to be made.</p>
+<p><em>For reducing bias</em></p>
+<ul>
+<li>Train a bigger model</li>
+<li>Train longer/better optimization algorithms</li>
+<li>Change/tweak NN architecture/hyperparameter search.</li>
+</ul>
+<p><em>For reducing variance</em></p>
+<ul>
+<li>Collect more data</li>
+<li>Regularization (L2, dropout, data augmentation)</li>
+<li>Change/tweak NN architecture/hyperparameter search.</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../neural_networks_and_deep_learning/week_4/" title="Week 4" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Week 4
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../week_2/" title="Week 2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Week 2
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1161 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/neural_networks_and_deep_learning/week_2/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Week 2 - Deeplearning.ai - Coursera Course Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#week-2-neural-networks-basics" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Deeplearning.ai - Coursera Course Notes
+              </span>
+              <span class="md-header-nav__topic">
+                Week 2
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Deeplearning.ai - Coursera Course Notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Course 1 - Neural Networks and Deep Learning
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Course 1 - Neural Networks and Deep Learning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 2
+      </label>
+    
+    <a href="./" title="Week 2" class="md-nav__link md-nav__link--active">
+      Week 2
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#week-2-neural-networks-basics" title="Week 2: Neural networks basics" class="md-nav__link">
+    Week 2: Neural networks basics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binary-classification" title="Binary Classification" class="md-nav__link">
+    Binary Classification
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logistic-regression-crash-course" title="Logistic Regression (Crash course)" class="md-nav__link">
+    Logistic Regression (Crash course)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-descent" title="Gradient Descent" class="md-nav__link">
+    Gradient Descent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aside-calculus-review" title="(ASIDE) Calculus Review" class="md-nav__link">
+    (ASIDE) Calculus Review
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-function-example" title="Linear Function Example" class="md-nav__link">
+    Linear Function Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-linear-function-example" title="Non-Linear Function Example" class="md-nav__link">
+    Non-Linear Function Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computation-graph" title="Computation Graph" class="md-nav__link">
+    Computation Graph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logistic-regression-gradient-descent" title="Logistic Regression Gradient Descent" class="md-nav__link">
+    Logistic Regression Gradient Descent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorization" title="Vectorization" class="md-nav__link">
+    Vectorization
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-pass" title="Forward pass" class="md-nav__link">
+    Forward pass
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-pass" title="Backward pass" class="md-nav__link">
+    Backward pass
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#broadcasting" title="Broadcasting" class="md-nav__link">
+    Broadcasting
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#addition" title="Addition" class="md-nav__link">
+    Addition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aisde-a-note-on-pythonnumpy-vectors" title="(AISDE) A note on python/numpy vectors" class="md-nav__link">
+    (AISDE) A note on python/numpy vectors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_4/" title="Week 4" class="md-nav__link">
+      Week 4
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Course 2 - Structuring Machine Learning Projects
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Course 2 - Structuring Machine Learning Projects
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../structuring_machine_learning_projects/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../structuring_machine_learning_projects/week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Course 5 - Sequence Models
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Course 5 - Sequence Models
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#week-2-neural-networks-basics" title="Week 2: Neural networks basics" class="md-nav__link">
+    Week 2: Neural networks basics
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binary-classification" title="Binary Classification" class="md-nav__link">
+    Binary Classification
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logistic-regression-crash-course" title="Logistic Regression (Crash course)" class="md-nav__link">
+    Logistic Regression (Crash course)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-descent" title="Gradient Descent" class="md-nav__link">
+    Gradient Descent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aside-calculus-review" title="(ASIDE) Calculus Review" class="md-nav__link">
+    (ASIDE) Calculus Review
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-function-example" title="Linear Function Example" class="md-nav__link">
+    Linear Function Example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-linear-function-example" title="Non-Linear Function Example" class="md-nav__link">
+    Non-Linear Function Example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computation-graph" title="Computation Graph" class="md-nav__link">
+    Computation Graph
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logistic-regression-gradient-descent" title="Logistic Regression Gradient Descent" class="md-nav__link">
+    Logistic Regression Gradient Descent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorization" title="Vectorization" class="md-nav__link">
+    Vectorization
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#forward-pass" title="Forward pass" class="md-nav__link">
+    Forward pass
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backward-pass" title="Backward pass" class="md-nav__link">
+    Backward pass
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#broadcasting" title="Broadcasting" class="md-nav__link">
+    Broadcasting
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#addition" title="Addition" class="md-nav__link">
+    Addition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aisde-a-note-on-pythonnumpy-vectors" title="(AISDE) A note on python/numpy vectors" class="md-nav__link">
+    (AISDE) A note on python/numpy vectors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/edit/master/docs/neural_networks_and_deep_learning/week_2.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Week 2</h1>
+                
+                <h2 id="week-2-neural-networks-basics">Week 2: Neural networks basics</h2>
+<h3 id="binary-classification">Binary Classification</h3>
+<p>First, some notation,</p>
+<ul>
+<li>\(n\) is the number of data attributes, or <em>features</em></li>
+<li>\(m\) is the number of input examples in our dataset (sometimes we write \(m_{train}, m_{test}\) to be more explicit).</li>
+<li>our data is represented as input, output pairs, \((x^{(1)},y^{(1)}), ..., (x^{(m)},y^{(m)})\) where \(x \in \mathbb R^n\) , \(y \in {0,1}\)</li>
+<li>\(X\) is our design matrix, which is simply columns of our input vectors \(x^{(i)}\) , thus it has dimensions of \(n\) x \(m\) .</li>
+<li>\(Y = [y^{(1)}, ..., y^{(m)}]\) , and is thus a \(1\) x \(m\) matrix.</li>
+</ul>
+<blockquote>
+<p>Note, this is different from many other courses which represent the design matrix, \(X\) as rows of transposed input vectors and the output vector \(Y\) as a \(m\) x \(1\) column vector. The above convention turns out to be easier to implement.</p>
+</blockquote>
+<p>When programming neural networks, implementation details become extremely important (<em>e.g</em>. vectorization in place of for loops).</p>
+<p>We are going to introduce many of the key concepts of neural networks using <strong>logistic regression</strong>, as this will make them easier to understand. Logistic regression is an algorithm for <strong>binary classification</strong>. In binary classification, we have an input (<em>e.g</em>. an image) that we want to classifying as belonging to one of two classes.</p>
+<h4 id="logistic-regression-crash-course">Logistic Regression (Crash course)</h4>
+<p>Given an input feature vector \(x\) (perhaps corresponding to an images flattened pixel data), we want \(\hat y\) , the probability of the input examples class, \(\hat y = P(y=1 | x)\)</p>
+<blockquote>
+<p>If \(x\) is a picture, we want the chance that this is a picture of a cat, \(\hat y\) .</p>
+</blockquote>
+<p>The parameters of our model are \(w \in \mathbb R^{n_x}\) , \(b \in \mathbb R\) . Our output is \(\hat y = \sigma(w^Tx + b)\) were \(\sigma\) is the <strong>sigmoid function</strong>.</p>
+<p><img alt="sigmoid" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/640px-Logistic-curve.svg.png" /></p>
+<p>The formula for the sigmoid function is given by: \(\sigma(z) = \frac{1}{1 + e^{-z}}\) where \(z = w^Tx + b\) . We notice a few things:</p>
+<ul>
+<li>If \(z\) is very large, \(e^{-z}\) will be close to \(0\) , and so \(\sigma(z)\) is very close to \(1\) .</li>
+<li>If \(z\) is very small, \(e^{-z}\) will grow very large, and so \(\sigma(z)\) is very close to \(0\) .</li>
+</ul>
+<blockquote>
+<p>It helps to look at the plot \(y = e^{-x}\)</p>
+</blockquote>
+<p>Thus, logistic regression attempts to learn parameters which will classify images based on their probability of belonging to one class or the other. The classification decision is decided by applying the sigmoid function to \(w^Tx + b\) .</p>
+<blockquote>
+<p>Note, with neural networks, it is easier to keep the weights \(w\) and the biases \(b\) separate. Another notation involves adding an extra parameters (\(w_0\) which plays the role of the bias.</p>
+</blockquote>
+<p><strong>Loss function</strong></p>
+<p>Our prediction for a given example \(x^{(i)}\) is \(\hat y^{(i)} = \sigma(w^Tx^{(i)} + b)\) .</p>
+<p>We chose <strong>loss function</strong>, \(\ell(\hat y, y) = -(y \; log\; \hat y + (1-y) \;log(1-\hat y))\).</p>
+<p>We note that:</p>
+<ul>
+<li>If \(y=1\) , then the loss function is \(\ell(\hat y, y) = -log\; \hat y\) . Thus, the loss approaches zero as \(\hat y\) approaches 1.</li>
+<li>If \(y=0\) , then the loss function is \(\ell(\hat y, y) = -log\; (1 -\hat y)\) . Thus, the loss approaches zero as \(\hat y\) approaches 0.</li>
+</ul>
+<blockquote>
+<p>Note, while \(\ell_2\) loss is taught in many courses and seems like an appropriate choice, it is non-convex and so we cannot use gradient descent to optimize it.</p>
+<p>An optional video is given further justifying the use of this loss function. Watch it and add notes here!</p>
+</blockquote>
+<p>Note that the <strong>loss function</strong> measures how well we are doing on a <em>single example</em>. We now define a <strong>cost function</strong>, which captures how well we are doing on the entire dataset:</p>
+<p>\(J(w,b) = \frac{1}{m}\sum^m_{i=1} \ell(\hat y^{(i)}, y^{(i)}) = - \frac{1}{m}\sum^m_{i=1}(y^{(i)} \; log\; \hat y^{(i)} + (1-y^{(i)}) \;log(1-\hat y^{(i)}))\)</p>
+<blockquote>
+<p>Note that this notation is somewhat unique, typically the cost/loss functions are just interchangeable terms. However in this course, we will define the <strong>loss function</strong> as computing the error for a single training example and the <strong>cost function</strong> as the average of the loss functions of the entire training set.</p>
+</blockquote>
+<h4 id="gradient-descent">Gradient Descent</h4>
+<p>We want to find \(w,b\) which minimize \(J(w,b)\) . We can plot the <strong>cost function</strong> with \(w\) and \(b\) as our horizontal axes:</p>
+<p><a href="https://postimg.cc/image/a1suswm2n/"><img alt="cost_surface.png" src="https://s19.postimg.cc/pna6cuy0z/cost_surface.png" /></a></p>
+<blockquote>
+<p>In practice, \(w\) typically has many more dimensions.</p>
+</blockquote>
+<p>Thus, the cost function \(J(w,b)\) can be thought of as a surface, were the height of the surface above the horizontal axes is its value. We want to find the values of our parameters \(w, b\) at the lowest point of this surface, the point at which the average loss is at its minimum.</p>
+<p><strong>Gradient Descent Algorithm</strong></p>
+<p>Initialize \(w,b\) to some random values</p>
+<blockquote>
+<p>because this cost function is convex, it doesn't matter what values we use to initialize, \(0\) is usually chosen for logistic regression.</p>
+</blockquote>
+<p>Repeat</p>
+<ol>
+<li>\(w := w - \alpha \frac{dJ(w)}{dw}\)</li>
+<li>\(b := b - \alpha \frac{dJ(w)}{db}\)</li>
+</ol>
+<blockquote>
+<p>\(\alpha\) is our learning rate, it controls how big a step we take on each iteration. In some notations, we use \(\partial\) to denote the partial derivative of a function with \(2\) or more variables, and \(d\) to denote the derivative of a function of only \(1\) variable.</p>
+</blockquote>
+<p><a href="https://postimg.cc/image/y5jmh99pb/"><img alt="gradient_descent.png" src="https://s19.postimg.cc/a1susyr8j/gradient_descent.png" /></a></p>
+<p>When implementing gradient descent in code, we will use the variable \(dw\) to represent \(\frac{dJ(w, b)}{dw}\) (this size of the step for \(w\) and \(db\) to represent \(\frac{dJ(w, b)}{db}\) (the size of the step for \(b\) .</p>
+<h4 id="aside-calculus-review">(ASIDE) Calculus Review</h4>
+<p><strong>Intuition about derivatives</strong></p>
+<h6 id="linear-function-example">Linear Function Example</h6>
+<p>Take the function \(f(a) = 3a\). Then \(f(a) = 6\) when \(a = 2\) . If we were to give \(a\) a tiny nudge, say to \(a = 2.001\) , what happens to \(f(a)\) ?</p>
+<p><a href="https://postimg.cc/image/4qdy86sa7/"><img alt="derivative.png" src="https://s19.postimg.cc/wdqnmadgz/derivative.png" /></a></p>
+<p>Then \(f(a) = 6.003\) , but more importantly if we inspect the triangle formed by performing the nudge, we can get the slope of the function between \(a\) and \(a + 0.001\) as the \(\frac{height}{width} = 3\) .</p>
+<p>Thus, the <strong>derivative</strong> (or slope) of \(f(a)\) <em>w.r.t</em> \(a\) is \(3\) . We say that \(\frac{df(a)}{da} = 3\) or \(\frac{d}{da}f(a) = 3\)</p>
+<blockquote>
+<p>Add my calculus notes here!
+Link to BlueBrown videos.</p>
+</blockquote>
+<h6 id="non-linear-function-example">Non-Linear Function Example</h6>
+<p>Take the function \(f(a) = a^2\) . Then \(f(a) = 4\) when \(a = 2\) . If we were to give \(a\) a tiny nudge, say to \(a = 2.001\), what happens to \(f(a)\)?</p>
+<p><a href="https://postimg.cc/image/89zvy3pvz/"><img alt="more_derivatives.png" src="https://s19.postimg.cc/535ceh5g3/more_derivatives.png" /></a></p>
+<p>Then \(f(a) = 4.004\), but more importantly if we inspect the triangle formed by performing the nudge, we can get the slope of the function between \(a\) and \(a + 0.001\) as the \(\frac{height}{width} = 4\) .</p>
+<p>In a similar way, we can perform this analysis for any point \(a\) on the plot, and we will see that slope of \(f(a)\) at some point \(a\) is equal to \(2a\) .</p>
+<p>Thus, the <strong>derivative</strong> (or slope) of \(f(a)\) <em>w.r.t</em> \(a\) is \(2a\) . We say that \(\frac{df(a)}{da} = 2a\) or \(\frac{d}{da}f(a) = 2a\) .</p>
+<h4 id="computation-graph">Computation Graph</h4>
+<p>A <strong>computation graph</strong> organizes a series of computations into left-to-right and right-to-left passes. Lets build the intuition behind a computation graph.</p>
+<p>Say we are trying to compute a function \(J(a,b,c) = 3(a + bc)\) . This computation of this function actually has three discrete steps:</p>
+<ul>
+<li>compute \(u = bc\)</li>
+<li>compute \(v = a + u\)</li>
+<li>compute J = \(3v\)</li>
+</ul>
+<p>We can draw this computation in a graph:</p>
+<p><a href="https://postimg.cc/image/r2br1l6tr/"><img alt="computation_graph.png" src="https://s19.postimg.cc/qcsyp86ab/computation_graph.png" /></a></p>
+<p>The computation graph is useful when you have some variable or output variable that you want to optimize (\(J\) in this case, in logistic regression it would be our <em>cost function output</em>). A <em>forward pass</em> through the graph is represented by <em>left-to-right</em> arrows (as drawn above) and a <em>backwards pass</em> is represented by <em>right-to-left</em> arrows.</p>
+<p>A backwards pass is a natural way to represent the computation of our derivatives.  </p>
+<p><strong>Derivatives with a computation graph</strong></p>
+<p>Lets take a look at our computation graph, and see how we can use it to compute the partial derivatives of \(J\) i.e., lets carry out backpropogation on this computation graph by hand.</p>
+<blockquote>
+<p>Informally, you can think of this as asking: "If we were to change the value of \(v\) slightly, how would \(J\) change?"</p>
+</blockquote>
+<p><a href="https://postimg.cc/image/iwtp3evfj/"><img alt="clean_computation_graph.png" src="https://s19.postimg.cc/q01kj10v7/clean_computation_graph.png" /></a></p>
+<p>First, we use our informal way of computing derivatives, and note that a small change to \(v\) results in a change to \(J\) of 3X that small change, and so \(\frac{dJ}{dv} = 3\) . This represents one step in our backward pass, the first step in backpropagation.</p>
+<p>Now let's look at another example. What is \(\frac{dJ}{da}\)?</p>
+<p>We compute the \(\frac{dJ}{da}\) from the second node in the computation graph by noting that a small change to \(a\) results in a change to \(J\) of 3X that small  change, and so \(\frac{dJ}{da} = 3.\) This represents our second step in our backpropagation.</p>
+<p>One way to break this down is to say that by changing \(a\), we change \(v\), the magnitude of this change is \(\frac{dv}{da}\) . Through this change in \(v\), we also change \(J\), and the magnitude of the change is \(\frac{dJ}{dv}\) . To capture this more generally, we use the <strong>chain rule</strong> from calculus, informally:</p>
+<p>\[\text{if } a \rightarrow v \rightarrow J \text{, then } \frac{dJ}{da} = \frac{dJ}{dv} \frac{dv}{da}\]</p>
+<blockquote>
+<p>Here, just take \(\rightarrow\) to mean 'effects'. A formal definition of the chain rule can be found <a href="https://en.wikipedia.org/wiki/Chain_rule">here</a>.</p>
+</blockquote>
+<p>The amount \(J\) changes when you when you nudge \(a\) is the product of the amount \(J\) changes when you nudge \(v\) multiplied by the amount \(v\) changes when you nudge \(a\) .</p>
+<blockquote>
+<p><strong>Implementation note</strong>: When writing code to implement backpropagation, there is typically a single output variable you want to optimize, \(dvar\), (the value of the cost function). We will follow to notation of calling this variable \(dvar\) .</p>
+</blockquote>
+<p>If we continue performing backpropagation steps, we can determine the individual contribution a change to the input variables has on the output variable. For example,</p>
+<p>\[\frac{dJ}{db} = \frac{dJ}{du} \frac{du}{db} = (3)(2) = 6\]</p>
+<p>The key take away from this video is that when computing derivatives to determine the contribution of input variables to change in an output variable, the most efficient way to do so is through a right to left pass through a computation graph. In particular, we'll first compute the derivative with respect to the output of the left-most node in a backward pass, which becomes useful for computing the derivative with respect to the next node and so forth. The <strong>chain rule</strong> makes the computation of these derivatives tractable.</p>
+<h4 id="logistic-regression-gradient-descent">Logistic Regression Gradient Descent</h4>
+<p>Logistic regression recap:</p>
+<p>\[z = w^Tx + b\]
+\[\hat y = a = \sigma(z)\]
+\[\ell(a,y) = -(ylog(a) + (1-y)log(1-a))\]</p>
+<blockquote>
+<p>\(\ell\) is our loss for a single example, and \(\hat y\) are our predictions.</p>
+</blockquote>
+<p>For this example, lets assume we have only two features: \(x_1\), \(x_2\) . Our computation graph is thus:</p>
+<p><a href="https://postimg.cc/image/le5gaphwv/"><img alt="computation_graph_logression.png" src="https://s19.postimg.cc/jz3vlzgtv/computation_graph_logression.png" /></a></p>
+<p>Our goal is to modify the parameters to minimize the loss \(\ell\) . This translates to computing derivatives \(w.r.t\) the loss function. Following our generic example above, we can compute all the relevant derivatives using the chain rule. The first two passes are computed by the following derivatives:</p>
+<ol>
+<li>\(\frac{d\ell(a,y)}{da} = - \frac{y}{a} + \frac{1-y}{1-a}\)</li>
+<li>\(\frac{d\ell(a,y)}{dz} = \frac{d\ell(a,y)}{da} \cdot \frac{da}{dz} =  a - y\)</li>
+</ol>
+<blockquote>
+<p>Note: You should prove these to yourself.</p>
+<p><strong>Implementation note</strong>, we use \(dx\) as a shorthand for \(\frac{d\ell(\hat y,y)}{dx}\) for some variable \(x\) when implementing this in code.</p>
+</blockquote>
+<p>Recall that the final step is to determine the derivatives of the loss function \(w.r.t\) to the parameters.</p>
+<ul>
+<li>\(\frac{d\ell(a,y)}{dw_1} = x_1 \cdot \frac{d\ell(a,y)}{dz}\)</li>
+<li>\(\frac{d\ell(a,y)}{dw_2} = x_2 \cdot \frac{d\ell(a,y)}{dz}\)</li>
+</ul>
+<p>One step of gradient descent would perform the updates:</p>
+<ul>
+<li>\(w_1 := w_1 - \alpha \frac{d\ell(a,y)}{dw_1}\)</li>
+<li>\(w_2 := w_2 - \alpha \frac{d\ell(a,y)}{dw_2}\)</li>
+<li>\(b := b - \alpha \frac{d\ell(a,y)}{db}\)</li>
+</ul>
+<p><strong>Extending to \(m\) examples</strong></p>
+<p>Lets first remind ourself of the logistic regression <strong>cost</strong> function:</p>
+<p>\[J(w,b) = \frac{1}{m}\sum^m_{i=1} \ell(\hat y^{(i)}, y^{(i)}) = - \frac{1}{m}\sum^m_{i=1}(y^{(i)} \; log\; \hat y^{(i)} + (1-y^{(i)}) \;log(1-\hat y^{(i)}))\]</p>
+<p>Where,</p>
+<p>\[\hat y = a = \sigma(z) = \sigma(w^Tx^{(i)} + b)\]</p>
+<p>In the example above for a single training example, we showed that to perform a gradient step we first need to compute the derivatives \(\frac{d\ell(a,y)}{dw_1}, \frac{d\ell(a,y)}{dw_2}, \frac{d\ell(a,y)}{db}\) . For \(m\) examples, these are computed as follows:</p>
+<ul>
+<li>\(\frac{\partial\ell(a,y)}{\partial dw_1} = \frac{1}{m}\sum^m_{i=1} \frac{\partial}{\partial w_1} \ell(\hat y^{(i)}, y^{(i)})\)</li>
+<li>\(\frac{\partial\ell(a,y)}{\partial w_2} = \frac{1}{m}\sum^m_{i=1} \frac{\partial}{\partial w_2} \ell(\hat y^{(i)}, y^{(i)})\)</li>
+<li>\(\frac{\partial\ell(a,y)}{\partial b} = \frac{1}{m}\sum^m_{i=1} \frac{\partial}{\partial b} \ell(\hat y^{(i)}, y^{(i)})\)</li>
+</ul>
+<p>We have already shown on the previous slide how to compute \(\frac{\partial}{\partial w_1} \ell(\hat y^{(i)}, y^{(i)}), \frac{\partial}{\partial w_2} \ell(\hat y^{(i)}, y^{(i)})\) and \(\frac{\partial}{\partial b} \ell(\hat y^{(i)}, y^{(i)})\) . Gradient descent for \(m\) examples essentially involves computing these derivatives for each input example \(x^{(i)}\) and averaging the result before performing the gradient step. Concretely, the pseudo-code for gradient descent on \(m\) examples of \(n=2\) features follows:</p>
+<p><strong>ALGO</strong></p>
+<p>Initialize \(J=0; dw_1 = 0; dw_2 = 0; db = 0\)</p>
+<p>for \(i=1\) to \(m\):</p>
+<ul>
+<li>\(z^{(i)} = w^Tx^{(i)}\)</li>
+<li>\(a^{(i)} = \sigma(z^{(i)})\)</li>
+<li>\(J \text{+= } -[y^{(i)}log(a^{(i)}) + (1-y^{(i)})log(1-a^{(i)})]\)</li>
+<li>\(dz^{(i)} = a^{(i)} - y^{(i)}\)</li>
+<li>for \(j = 1\) to \(n\)</li>
+<li>\(dw_j \text{+= } x_j^{(i)}dz^{(i)}\)</li>
+<li>\(dw_j \text{+= } x_j^{(i)}dz^{(i)}\)</li>
+<li>\(db \text{+= } dz^{(i)}\)</li>
+</ul>
+<p>\(J = J/m;\; dw_1 \text{=/ } m;\; dw_2 \text{=/ }  m;\;b \text{=/ }  m\)</p>
+<p>In plain english, for each training example, we use the sigmoid function to compute its activation, accumulate a loss for that example based on the current parameters, compute the derivative of the current cost function \(w.r.t\) the activation function, and update our parameters and bias. Finally we take the average of our cost function and our gradients.</p>
+<p>Finally, we use our derivatives to update our parameters,</p>
+<ul>
+<li>\(w_1 := w_1 - \alpha \cdot {dw_1}\)</li>
+<li>\(w_2 := w_2 - \alpha \cdot {dw_2}\)</li>
+<li>\(b := b - \alpha \cdot {db}\)</li>
+</ul>
+<p>This constitutes <strong>one step</strong> of gradient descent.</p>
+<p>The main problem with this implementation is the nested for loops. For deep learning, which requires very large training sets, <em>explicit for loops</em> will make our implementation very slow. Vectorizing this algorithm will greatly speed up our algorithms running time.</p>
+<h4 id="vectorization">Vectorization</h4>
+<p>Vectorization is basically the art of getting rid of explicit for loops. In practice, deep learning requires large datasets (at least to obtain high performance). Explicit for loops lead to computational overhead that significantly slows down the training process.</p>
+<p>The main reason vectorization makes such a dramatic difference is that it allows us to take advantage of <strong>parallelization</strong>. The rule of thumb to remember is: <em>whenever possible, avoid explicit for-loops</em>.</p>
+<blockquote>
+<p>In a toy example were \(n_x\) is \(10^6\), and \(w, x^{(i)}\) are random values, vectorization leads to an approximately 300X speed up to compute all \(z^{(i)}\)</p>
+</blockquote>
+<p>Lets take a look at some explicit examples:</p>
+<ul>
+<li>Multiply a <strong>matrix</strong> by a <strong>vector</strong>, e.g., \(u = Av\) .</li>
+</ul>
+<p>So, \(u_i = \sum_jA_{ij}v_j\) . Instead of using for nested loops, use: <code>u = np.dot(A,v)</code></p>
+<ul>
+<li>Apply exponential operation on every element of a matrix/vector \(v\).</li>
+</ul>
+<p>Again, use libraries such as <code>numpy</code> to perform this with a single operation, e.g., <code>u = np.exp(v)</code></p>
+<blockquote>
+<p>This example applies to almost all operations, <code>np.log(v)</code>, <code>np.abs(v)</code>, <code>np.max(v)</code>, etc...</p>
+</blockquote>
+<p><strong>Example: Vectorization of Logistic Regression</strong></p>
+<h6 id="forward-pass">Forward pass</h6>
+<p>Lets first review the forward pass of logistic regression for \(m\) examples:</p>
+<p>\(z^{(1)} = w^Tx^{(1)} + b\);  \(a^{(1)} = \sigma(z^{1})\), \(...\) , \(z^{(m)} = w^Tx^{(m)} + b\);  \(a^{(m)} = \sigma(z^{m})\)</p>
+<p>In logistic regression, we need to compute \(z^{(i)} = w^Tx^{(i)}+b\) for each input example \(x^{(i)}\) . Instead of using a for loop over each \(i\) in range \((m)\) we can use a vectorized implementation to compute z directly.</p>
+<p>Our vectors are of the dimensions: \(w \in \mathbb R^{n_x}\), \(b \in \mathbb R^{n_x}\), \(x \in \mathbb R^{n_x}\).</p>
+<p>Our parameter vector, bias vector, and design matrix are,</p>
+<p>\(w = \begin{bmatrix}w_1 \\ ... \\ w_{n_x}\end{bmatrix}\), \(b = \begin{bmatrix}b_1 \\ ... \\ b_{n_x}\end{bmatrix}\), \(X = \begin{bmatrix}x^{(1)}<em>1 &amp; ... &amp; x^{(m)} \\ ... \\ x^{(1)}</em>{n_x}\end{bmatrix}\)</p>
+<p>So, \(w^T \cdot X + b = w^Tx^{(i)} + b\) (for all \(i\)). Thus we can compute all \(w^Tx^{(i)}\) in one operation if we vectorize!</p>
+<p>In numpy code:</p>
+<p><code>Z = np.dot(w.T, X) + b</code></p>
+<blockquote>
+<p>Note, \(+ b\) will perform element-wise addition in python, and is an example of <strong>broadcasting</strong>.</p>
+</blockquote>
+<p>Where \(Z\) is a row vector \([z^{(1)}, ..., z^{(m)}]\) .</p>
+<h6 id="backward-pass">Backward pass</h6>
+<p>Recall, for the gradient computation, we computed the following derivatives:</p>
+<p>\(dz^{(1)} = a^{(1)} - y^{(1)} ... dz^{(m)} = a^{(m)} - y^{(m)}\)</p>
+<p>We define a row vector,</p>
+<p>\(dZ = [dz^{(1)}, ..., dz^{(m)}]\) .</p>
+<p>From which it is trivial to see that,</p>
+<p>\(dZ = A - Y\), where \(A = [a^{(1)}, ..., a^{(m)}]\) and \(Y = [y^{(1)}, ..., y^{(m)}]\) .</p>
+<blockquote>
+<p>This is an element-wise subtraction, \(a^{(1)} - y^{(1)}, ..., a^{(m)} - y^{(m)}\) that produces a \(m\) length row vector.</p>
+</blockquote>
+<p>We can then compute our <em>average</em> derivatives of the cost function \(w.r.t\) to the parameters in two lines of codes,</p>
+<p><code>db = 1/m * np.sum(dZ)</code></p>
+<p><code>dw = 1/m * np.dot(X, dZ.T)</code></p>
+<p>Finally, we compare our non-vectorized approach to linear regression vs our vectorized approaches</p>
+<table>
+<thead>
+<tr>
+<th align="center">Non-vectorized Approach</th>
+<th align="center">Vectorized Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://postimg.cc/image/shdbqdksf/"><img alt="gd_no_vectorization.png" src="https://s19.postimg.cc/w0z9g6nib/gd_no_vectorization.png" /></a></td>
+<td align="center"><a href="https://postimg.cc/image/u96al9wfj/"><img alt="gd_vectorization.png" src="https://s19.postimg.cc/pna6cxawj/gd_vectorization.png" /></a></td>
+</tr>
+<tr>
+<td align="center">Two for loops, one over the training examples \(x^{(i)}\) and a second over the features \(x^{(i)}_j\) . We have omitted the outermost loop that iterates over gradient steps.</td>
+<td align="center">Note that, we still need a single for loop to iterate over each gradient step (regardless if we are using stochastic or mini-batch gradient descent) even in our vectorized approach.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="broadcasting">Broadcasting</h4>
+<p>Lets motivate the usefulness of <strong>broadcasting</strong> with an example. Lets say you wanted to get the percent of total calories from carbs, proteins, and fats for multiple foods.</p>
+<p><a href="https://postimg.cc/image/le5gapa73/"><img alt="food_matrix.png" src="https://s19.postimg.cc/q01kj1vqb/food_matrix.png" /></a></p>
+<p><em>Can we do this without an explicit for loop?</em></p>
+<p>Set this matrix to a <code>(3,4)</code> numpy matrix <code>A</code>.</p>
+<div class="highlight"><pre><span></span>import numy as np
+
+# some numpy array of shape (3,4)
+A = np.array([
+  [...],
+  [...],
+  [...]
+  ])
+
+cal = A.sum(axis=0) # get column-wise sums
+percentage = 100 * A / cal.reshape(1,4) # get percentage of total calories
+</pre></div>
+
+<p>So, we took a <code>(3,4)</code> matrix <code>A</code> and divided it by a <code>(1,4)</code> matrix <code>cal</code>. This is an example of broadcasting.</p>
+<p>The general principle of broadcast can be summed up as follows:</p>
+<ul>
+<li>\((m,n) \text{ [+ OR - OR * OR /] } (1, n) \Rightarrow (m,n) \text{ [+ OR - OR * OR /] } (m \text{ copies}, n)\)</li>
+<li>\((m,n) \text{ [+ OR - OR * OR /] } (m, 1) \Rightarrow (m,n) \text{ [+ OR - OR * OR /] } (m, n \text{ copies})\)</li>
+</ul>
+<p>Where \((m, n), (1, n)\) are matrices, and the operations are performed <em>element-wise</em> after broadcasting.</p>
+<p><strong>More broadcasting examples</strong></p>
+<h6 id="addition">Addition</h6>
+<p><em>Example 1</em>: \(\begin{bmatrix}1 \\ 2 \\ 3 \\ 4\end{bmatrix} + 100 == \begin{bmatrix}1 \\ 2 \\ 3 \\ 4\end{bmatrix} + \begin{bmatrix}100 \\ 100 \\ 100 \\ 100\end{bmatrix} = \begin{bmatrix}101 \\ 102 \\ 103 \\ 104\end{bmatrix}\)</p>
+<p><em>Example 2</em>: \(\begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix} + \begin{bmatrix}100 &amp; 200 &amp; 300\end{bmatrix} == \begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix} + \begin{bmatrix}100 &amp; 200 &amp; 300 \\ 100 &amp; 200 &amp; 300\end{bmatrix} = \begin{bmatrix}101 &amp; 202 &amp; 303 \\ 104 &amp; 205 &amp; 306\end{bmatrix}\)</p>
+<p><em>Example 3</em>: \(\begin{bmatrix}1 &amp; 2 &amp; 3  \\ 4 &amp; 5 &amp; 6\end{bmatrix} + \begin{bmatrix}100 \\ 200\end{bmatrix} == \begin{bmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6\end{bmatrix} + \begin{bmatrix}100 &amp; 100 &amp; 100 \\ 200 &amp; 200 &amp; 200\end{bmatrix} = \begin{bmatrix}101 &amp; 202 &amp; 303 \\ 104 &amp; 205 &amp; 206\end{bmatrix}\)</p>
+<h4 id="aisde-a-note-on-pythonnumpy-vectors">(AISDE) A note on python/numpy vectors</h4>
+<p>The great flexibility of the python language paired with the numpy library is both a strength and a weakness. It is a strength because of the great expressivity of the pair, but with this comes the opportunity to intro strange, hard-to-catch bugs if you aren't familiar with the intricacies of numpy and in particular broadcasting.</p>
+<p>Here are a couple of tips and tricks to minimize the number of these bugs:</p>
+<ul>
+<li>Creating a random array: <code>a = np.random.randn(5)</code></li>
+<li>Arrays of shape <code>(x, )</code> are known as <strong>rank 1 array</strong>. They have some nonintuitive properties and don't consistently behave like either a column vector or a row vector. Let <code>b</code> be a rank 1 array.</li>
+<li><code>b.T == b</code></li>
+<li><code>np.dot(b, b.T)</code> is a real number, <em>not the outer product as you might expect</em>.</li>
+<li>Thus, in this class at least, using rank 1 tensors with an unspecified dimension length is not generally advised. <em>Always specify both dimensions</em>.</li>
+<li>If you know the size that your numpy arrays should be in advance, its often useful to throw in a python assertion to help catch strange bugs before they happen:</li>
+<li><code>assert(a.shape == (5,1))</code></li>
+<li>Additionally, the reshape function runs in linear time and is thus very cheap to call, use it freely!</li>
+<li><code>a = a.reshape((5,1))</code></li>
+</ul>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Week 1
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../week_3/" title="Week 3" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Week 3
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

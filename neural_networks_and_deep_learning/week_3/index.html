@@ -1,0 +1,1098 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/neural_networks_and_deep_learning/week_3/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Week 3 - Deeplearning.ai - Coursera Course Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#week-3-shallow-neural-networks" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Deeplearning.ai - Coursera Course Notes
+              </span>
+              <span class="md-header-nav__topic">
+                Week 3
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Deeplearning.ai - Coursera Course Notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Course 1 - Neural Networks and Deep Learning
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Course 1 - Neural Networks and Deep Learning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 3
+      </label>
+    
+    <a href="./" title="Week 3" class="md-nav__link md-nav__link--active">
+      Week 3
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#week-3-shallow-neural-networks" title="Week 3: Shallow neural networks" class="md-nav__link">
+    Week 3: Shallow neural networks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#neural-network-overview" title="Neural network overview" class="md-nav__link">
+    Neural network overview
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#neural-network-representation" title="Neural network Representation" class="md-nav__link">
+    Neural network Representation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computing-a-neural-networks-output" title="Computing a Neural Networks Output" class="md-nav__link">
+    Computing a Neural Networks Output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorizing-across-multiple-examples" title="Vectorizing across multiple examples" class="md-nav__link">
+    Vectorizing across multiple examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activation-functions" title="Activation Functions" class="md-nav__link">
+    Activation Functions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tanh" title="Tanh" class="md-nav__link">
+    Tanh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relu" title="ReLu" class="md-nav__link">
+    ReLu
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exceptions" title="Exceptions" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derivatives-of-activation-functions" title="Derivatives of activation functions" class="md-nav__link">
+    Derivatives of activation functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-descent-for-neural-networks" title="Gradient descent for Neural Networks" class="md-nav__link">
+    Gradient descent for Neural Networks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formulas-for-computing-derivatives" title="Formulas for computing derivatives" class="md-nav__link">
+    Formulas for computing derivatives
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random-initialization" title="Random Initialization" class="md-nav__link">
+    Random Initialization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_4/" title="Week 4" class="md-nav__link">
+      Week 4
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Course 2 - Structuring Machine Learning Projects
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Course 2 - Structuring Machine Learning Projects
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../structuring_machine_learning_projects/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../structuring_machine_learning_projects/week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Course 5 - Sequence Models
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Course 5 - Sequence Models
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#week-3-shallow-neural-networks" title="Week 3: Shallow neural networks" class="md-nav__link">
+    Week 3: Shallow neural networks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#neural-network-overview" title="Neural network overview" class="md-nav__link">
+    Neural network overview
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#neural-network-representation" title="Neural network Representation" class="md-nav__link">
+    Neural network Representation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computing-a-neural-networks-output" title="Computing a Neural Networks Output" class="md-nav__link">
+    Computing a Neural Networks Output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vectorizing-across-multiple-examples" title="Vectorizing across multiple examples" class="md-nav__link">
+    Vectorizing across multiple examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#activation-functions" title="Activation Functions" class="md-nav__link">
+    Activation Functions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tanh" title="Tanh" class="md-nav__link">
+    Tanh
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relu" title="ReLu" class="md-nav__link">
+    ReLu
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exceptions" title="Exceptions" class="md-nav__link">
+    Exceptions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derivatives-of-activation-functions" title="Derivatives of activation functions" class="md-nav__link">
+    Derivatives of activation functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradient-descent-for-neural-networks" title="Gradient descent for Neural Networks" class="md-nav__link">
+    Gradient descent for Neural Networks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formulas-for-computing-derivatives" title="Formulas for computing derivatives" class="md-nav__link">
+    Formulas for computing derivatives
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#random-initialization" title="Random Initialization" class="md-nav__link">
+    Random Initialization
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/edit/master/docs/neural_networks_and_deep_learning/week_3.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>Week 3</h1>
+                
+                <h2 id="week-3-shallow-neural-networks">Week 3: Shallow neural networks</h2>
+<h3 id="neural-network-overview">Neural network overview</h3>
+<p>Up until this point, we have used logistic regression as a stand-in for neural networks. The "network" we have been describing looked like:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Network</th>
+<th align="center">Computation Graph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://postimg.cc/image/jmchfu8un/"><img alt="lr_overview.png" src="https://s19.postimg.cc/3o3rppemr/lr_overview.png" /></a></td>
+<td align="center"><a href="https://postimg.cc/image/cj4m09dpr/"><img alt="lr_overview_graph.png" src="https://s19.postimg.cc/mgfmtblbn/lr_overview_graph.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>\(a\) and  \(\hat y\) are used interchangeably</p>
+</blockquote>
+<p>A neural network looks something like this:</p>
+<table>
+<thead>
+<tr>
+<th align="center">Network</th>
+<th align="center">Computation Graph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://postimg.cc/image/c6d7u4dgf/"><img alt="nn_overview.png" src="https://s19.postimg.cc/77ppfl9nn/nn_overview.png" /></a></td>
+<td align="center"><a href="https://postimg.cc/image/535cehkvj/"><img alt="nn_overview_graph.png" src="https://s19.postimg.cc/mt70ziygj/nn_overview_graph.png" /></a></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>We typically don't distinguish between \(z\) and \(a\) when talking about neural networks, one neuron = one activation = one \(a\) like calculation.</p>
+</blockquote>
+<p>We will introduce the notation of superscripting values with \(^{[l]}\), where \(l\) refers to the layer of the neural network that we are talking about.</p>
+<blockquote>
+<p>Not to be confused with \(^{(i)}\) which we use to refer to a single input example \(i\) .</p>
+</blockquote>
+<p><em>The key intuition is that neural networks stack activations of inputs multiplied by their weights</em>.</p>
+<p>Similar to the 'backwards' step that we discussed for logistic regression, we will explore the backwards steps that makes learning in a neural network possible.</p>
+<h4 id="neural-network-representation">Neural network Representation</h4>
+<p>This is the canonical representation of a neural network</p>
+<p><a href="https://postimg.cc/image/4qdy8babj/"><img alt="neural_network_basics.png" src="https://s19.postimg.cc/vbgh3vcoz/neural_network_basics.png" /></a></p>
+<p>On the left, we have the <strong>input features</strong> stacked vertically. This constitutes our <strong>input layer</strong>. The final layer, is called the <strong>output layer</strong> and it is responsible for generating the predicted value \(\hat y\) . Any layer in between these two layers is known as a <strong>hidden layer</strong>. This name derives from the fact that the <em>true values</em> of these hidden units is not observed in the training set.</p>
+<blockquote>
+<p>The hidden layers and output layers have parameters associated with them. These parameters are denoted \(W^{[l]}\) and \(b^{[l]}\) for layer \(l\) .</p>
+</blockquote>
+<p>Previously, we were referring to our input examples as \(x^{(i)}\) and organizing them in a design matrix \(X\) . With neural networks, we will introduce the convention of denoting output values of a layer \(l\), as a column vector \(a^{[l]}\), where \(a\) stands for <em>activation</em>. You can also think of these as the values a layer \(l\) passes on to the next layer.</p>
+<p>Another note: the network shown above is a <em>2-layer</em> neural network. We typically do not count the input layer. In light of this, we usually denote the input layer as \(l=0\).</p>
+<h4 id="computing-a-neural-networks-output">Computing a Neural Networks Output</h4>
+<p>We will use the example of a single hidden layer neural network to demonstrate the forward propagation of inputs through the network leading to the networks output.</p>
+<p>We can think of each unit in the neural network as performing two steps, the <em>multiplication of inputs by weights and the addition of a bias</em>, and the <em>activation of the resulting value</em></p>
+<p><a href="https://postimg.cc/image/i8kuk2z67/"><img alt="unit_breakdown.png" src="https://s19.postimg.cc/qquaof5oz/unit_breakdown.png" /></a></p>
+<blockquote>
+<p>Recall, that we will use a superscript, \(^{[l]}\) to denote values belonging to the \(l-th\) layer.</p>
+</blockquote>
+<p>So, the \(j^{th}\) node of the \(l^{th}\) layer performs the computation</p>
+<p>\[ a_j^{[l]} = \sigma(w_j^{[l]^T}a^{[l-1]} + b_j^{[l]}) \]</p>
+<blockquote>
+<p>Where \(a^{[l-1]}\) is the activation values from the precious layer.</p>
+</blockquote>
+<p>for some input \(x\). With this notation, we can draw our neural network as follows:</p>
+<p><a href="https://postimg.cc/image/f0gd7lxn3/"><img alt="new_notation_nn.png" src="https://s19.postimg.cc/6i6x39r4j/new_notation_nn.png" /></a></p>
+<p>In order to easily vectorize the computations we need to perform, we designate a matrix \(W^{[l]}\) for each layer \(l\), which has dimensions <em>(number of units in current layer X number of units in previous layer)</em></p>
+<p>We can vectorize the computation of \(z^{[l]}\) as follows:</p>
+<p><a href="https://postimg.cc/image/66pgpz08f/"><img alt="vectorized_z_nn.png" src="https://s19.postimg.cc/n78cynd9v/vectorized_z_nn.png" /></a></p>
+<p>And the computation of \(a^{[l]}\) just becomes the element-wise application of the sigmoid function:</p>
+<p><a href="https://postimg.cc/image/n78cymaov/"><img alt="vectorized_a_nn.png" src="https://s19.postimg.cc/7yifkuh0j/vectorized_a_nn.png" /></a></p>
+<p>We can put it all together for our two layer neural network, and outline all the computations using our new notation:</p>
+<p><a href="https://postimg.cc/image/h50q8noz3/"><img alt="putting_it_all_together_new_notation.png" src="https://s19.postimg.cc/5so4qvgab/putting_it_all_together_new_notation.png" /></a></p>
+<h4 id="vectorizing-across-multiple-examples">Vectorizing across multiple examples</h4>
+<p>In the last video, we saw how to compute the prediction for a neural network with a single input example. In this video, we introduce a vectorized approach to compute predictions for many input examples.  </p>
+<p>We have seen how to take a single input example \(x\) and compute \(a^{[2]} = \hat y\) for a 2-layered neural network. If we have \(m\) training examples, we can used a vectorized approach to compute all \(m\) predictions.</p>
+<p>First, lets introduce a new notation. The activation values of layer \(l\) for input example \(i\) is:</p>
+<p>\[ a^{<a href="i">l</a>} \]</p>
+<p>The \(m\) predictions our 2-layered are therefore computed in the following way:</p>
+<p><a href="https://postimg.cc/image/i7awr5acf/"><img alt="m_examples_nn.png" src="https://s19.postimg.cc/mt70zhvvn/m_examples_nn.png" /></a></p>
+<p>Recall that \(X\) is a \((n_x, m)\) design matrix, where each column is a single input example and \(W^{[l]}\) is a matrix where each row is the transpose of the parameter column vector for layer \(l\).</p>
+<p>Thus, we can now compute the activation of a layer in the neural network for all training examples:</p>
+<p>\[Z^{[l]} = W^{[l]}X + b^{[l]}\]
+\[A^{[l]} = sign(Z^{[l]})\]</p>
+<p>As an example, the result of a matrix multiplication of \(W^{[1]}\) by \(X\) is a matrix with dimensions \((j, m)\) where \(j\) is the number of units in layer \(1\) and \(m\) is the number of input examples</p>
+<p><a href="https://postimg.cc/image/un7mkfljj/"><img alt="WX_vector.jpg" src="https://s19.postimg.cc/6w892blcj/WX_vector.jpg" /></a></p>
+<p>\(A^{[l]}\) is therefore a matrix of dimensions (size of layer \(l\) X \(m\)). The top-leftmost value is the activation for the first unit in the layer \(l\) for the first input example \(i\), and the bottom-rightmost value is the activation for the last unit in the layer \(l\) for the last input example \(m\) .</p>
+<p><a href="https://postimg.cc/image/o9ijh617z/"><img alt="vectorized_activations.png" src="https://s19.postimg.cc/dmoqbqt2r/vectorized_activations.png" /></a></p>
+<h3 id="activation-functions">Activation Functions</h3>
+<p>So far, we have been using the <strong>sigmoid</strong> activation function</p>
+<p>\[\sigma(z) = \frac{1}{1 + e^{-z}}\]</p>
+<p>It turns out there are much better options.</p>
+<h4 id="tanh">Tanh</h4>
+<p>The <strong>hyperbolic tangent function</strong> is a non-linear activation function that almost always works better than the sigmoid function.</p>
+<p>\[tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}\]</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Sinh_cosh_tanh.svg/640px-Sinh_cosh_tanh.svg.png?1514655794955.png" /></p>
+<blockquote>
+<p>The tanh function is really just a shift of the sigmoid function so that it crosses through the origin.</p>
+</blockquote>
+<p>The tanh activation usually works better than sigmoid activation function for hidden units because the mean of its output is closer to zero, and so it centers the data better for the next layer.</p>
+<p>The single exception of sigmoid outperforming tanh is when its used in the ouput layer. In this case, it can be more desirable to scale our outputs from \(0\) to \(1\) (particularly in classification, when we want to output the probability that something belongs to a certain class). Indeed, we often mix activation functions in neural networks, and denote them:</p>
+<p>\[g^{[p]}(z)\]</p>
+<p>Where \(p\) is the \(p^{th}\) activation function.</p>
+<p>If \(z\) is either very large, or very small, the derivative of both the tanh and sigmoid functions becomes very small, and this can slow down learning.</p>
+<h4 id="relu">ReLu</h4>
+<p>The <strong>rectified linear unit</strong> activation function solves the disappearing gradient problem faced by tanh and sigmoid activation functions. In practice, it also leads to faster learning.</p>
+<p>\[ReLu(z) = max(0, z)\]</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Rectifier_and_softplus_functions.svg/640px-Rectifier_and_softplus_functions.svg.png?1528644452536" /></p>
+<blockquote>
+<p>Note: the derivative at exactly 0 is not well-defined. In practice, we can simply set it to 0 or 1 (it matters little, due to the unlikeliness of a floating point number to ever be \(0.0000...\) exactly).</p>
+</blockquote>
+<p>One disadvantage of ReLu is that the derivative is equal to \(0\) when \(z\) is negative. <strong>Leaky ReLu</strong>'s aim to solve this problem with a slight negative slope for values of \(z&lt;0\) .</p>
+<p>\[ReLu(z) = max(0.01 * z, z)\]</p>
+<p><img alt="" src="http://lamda.nju.edu.cn/weixs/project/CNNTricks/imgs/leaky.png" /></p>
+<blockquote>
+<p>Image sourced from <a href="http://lamda.nju.edu.cn/weixs/project/CNNTricks/imgs/leaky.png">here</a>.</p>
+</blockquote>
+<p>Sometimes, the \(0.01\) value is treated as an adaptive parameter of the learning algorithm. Leaky ReLu's solve a more general problem of "<a href="https://www.quora.com/What-is-the-definition-of-a-dead-neuron-in-Artificial-Neural-Networks?share=1">dead neurons</a>". However, it is not used as much in practice.</p>
+<p><strong>Rules of thumb for choosing activations functions</strong></p>
+<ul>
+<li><em>If your output is a 0/1 value</em>, i.e., you are performing binary classification, the sigmoid activation is a natural choice for the output layer.</li>
+<li><em>For all other units</em>, ReLu's is increasingly the default choice of activation function.</li>
+</ul>
+<p><strong>Why do you need non-linear activation functions?</strong></p>
+<p>We could imagine using some <strong>linear</strong> activation function, \(g(z) = z\) in place of the <strong>non-linear</strong> activation functions we have been using so far. Why is this a bad idea? Lets illustrate out explanation using our simple neural networks</p>
+<p><a href="https://postimg.cc/image/4qdy8babj/"><img alt="neural_network_basics.png" src="https://s19.postimg.cc/vbgh3vcoz/neural_network_basics.png" /></a></p>
+<p>For this linear activation function, the activations of our simple network become:</p>
+<p>\[z^{[1]} = W^{[1]}x + b^{[1]}\]
+\[a^{[1]} = z^{[1]}\]
+\[z^{[2]} = W^{[2]}x + b^{[2]}\]
+\[a^{[2]} = z^{[2]}\]</p>
+<p>From which we can show that,</p>
+<p>\[a^{[2]} = (W^{[2]}W^{[1]})x + (W^{[2]}b^{[1]} + b^{[2]})\]
+\[a^{[2]} = W'x + b' \text{, where } W' = W^{[2]}W^{[1]} \text{ and } b' = W^{[2]}b^{[1]} + b^{[2]}\]</p>
+<p>Therefore, in the case of a <em>linear activation function</em>, the neural network is outputting a <em>linear function of the inputs</em>, no matter how many hidden layers!</p>
+<h6 id="exceptions">Exceptions</h6>
+<p>There are (maybe) two cases in which you may actually want to use a linear activation function.</p>
+<ol>
+<li>The output layer of a network used to perform regression, where we want \(\hat y\) to be a real-valued number, \(\hat y \in \mathbb R\)</li>
+<li>Extremely specific cases pertaining to compression.</li>
+</ol>
+<h4 id="derivatives-of-activation-functions">Derivatives of activation functions</h4>
+<p>When performing back-propogation on a network, we need to compute the derivatives of the activation functions. Lets take a look at our activation functions and their derivatives</p>
+<p><strong>Sigmoid</strong></p>
+<p><a href="https://postimg.cc/image/535ceiv67/"><img alt="sigmoid_deriv.png" src="https://s19.postimg.cc/dy66p1jyr/sigmoid_deriv.png" /></a></p>
+<p>The deriviative of \(g(z)\), \(g(z)'\) is:</p>
+<p>\[\frac{d}{dz}g(z) = \frac{1}{1 + e^{-z}}(1 - \frac{1}{1 + e^{-z}})= g(z)(1-g(z)) = a(1-a)\]</p>
+<blockquote>
+<p>We can sanity check this by inputting very large, or very small values of \(z\) into our derivative formula and inspecting the size of the outputs.</p>
+</blockquote>
+<p>Notice that if we have already computed the value of \(a\), we can very cheaply compute the value of \(g(z)'\) .</p>
+<p><strong>Tanh</strong></p>
+<p><a href="https://postimg.cc/image/i7awr82nj/"><img alt="tanh_deriv.png" src="https://s19.postimg.cc/g2qjq510z/tanh_deriv.png" /></a></p>
+<p>The deriviative of \(g(z)\), \(g(z)'\) is:</p>
+<p>\[\frac{d}{dz}g(z) = 1 - (tanh(z))^z\]</p>
+<blockquote>
+<p>Again, we can sanity check this inspecting that the outputs for different values of \(z\) match our intuition about the activation function.</p>
+</blockquote>
+<p><strong>ReLu</strong></p>
+<p><a href="https://postimg.cc/image/iwtp3jswf/"><img alt="relu_deriv.png" src="https://s19.postimg.cc/i7awr6scz/relu_deriv.png" /></a></p>
+<p>The derivative of \(g(z)\), \(g(z)'\) is:</p>
+<p>\[\frac{d}{dz}g(z) = 0 \text{ if } z &lt; 0 ; 1 \text{ if } z &gt; 0; \text{ undefined if } z = 0\]</p>
+<blockquote>
+<p>If \(z = 0\), we typically default to setting \(g(z)\) to either \(0\) or \(1\) . In practice this matters little.</p>
+</blockquote>
+<h3 id="gradient-descent-for-neural-networks">Gradient descent for Neural Networks</h3>
+<p>Lets implement gradient descent for our simple 2-layer neural network.</p>
+<p>Recall, our parameters are: \(W^{[1]}, b^{[1]}, W^{[2]}, b^{[2]}\) . We have number of features, \(n_x = n^{[0]}\), number of hidden units \(n^{[1]}\), and \(n^{[2]}\) output units.</p>
+<p>Thus our dimensions:</p>
+<ul>
+<li>\(W^{[1]}\) : (\(n^{[1]}, n^{[0]}\))</li>
+<li>\(b^{[1]}\) : (\(n^{[1]}, 1\))</li>
+<li>\(W^{[2]}\) : (\(n^{[2]}, n^{[1]}\))</li>
+<li>\(b^{[2]}\) : (\(n^{[2]}, 1\))</li>
+</ul>
+<p>Our cost function is: \(J(W^{[1]}, b^{[1]}, W^{[2]}, b^{[2]}) = \frac{1}{m}\sum_{i=1}^m \ell(\hat y, y)\)</p>
+<blockquote>
+<p>We are assuming binary classification.</p>
+</blockquote>
+<p><strong>Gradient Descent sketch</strong></p>
+<ol>
+<li>Initialize parameters <em>randomly</em></li>
+<li>Repeat:<ul>
+<li>compute predictions \(\hat y^{(i)}\) for \(i = 1 ,..., m\)</li>
+<li>\(dW^{[1]} = \frac{\partial J}{\partial W^{[1]}}, db^{[1]} = \frac{\partial J}{\partial b^{[1]}}, ...\)</li>
+<li>\(W^{[1]} = W^{[1]} - \alpha dW^{[1]}, ...\)</li>
+<li>\(b^{[1]} = b^{[1]} - \alpha db^{[1]}, ...\)</li>
+</ul>
+</li>
+</ol>
+<p>The key to gradient descent is to computation of the derivatives, \(\frac{\partial J}{\partial W^{[l]}}\) and \(\frac{\partial J}{\partial b^{[l]}}\) for all layers \(l\) .</p>
+<h4 id="formulas-for-computing-derivatives">Formulas for computing derivatives</h4>
+<p>We are going to simply present the formulas you need, and defer their explanation to the next video. Recall the computation graph for our 2-layered neural network:</p>
+<p><a href="https://postimg.cc/image/535cehkvj/"><img alt="nn_overview_graph.png" src="https://s19.postimg.cc/mt70ziygj/nn_overview_graph.png" /></a>|</p>
+<p>And the vectorized implementation of our computations in our <strong>forward propagation</strong></p>
+<p>1.\[Z^{[1]} = W^{[1]}X + b^{[1]}\]
+2.\[A^{[1]} = g^{[1]}(z^{[1]})\]
+3.\[Z^{[2]} = W^{[2]}X + b^{[2]}\]
+4.\ß[A^{[2]} = g^{[2]}(z^{[2]})\]</p>
+<blockquote>
+<p>Where \(g^{[2]}\) would likely be the sigmoid function if we are doing binary classification.</p>
+</blockquote>
+<p>Now we list the computations for our <strong>backward propagation</strong></p>
+<p>1.\[ dZ^{[2]} = A^{[2]} - Y \]
+2.\[ dW^{[2]} = \frac{1}{m}dZ^{[2]}A^{[1]T} \]</p>
+<blockquote>
+<p>Transpose of A accounts for the fact that W is composed of transposed column vectors of parameters.</p>
+</blockquote>
+<p>3.\[db^{[2]} = \frac{1}{m}np.sum(dZ^{[2]}, axis = 1, keepdims=True)\]</p>
+<blockquote>
+<p>Where \(Y = [y^{(1)}, ..., y^{[m]}]\) . The <code>keepdims</code> arguments prevents numpy from returning a rank 1 array, \((n,)\)</p>
+</blockquote>
+<p>4.\[dZ^{[1]} = W^{[2]T}dZ^{[2]} \odot g(Z)' (Z^{[1]})\]</p>
+<blockquote>
+<p>Where \(\odot\) is the element-wise product. Note: this is a collapse of \(dZ\) and \(dA\) computations.</p>
+</blockquote>
+<p>5.\[dW{[1]} = \frac{1}{m} = dZ^{[1]}X^T\]
+6.\[db^{[1]} = \frac{1}{m}np.sum(dZ^{[1]}, axis=1, keepdims=True)\]</p>
+<h3 id="random-initialization">Random Initialization</h3>
+<p>When you train your neural network, it is important to initialize your parameters <em>randomly</em>. With logistic regression, we were able to initialize our weights to <em>zero</em> because the cost function was convex. We will see that this <em>will not work</em> with neural networks.</p>
+<p>Lets take the following network as example:</p>
+<p><a href="https://postimg.cc/image/aslkya3r3/"><img alt="super_simple_network.png" src="https://s19.postimg.cc/8b9tr0jur/super_simple_network.png" /></a></p>
+<p>Lets say we initialize our parameters as follows:</p>
+<p>\(W^{[1]} = \begin{bmatrix}0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\), \(b^{[1]} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}\),
+\(W^{[2]} = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\),
+\(b^{[2]} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}\)</p>
+<blockquote>
+<p>It turns out that initializing the bias \(b\) with zeros is OK.</p>
+</blockquote>
+<p>The problem with this initialization is that for any input examples \(i, j\),</p>
+<p>\[a^{[1]}_i == a^{[1]}_j\]</p>
+<p>Similarly,</p>
+<p>\[dz^{[1]}_i == dz^{[1]}_j\]</p>
+<p>Thus, \(dW^{[1]}\) will be some matrix \(\begin{bmatrix}u &amp; v \\ u &amp; v\end{bmatrix}\) and all updates to the parameters \(W^{[1]}\) will be identical.</p>
+<blockquote>
+<p>Note we are referring to our single hidden layer \(^{[1]}\) but this would apply to any hidden layer of any fully-connected network, no matter how large.</p>
+</blockquote>
+<p>Using a <em>proof by induction</em>, it is actually possible to prove that after any number of rounds of training the two hidden units are still computing <em>identical functions</em>. This is often called the <strong>symmetry breaking problem</strong>.</p>
+<p>The solution to this problem, is to initialize parameters <em>randomly</em>. Heres an example on how to do that with numpy:</p>
+<ul>
+<li>\(W^{[1]}\) = <code>np.random.rand(2,2) * 0.01</code></li>
+<li>\(W^{[2]}\) = <code>np.random.rand(1,2) * 0.01</code></li>
+<li>...</li>
+</ul>
+<blockquote>
+<p>This will generate small, gaussian random values.</p>
+</blockquote>
+<ul>
+<li>\(b^{[1]}\) = <code>np.zeros((2,1))</code></li>
+<li>\(b^{[2]}\) = <code>0</code></li>
+<li>...</li>
+</ul>
+<blockquote>
+<p>In next weeks material, we will talk about how and when you might choose a different factor than \(0.01\) for initialization.</p>
+</blockquote>
+<p>It turns out the \(b\) does not have this symmetry breaking problem, because as long as the hidden units are computing different functions, the network will converge on different values of \(b\), and so it is fine to initialize it to zeros.</p>
+<p><strong>Why do we initialize to small values?</strong></p>
+<p>For a <em>sigmoid-like</em> activation function, large parameter weights (positive or negative) will make it more likely that \(z\) is very large (positive or negative) and thus \(dz\) will approach \(0\), <em>slowing down learning dramatically</em>.</p>
+<blockquote>
+<p>Note this is a less of an issue when using ReLu's, however many classification problems use sigmoid activations in their output layer.</p>
+</blockquote>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../week_2/" title="Week 2" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Week 2
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../week_4/" title="Week 4" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Week 4
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

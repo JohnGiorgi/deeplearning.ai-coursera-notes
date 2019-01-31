@@ -1,0 +1,1391 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/structuring_machine_learning_projects/week_2/">
+      
+      
+        <meta name="author" content="John Giorgi">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
+    
+    
+      
+        <title>Week 2 - Deeplearning.ai - Coursera Course Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#ff7043">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-orange" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#week-2-ml-strategy-2" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Deeplearning.ai - Coursera Course Notes
+              </span>
+              <span class="md-header-nav__topic">
+                Week 2
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/" title="Deeplearning.ai - Coursera Course Notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Deeplearning.ai - Coursera Course Notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#__github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      JohnGiorgi/mathematics-for-machine-learning
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Course 1 - Neural Networks and Deep Learning
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Course 1 - Neural Networks and Deep Learning
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../neural_networks_and_deep_learning/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../neural_networks_and_deep_learning/week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../neural_networks_and_deep_learning/week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../neural_networks_and_deep_learning/week_4/" title="Week 4" class="md-nav__link">
+      Week 4
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Course 2 - Structuring Machine Learning Projects
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Course 2 - Structuring Machine Learning Projects
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 2
+      </label>
+    
+    <a href="./" title="Week 2" class="md-nav__link md-nav__link--active">
+      Week 2
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#error-analysis" title="Error Analysis" class="md-nav__link">
+    Error Analysis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#carrying-out-error-analysis" title="Carrying out error analysis" class="md-nav__link">
+    Carrying out error analysis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#evaluate-multiple-ideas-in-parallel" title="Evaluate multiple ideas in parallel" class="md-nav__link">
+    Evaluate multiple ideas in parallel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleaning-up-incorrectly-labeled-data" title="Cleaning up incorrectly labeled data" class="md-nav__link">
+    Cleaning up incorrectly labeled data
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-set" title="Training set" class="md-nav__link">
+    Training set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#devtest-set" title="Dev/test set" class="md-nav__link">
+    Dev/test set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-quickly-then-iterate" title="Build quickly, then iterate" class="md-nav__link">
+    Build quickly, then iterate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mismatched-training-and-devtest-set" title="Mismatched training and dev/test set" class="md-nav__link">
+    Mismatched training and dev/test set
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1" title="Option 1" class="md-nav__link">
+    Option 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2" title="Option 2" class="md-nav__link">
+    Option 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bias-and-variance-with-mismatched-data-distributions" title="Bias and Variance with mismatched data distributions" class="md-nav__link">
+    Bias and Variance with mismatched data distributions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#more-general-formation" title="More general formation" class="md-nav__link">
+    More general formation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addressing-data-mismatch" title="Addressing data mismatch" class="md-nav__link">
+    Addressing data mismatch
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#artificial-data-synthesis" title="Artificial data synthesis" class="md-nav__link">
+    Artificial data synthesis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-from-multiple-tasks" title="Learning from multiple tasks" class="md-nav__link">
+    Learning from multiple tasks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transfer-learning" title="Transfer learning" class="md-nav__link">
+    Transfer learning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-does-transfer-learning-make-sense" title="When does transfer learning make sense?" class="md-nav__link">
+    When does transfer learning make sense?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-task-learning" title="Multi-task learning" class="md-nav__link">
+    Multi-task learning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simplified-autonomous-driving-example" title="Simplified autonomous driving example" class="md-nav__link">
+    Simplified autonomous driving example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-does-multi-task-learning-make-sense" title="When does multi-task learning make sense?" class="md-nav__link">
+    When does multi-task learning make sense?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-deep-learning" title="End-to-end deep learning" class="md-nav__link">
+    End-to-end deep learning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-end-to-end-deep-learning" title="What is end-to-end deep learning?" class="md-nav__link">
+    What is end-to-end deep learning?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#speech-recognition-example" title="Speech recognition example" class="md-nav__link">
+    Speech recognition example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whether-or-not-to-use-end-to-end-learning" title="Whether or not to use end-to-end learning" class="md-nav__link">
+    Whether or not to use end-to-end learning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pros-and-cons-of-end-to-end-deep-learning" title="Pros and cons of end-to-end deep learning" class="md-nav__link">
+    Pros and cons of end-to-end deep learning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#should-i-use-end-to-end-deep-learning" title="Should I use end-to-end deep learning?" class="md-nav__link">
+    Should I use end-to-end deep learning?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Course 5 - Sequence Models
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Course 5 - Sequence Models
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_1/" title="Week 1" class="md-nav__link">
+      Week 1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_2/" title="Week 2" class="md-nav__link">
+      Week 2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../sequence_models/week_3/" title="Week 3" class="md-nav__link">
+      Week 3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#error-analysis" title="Error Analysis" class="md-nav__link">
+    Error Analysis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#carrying-out-error-analysis" title="Carrying out error analysis" class="md-nav__link">
+    Carrying out error analysis
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#evaluate-multiple-ideas-in-parallel" title="Evaluate multiple ideas in parallel" class="md-nav__link">
+    Evaluate multiple ideas in parallel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleaning-up-incorrectly-labeled-data" title="Cleaning up incorrectly labeled data" class="md-nav__link">
+    Cleaning up incorrectly labeled data
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#training-set" title="Training set" class="md-nav__link">
+    Training set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#devtest-set" title="Dev/test set" class="md-nav__link">
+    Dev/test set
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-quickly-then-iterate" title="Build quickly, then iterate" class="md-nav__link">
+    Build quickly, then iterate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mismatched-training-and-devtest-set" title="Mismatched training and dev/test set" class="md-nav__link">
+    Mismatched training and dev/test set
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1" title="Option 1" class="md-nav__link">
+    Option 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2" title="Option 2" class="md-nav__link">
+    Option 2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bias-and-variance-with-mismatched-data-distributions" title="Bias and Variance with mismatched data distributions" class="md-nav__link">
+    Bias and Variance with mismatched data distributions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#more-general-formation" title="More general formation" class="md-nav__link">
+    More general formation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#addressing-data-mismatch" title="Addressing data mismatch" class="md-nav__link">
+    Addressing data mismatch
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#artificial-data-synthesis" title="Artificial data synthesis" class="md-nav__link">
+    Artificial data synthesis
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#learning-from-multiple-tasks" title="Learning from multiple tasks" class="md-nav__link">
+    Learning from multiple tasks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transfer-learning" title="Transfer learning" class="md-nav__link">
+    Transfer learning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-does-transfer-learning-make-sense" title="When does transfer learning make sense?" class="md-nav__link">
+    When does transfer learning make sense?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-task-learning" title="Multi-task learning" class="md-nav__link">
+    Multi-task learning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#simplified-autonomous-driving-example" title="Simplified autonomous driving example" class="md-nav__link">
+    Simplified autonomous driving example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-does-multi-task-learning-make-sense" title="When does multi-task learning make sense?" class="md-nav__link">
+    When does multi-task learning make sense?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end-deep-learning" title="End-to-end deep learning" class="md-nav__link">
+    End-to-end deep learning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-is-end-to-end-deep-learning" title="What is end-to-end deep learning?" class="md-nav__link">
+    What is end-to-end deep learning?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#speech-recognition-example" title="Speech recognition example" class="md-nav__link">
+    Speech recognition example
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" title="Summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whether-or-not-to-use-end-to-end-learning" title="Whether or not to use end-to-end learning" class="md-nav__link">
+    Whether or not to use end-to-end learning
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pros-and-cons-of-end-to-end-deep-learning" title="Pros and cons of end-to-end deep learning" class="md-nav__link">
+    Pros and cons of end-to-end deep learning
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#should-i-use-end-to-end-deep-learning" title="Should I use end-to-end deep learning?" class="md-nav__link">
+    Should I use end-to-end deep learning?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/edit/master/docs/structuring_machine_learning_projects/week_2.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="week-2-ml-strategy-2">Week 2: ML Strategy (2)</h1>
+<h2 id="error-analysis">Error Analysis</h2>
+<p>Manually examining mistakes that your algorithm is making can give you insights into what to do next (<em>especially if your learning algorithm is not yet at the performance of a human</em>). This process is called <strong>error analysis</strong>. Let's start with an example.</p>
+<h3 id="carrying-out-error-analysis">Carrying out error analysis</h3>
+<p>Take for example our <strong>cat image classifier</strong>, and say we obtain 10% error on our <strong>test set</strong>, much worse than we were hoping to do. Assume further that a colleague notices some of the misclassified examples are actually pictures of dogs. The question becomes, <em>should you try to make your cat classifier do better on dogs?</em></p>
+<p>This is where <strong>error analysis</strong> is particularly useful. In this example, we might:</p>
+<ul>
+<li>collect ~100 mislabeled dev set examples</li>
+<li>count up how any many dogs</li>
+</ul>
+<p>Lets say we find that 5/100 (5%) mislabeled dev set example are dogs. Thus, the best we could hope to do (if we were to <em>completely</em> solve the dog problem) is decrease our error from 10% to 9.5% (a 5% relative drop in error.) We conclude that <em>this is likely not the best use of our time</em>. Sometimes, this is called the <strong>ceiling</strong>, i.e., the <em>maximum</em> amount of improvement we can expect from <em>some change</em> to our algorithm/dataset.</p>
+<p>Suppose instead we find 50/500 (50%) mislabeled dev set examples are dogs. Thus, if we solve the dog problem, we could decrease our error from 10% to 5% (a 50% relative drop in error.) We conclude that <em>solving the dog problem is likely a good use of our time</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice the disproportionate 'payoff' here. It may take &lt; 10 min to manually examine 100 examples from our dev set, but the exercise offers <em>major</em> clues as to where to focus our efforts.</p>
+</div>
+<h4 id="evaluate-multiple-ideas-in-parallel">Evaluate multiple ideas in parallel</h4>
+<p>Lets, continue with our cat detection example. Sometimes we might want to evaluate <strong>multiple</strong> ideas in <strong>parallel</strong>. For example, say we have the following ideas:</p>
+<ul>
+<li>fix pictures of dogs being recognized as cats</li>
+<li>fix great cats (lions, panthers, etc..) being misrecognized</li>
+<li>improve performance on blurry images</li>
+</ul>
+<p>What can do is create a table, where the <em>rows</em> represent the images we plan on evaluating manually, and the <em>columns</em> represent the categorizes we think the algorithm may be misrecognizing. It is also helpful to add comments describing the the misclassified example.</p>
+<p><img alt="" src="https://s19.postimg.org/thwsxyhrn/Screen_Shot_2018-02-24_at_9.39.51_AM.png" /></p>
+<p>As you are part-way through this process, you may also notice another common category of mistake, which you can add to this manual evaluation and repeat.</p>
+<p><em>The conclusion of this process is estimates for:</em></p>
+<ul>
+<li>which errors we should direct our attention to solving</li>
+<li>how much we should expect performance to improve if reduce the number of errors in each category</li>
+</ul>
+<h4 id="summary">Summary</h4>
+<p>To summarize: when carrying out error analysis, you should find a set of <em>mislabeled</em> examples and look at these examples for <em>false positives</em> and <em>false negatives</em>. Counting up the number of errors that fall into various different categories will often this will help you prioritize, or give you inspiration for new directions to go in for improving your algorithm.</p>
+<p>Three numbers to keep your eye on</p>
+<ol>
+<li>Overall dev set error</li>
+<li>Errors due to cause of interest / Overall dev set error</li>
+<li>Error due to other causes / Overall dev set error</li>
+</ol>
+<p>If the errors due to other causes &gt;&gt; errors due to cause of interest, it will likely be more productive to ignore our cause of interest for the time being and seek another source of error we can try to minimize.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this case, <em>cause of interest</em> is just our idea for improving our leaning algorithm, e.g., <em>fix pictures of dogs being recognized as cats</em></p>
+</div>
+<h2 id="cleaning-up-incorrectly-labeled-data">Cleaning up incorrectly labeled data</h2>
+<p>In supervised learning, we (typically) have hand-labeled training data. What if we realize that some examples are <em>incorrectly labeled?</em> First, lets consider our training set.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In an effort to be less ambiguous, we use <strong>mislabeled</strong> when we are referring to examples the ML algo labeled incorrectly and <strong>incorrectly</strong> labeled when we are referring to examples in the training data set with the wrong label.</p>
+</div>
+<h3 id="training-set">Training set</h3>
+<p>Deep learning algorithms are quite robust to <strong>random</strong> errors in the training set. If the errors are reasonably <strong>random</strong> and the dataset is big enough (i.e., the errors make up only a tiny proportion of all examples) performance of our algorithm is unlikely to be affected.</p>
+<p><strong>Systematic errors</strong> are much more of a problem. Taking as example our cat classifier again, if labelers mistakingly label all white dogs as cats, this will dramatically impact performance of our classifier, which is likely to labels white dogs as cats with <em>high degree of confidence</em>.</p>
+<h3 id="devtest-set">Dev/test set</h3>
+<p>If you suspect that there are many <em>incorrectly</em> labeled examples in your dev or test set, you can add another column to your error analysis table where you track these incorrectly labeled examples. Depending on the total percentage of these examples, you can decide if it is worth the time to go through and correct all <em>incorrectly</em> labeled examples in your dev or test set.</p>
+<p>There are some special considerations when correcting incorrect dev/test set examples, namely:</p>
+<ul>
+<li>apply the same process to your dev and test sets to make sure they continue to come from the same distribution</li>
+<li>considering examining examples your algorithm got right as well as ones it got wrong</li>
+<li>train and dev/test data may now come from different distributions --- this is not necessarily a problem</li>
+</ul>
+<h3 id="build-quickly-then-iterate">Build quickly, then iterate</h3>
+<p>If you are working on a brand new ML system, it is recommended to <em>build quickly</em>, then <em>iterate</em>. For many problems, there are often tens or hundreds of directions we could reasonably choose to go in.</p>
+<p>Building a system quickly breaks down to the following tasks:</p>
+<ol>
+<li>set up a dev/test set and metric</li>
+<li>build the initial system quickly and deploy</li>
+<li>use bias/variance analysis &amp; error analysis to prioritize next steps</li>
+</ol>
+<p>A lot of value in this approach lies in the fact that we can quickly build insight to our problem.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that this advice applies less when we have significant expertise in a given area and/or there is a significant body of academic work for the same or a very similar task (i.e., face recognition).</p>
+</div>
+<h2 id="mismatched-training-and-devtest-set">Mismatched training and dev/test set</h2>
+<p>Deep learning algorithms are <em>extremely data hungry</em>. Because of this, some teams are tempted into shoving as much information into their training sets as possible. However, this poses a problem when the data sources do not come from the same distributions.</p>
+<p>Lets illustrate this again with an example. Take our cat classifier. Say we have ~10,000 images from a <strong>mobile app</strong>, and these are the images (or <em>type</em> of images) we hope to do well on. Assume as well that we have ~200,000 images from <strong>webpages</strong>, which have a slightly different underlying distribution than the mobile app images (say, for example, that they are generally higher quality.) <em>How do we combine these data sets?</em></p>
+<h3 id="option-1">Option 1</h3>
+<p>We could take the all datasets, combine them, and shuffle them randomly into train/dev/test sets. However, this poses the obvious problem that <em>many of the examples in our dev set (~95% of them) will be from the webpage dataset</em>. We are effectively tuning our algorithm to a distribution that is <em>slightly different</em> than our target distribution --- data from the mobile app.</p>
+<h3 id="option-2">Option 2</h3>
+<p>The second, recommended option, is to comprise the dev/test sets of images <em>entirely from the target (i.e., mobile data) distribution</em>. The advantage, is that we are now "aiming the target" in the right place, i.e., the distribution we hope to perform well on. The disadvantage of course, is that the training set comes from a different distribution than our target (dev/test) sets. However, this method is still superior to <strong>option 1</strong>, and we will discuss laters further ways of dealing with this difference in distributions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note, we can still include examples from the distribution we care about in our training set, assuming we have enough data from this distribution.</p>
+</div>
+<h2 id="bias-and-variance-with-mismatched-data-distributions">Bias and Variance with mismatched data distributions</h2>
+<p>Estimating the <strong>bias</strong> and <strong>variance</strong> of your learning algorithm can really help you prioritize what to work on next. The way you analyze bias and variance changes when your training set comes from a different distribution than your dev and test sets. Let's see how.</p>
+<p>Let's keep using our cat classification example and let's say humans get near perfect performance on this. So, Bayes error, or Bayes optimal error, we know is nearly 0% on this problem. Assume further:</p>
+<ul>
+<li>training error: 1%</li>
+<li>dev error: 10%</li>
+</ul>
+<p>If your <strong>dev</strong> data came from the <em>same distribution</em> as your <strong>training</strong> set, you would say that you have a large <strong>variance</strong> problem, i.e., your algorithm is not generalizing well from the training set to the dev set. But in the setting where your training data and your dev data comes from a <em>different distribution</em>, you can no longer safely draw this conclusion. If the training and dev data come from <em>different underlying distributions</em>, then by comparing the training set to the dev set we are actually observing two different changes at the same time:</p>
+<ol>
+<li>The algorithm <em>saw</em> the training data. It did not <em>see</em> the dev data</li>
+<li>The data do not come from the same underlying distribution</li>
+</ol>
+<p>In order to tease out these which of these is conributing to the drop in perfromsnce from our train to dev set, it will be useful to define a new piece of data which we'll call the <strong>training-dev</strong> set: a new subset of data with the same distribution as the training set, but not used for training.</p>
+<p>Heres what we mean, previously we had train/dev/test sets. What we are going to do instead is randomly shuffle the training set and carve out a part of this shuffled set to be the <strong>training-dev</strong>.</p>
+<p><img alt="" src="https://s19.postimg.org/hytnawr6r/Screen_Shot_2018-02-25_at_12.10.35_PM.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Just as the dev/test sets have the same distribution, the train-dev set and train set have the same distribution.</p>
+</div>
+<p>Now, say we have the following errors:</p>
+<ul>
+<li>training error: 1%</li>
+<li>train-dev error: 9%</li>
+<li>dev error: 10%</li>
+</ul>
+<p>We see that training error \(\lt \lt\) train-dev error \(\approx\) dev error. Because the train and train-dev sets come from the same underlying distribution, we can safely conclude that the large increase in error from the train set to the dev set is due to <em>variance</em> (i.e., our network is not generalizing well)</p>
+<p>Lets look at a counter example. Say we have the following errors:</p>
+<ul>
+<li>training error: 1%</li>
+<li>train-dev error: 1.5%</li>
+<li>dev error: 10%</li>
+</ul>
+<p>This is much more likely to be a <em>data mismatch problem</em>. Specifically, the algorithm is performing extremely well on the train and train-dev sets, but poorly on the dev set, hinting that the train/train-dev sets likely come from different underlying distributions than the dev set.</p>
+<p>Finally, one last example. Say we have the following errors:</p>
+<ul>
+<li>Bayes error: \(\approx\) 0%</li>
+<li>training error: 10%</li>
+<li>train-dev error: 11%</li>
+<li>dev error: 20%</li>
+</ul>
+<p>Here, we likely have two problems. First, we notice an <em>avoidable bias</em> problem, suggested by the fact that our training error \(\gt \gt\) Bayes error. We also have a <em>data mismatch problem</em>, suggested by the fact that our training error \(\approx\) train-dev error by both are \(\lt \lt\) our dev error.</p>
+<p>So let's take what we've done and write out the general principles. The <em>key quantities</em> your want to look at are: human-level error (or Bayes error), training set error, training-dev set error and the dev set error.</p>
+<p>The differences between these errors give us a sense about the <strong>avoidable bias</strong>, the <strong>variance</strong>, and the <strong>data mismatch problem</strong>. Generally,</p>
+<ul>
+<li>training error \(\gt \gt\) Bayes error: avoidable bias problem</li>
+<li>training error \(\lt \lt\) train-dev error: variance problem</li>
+<li>training error \(\approx\) train-dev error \(\lt \lt\) dev error: data mismatch problem.</li>
+</ul>
+<h3 id="more-general-formation">More general formation</h3>
+<p>We can organize these metrics into a table; where the columns are different datasets (if you have more than one) and the rows are the error for examples the algorithm <em>was</em> trained on and examples the algorithm <em>was not</em> trained on.</p>
+<p><img alt="" src="https://s19.postimg.org/bfl8ak6xv/Screen_Shot_2018-02-25_at_4.34.00_PM.png" /></p>
+<h2 id="addressing-data-mismatch">Addressing data mismatch</h2>
+<p>If your training set comes from a different distribution, than your dev and test set, and if error analysis shows you that you have a data mismatch problem, what can you do? Unfortunately, there are not (completely) systematic solutions to this, but let's look at some things you could try.</p>
+<p><em>Some recommendations:</em></p>
+<ul>
+<li>carry out manual error analysis to try to understand different between training and dev/test sets.</li>
+<li><em>for example, you may find that many of the examples in your dev set are noisy when compared to those in your training set.</em></li>
+<li>make training data more similar; or collect more data similar to dev/test sets.</li>
+<li><em>for example, you may simulate noise in the training set</em></li>
+</ul>
+<p>The second point leads us into the idea of <strong>artificial data synthesis</strong></p>
+<h3 id="artificial-data-synthesis">Artificial data synthesis</h3>
+<p>In some cases, we may be able to artificially synthesis data to make up for a lack of real data. For example, we can imagine synthesizing images of cars to supplement a dataset of car images for the task of car recognition in photos.</p>
+<p><a href="https://postimg.cc/image/5rexjq01b/"><img alt="artificial_car_images.png" src="https://s19.postimg.cc/dk5lbp60j/artificial_car_images.png" /></a></p>
+<p>While artificial data synthesis can be a powerful technique for increasing the size of our dataset (and thus the performance of our learning algorithm), we must be wary of overfitting to the synthesized data. Say for example, the set of "all cars" and "synthesized cars" looked as follows:</p>
+<p><a href="https://postimg.cc/image/3mukint9r/"><img alt="artificial_data_venn.png" src="https://s19.postimg.cc/ojqsnbrar/artificial_data_venn.png" /></a></p>
+<p>In this case, we run a real risk of our algorithm overfitting to the synthesized images.</p>
+<h2 id="learning-from-multiple-tasks">Learning from multiple tasks</h2>
+<h3 id="transfer-learning">Transfer learning</h3>
+<p>One of the most powerful ideas in deep learning is that you can take knowledge the neural network has learned from <em>one task</em> and apply that knowledge to a <em>separate task</em>. So for example, maybe you could have the neural network learn to recognize objects like cats and then use parts of that knowledge to help you do a better job reading X-ray scans. This is called <strong>transfer learning</strong>. Let's take a look.</p>
+<p>Lets say you have trained a neural network for <strong>image recognition</strong>. If you want to take this neural network and <em>transfer</em> it to a different task, say radiology diagnosis, one method would be to <em>delete</em> the last layer, and re-randomly initialize the weights feeding into the output layer.</p>
+<p>To be concrete:</p>
+<ul>
+<li>during the first phase of training when you're training on an image recognition task, you train all of the usual parameters for the neural network, all the weights, all the layers</li>
+<li>having trained that neural network, what you now do to implement transfer learning is swap in a new data set \(X,Y\), where now these are radiology images and diagnoses pairs.</li>
+<li>finally, initialize the last layers' weights randomly and retrain the neural network on this new data set.</li>
+</ul>
+<p>We have a couple options on how we retrain the dataset.</p>
+<ul>
+<li>If the radiology dataset is <strong>small</strong>: we should likely <em>"freeze"</em> the transferred layers and only train the output layer.</li>
+<li>If the radiology dataset is <strong>large</strong>: we should likely train all layers.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Sometimes, we call the process of training on the first dataset <strong>pre-training</strong>, and the process of training on the second dataset <strong>fine-tuning</strong>.</p>
+</div>
+<p><img alt="" src="https://s19.postimg.org/ale9bpes3/Screen_Shot_2018-02-26_at_6.26.15_PM.png" /></p>
+<p>The idea is that learning from a very large image data set allows us to transfer some fundamental knowledge for the task of computer vision (i.e., extracting features such as lines/edges, small objects, etc.)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that transfer learning is <strong>not</strong> confined to computer vision examples, recent research has shown much success deploying transfer learning for NLP tasks.</p>
+</div>
+<h4 id="when-does-transfer-learning-make-sense">When does transfer learning make sense?</h4>
+<p>Transfer learning makes sense when you have a <em>lot of data for the problem you're transferring <strong>from</strong> and usually relatively less data for the problem you're transferring <strong>to</strong></em>.</p>
+<p>So for our example, let's say you have a <em>million</em> examples for image recognition task. Thats a lot of data to learn low level features or to learn a lot of useful features in the earlier layers in neural network. But for the radiology task, assume we only a hundred examples. So a lot of knowledge you learn from image recognition can be transferred and can really help you get going with radiology recognition even if you don't have enough data to perform well for the radiology diagnosis task.</p>
+<p>If you're trying to learn from some <strong>Task A</strong> and transfer some of the knowledge to some <strong>Task B</strong>, then transfer learning makes sense when:</p>
+<ul>
+<li>Task A and B have the same input X.</li>
+<li>you have a lot more data for Task A than for Task B --- all this is under the assumption that what you really want to do well on is Task B.</li>
+<li>transfer learning will tend to make more sense if you suspect that low level features from Task A could be helpful for learning Task B.</li>
+</ul>
+<h3 id="multi-task-learning">Multi-task learning</h3>
+<p>Whereas in transfer learning, you have a sequential process where you learn from task A and then transfer that to task B --- in multi-task learning, you start off simultaneously, trying to have one neural network do several things at the same time. The idea is that shared information from each of these tasks improves performance on <em>all</em> tasks. Let's look at an example.</p>
+<h4 id="simplified-autonomous-driving-example">Simplified autonomous driving example</h4>
+<p>Let's say you're building an autonomous vehicle. Then your self driving car would need to detect several different things such as <em>pedestrians</em>, <em>other cars</em>, <em>stop signs</em>, <em>traffic lights</em> etc.</p>
+<p>Our input to the learning algorithm could be a single image, our our label for that example, \(y^{(i)}\) might be a four-dimensional column vector, where \(0\) at position \(j\) represents absence of that object from the image and \(1\) represents presence.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>E.g., a \(0\) at the first index of \(y^{(i)}\) might specify absence of a pedestrian in the image.</p>
+</div>
+<p>Our neural network architecture would then involve a single input and output layer. The twist is that the output layer would have \(j\) number of nodes, one per object we want to recognize.</p>
+<p><img alt="" src="https://s19.postimg.org/et91kny9v/Screen_Shot_2018-02-26_at_7.23.04_PM.png" /></p>
+<p>To account for this, our cost function will need to sum over the individual loss functions for each of the objects we wish to recongize:</p>
+<p>\[Cost = \frac{1}{m}\sum^m_{i=1}\sum^m_{j=1}\ell(\hat y_j^{(i)}, y_j^{(i)})\]</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Were \(\ell\) is our logisitc loss.</p>
+</div>
+<p>Unlike traditional softmax regression, one image can have multiple labels. This, in essense, is <strong>multi-task</strong> learning, as we are preforming multiple tasks with the same neural network (sets of weights/biases).</p>
+<h4 id="when-does-multi-task-learning-make-sense">When does multi-task learning make sense?</h4>
+<p>Typically (but with some exceptions) when the following hold:</p>
+<ul>
+<li>Training on a set of tasks that could benefit from having shared lower-level features.</li>
+<li>Amount of data you have for each task is quite similar.</li>
+<li>Can train a big enough neural network to do well on all the tasks</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The last point is important. We typically need to "scale-up" the neural network in multi-task learning, as we will need a high variance model to be able to perform well on multiple tasks and typically more data --- as opposed to single tasks.</p>
+</div>
+<h2 id="end-to-end-deep-learning">End-to-end deep learning</h2>
+<p>One of the most exciting recent developments in deep learning has been the rise of <strong>end-to-end deep</strong> learning. So what is the end-to-end learning? Briefly, there have been some data processing systems, or learning systems that require <em>multiple stages of processing</em>. In contrast, end-to-end deep learning attempts to replace those multiple stages with a single neural network. Let's look at some examples.</p>
+<h3 id="what-is-end-to-end-deep-learning">What is end-to-end deep learning?</h3>
+<h4 id="speech-recognition-example">Speech recognition example</h4>
+<p>At a high level, the task of speech recognition requires receiving as input some audio singles containing spoken words, and mapping that to a transcript containing those words.</p>
+<p>Traditionally, speech recognition involved many stages of processing:</p>
+<ol>
+<li>First, you would extract "hand-designed" features from the audio clip</li>
+<li>Feed these features into a ML algorithm which would extract phonemes</li>
+<li>Concatenate these phonemes to form words and then transcripts</li>
+</ol>
+<p>In contrast to this step-by-step pipeline, <strong>end-to-end deep learning</strong> seeks to model all these tasks with a single network given a set of inputs.</p>
+<p><img alt="" src="https://s19.postimg.org/cg5t1jlur/Screen_Shot_2018-02-27_at_8.53.09_PM.png" /></p>
+<p>The more traditional, <strong>hand-crafted</strong> approach tends to <em>outperform</em> the <strong>end-to-end approach</strong> when <em>our dataset is small</em>, but this relationship flips as the dataset grows larger. Indeed, one of the biggest barriers to using end-to-end deep learning approaches is that large datasets which map our input to our final downstream task are <em>rare</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Think about this for a second and it makes perfect sense, its only recently in the era of deep learning that datasets have begun to map inputs to downstream outputs, skipping many of the intermediate levels of representation (images \(\Rightarrow\) labels, audio clips \(\Rightarrow\) transcripts.)</p>
+</div>
+<p>One example where end-to-end deep learning currently works very well is <strong>machine translation</strong> (massive, parallel corpuses have made end-to-end solutions feasible.)</p>
+<h3 id="summary_1">Summary</h3>
+<p>When end-to-end deep learning works, it can work really well and can simplify the system, removing the need to build many hand-designed individual components. But it's also not panacea, <em>it doesn't always work</em>.</p>
+<h3 id="whether-or-not-to-use-end-to-end-learning">Whether or not to use end-to-end learning</h3>
+<p>Let's say in building a machine learning system you're trying to decide whether or not to use an end-to-end approach. Let's take a look at some of the pros and cons of end-to-end deep learning so that you can come away with some guidelines on whether or not an end-to-end approach seems promising for your application.</p>
+<h4 id="pros-and-cons-of-end-to-end-deep-learning">Pros and cons of end-to-end deep learning</h4>
+<p><strong>Pros</strong>:</p>
+<ol>
+<li><em>let the data speak</em>: if you have enough labeled data, your network (given that it is large enough) should be able to a mapping from \(x \rightarrow  y\), with out having to rely on a humans preconceived notions or forcing the model to use some representation of the relationship between inputs an outputs.</li>
+<li><em>less hand-designing of components needed</em>: end-to-end deep learning seeks to model the entire task with a single learning algorithm, which typically involves little in the way of hand-designing components.</li>
+</ol>
+<p><strong>Cons</strong>:</p>
+<ol>
+<li><em>likely need a large amount of data for end-to-end learning to work well</em></li>
+<li><em>excludes potentially useful hand-designed components</em>: if we have only a small training set, our learning algorithm likely does not have enough examples to learn representations that perform well. Although deep learning practitioners often speak despairingly about hand-crafted features or components, they allow us to inject priors into our model, which is particularly useful when we do not have a lot of labeled data.</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note: hand-designed components and features are a double-edged sword. Poorly designed components may actually harm performance of the model by forcing the model to obey incorrect assumptions about the data.</p>
+</div>
+<h4 id="should-i-use-end-to-end-deep-learning">Should I use end-to-end deep learning?</h4>
+<p>The key question we need to ask ourselves when considering on using end-to-end deep learning is:</p>
+<p><em>Do you have sufficient data to learn a function of the complexity needed to map \(x\) to \(y\)?</em></p>
+<p>Unfortunately, we do not have a formal definition of <strong>complexity</strong> --- we have to rely on our intuition.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Week 1
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../sequence_models/week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Week 1
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

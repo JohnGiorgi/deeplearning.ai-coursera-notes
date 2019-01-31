@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/">
+        <link rel="canonical" href="https://johngiorgi.github.io/deeplearning.ai-coursera-notes/neural_networks_and_deep_learning/week_1/">
       
       
         <meta name="author" content="John Giorgi">
@@ -35,18 +35,18 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.2.0">
     
     
       
-        <title>Deeplearning.ai - Coursera Course Notes</title>
+        <title>Week 1 - Deeplearning.ai - Coursera Course Notes</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/application.572ca0f0.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.572ca0f0.css">
       
-        <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.22915126.css">
       
       
         
@@ -55,7 +55,7 @@
       
     
     
-      <script src="assets/javascripts/modernizr.8c900955.js"></script>
+      <script src="../../assets/javascripts/modernizr.8c900955.js"></script>
     
     
       
@@ -64,10 +64,10 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
     
   </head>
@@ -105,7 +105,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#deeplearningai-coursera-course-notes" tabindex="1" class="md-skip">
+      <a href="#week-1-introduction" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -131,7 +131,7 @@
                 Deeplearning.ai - Coursera Course Notes
               </span>
               <span class="md-header-nav__topic">
-                About
+                Week 1
               </span>
             
           
@@ -246,49 +246,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        About
-      </label>
-    
-    <a href="." title="About" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../.." title="About" class="md-nav__link">
       About
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#resources" title="Resources" class="md-nav__link">
-    Resources
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -296,10 +258,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Course 1 - Neural Networks and Deep Learning
@@ -315,11 +279,76 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="neural_networks_and_deep_learning/week_1/" title="Week 1" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Week 1
+      </label>
+    
+    <a href="./" title="Week 1" class="md-nav__link md-nav__link--active">
       Week 1
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-neural-network" title="What is a neural network?" class="md-nav__link">
+    What is a neural network?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supervised-learning-with-neural-networks" title="Supervised Learning with Neural Networks" class="md-nav__link">
+    Supervised Learning with Neural Networks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structured-vs-unstructured-data" title="Structured vs. Unstructured Data" class="md-nav__link">
+    Structured vs. Unstructured Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-is-deep-learning-taking-off" title="Why is Deep Learning taking off?" class="md-nav__link">
+    Why is Deep Learning taking off?
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -329,7 +358,7 @@
 
 
   <li class="md-nav__item">
-    <a href="neural_networks_and_deep_learning/week_2/" title="Week 2" class="md-nav__link">
+    <a href="../week_2/" title="Week 2" class="md-nav__link">
       Week 2
     </a>
   </li>
@@ -341,7 +370,7 @@
 
 
   <li class="md-nav__item">
-    <a href="neural_networks_and_deep_learning/week_3/" title="Week 3" class="md-nav__link">
+    <a href="../week_3/" title="Week 3" class="md-nav__link">
       Week 3
     </a>
   </li>
@@ -353,7 +382,7 @@
 
 
   <li class="md-nav__item">
-    <a href="neural_networks_and_deep_learning/week_4/" title="Week 4" class="md-nav__link">
+    <a href="../week_4/" title="Week 4" class="md-nav__link">
       Week 4
     </a>
   </li>
@@ -389,7 +418,7 @@
 
 
   <li class="md-nav__item">
-    <a href="structuring_machine_learning_projects/week_1/" title="Week 1" class="md-nav__link">
+    <a href="../../structuring_machine_learning_projects/week_1/" title="Week 1" class="md-nav__link">
       Week 1
     </a>
   </li>
@@ -401,7 +430,7 @@
 
 
   <li class="md-nav__item">
-    <a href="structuring_machine_learning_projects/week_2/" title="Week 2" class="md-nav__link">
+    <a href="../../structuring_machine_learning_projects/week_2/" title="Week 2" class="md-nav__link">
       Week 2
     </a>
   </li>
@@ -437,7 +466,7 @@
 
 
   <li class="md-nav__item">
-    <a href="sequence_models/week_1/" title="Week 1" class="md-nav__link">
+    <a href="../../sequence_models/week_1/" title="Week 1" class="md-nav__link">
       Week 1
     </a>
   </li>
@@ -449,7 +478,7 @@
 
 
   <li class="md-nav__item">
-    <a href="sequence_models/week_2/" title="Week 2" class="md-nav__link">
+    <a href="../../sequence_models/week_2/" title="Week 2" class="md-nav__link">
       Week 2
     </a>
   </li>
@@ -461,7 +490,7 @@
 
 
   <li class="md-nav__item">
-    <a href="sequence_models/week_3/" title="Week 3" class="md-nav__link">
+    <a href="../../sequence_models/week_3/" title="Week 3" class="md-nav__link">
       Week 3
     </a>
   </li>
@@ -493,8 +522,35 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#resources" title="Resources" class="md-nav__link">
-    Resources
+  <a href="#what-is-a-neural-network" title="What is a neural network?" class="md-nav__link">
+    What is a neural network?
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supervised-learning-with-neural-networks" title="Supervised Learning with Neural Networks" class="md-nav__link">
+    Supervised Learning with Neural Networks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structured-vs-unstructured-data" title="Structured vs. Unstructured Data" class="md-nav__link">
+    Structured vs. Unstructured Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-is-deep-learning-taking-off" title="Why is Deep Learning taking off?" class="md-nav__link">
+    Why is Deep Learning taking off?
   </a>
   
 </li>
@@ -515,17 +571,45 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes/edit/master/docs/neural_networks_and_deep_learning/week_1.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="deeplearningai-coursera-course-notes">Deeplearning.ai - Coursera Course Notes</h1>
-<p>Compiled notes for the deep learning.ai specialization on Coursera.</p>
-<p>I intend to continuously add to and improve these notes as I complete the <a href="https://www.deeplearning.ai/">5-course specialization</a>.</p>
-<h4 id="resources">Resources</h4>
+                <h1 id="week-1-introduction">Week 1: Introduction</h1>
+<h2 id="what-is-a-neural-network">What is a neural network?</h2>
+<h3 id="supervised-learning-with-neural-networks">Supervised Learning with Neural Networks</h3>
+<p>In supervised learning, you have some input \(x\) and some output \(y\) . The goal is to learn a mapping \(x \rightarrow y\) .</p>
+<p>Possibly, the single most lucrative (but not the most inspiring) application of deep learning today is online advertising. Using information about the ad combined with information about the user as input, neural networks have gotten very good at predicting whether or not you click on an ad. Because the ability to show you ads that you're more likely to click on has a <em>direct impact on the bottom line of some of the very large online advertising companies</em>.</p>
+<p>Here are some more areas in which deep learning has had a huge impact:</p>
 <ul>
-<li><a href="https://d3c33hcgiwev3.cloudfront.net/_106ac679d8102f2bee614cc67e9e5212_deep-learning-notation.pdf?Expires=1514764800&amp;Signature=bnnZZMJUAG2PZPWezLLN6EeKjihlTdaVPo1fqHDdsPmXkLDyjVG-fBtstgOCIcFkKd8OGx845pIKDITTFGm0sMA1eGo4lAIqP7Btffy5VGBRwasKW3WCGGkP-dmq0Vw7Y83ezax4wQCzzYB6iPevY8QniePzg-iq~O5a9hJ4TRk_&amp;Key-Pair-Id=APKAJLTNE6QMUY6HBC5A">Notation cheetsheet</a> (I recommend printing this out and sticking it on the wall where you work!)</li>
-<li>Check links at end of all programming assignments, these are good resources.</li>
+<li><strong>Computer vision</strong> the recognition and classification of objects in photos and videos.</li>
+<li><strong>Speech Recognition</strong> converting speech in audio files into transcribed text.</li>
+<li><strong>Machine translation</strong> translating one natural language to another.</li>
+<li><strong>Autonomous driving</strong></li>
 </ul>
+<p><a href="https://postimg.cc/image/r2br1relb/"><img alt="supervised_learning.png" src="https://s19.postimg.cc/wdqnmh0o3/supervised_learning.png" /></a></p>
+<p>A lot of the value generation from using neural networks have come from intelligently choosing our \(x\) and \(y\) and learning a mapping.</p>
+<p>We tend to use different architectures for different types of data. For example, <strong>convolutional neural networks</strong> (CNNs) are very common for <em>image data</em>, while <strong>recurrent neural networks</strong> (RNNs) are very common for <em>sequence data</em> (such as text). Some data, such as radar data from autonomous vehicles, don't neatly fit into any particularly category and so we typical use a complex/hybrid network architecture.</p>
+<h3 id="structured-vs-unstructured-data">Structured vs. Unstructured Data</h3>
+<p>You can think of <strong>structured data</strong> as essentially meaning <em>databases of data</em>. It is data that is highly <em>structured</em>, typically with multiple, well-defined attributes for each piece of data. For example, in housing price prediction, you might have a database where the columns tells you the size and the number of bedrooms. Or in predicting whether or not a user will click on an ad, you might have information about the user, such as the age, some information about the ad, and then labels why that you're trying to predict.</p>
+<p>In contrast, <strong>unstructured data</strong> refers to things like audio, raw audio,
+or images. Here the features might be the pixel values in an image or the individual words in a piece of text. Historically, it has been much harder for computers to make sense of unstructured data compared to structured data. In contrast, the human race has evolved to be very good at understanding audio cues as well as images. <em>People are really good at interpreting unstructured data</em>. And so one of the most exciting things about the rise of neural networks is that, thanks to deep learning, thanks to neural networks, computers are now much better at interpreting unstructured data as compared to just a few years ago. This creates opportunities for many new exciting applications that use speech recognition, image recognition, and natural language processing on text.</p>
+<p>Because people have a natural empathy to understanding unstructured data, you might hear about neural network successes on unstructured data more in the media because it's just cool when the neural network recognizes a cat. We all like that, and we all know what that means. But it turns out that a lot of short term economic value that neural networks are creating has also been on structured data, such as much better advertising systems, much better profit recommendations, and just a much better ability to process the giant databases that many companies have to make accurate predictions from them.</p>
+<p><a href="https://postimg.cc/image/5ty2jrutb/"><img alt="unstructured_vs_structured_data.png" src="https://s19.postimg.cc/66pgpyd37/unstructured_vs_structured_data.png" /></a></p>
+<h2 id="why-is-deep-learning-taking-off">Why is Deep Learning taking off?</h2>
+<p><em>If the basic technical details surrounding deep learning have been around for decades, why are they just taking off now?</em></p>
+<p>First and foremost, the massive amount of (labeled) data we have been generating for the past couple of decades (in part because of the 'digitization' of our society).</p>
+<p>It turns out, that large, complex neural networks can take advantage of these huge data stores. Thus, we often say <em>scale</em> has been driving progress with deep learning, where scale means the size of the data, the size/complexity of the neural network, and the growth in computation.</p>
+<p>The interplay between these 'scales' is apparent when you consider that many of the algorithmic advances of neural networks have come from making them more computational efficient.  </p>
+<p><strong>Algorithmic Advances: ReLu</strong></p>
+<p>One of the huge breakthroughs in neural networks has been the seemingly simple switch from the <strong>sigmoid</strong> activation function to the <strong>rectified linear</strong> (ReLu) activation function.</p>
+<p>One of the problems with using <strong>sigmoid</strong> functions is that its gradients approach 0 as input to the sigmoid function approaches and \(+\infty\) and \(-\infty\) . In this case, the updates to the parameters become very small and our learning slows dramatically.</p>
+<p>With ReLu units, our gradient is equal to \(1\) for all positive inputs. This makes learning with gradient descent much faster. See <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">here</a> for more information on ReLu's.</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Rectifier_and_softplus_functions.svg/640px-Rectifier_and_softplus_functions.svg.png?1527957850905" /></p>
+<p><strong>Scale Advances</strong></p>
+<p>With smaller training sets, the relative ordering of the algorithms is actually not very well defined so if you don't have a lot of training data it is often up to your skill at hand engineering features that determines the
+performance. For small training sets, it's quite possible that if someone training an SVM is more motivated to hand engineer features they will outperform a powerful neural network architecture.</p>
+<p><a href="https://postimg.cc/image/t6w42u0sf/"><img alt="scale.png" src="https://s19.postimg.cc/6i6x39jer/scale.png" /></a></p>
+<p>However, for very large training sets, <em>we consistently see large neural networks dominating the other approaches</em>.</p>
                 
                   
                 
@@ -546,14 +630,28 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
+          <a href="../.." title="About" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                About
+              </span>
+            </div>
+          </a>
         
-          <a href="neural_networks_and_deep_learning/week_1/" title="Week 1" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+        
+          <a href="../week_2/" title="Week 2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Week 1
+                Week 2
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -577,7 +675,7 @@
       
         
   <div class="md-footer-social">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.css">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
     
       <a href="https://github.com/JohnGiorgi" class="md-footer-social__link fa fa-github"></a>
     
@@ -590,9 +688,9 @@
       
     </div>
     
-      <script src="assets/javascripts/application.b41f3d20.js"></script>
+      <script src="../../assets/javascripts/application.b41f3d20.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
