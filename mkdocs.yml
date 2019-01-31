@@ -1,0 +1,53 @@
+# Project information
+site_name: 'Deeplearning.ai - Coursera Course Notes'
+site_author: 'John Giorgi'
+site_url: 'https://johngiorgi.github.io/deeplearning.ai-coursera-notes/'
+
+# Repository
+repo_name: 'JohnGiorgi/mathematics-for-machine-learning'
+repo_url: 'https://github.com/JohnGiorgi/deeplearning.ai-coursera-notes'
+
+# Configuration
+theme:
+  name: 'material'
+  language: 'en'
+  palette:
+    primary: 'Deep Orange'
+    accent: 'Deep Purple'
+
+# Customization
+extra:
+  social:
+    - type: 'github'
+      link: 'https://github.com/JohnGiorgi'
+
+extra_css:
+  - 'stylesheets/extra.css'
+
+extra_javascript:
+  # Add MathJax support
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+
+# Navigation
+nav:
+    - About: index.md
+    - Course 1 - Neural Networks and Deep Learning:
+      - Week 1: neural_networks_and_deep_learning/week_1.md
+      - Week 2: neural_networks_and_deep_learning/week_2.md
+      - Week 3: neural_networks_and_deep_learning/week_3.md
+      - Week 4: neural_networks_and_deep_learning/week_4.md
+
+    - Course 2 - Structuring Machine Learning Projects:
+      - Week 1: structuring_machine_learning_projects/week_1.md
+      - Week 2: structuring_machine_learning_projects/week_2.md
+    - Course 5 - Sequence Models:
+        - Week 1: sequence_models/week_1.md
+        - Week 2: sequence_models/week_2.md
+        - Week 3: sequence_models/week_3.md
+
+
+markdown_extensions:
+    - pymdownx.arithmatex
+    - pymdownx.details
+    - pymdownx.superfences
+    - admonition
