@@ -231,7 +231,7 @@ for \\(i=1\\) to \\(m\\):
   - \\(dw_j \text{+= } x_j^{(i)}dz^{(i)}\\)
 - \\(db \text{+= } dz^{(i)}\\)
 
-\\(J = J/m;\; dw_1 \text{=/ } m;\; dw_2 \text{=/ }  m;\;b \text{=/ }  m\\)
+\\(J \text{/= } m;\; dw_1 \text{/= } m;\; dw_2 \text{/= }  m;\;db \text{/= }  m\\)
 
 In plain english, for each training example, we use the sigmoid function to compute its activation, accumulate a loss for that example based on the current parameters, compute the derivative of the current cost function \\(w.r.t\\) the activation function, and update our parameters and bias. Finally we take the average of our cost function and our gradients.
 
