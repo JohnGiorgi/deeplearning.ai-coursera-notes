@@ -279,7 +279,7 @@ Our vectors are of the dimensions: \\(w \in \mathbb R^{n_x}\\), \\(b \in \mathbb
 
 Our parameter vector, bias vector, and design matrix are,
 
-\\(w = \begin{bmatrix}w_1 \\\\ ... \\\\ w_{n_x}\end{bmatrix}\\), \\(b = \begin{bmatrix}b_1 \\\\ ... \\\\ b_{n_x}\end{bmatrix}\\), \\(X = \begin{bmatrix}x^{(1)}_1 & ... & x^{(m)} \\\\ ... \\\\ x^{(1)}_{n_x}\end{bmatrix}\\)
+\\(w = \begin{bmatrix}w_1 \\\\ ... \\\\ w_{n_x}\end{bmatrix}\\), \\(b = \begin{bmatrix}b_1 \\\\ ... \\\\ b_{n_x}\end{bmatrix}\\), \\(X = \begin{bmatrix}x_1^{(1)} & ... & x_1^{(m)} \\\\ ... \\\\ x^{(1)}_{n_x}\end{bmatrix}\\)
 
 So, \\(w^T \cdot X + b = w^Tx^{(i)} + b\\) (for all \\(i\\)). Thus we can compute all \\(w^Tx^{(i)}\\) in one operation if we vectorize!
 
