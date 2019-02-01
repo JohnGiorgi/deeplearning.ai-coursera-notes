@@ -83,7 +83,7 @@ We have seen how to take a single input example \\(x\\) and compute \\(a^{[2]} =
 
 First, lets introduce a new notation. The activation values of layer \\(l\\) for input example \\(i\\) is:
 
-\\[ a^{[l](i)} \\]
+\\[ a^{[l] (i)} \\]
 
 The \\(m\\) predictions our 2-layered are therefore computed in the following way:
 
