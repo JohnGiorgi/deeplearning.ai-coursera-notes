@@ -231,7 +231,7 @@ for \\(i=1\\) to \\(m\\):
   - \\(dw_j \text{+= } x_j^{(i)}dz^{(i)}\\)
 - \\(db \text{+= } dz^{(i)}\\)
 
-\\(J = J/m;\; dw_1 \text{=/ } m;\; dw_2 \text{=/ }  m;\;b \text{=/ }  m\\)
+\\(J \text{/= } m;\; dw_1 \text{/= } m;\; dw_2 \text{/= }  m;\;db \text{/= }  m\\)
 
 In plain english, for each training example, we use the sigmoid function to compute its activation, accumulate a loss for that example based on the current parameters, compute the derivative of the current cost function \\(w.r.t\\) the activation function, and update our parameters and bias. Finally we take the average of our cost function and our gradients.
 
@@ -279,7 +279,7 @@ Our vectors are of the dimensions: \\(w \in \mathbb R^{n_x}\\), \\(b \in \mathbb
 
 Our parameter vector, bias vector, and design matrix are,
 
-\\(w = \begin{bmatrix}w_1 \\\\ ... \\\\ w_{n_x}\end{bmatrix}\\), \\(b = \begin{bmatrix}b_1 \\\\ ... \\\\ b_{n_x}\end{bmatrix}\\), \\(X = \begin{bmatrix}x^{(1)}_1 & ... & x^{(m)} \\\\ ... \\\\ x^{(1)}_{n_x}\end{bmatrix}\\)
+\\(w = \begin{bmatrix}w_1 \\\\ ... \\\\ w_{n_x}\end{bmatrix}\\), \\(b = \begin{bmatrix}b_1 \\\\ ... \\\\ b_{n_x}\end{bmatrix}\\), \\(X = \begin{bmatrix}x_1^{(1)} & ... & x_1^{(m)} \\\\ ... \\\\ x^{(1)}_{n_x}\end{bmatrix}\\)
 
 So, \\(w^T \cdot X + b = w^Tx^{(i)} + b\\) (for all \\(i\\)). Thus we can compute all \\(w^Tx^{(i)}\\) in one operation if we vectorize!
 

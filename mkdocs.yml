@@ -36,14 +36,13 @@ nav:
       - Week 2: neural_networks_and_deep_learning/week_2.md
       - Week 3: neural_networks_and_deep_learning/week_3.md
       - Week 4: neural_networks_and_deep_learning/week_4.md
-
-    - Course 2 - Structuring Machine Learning Projects:
+    - Course 3 - Structuring Machine Learning Projects:
       - Week 1: structuring_machine_learning_projects/week_1.md
       - Week 2: structuring_machine_learning_projects/week_2.md
     - Course 5 - Sequence Models:
-        - Week 1: sequence_models/week_1.md
-        - Week 2: sequence_models/week_2.md
-        - Week 3: sequence_models/week_3.md
+      - Week 1: sequence_models/week_1.md
+      - Week 2: sequence_models/week_2.md
+      - Week 3: sequence_models/week_3.md
 
 
 markdown_extensions:

@@ -83,7 +83,7 @@ We have seen how to take a single input example \\(x\\) and compute \\(a^{[2]} =
 
 First, lets introduce a new notation. The activation values of layer \\(l\\) for input example \\(i\\) is:
 
-\\[ a^{[l](i)} \\]
+\\[ a^{[l] (i)} \\]
 
 The \\(m\\) predictions our 2-layered are therefore computed in the following way:
 
@@ -257,9 +257,9 @@ We are going to simply present the formulas you need, and defer their explanatio
 And the vectorized implementation of our computations in our __forward propagation__
 
 1.\\[Z^{[1]} = W^{[1]}X + b^{[1]}\\]
-2.\\[A^{[1]} = g^{[1]}(z^{[1]})\\]
-3.\\[Z^{[2]} = W^{[2]}X + b^{[2]}\\]
-4.\\ß[A^{[2]} = g^{[2]}(z^{[2]})\\]
+2.\\[A^{[1]} = g^{[1]}(Z^{[1]})\\]
+3.\\[Z^{[2]} = W^{[2]}A^{[1]} + b^{[2]}\\]
+4.\\[A^{[2]} = g^{[2]}(Z^{[2]}) = \sigma(Z^{[2]})\\]
 
 > Where \\(g^{[2]}\\) would likely be the sigmoid function if we are doing binary classification.
 
