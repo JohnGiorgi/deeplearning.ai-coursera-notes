@@ -52,7 +52,7 @@ For a \\(l\\)-layered neural network, our dimensions are as follows:
 
 Where \\(n^{[l]}\\) is the number of units in layer \\(l\\).
 
-> See [this](https://www.coursera.org/learn/neural-networks-deep-learning/lecture/rz9xJ/why-deep-representations) video for a derivation of these dimensions.
+> See [this](https://www.coursera.org/learn/neural-networks-deep-learning/lecture/Rz47X/getting-your-matrix-dimensions-right) video for a derivation of these dimensions.
 
 When implementing backpropagation, the dimensions are the same, i.e., the dimensions of \\(W\\), \\(b\\), \\(A\\) and \\(Z\\) are the same as \\(dW\\), \\(db\\), ...
 
