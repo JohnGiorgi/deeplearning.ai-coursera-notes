@@ -97,7 +97,7 @@ __Forward Propagation__
 - Linear function: \\(z^{[l]} = W^{[l]}a^{[l-1] + b^{[l]}}\\)
 - Activation function: \\(a^{[l]} = g^{[l]}(z^{[l]})\\)
 
-Because \\(z^{[l]}, W^{[l]} and b^{[l]}\\) are used in then backpropagation steps, it helps to cache theses values during forward propagation.
+Because \\(z^{[l]}, W^{[l]}, b^{[l]}\\) are used in then backpropagation steps, it helps to cache these values during forward propagation.
 
 __Backwards Propagation__
 
@@ -124,7 +124,7 @@ Examples include:
 - number of hidden units \\(n^{[1]}, n^{[2]}, ...\\)
 - choice of activation function
 
-> the learning rate is sometimes called a parameter. We will follow the convetion of calling it a hyperparameter.
+> the learning rate is sometimes called a parameter. We will follow the convention of calling it a hyperparameter.
 
 It can be difficult to know the optimal hyperparameters in advance. Often, we start by simply trying out many values to see what works best, this allows us to build our intuition about the best hyperparameters to use. We will defer a deep discussion on how to choose hyperparameters to the next course.
 
