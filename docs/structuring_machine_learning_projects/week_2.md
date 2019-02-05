@@ -166,7 +166,7 @@ The differences between these errors give us a sense about the **avoidable bias*
 - training error \\(\lt \lt\\) train-dev error: variance problem
 - training error \\(\approx\\) train-dev error \\(\lt \lt\\) dev error: data mismatch problem.
 
-### More general formation
+### More general formulation
 
 We can organize these metrics into a table; where the columns are different datasets (if you have more than one) and the rows are the error for examples the algorithm _was_ trained on and examples the algorithm _was not_ trained on.
 
