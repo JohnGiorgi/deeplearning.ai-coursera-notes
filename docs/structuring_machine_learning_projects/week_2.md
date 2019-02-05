@@ -15,7 +15,7 @@ This is where **error analysis** is particularly useful. In this example, we mig
 
 Lets say we find that 5/100 (5%) mislabeled dev set example are dogs. Thus, the best we could hope to do (if we were to _completely_ solve the dog problem) is decrease our error from 10% to 9.5% (a 5% relative drop in error.) We conclude that _this is likely not the best use of our time_. Sometimes, this is called the __ceiling__, i.e., the _maximum_ amount of improvement we can expect from _some change_ to our algorithm/dataset.
 
-Suppose instead we find 50/500 (50%) mislabeled dev set examples are dogs. Thus, if we solve the dog problem, we could decrease our error from 10% to 5% (a 50% relative drop in error.) We conclude that _solving the dog problem is likely a good use of our time_.
+Suppose instead we find 50/100 (50%) mislabeled dev set examples are dogs. Thus, if we solve the dog problem, we could decrease our error from 10% to 5% (a 50% relative drop in error.) We conclude that _solving the dog problem is likely a good use of our time_.
 
 !!! note
     Notice the disproportionate 'payoff' here. It may take < 10 min to manually examine 100 examples from our dev set, but the exercise offers _major_ clues as to where to focus our efforts.
