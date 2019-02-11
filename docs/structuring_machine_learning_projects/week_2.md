@@ -30,7 +30,7 @@ Lets, continue with our cat detection example. Sometimes we might want to evalua
 
 What can do is create a table, where the _rows_ represent the images we plan on evaluating manually, and the _columns_ represent the categorizes we think the algorithm may be misrecognizing. It is also helpful to add comments describing the the misclassified example.
 
-![](https://s19.postimg.org/thwsxyhrn/Screen_Shot_2018-02-24_at_9.39.51_AM.png)
+![](https://i.postimg.cc/7hHSnxTv/Screen-Shot-2018-02-24-at-9-39-51-AM.png)
 
 As you are part-way through this process, you may also notice another common category of mistake, which you can add to this manual evaluation and repeat.
 
@@ -128,7 +128,7 @@ In order to tease out these which of these is conributing to the drop in perfrom
 
 Heres what we mean, previously we had train/dev/test sets. What we are going to do instead is randomly shuffle the training set and carve out a part of this shuffled set to be the **training-dev**.
 
-![](https://s19.postimg.org/hytnawr6r/Screen_Shot_2018-02-25_at_12.10.35_PM.png)
+![](https://i.postimg.cc/tgHcQmhz/train-dev-set.png)
 
 !!! note
     Just as the dev/test sets have the same distribution, the train-dev set and train set have the same distribution.
@@ -170,7 +170,7 @@ The differences between these errors give us a sense about the **avoidable bias*
 
 We can organize these metrics into a table; where the columns are different datasets (if you have more than one) and the rows are the error for examples the algorithm _was_ trained on and examples the algorithm _was not_ trained on.
 
-![](https://s19.postimg.org/bfl8ak6xv/Screen_Shot_2018-02-25_at_4.34.00_PM.png)
+![](https://i.postimg.cc/3xf5C2Hs/general-error-formation.png)
 
 ## Addressing data mismatch
 
@@ -219,7 +219,7 @@ We have a couple options on how we retrain the dataset.
 !!! note
     Sometimes, we call the process of training on the first dataset __pre-training__, and the process of training on the second dataset __fine-tuning__.
 
-![](https://s19.postimg.org/ale9bpes3/Screen_Shot_2018-02-26_at_6.26.15_PM.png)
+![](https://i.postimg.cc/7ZLRxTc5/transfer-learning.png)
 
 The idea is that learning from a very large image data set allows us to transfer some fundamental knowledge for the task of computer vision (i.e., extracting features such as lines/edges, small objects, etc.)
 
@@ -253,7 +253,7 @@ Our input to the learning algorithm could be a single image, our our label for t
 
 Our neural network architecture would then involve a single input and output layer. The twist is that the output layer would have \\(j\\) number of nodes, one per object we want to recognize.
 
-![](https://s19.postimg.org/et91kny9v/Screen_Shot_2018-02-26_at_7.23.04_PM.png)
+![](https://i.postimg.cc/Y09rNS0j/multi-task.png)
 
 To account for this, our cost function will need to sum over the individual loss functions for each of the objects we wish to recongize:
 
@@ -293,7 +293,7 @@ Traditionally, speech recognition involved many stages of processing:
 
 In contrast to this step-by-step pipeline, __end-to-end deep learning__ seeks to model all these tasks with a single network given a set of inputs.
 
-![](https://s19.postimg.org/cg5t1jlur/Screen_Shot_2018-02-27_at_8.53.09_PM.png)
+![](https://i.postimg.cc/wjZRRWKN/step-by-step-vs-end-to-end.png)
 
 The more traditional, **hand-crafted** approach tends to _outperform_ the **end-to-end approach** when _our dataset is small_, but this relationship flips as the dataset grows larger. Indeed, one of the biggest barriers to using end-to-end deep learning approaches is that large datasets which map our input to our final downstream task are _rare_.
 
