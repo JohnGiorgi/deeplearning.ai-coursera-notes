@@ -1066,7 +1066,7 @@
 <li>improve performance on blurry images</li>
 </ul>
 <p>What can do is create a table, where the <em>rows</em> represent the images we plan on evaluating manually, and the <em>columns</em> represent the categorizes we think the algorithm may be misrecognizing. It is also helpful to add comments describing the the misclassified example.</p>
-<p><img alt="" src="https://s19.postimg.org/thwsxyhrn/Screen_Shot_2018-02-24_at_9.39.51_AM.png" /></p>
+<p><img alt="" src="https://i.postimg.cc/7hHSnxTv/Screen-Shot-2018-02-24-at-9-39-51-AM.png" /></p>
 <p>As you are part-way through this process, you may also notice another common category of mistake, which you can add to this manual evaluation and repeat.</p>
 <p><em>The conclusion of this process is estimates for:</em></p>
 <ul>
@@ -1141,7 +1141,7 @@
 </ol>
 <p>In order to tease out these which of these is conributing to the drop in perfromsnce from our train to dev set, it will be useful to define a new piece of data which we'll call the <strong>training-dev</strong> set: a new subset of data with the same distribution as the training set, but not used for training.</p>
 <p>Heres what we mean, previously we had train/dev/test sets. What we are going to do instead is randomly shuffle the training set and carve out a part of this shuffled set to be the <strong>training-dev</strong>.</p>
-<p><img alt="" src="https://s19.postimg.org/hytnawr6r/Screen_Shot_2018-02-25_at_12.10.35_PM.png" /></p>
+<p><img alt="" src="https://i.postimg.cc/tgHcQmhz/train-dev-set.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Just as the dev/test sets have the same distribution, the train-dev set and train set have the same distribution.</p>
@@ -1177,7 +1177,7 @@
 </ul>
 <h3 id="more-general-formation">More general formation</h3>
 <p>We can organize these metrics into a table; where the columns are different datasets (if you have more than one) and the rows are the error for examples the algorithm <em>was</em> trained on and examples the algorithm <em>was not</em> trained on.</p>
-<p><img alt="" src="https://s19.postimg.org/bfl8ak6xv/Screen_Shot_2018-02-25_at_4.34.00_PM.png" /></p>
+<p><img alt="" src="https://i.postimg.cc/3xf5C2Hs/general-error-formation.png" /></p>
 <h2 id="addressing-data-mismatch">Addressing data mismatch</h2>
 <p>If your training set comes from a different distribution, than your dev and test set, and if error analysis shows you that you have a data mismatch problem, what can you do? Unfortunately, there are not (completely) systematic solutions to this, but let's look at some things you could try.</p>
 <p><em>Some recommendations:</em></p>
@@ -1213,7 +1213,7 @@
 <p class="admonition-title">Note</p>
 <p>Sometimes, we call the process of training on the first dataset <strong>pre-training</strong>, and the process of training on the second dataset <strong>fine-tuning</strong>.</p>
 </div>
-<p><img alt="" src="https://s19.postimg.org/ale9bpes3/Screen_Shot_2018-02-26_at_6.26.15_PM.png" /></p>
+<p><img alt="" src="https://i.postimg.cc/7ZLRxTc5/transfer-learning.png" /></p>
 <p>The idea is that learning from a very large image data set allows us to transfer some fundamental knowledge for the task of computer vision (i.e., extracting features such as lines/edges, small objects, etc.)</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1238,7 +1238,7 @@
 <p>E.g., a \(0\) at the first index of \(y^{(i)}\) might specify absence of a pedestrian in the image.</p>
 </div>
 <p>Our neural network architecture would then involve a single input and output layer. The twist is that the output layer would have \(j\) number of nodes, one per object we want to recognize.</p>
-<p><img alt="" src="https://s19.postimg.org/et91kny9v/Screen_Shot_2018-02-26_at_7.23.04_PM.png" /></p>
+<p><img alt="" src="https://i.postimg.cc/Y09rNS0j/multi-task.png" /></p>
 <p>To account for this, our cost function will need to sum over the individual loss functions for each of the objects we wish to recongize:</p>
 <p>\[Cost = \frac{1}{m}\sum^m_{i=1}\sum^m_{j=1}\ell(\hat y_j^{(i)}, y_j^{(i)})\]</p>
 <div class="admonition note">
@@ -1269,7 +1269,7 @@
 <li>Concatenate these phonemes to form words and then transcripts</li>
 </ol>
 <p>In contrast to this step-by-step pipeline, <strong>end-to-end deep learning</strong> seeks to model all these tasks with a single network given a set of inputs.</p>
-<p><img alt="" src="https://s19.postimg.org/cg5t1jlur/Screen_Shot_2018-02-27_at_8.53.09_PM.png" /></p>
+<p><img alt="" src="https://i.postimg.cc/wjZRRWKN/step-by-step-vs-end-to-end.png" /></p>
 <p>The more traditional, <strong>hand-crafted</strong> approach tends to <em>outperform</em> the <strong>end-to-end approach</strong> when <em>our dataset is small</em>, but this relationship flips as the dataset grows larger. Indeed, one of the biggest barriers to using end-to-end deep learning approaches is that large datasets which map our input to our final downstream task are <em>rare</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
