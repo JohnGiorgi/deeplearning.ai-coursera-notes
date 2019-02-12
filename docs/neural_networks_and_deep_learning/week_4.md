@@ -68,7 +68,7 @@ The next layer can use the outputs from the previous layer, which can roughly be
 
 Finally, the output layer uses the output of the previous layer, detected features of a face, and compose them together to recognize a whole face.
 
-[![deep_representations.png](https://s19.postimg.cc/57hzx2doj/deep_representations.png)](https://postimg.cc/image/slpz8zvlr/)
+![deep_representations.png](../img/deep-representations.png)
 
 > The main intuition is that earlier layers detect "simpler" structures, and pass this information onto the next layer which can use it to detect increasingly complex structures.
 
@@ -84,7 +84,7 @@ Circuit theory also provides us with a possible explanation as to why deep netwo
 
 Lets take a more holistic approach and talk about all the building blocks of deep neural networks. Here is a deep neural network with a few hidden layers
 
-[![simple_deep_nn_2.png](https://s19.postimg.cc/wtuvboc5v/simple_deep_nn_2.png)](https://postimg.cc/image/fgkkwtgun/)
+![simple_deep_nn_2.png](../img/simple-deep-nn-2.png)
 
 Lets pick one layer, \\(l\\) and look at the computations involved.
 
@@ -106,7 +106,7 @@ __Backwards Propagation__
 
 The key insight, is that for every computation in forward propagation there is a corresponding computation in backwards propagation
 
-[![forward_backward.png](https://s19.postimg.cc/nfx5yyrtf/forward_backward.png)](https://postimg.cc/image/ct3ctjjnz/)
+![forward_backward.png](../img/forward-backward.png)
 
 So one iteration of training with a neural network involves feeding our inputs into the network (\\(a^{[0]})\\), performing forward propagation computing \\(\hat y\\), and using it to compute the loss and perform backpropagation through the network. This will produce all the derivatives of the parameters w.r.t the loss that we need to update the parameters for gradient descent.
 

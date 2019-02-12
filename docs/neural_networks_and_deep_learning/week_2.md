@@ -24,7 +24,7 @@ Given an input feature vector \\(x\\) (perhaps corresponding to an images flatte
 
 The parameters of our model are \\(w \in \mathbb R^{n_x}\\) , \\(b \in \mathbb R\\) . Our output is \\(\hat y = \sigma(w^Tx + b)\\) were \\(\sigma\\) is the __sigmoid function__.
 
-![sigmoid](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/640px-Logistic-curve.svg.png)
+![sigmoid](../img/sigmoid.png)
 
 The formula for the sigmoid function is given by: \\(\sigma(z) = \frac{1}{1 + e^{-z}}\\) where \\(z = w^Tx + b\\) . We notice a few things:
 
@@ -62,7 +62,7 @@ Note that the __loss function__ measures how well we are doing on a _single exam
 
 We want to find \\(w,b\\) which minimize \\(J(w,b)\\) . We can plot the __cost function__ with \\(w\\) and \\(b\\) as our horizontal axes:
 
-[![cost_surface.png](https://s19.postimg.cc/pna6cuy0z/cost_surface.png)](https://postimg.cc/image/a1suswm2n/)
+![cost_surface.png](../img/cost-surface.png)
 
 > In practice, \\(w\\) typically has many more dimensions.
 
@@ -81,7 +81,7 @@ Repeat
 
 > \\(\alpha\\) is our learning rate, it controls how big a step we take on each iteration. In some notations, we use \\(\partial\\) to denote the partial derivative of a function with \\(2\\) or more variables, and \\(d\\) to denote the derivative of a function of only \\(1\\) variable.
 
-[![gradient_descent.png](https://s19.postimg.cc/a1susyr8j/gradient_descent.png)](https://postimg.cc/image/y5jmh99pb/)
+![gradient_descent.png](../img/gradient-descent.png)
 
 When implementing gradient descent in code, we will use the variable \\(dw\\) to represent \\(\frac{dJ(w, b)}{dw}\\) (this size of the step for \\(w\\) and \\(db\\) to represent \\(\frac{dJ(w, b)}{db}\\) (the size of the step for \\(b\\) .
 
@@ -93,7 +93,7 @@ __Intuition about derivatives__
 
 Take the function \\(f(a) = 3a\\). Then \\(f(a) = 6\\) when \\(a = 2\\) . If we were to give \\(a\\) a tiny nudge, say to \\(a = 2.001\\) , what happens to \\(f(a)\\) ?
 
-[![derivative.png](https://s19.postimg.cc/wdqnmadgz/derivative.png)](https://postimg.cc/image/4qdy86sa7/)
+![derivative.png](../img/derivative.png)
 
 Then \\(f(a) = 6.003\\) , but more importantly if we inspect the triangle formed by performing the nudge, we can get the slope of the function between \\(a\\) and \\(a + 0.001\\) as the \\(\frac{height}{width} = 3\\) .
 
@@ -106,7 +106,7 @@ Thus, the __derivative__ (or slope) of \\(f(a)\\) _w.r.t_ \\(a\\) is \\(3\\) . W
 
 Take the function \\(f(a) = a^2\\) . Then \\(f(a) = 4\\) when \\(a = 2\\) . If we were to give \\(a\\) a tiny nudge, say to \\(a = 2.001\\), what happens to \\(f(a)\\)?
 
-[![more_derivatives.png](https://s19.postimg.cc/535ceh5g3/more_derivatives.png)](https://postimg.cc/image/89zvy3pvz/)
+![more_derivatives.png](../img/more-derivatives.png)
 
 Then \\(f(a) = 4.004\\), but more importantly if we inspect the triangle formed by performing the nudge, we can get the slope of the function between \\(a\\) and \\(a + 0.001\\) as the \\(\frac{height}{width} = 4\\) .
 
@@ -126,7 +126,7 @@ Say we are trying to compute a function \\(J(a,b,c) = 3(a + bc)\\) . This comput
 
 We can draw this computation in a graph:
 
-[![computation_graph.png](https://s19.postimg.cc/qcsyp86ab/computation_graph.png)](https://postimg.cc/image/r2br1l6tr/)
+![computation_graph.png](../img/computation-graph.png)
 
 The computation graph is useful when you have some variable or output variable that you want to optimize (\\(J\\) in this case, in logistic regression it would be our _cost function output_). A _forward pass_ through the graph is represented by _left-to-right_ arrows (as drawn above) and a _backwards pass_ is represented by _right-to-left_ arrows.
 
@@ -138,7 +138,7 @@ Lets take a look at our computation graph, and see how we can use it to compute 
 
 > Informally, you can think of this as asking: "If we were to change the value of \\(v\\) slightly, how would \\(J\\) change?"
 
-[![clean_computation_graph.png](https://s19.postimg.cc/q01kj10v7/clean_computation_graph.png)](https://postimg.cc/image/iwtp3evfj/)
+![clean_computation_graph.png](../img/clean-computation-graph.png)
 
 First, we use our informal way of computing derivatives, and note that a small change to \\(v\\) results in a change to \\(J\\) of 3X that small change, and so \\(\frac{dJ}{dv} = 3\\) . This represents one step in our backward pass, the first step in backpropagation.
 
@@ -174,7 +174,7 @@ Logistic regression recap:
 
 For this example, lets assume we have only two features: \\(x_1\\), \\(x_2\\) . Our computation graph is thus:
 
-[![computation_graph_logression.png](https://s19.postimg.cc/jz3vlzgtv/computation_graph_logression.png)](https://postimg.cc/image/le5gaphwv/)
+![computation_graph_logression.png](../img/computation-graph-logression.png)
 
 
 Our goal is to modify the parameters to minimize the loss \\(\ell\\) . This translates to computing derivatives \\(w.r.t\\) the loss function. Following our generic example above, we can compute all the relevant derivatives using the chain rule. The first two passes are computed by the following derivatives:
@@ -317,14 +317,14 @@ Finally, we compare our non-vectorized approach to linear regression vs our vect
 
 Non-vectorized Approach       | Vectorized Approach 	|
 |:-------------------------:|:-------------------------:|
-|[![gd_no_vectorization.png](https://s19.postimg.cc/w0z9g6nib/gd_no_vectorization.png)](https://postimg.cc/image/shdbqdksf/)| [![gd_vectorization.png](https://s19.postimg.cc/pna6cxawj/gd_vectorization.png)](https://postimg.cc/image/u96al9wfj/)|
+|![gd_no_vectorization.png](../img/gd-no-vectorization.png)| ![gd_vectorization.png](../img/gd-vectorization.png)|
 |Two for loops, one over the training examples \\(x^{(i)}\\) and a second over the features \\(x^{(i)}_j\\) . We have omitted the outermost loop that iterates over gradient steps. | Note that, we still need a single for loop to iterate over each gradient step (regardless if we are using stochastic or mini-batch gradient descent) even in our vectorized approach. |
 
 #### Broadcasting
 
 Lets motivate the usefulness of __broadcasting__ with an example. Lets say you wanted to get the percent of total calories from carbs, proteins, and fats for multiple foods.
 
-[![food_matrix.png](https://s19.postimg.cc/q01kj1vqb/food_matrix.png)](https://postimg.cc/image/le5gapa73/)
+![food_matrix.png](../img/food-matrix.png)
 
 _Can we do this without an explicit for loop?_
 

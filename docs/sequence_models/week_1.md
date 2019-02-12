@@ -60,8 +60,7 @@ The goal is to learn a mapping from each $x^{<t>}$ to some __tag__ (i.e. PERSON)
 
 In our previous example, we had 9 input words. You could imagine taking these 9 input words (represented as one-hot encoded vectors) as inputs to a "standard" neural network
 
-
-![](https://s19.postimg.cc/x6zs848qr/Screen_Shot_2018-05-31_at_7.33.26_PM.png)
+![standard-nn-for-rnn.png](../img/standard-nn-for-rnn.png)
 
 This turns out _not_ to work well. There are two main problems:
 
@@ -72,14 +71,14 @@ This turns out _not_ to work well. There are two main problems:
 
 Unlike a "standard" neural network, **recurrent neural networks** (**RNN**) accept input from the _previous_ timestep in a sequence. For our example $x$ above, the _unrolled_ RNN diagram might look like the following:
 
-![](https://s19.postimg.cc/zaa7gd103/Screen_Shot_2018-05-31_at_7.56.19_PM.png)
+![RNN-hand-drawn.png](../img/RNN-hand-drawn.png)
 
 !!! note
     Timestep 0 is usually initialized with a fake vector of 0's
 
 Note that the diagram is sometimes drawn like this:
 
-![](https://s19.postimg.cc/db3st5rvn/Screen_Shot_2018-05-31_at_7.50.01_PM.png)
+![RNN-single-hand-drawn.png](../img/RNN-single-hand-drawn.png)
 
 Where the little black box represented a delay of _1 timestep_.
 
@@ -110,7 +109,7 @@ And the task of __named entity recognition__ (__NER__), it would be really usefu
 
 Lets dig deeper into how a RNN works. First, lets start with a cleaned up depiction of our network
 
-![](https://s19.postimg.cc/67vxdf4er/Screen_Shot_2018-06-01_at_10.06.12_AM.png)
+![standard-nn-for-rnn-example.png](../img/standard-nn-for-rnn-example.png)
 
 ##### Forward Propagation
 
@@ -165,7 +164,7 @@ We have seen at a high-level how forward propagation works for an RNN. Essential
 
 More explicitly, we can represent the process of foward propogation as a series of matrix multiplications in diagram form:
 
-![](https://s19.postimg.cc/u058ol3r7/Screen_Shot_2018-06-01_at_1.06.39_PM.png)
+![forward-prop-rnns.png](../img/forward-prop-rnns.png)
 
 ### Backward propogation through time (BPTT)
 
@@ -181,7 +180,7 @@ $$\ell = \sum_{t=1}^{T_y}\ell^{<t>}(\hat y^{<t>}, y^{<t>})$$
 
 While not covered in detail here, BPTT simply involves applying our loss function to each prediction at each timestep, and then using this information along with the chain rule to compute the gradients we will need to update our parameters and _assign blame proportionally_. The entire process might look something like the following:
 
-![](https://s19.postimg.cc/44li5lc9v/Screen_Shot_2018-06-01_at_1.17.38_PM.png)
+![BPTT.png](../img/BPTT.png)
 
 ## Different types of RNNs
 
@@ -195,39 +194,39 @@ $x$: "There is nothing to like in this movie"
 
 We want our network to output a single prediction from 1-5. This is an example of a __many-to-one__ architecture.
 
-![](https://s19.postimg.cc/qukmyfy0j/Screen_Shot_2018-06-01_at_1.32.36_PM.png)
+![many-to-one.png](../img/many-to-one.png)
 
 Another type of RNN architecture is __one-to-many__. An example of this architecture is __music generation__, where we might input an integer (indicating a genre) or the 0-vector (no input) and generate musical notes as our output. In this case, we input a single value to the network at timestep 1, and then propagate that input through the network (the remaining timesteps), with the caveat that in this architecture, we often take the ouput from the previous timestep and feed it to the next timestep:
 
-![](https://s19.postimg.cc/4imu5141f/Screen_Shot_2018-06-01_at_1.39.52_PM.png)
+![one-to-many.png](../img/one-to-many.png)
 
 The final example is a __many-to-many__ architecture. Unlike our previous example where $T_x == T_y$, in machine translation $T_x \not = T_y$, as the number of words in the input sentence (say, in _english_) is not necessarily the same as the output sentence (say, in _french_). These problems are typicaly solved with __sequence to sequence models__, that are composed of distinct __encoder__ and __decoder__ RNNs.
 
-![](https://s19.postimg.cc/mlfwwes83/Screen_Shot_2018-06-01_at_1.47.32_PM.png)
+![seq2seq-machine-translation-ex.png](../img/seq2seq-machine-translation-ex.png)
 
 ### Summary of RNN types
 
 1. **One-to-one**: a standard, generic neural network. Strictly speaking, you wouldn't model this problem with an RNN.
 
-![](https://s19.postimg.cc/g7qtta5df/Screen_Shot_2018-06-01_at_1.49.36_PM.png)
+![one-to-one.png](../img/one-to-one.png)
 
 2. __One-to-many__: Where our input is a single value (or in some cases, a null input represented by the 0-vector) which propogates through the network and our output is a sequence. Often, we use the prediction from the previous timestep when computing the hidden activations. An example is _music generation_ or _sequence generation_ more generally.
 
-![](https://s19.postimg.cc/efxuyd6kz/Screen_Shot_2018-06-01_at_1.51.52_PM.png)
+![one-to-many-clean.png](../img/one-to-many-clean.png)
 
 3. __Many-to-one__: Where our input is a sequence and our output is a single value. Typically we take the prediction from the last timestep of the RNN. An example is _sentiment classification_
 
-![](https://s19.postimg.cc/9u1qq0dc3/Screen_Shot_2018-06-01_at_1.53.11_PM.png)
+![many-to-one-clean.png](../img/many-to-one-clean.png)
 
 4. __Many-to-many__: Where both our input and outputs are sequences. These sequence are not necessarily the same length ($T_x \not = T_y$).
 
   - When $T_x == T_y$ our architecture looks like a standard RNN:
 
-![](https://s19.postimg.cc/5xoetzxhf/Screen_Shot_2018-06-01_at_1.55.17_PM.png)
+![many-to-many-clean.png](../img/many-to-many-clean.png)
 
   - and when $T_x \not = T_y$ are architecture is a _sequence to sequence_ model which looks like:
 
-![](https://s19.postimg.cc/585mhn4nn/Screen_Shot_2018-06-01_at_1.55.13_PM.png)
+![many-to-many-clean-2.png](../img/many-to-many-clean-2.png)
 
 ## Language model and sequence generation
 
@@ -273,7 +272,7 @@ At the second timestep, we will actually feed the first token in the sequence as
 
 The full model looks something like:
 
-[![Screen_Shot_2018-06-01_at_6.40.05_PM.png](https://s19.postimg.cc/5c8mpbc0z/Screen_Shot_2018-06-01_at_6.40.05_PM.png)](https://postimg.cc/image/sqgm18ty7/)
+![RNN-language-model.png](../img/RNN-language-model.png)
 
 There are two important steps in this process:
 
@@ -305,7 +304,7 @@ We start by computing the activation $a^{<1>}$ as a function of some inputs $x^{
 
 The entire procedure looks something like:
 
-[![Screen_Shot_2018-06-02_at_12.31.59_PM.png](https://s19.postimg.cc/c2gdqplyb/Screen_Shot_2018-06-02_at_12.31.59_PM.png)](https://postimg.cc/image/cf7rww47z/)
+![sequence-generation-hand-drawn.png](../img/sequence-generation-hand-drawn.png)
 
 _How do we know when the sequence ends_?
 
@@ -330,7 +329,7 @@ However, using a _character_-level language models has the benefit of avoiding t
 
 One of the problems with the basic RNN algorithm is the __vanishing gradient problem__. The RNN architecture as we have described it so far:
 
-[![Screen_Shot_2018-06-02_at_12.57.39_PM.png](https://s19.postimg.cc/xddxv1wdv/Screen_Shot_2018-06-02_at_12.57.39_PM.png)](https://postimg.cc/image/th0lz2be7/)
+![rnn-clean.png](../img/rnn-clean.png)
 
 Take the following two input examples:
 
@@ -363,7 +362,7 @@ $$a^{<t>} = g(W_a[a^{<t-1>}, x^{<t>}] + b_a)$$
 
 As a picture:
 
-[![rnn_unit_hand_drawn.png](https://s19.postimg.cc/5nwil5l9v/rnn_unit_hand_drawn.png)](https://postimg.cc/image/ceczul8fj/)
+![rnn_unit_hand_drawn.png](../img/rnn-unit-hand-drawn.png)
 
 !!! note
     Two papers were important for the development of GRUs: [Cho et al., 2014](https://arxiv.org/pdf/1406.1078v3.pdf) and [Chung et al., 2014](https://arxiv.org/pdf/1412.3555.pdf).
@@ -403,7 +402,7 @@ For our example sentence above, we might hope that the GRU would set $\Gamma_u =
 
 As a picture:
 
-[![gru_unit_hand_drawn.png](https://s19.postimg.cc/3xi2xfg9v/gru_unit_hand_drawn.png)](https://postimg.cc/image/v83e5cj6n/)
+![gru_unit_hand_drawn.png](../img/gru-unit-hand-drawn.png)
 
 !!! note
     The purple box just represents our calculation of $c^{<t>}$
@@ -496,14 +495,14 @@ Notice that with LSTMs, $a^{<t>} \not = c^{<t>}$. One new property of the LSTM i
 
 We can represent the LSTM unit in diagram form as follows:
 
-[![lstm_unit_clean.png](https://s19.postimg.cc/6bfomuc9v/lstm_unit_clean.png)](https://postimg.cc/image/f6gixd127/)
+![lstm_unit_clean.png](../img/lstm-unit-clean.png)
 
 !!! note
     See [here](https://colah.github.io/posts/2015-08-Understanding-LSTMs/) for an more detailed explanation of an LSTM unit.
 
 One thing you may notice is that if we draw out multiple units in temporal succession, it becomes clear how the LSTM is able to achieve something akin to "memory" over a sequence:
 
-[![multiple_lstm_units_clean.png](https://s19.postimg.cc/iq2gn6bhv/multiple_lstm_units_clean.png)](https://postimg.cc/image/mz76pcer3/)
+![multiple_lstm_units_clean.png](../img/multiple-lstm-units-clean.png)
 
 ### Modifications to LSTMs
 
@@ -521,14 +520,14 @@ $x^{(2)}$: _He said, "Teddy bears are on sale!"_
 
 Recall, that for the task of NER we established that correctly predicting the token _Teddy_ as a _person_ entity without seeing the words that follow it would be difficult.
 
-[![rnn_teddy_example.png](https://s19.postimg.cc/i4i34ql83/rnn_teddy_example.png)](https://postimg.cc/image/m0vf0q67j/)
+![rnn_teddy_example.png](../img/rnn-teddy-example.png)
 
 !!! note
     Note: this problem is independent of whether these are standard RNN, GRU, or LSTM units.
 
 A solution to this problem is to introduce another RNN in the opposite direction, going _backwards_ in time.
 
-[![bidirectional_rnn.png](https://s19.postimg.cc/99h8u7opv/bidirectional_rnn.png)](https://postimg.cc/image/o5fs1t04f/)
+![bidirectional_rnn.png](../img/bidirectional-rnn.png)
 
 During forward propogation, we compute activations as we have seen previously, with key difference being that we learn two series of activations: one from _left-to-right_ $\overrightarrow a^{<t>}$ and one from _right-to-left_ $\overleftarrow a^{<t>}$. What this allows us to do is learn the representation of each element in the sequence _within its context_. Explicitly, this is done by using the output of both the forward and backward units at each time step in order to make a prediction $\hat y^{<t>}$:
 
@@ -554,7 +553,7 @@ Recall, that for a standard neural network we have some input $x$ which is fed t
 
 A stacked RNN would thus look something like the following:
 
-[![deep_rnn_clean.png](https://s19.postimg.cc/qck0pmpyb/deep_rnn_clean.png)](https://postimg.cc/image/mg6otn4yn/)
+![deep_rnn_clean.png](../img/deep-rnn-clean.png)
 
 The computation of, for example, $a^{[2]<3>}$ would be:
 

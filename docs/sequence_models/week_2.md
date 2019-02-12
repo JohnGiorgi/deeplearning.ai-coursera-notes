@@ -25,7 +25,7 @@ And similarly, the [euclidean distance](http://www.wikiwand.com/en/Euclidean_dis
 
 To build our intuition of word embeddings, image a contrived example where we represent each word with some __feature representation__:
 
-[![word_embeddings_intro.png](https://s19.postimg.cc/6bvaxkjw3/word_embeddings_intro.png)](https://postimg.cc/image/5mcil7jcf/)
+![word_embeddings_intro.png](../img/word-embeddings-intro.png)
 
 We could imagine many features (with values -1 to 1, say) that can be used to build up a featue representation, an \\(f_n\\)-dimensional vector, of each word. Similarly to our one-hot representations, lets introduce a new notation \\(e_i\\) to represent the _embedding_ of token \\(i\\) in our vocabulary \\(V\\).
 
@@ -39,7 +39,7 @@ Thinking back to our previous example, notice that our representations for the t
 
 Once these feature vectors or _embeddings_ are learned, a popular thing to do is to use dimensionality reduction to _embed_ them into a 2D geometric space for easy visualization. An example of this using our word representations presented above:
 
-[![visualize_embeddings.png](https://s19.postimg.cc/e5vwinmgj/visualize_embeddings.png)](https://postimg.cc/image/ofybhwcbz/)
+![visualize_embeddings.png](../img/visualize-embeddings.png)
 
 We notice that semantically similar words tend to cluster together, and that each cluster seems to roughly represent some idea or concept (i.e., numbers typically cluster together). This demonstrates our ability to learn _similar_ feature vectors for _similar_ tokens and will allow our models to generalize between words and even sentences.
 
@@ -47,7 +47,7 @@ We notice that semantically similar words tend to cluster together, and that eac
 
 The reason this feature representations are called _embeddings_ is because we imagine that we are _embedding_ each word into a geometric space (say, of 300 dimensions). If you imagine a cube, we can think of giving each word a single unit of space within this cube.
 
-[![why_embeddings.png](https://s19.postimg.cc/ofybi1237/why_embeddings.png)](https://postimg.cc/image/llv64kzwv/)
+![why_embeddings.png](../img/why-embeddings.png)
 
 ## Introduction to word embeddings: Using word embeddings
 
@@ -57,7 +57,7 @@ In the last lecture, you saw what it might mean to learn a featurized representa
 
 Take again the example of named entity recognition, and image we have the following example:
 
-[![ner_word_emb_example.png](https://s19.postimg.cc/btx3cxm6b/ner_word_emb_example.png)](https://postimg.cc/image/9clc5o29r/)
+![ner_word_emb_example.png](../img/ner-word-emb-example.png)
 
 Let's assume we correctly identify "_Sally Johnson_" as a PERSON entity. Now imagine we see the following sequence:
 
@@ -91,7 +91,7 @@ By now, you should have a sense of how word embeddings can help you build NLP ap
 
 Let us return to our previous example:
 
-[![word_emb_analogies.png](https://s19.postimg.cc/b6y6n9cdv/word_emb_analogies.png)](https://postimg.cc/image/wglsy3sof/)
+![word_emb_analogies.png](../img/word-emb-analogies.png)
 
 Say we post the question: "_Man is to women as king is to **what**?_"
 
@@ -107,12 +107,12 @@ Explicitly, an algorithm to answer the question "_Man is to women as king is to 
 
 Lets try to visualize why this makes sense. Imagine our word embedding plotted as vectors in a 300D space (represented here in 2 dimensions for visualization). We would expect our vectors to line up in a parallelogram:
 
-[![visualize_word_emb_300d.png](https://s19.postimg.cc/f8f9t59w3/visualize_word_emb_300d.png)](https://postimg.cc/image/c1kq9ipfz/)
+![visualize_word_emb_300d.png](../img/visualize-word-emb-300d.png)
 
 
 Note that in reality, if you use a dimensionality reduction algorithm such as t-SNE, you will find that this expected relationship between words in an analogy does not hold:
 
-[![t-sne_visulize_word_emb.png](https://s19.postimg.cc/xb8ckcy0z/t-sne_visulize_word_emb.png)](https://postimg.cc/image/if9tcrmm7/)
+![t-sne_visulize_word_emb.png](../img/t-sne-visulize-word-emb.png)
 
 We want to find \\(e_w \approx e_{king} - e_{man} + e_{woman}\\). Our algorithm is thus:
 
@@ -165,7 +165,7 @@ We will introduce an early algorithm for learning word embeddings, which was ver
 
 One way to approach this problem is to lookup the embeddings for each word in the given sequence, and feed this to a densely connected layer which itself feeds to a single output unit with **softmax**.
 
-[![neural_language_model_ex.png](https://s19.postimg.cc/f1k49mn1f/neural_language_model_ex.png)](https://postimg.cc/image/78tghnh27/)
+![neural_language_model_ex.png](../img/neural-language-model-ex.png)
 
 Imagine our embeddings are 300 dimensions. Then our input layer is \\(\mathbb R^{6 \times 300}\\). Our dense layer and output softmax layer have their own parameters, \\(W^{[1]}, b^{[1]}\\) and \\(W^{[2]}, b^{[2]}\\). We can then use back-propagation to learn these parameters along with the embedding matrix. The reason this works is because the algorithm is incentivized to learn good word embeddings in order to generalize and perform well when predicting the next word in a sequence.
 
@@ -404,7 +404,7 @@ might incorrectly be predicted to correspond with a high star rating, because of
 
 A more sophisticated model involves using the embeddings as inputs to an RNN, which uses a softmax layer at the last timestep to predict a star rating:
 
-[![Screen_Shot_2018-06-14_at_7.18.52_PM.png](https://s19.postimg.cc/kisjwkxrn/Screen_Shot_2018-06-14_at_7.18.52_PM.png)](https://postimg.cc/image/5zlev64mn/)
+![rnn-for-sentiment-classification.png](../img/rnn-for-sentiment-classification.png)
 
 Recall that we actually saw this example when discussing many-to-one RNN architectures. Unlike the previous, simpler model, this model takes into account word order and performs much better on examples such as:
 
@@ -459,7 +459,7 @@ This process is a little complicated, but the end results is that these pairs of
 
 It turns out, the number of these pairs is very small. It is quite feasible to pick this out by hand.
 
-[![biased_embeddings.png](https://s19.postimg.cc/m4erkclpf/biased_embeddings.png)](https://postimg.cc/image/g3h2n9z33/)
+![biased_embeddings.png](../img/biased-embeddings.png)
 
 ### Summary
 

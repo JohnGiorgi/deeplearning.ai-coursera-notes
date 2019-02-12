@@ -15,7 +15,7 @@ Here are some more areas in which deep learning has had a huge impact:
 - __Machine translation__ translating one natural language to another.
 - __Autonomous driving__
 
-![](../img/supervised-learning.png)
+![supervised-learning.png](../img/supervised-learning.png)
 
 A lot of the value generation from using neural networks have come from intelligently choosing our \\(x\\) and \\(y\\) and learning a mapping.
 
@@ -30,7 +30,7 @@ or images. Here the features might be the pixel values in an image or the indivi
 
 Because people have a natural empathy to understanding unstructured data, you might hear about neural network successes on unstructured data more in the media because it's just cool when the neural network recognizes a cat. We all like that, and we all know what that means. But it turns out that a lot of short term economic value that neural networks are creating has also been on structured data, such as much better advertising systems, much better profit recommendations, and just a much better ability to process the giant databases that many companies have to make accurate predictions from them.
 
- [![unstructured_vs_structured_data.png](https://s19.postimg.cc/66pgpyd37/unstructured_vs_structured_data.png)](https://postimg.cc/image/5ty2jrutb/)
+ ![unstructured_vs_structured_data.png](../img/unstructured-vs-structured-data.png)
 
 ## Why is Deep Learning taking off?
 
@@ -50,13 +50,13 @@ One of the problems with using __sigmoid__ functions is that its gradients appro
 
 With ReLu units, our gradient is equal to \\(1\\) for all positive inputs. This makes learning with gradient descent much faster. See [here](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) for more information on ReLu's.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Rectifier_and_softplus_functions.svg/640px-Rectifier_and_softplus_functions.svg.png?1527957850905)
+![rectifier_and_softplus_functions.png](../img/rectifier_and_softplus_functions.png)
 
 __Scale Advances__
 
 With smaller training sets, the relative ordering of the algorithms is actually not very well defined so if you don't have a lot of training data it is often up to your skill at hand engineering features that determines the
 performance. For small training sets, it's quite possible that if someone training an SVM is more motivated to hand engineer features they will outperform a powerful neural network architecture.
 
- [![scale.png](https://s19.postimg.cc/6i6x39jer/scale.png)](https://postimg.cc/image/t6w42u0sf/)
+ ![scale.png](../img/scale.png)
 
 However, for very large training sets, _we consistently see large neural networks dominating the other approaches_.

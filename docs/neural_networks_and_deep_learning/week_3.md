@@ -6,8 +6,7 @@ Up until this point, we have used logistic regression as a stand-in for neural n
 
 Network       | Computation Graph 	|
 |:-------------------------:|:-------------------------:|
-|[![lr_overview.png](https://s19.postimg.cc/3o3rppemr/lr_overview.png)](https://postimg.cc/image/jmchfu8un/)|[![lr_overview_graph.png](https://s19.postimg.cc/mgfmtblbn/lr_overview_graph.png)](https://postimg.cc/image/cj4m09dpr/)|
-
+|![lr_overview.png](../img/lr-overview.png)|![lr_overview_graph.png](../img/lr-overview-graph.png)|
 
 > \\(a\\) and  \\(\hat y\\) are used interchangeably
 
@@ -15,7 +14,7 @@ A neural network looks something like this:
 
 Network       | Computation Graph 	|
 |:-------------------------:|:-------------------------:|
-|[![nn_overview.png](https://s19.postimg.cc/77ppfl9nn/nn_overview.png)](https://postimg.cc/image/c6d7u4dgf/)|[![nn_overview_graph.png](https://s19.postimg.cc/mt70ziygj/nn_overview_graph.png)](https://postimg.cc/image/535cehkvj/)|
+|![nn_overview.png](../img/nn-overview.png)|![nn_overview_graph.png](../img/nn-overview-graph.png)|
 
 > We typically don't distinguish between \\(z\\) and \\(a\\) when talking about neural networks, one neuron = one activation = one \\(a\\) like calculation.
 
@@ -31,7 +30,7 @@ Similar to the 'backwards' step that we discussed for logistic regression, we wi
 
 This is the canonical representation of a neural network
 
-[![neural_network_basics.png](https://s19.postimg.cc/vbgh3vcoz/neural_network_basics.png)](https://postimg.cc/image/4qdy8babj/)
+![neural_network_basics.png](../img/neural-network-basics.png)
 
 On the left, we have the __input features__ stacked vertically. This constitutes our __input layer__. The final layer, is called the __output layer__ and it is responsible for generating the predicted value \\(\hat y\\) . Any layer in between these two layers is known as a __hidden layer__. This name derives from the fact that the _true values_ of these hidden units is not observed in the training set.
 
@@ -47,7 +46,7 @@ We will use the example of a single hidden layer neural network to demonstrate t
 
 We can think of each unit in the neural network as performing two steps, the _multiplication of inputs by weights and the addition of a bias_, and the _activation of the resulting value_
 
-[![unit_breakdown.png](https://s19.postimg.cc/qquaof5oz/unit_breakdown.png)](https://postimg.cc/image/i8kuk2z67/)
+![unit_breakdown.png](../img/unit-breakdown.png)
 
 > Recall, that we will use a superscript, \\(^{[l]}\\) to denote values belonging to the \\(l-th\\) layer.
 
@@ -59,21 +58,21 @@ So, the \\(j^{th}\\) node of the \\(l^{th}\\) layer performs the computation
 
 for some input \\(x\\). With this notation, we can draw our neural network as follows:
 
-[![new_notation_nn.png](https://s19.postimg.cc/6i6x39r4j/new_notation_nn.png)](https://postimg.cc/image/f0gd7lxn3/)
+![new_notation_nn.png](../img/new-notation-nn.png)
 
 In order to easily vectorize the computations we need to perform, we designate a matrix \\(W^{[l]}\\) for each layer \\(l\\), which has dimensions _(number of units in current layer X number of units in previous layer)_
 
 We can vectorize the computation of \\(z^{[l]}\\) as follows:
 
-[![vectorized_z_nn.png](https://s19.postimg.cc/n78cynd9v/vectorized_z_nn.png)](https://postimg.cc/image/66pgpz08f/)
+![vectorized_z_nn.png](../img/vectorized-z-nn.png)
 
 And the computation of \\(a^{[l]}\\) just becomes the element-wise application of the sigmoid function:
 
-[![vectorized_a_nn.png](https://s19.postimg.cc/7yifkuh0j/vectorized_a_nn.png)](https://postimg.cc/image/n78cymaov/)
+![vectorized_a_nn.png](../img/vectorized-a-nn.png)
 
 We can put it all together for our two layer neural network, and outline all the computations using our new notation:
 
-[![putting_it_all_together_new_notation.png](https://s19.postimg.cc/5so4qvgab/putting_it_all_together_new_notation.png)](https://postimg.cc/image/h50q8noz3/)
+![putting_it_all_together_new_notation.png](../img/putting-it-all-together-new-notation.png)
 
 #### Vectorizing across multiple examples
 
@@ -87,7 +86,7 @@ First, lets introduce a new notation. The activation values of layer \\(l\\) for
 
 The \\(m\\) predictions our 2-layered are therefore computed in the following way:
 
-[![m_examples_nn.png](https://s19.postimg.cc/mt70zhvvn/m_examples_nn.png)](https://postimg.cc/image/i7awr5acf/)
+![m_examples_nn.png](../img/m-examples-nn.png)
 
 Recall that \\(X\\) is a \\((n_x, m)\\) design matrix, where each column is a single input example and \\(W^{[l]}\\) is a matrix where each row is the transpose of the parameter column vector for layer \\(l\\).
 
@@ -98,11 +97,11 @@ Thus, we can now compute the activation of a layer in the neural network for all
 
 As an example, the result of a matrix multiplication of \\(W^{[1]}\\) by \\(X\\) is a matrix with dimensions \\((j, m)\\) where \\(j\\) is the number of units in layer \\(1\\) and \\(m\\) is the number of input examples
 
-[![WX_vector.jpg](https://s19.postimg.cc/6w892blcj/WX_vector.jpg)](https://postimg.cc/image/un7mkfljj/)
+![WX_vector.jpg](../img/WX-vector.jpg)
 
 \\(A^{[l]}\\) is therefore a matrix of dimensions (size of layer \\(l\\) X \\(m\\)). The top-leftmost value is the activation for the first unit in the layer \\(l\\) for the first input example \\(i\\), and the bottom-rightmost value is the activation for the last unit in the layer \\(l\\) for the last input example \\(m\\) .
 
-[![vectorized_activations.png](https://s19.postimg.cc/dmoqbqt2r/vectorized_activations.png)](https://postimg.cc/image/o9ijh617z/)
+![vectorized_activations.png](../img/vectorized-activations.png)
 
 ### Activation Functions
 
@@ -118,7 +117,7 @@ The __hyperbolic tangent function__ is a non-linear activation function that alm
 
 \\[tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}\\]
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Sinh_cosh_tanh.svg/640px-Sinh_cosh_tanh.svg.png?1514655794955.png)
+![tanh.png](../img/tanh.png)
 
 > The tanh function is really just a shift of the sigmoid function so that it crosses through the origin.
 
@@ -138,7 +137,7 @@ The __rectified linear unit__ activation function solves the disappearing gradie
 
 \\[ReLu(z) = max(0, z)\\]
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Rectifier_and_softplus_functions.svg/640px-Rectifier_and_softplus_functions.svg.png?1528644452536)
+![rectifier_and_softplus_functions.png](../img/rectifier_and_softplus_functions.png)
 
 > Note: the derivative at exactly 0 is not well-defined. In practice, we can simply set it to 0 or 1 (it matters little, due to the unlikeliness of a floating point number to ever be \\(0.0000...\\) exactly).
 
@@ -146,7 +145,7 @@ One disadvantage of ReLu is that the derivative is equal to \\(0\\) when \\(z\\)
 
 \\[ReLu(z) = max(0.01 * z, z)\\]
 
-![](http://lamda.nju.edu.cn/weixs/project/CNNTricks/imgs/leaky.png)
+![](../img/leaky-relu.jpg)
 
 > Image sourced from [here](http://lamda.nju.edu.cn/weixs/project/CNNTricks/imgs/leaky.png).
 
@@ -161,7 +160,7 @@ __Why do you need non-linear activation functions?__
 
 We could imagine using some __linear__ activation function, \\(g(z) = z\\) in place of the __non-linear__ activation functions we have been using so far. Why is this a bad idea? Lets illustrate out explanation using our simple neural networks
 
-[![neural_network_basics.png](https://s19.postimg.cc/vbgh3vcoz/neural_network_basics.png)](https://postimg.cc/image/4qdy8babj/)
+![neural_network_basics.png](../img/neural-network-basics.png)
 
 For this linear activation function, the activations of our simple network become:
 
@@ -190,7 +189,7 @@ When performing back-propogation on a network, we need to compute the derivative
 
 __Sigmoid__
 
-[![sigmoid_deriv.png](https://s19.postimg.cc/dy66p1jyr/sigmoid_deriv.png)](https://postimg.cc/image/535ceiv67/)
+![sigmoid_deriv.png](../img/sigmoid-deriv.png)
 
 The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
 
@@ -202,7 +201,7 @@ Notice that if we have already computed the value of \\(a\\), we can very cheapl
 
 __Tanh__
 
-[![tanh_deriv.png](https://s19.postimg.cc/g2qjq510z/tanh_deriv.png)](https://postimg.cc/image/i7awr82nj/)
+![tanh_deriv.png](../img/tanh-deriv.png)
 
 The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
 
@@ -212,7 +211,7 @@ The deriviative of \\(g(z)\\), \\(g(z)'\\) is:
 
 __ReLu__
 
-[![relu_deriv.png](https://s19.postimg.cc/i7awr6scz/relu_deriv.png)](https://postimg.cc/image/iwtp3jswf/)
+![relu_deriv.png](../img/relu-deriv.png)
 
 The derivative of \\(g(z)\\), \\(g(z)'\\) is:
 
@@ -252,7 +251,7 @@ The key to gradient descent is to computation of the derivatives, \\(\frac{\part
 
 We are going to simply present the formulas you need, and defer their explanation to the next video. Recall the computation graph for our 2-layered neural network:
 
-[![nn_overview_graph.png](https://s19.postimg.cc/mt70ziygj/nn_overview_graph.png)](https://postimg.cc/image/535cehkvj/)|
+![nn_overview_graph.png](../img/nn-overview-graph.png)
 
 And the vectorized implementation of our computations in our __forward propagation__
 
@@ -287,7 +286,7 @@ When you train your neural network, it is important to initialize your parameter
 
 Lets take the following network as example:
 
-[![super_simple_network.png](https://s19.postimg.cc/8b9tr0jur/super_simple_network.png)](https://postimg.cc/image/aslkya3r3/)
+![super_simple_network.png](../img/super-simple-network.png)
 
 Lets say we initialize our parameters as follows:
 
