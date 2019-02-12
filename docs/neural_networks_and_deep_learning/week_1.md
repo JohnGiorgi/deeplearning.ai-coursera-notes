@@ -15,7 +15,7 @@ Here are some more areas in which deep learning has had a huge impact:
 - __Machine translation__ translating one natural language to another.
 - __Autonomous driving__
 
-[![](../img/supervised_learning.png)
+![](../img/supervised-learning.png)
 
 A lot of the value generation from using neural networks have come from intelligently choosing our \\(x\\) and \\(y\\) and learning a mapping.
 
