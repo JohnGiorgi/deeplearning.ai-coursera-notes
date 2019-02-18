@@ -18,7 +18,7 @@ Recall that we represent individual elements in the input sequence as \(x^{<t>}\
 
 First, we build our __encoder__, an RNN (LSTM or GRU) which processes the _input_ sequence. The encoder outputs a vector that represents the learned representation of the input sequence. A __decoder__ takes this _output_ sequence, and outputs the translation one word at a time.
 
-![](https://s19.postimg.cc/585mhn4nn/Screen_Shot_2018-06-01_at_1.55.13_PM.png)
+![many-to-many-clean-2.png](../img/many-to-many-clean-2.png)
 
 > Note that the outputs from each timestep in the decoder network are actually passed as input for the next timestep in the case of language modelling.
 
@@ -34,7 +34,7 @@ The task of **image captioning** involves inputing an image, and having the netw
 
 Typically, we use a CNN as our **encoder**, without any classification layer at the end. We feed the learned representation to a __decoder__, an RNN, which generates and output sequence which is our image caption.
 
-[![image_captioning.png](https://s19.postimg.cc/hxtx5aor7/image_captioning.png)](https://postimg.cc/image/w49o0izm7/)
+![image_captioning.png](../img/image-captioning.png)
 
 ### Summary
 
@@ -50,11 +50,11 @@ While there are some similarities between the **sequence to sequence machine tra
 
 We can think of machine translation as building a _conditional language model_. First, recall the language model we worked with previously:
 
-![](https://s19.postimg.cc/driq0vq0j/recall_language_model.png)
+![recall-language-model.png](../img/recall-language-model.png)
 
 The machine translation model looks like:
 
-![](https://s19.postimg.cc/derbupfgj/recall_machine_translation.png)
+![recall-machine-translation.png](../img/recall-machine-translation.png)
 
 Notice that the decoder network looks pretty much identical to the language model. However, instead of the initial hidden state being \(a^{<t>} = 0\), the initial hidden state is initialized with the learned representation from the encoder. That is why we can think of this as a _conditional language model_. Instead of modeling the probability of any sentence, it is now modeling the probability of say, the output English translation, conditioned on some input French sentence.
 
@@ -213,7 +213,7 @@ Beam search chose \(\hat y\) (recall, its optimization objective is \(\hat y  = 
 
 In practice, we might collect some examples of our gold translations (provided by a human) and compare them in a table to the corresponding machine-provided translations, tallying \(P(y* | x)\) and \(P(\hat y | x)\) for each example. We can then use the rules provided above to assign blame to either the RNN or to beam search in each case:
 
-[![beam_search_error_analysis.png](https://s19.postimg.cc/vdyeaknn7/beam_search_error_analysis.png)](https://postimg.cc/image/nxz4orzxr/)
+![beam_search_error_analysis.png](../img/beam-search-error-analysis.png)
 
 Through this process, you can carry out error analysis to figure out what fraction of errors are due to _beam search_ versus the _RNN model_. For every example in your dev sets where the algorithm gives a much worse output than the human translation, you can try to ascribe the error to either the search algorithm or to the objective function, or to the RNN model that generates the objective function that beam search is supposed to be maximizing. If you find that beam search is responsible for a lot of errors, then maybe it is worth increasing the beam width. Whereas in contrast, if you find that the RNN model is at fault, you could do a deeper layer of analysis to try to figure out if you want to add regularization, or get more training data, or try a different network architecture, or something else.
 
@@ -231,7 +231,7 @@ Given a very long French sentence, the encoder in a seq2seq network must read in
 
 Now, the way a human translator would translate this sentence is _not_ by reading and memorizing the entire sentence before beginning translation. Instead, the human translator would read the sentence bit-by-bit, translating words as they go, and paying special attention to certain parts of the input sentence when deciding what the ouput sentence should be. For the seq2seq architecture we introduced earlier, we finde that it works quite well for short sentences, but for very long sentences (maybe longer than 30 or 40 words) performance drops.
 
-[![bleu_score_with_attention.png](https://s19.postimg.cc/n1zfhwibn/bleu_score_with_attention.png)](https://postimg.cc/image/4meyki473/)
+![bleu_score_with_attention.png](../img/bleu-score-with-attention.png)
 
 > Short sentences are just hard to translate in general due to the lack of context. For long sentences, the vanilla seq2seq model doesn't do well because it's difficult to for the network to memorize a very long sentence. Blue line: seq2seq architectures without attention, Green line: seq2seq architectures with attention.
 
@@ -249,7 +249,7 @@ Note that attention is typically more useful for longer sequences, but for the p
 
 Say that we use a bi-directional RNN to compute some sort of rich feature set for a given input. Lets introduce a new notation: \(\alpha^{<i, j>}\) can be thought of as an attention measure, e.g., when we are looking to produce the translated word \(i\) in the output sequence, how much _attention_ should we pay to the word \(j\) in the input sequence? Broadly speaking, our decoder takes these measures of attention, along with the output from the encoder network to compute a new input that it uses when determining its outputs. More specifically, \(\alpha^{<i, j>}\) is influenced by the forward and backward activations of the encoder network at timestep \(i\) and the output from the previous timestep of the decoder network, \(S^{<t-1>}\).
 
-[![attention_model_intuition.png](https://s19.postimg.cc/sy30gg3pf/attention_model_intuition.png)](https://postimg.cc/image/q3zv301j3/)
+![attention_model_intuition.png](../img/attention-model-intuition.png)
 
 > Note, we have denoted the activations of the decoder network as \(S^{<t>}\) to avoid confusion.
 
@@ -263,7 +263,7 @@ In the last lecture, we saw how the attention model allows a neural network to p
 
 Similar to the last lecture, lets assume we have a bi-directional RNN (be it LSTM or GRU) that we use to compute features for the input sequence.
 
-[![attention_detail_fb.png](https://s19.postimg.cc/w4kox57gj/attention_detail_fb.png)](https://postimg.cc/image/qt5scfldr/)
+![attention_detail_fb.png](../img/attention-detail-fb.png)
 
 To simplify the notation, at every timestep we are going to denote the activations for both the forward and backward recurrent networks as \(a^{<t>}\), such that:
 
@@ -281,7 +281,7 @@ In plain english, \(\alpha^{<t, t'>}\) is the amount of "attention" that \(y^{<t
 
 And so forth and so on.
 
-[![attention_detail_complete.png](https://s19.postimg.cc/j0f4kfzz7/attention_detail_complete.png)](https://postimg.cc/image/obu155m1r/)
+![attention_detail_complete.png](../img/attention-detail-complete.png)
 
 The only thing left to define is how we _actually_ compute the attention weights, \(\alpha^{<t, t'>}\)
 
@@ -295,7 +295,7 @@ Let us first present the formula and then explain it:
 
 We first compute \(e^{<t, t'>}\) and then use what is essentially a softmax over all \(t'\) to guarantee that \(\alpha^{<t, t'>}\) sums to zero over all \(t'\). But how do we compute \(e^{<t, t'>}\)? Typically we use a small neural network that looks something like the following:
 
-[![attention_how_to_learn_attention_weights.png](https://s19.postimg.cc/vrtaqxubn/attention_how_to_learn_attention_weights.png)](https://postimg.cc/image/whc33auv3/)
+![attention_how_to_learn_attention_weights.png](../img/attention-how-to-learn-attention-weights.png)
 
 The intuition is, if you want to decide how much attention to pay to the activation of \(t'\), we should depend on the hidden state activation from the previous time step, \(S^{<t-1>}\) and the learned features of the word at \(t'\), \(a^{<t'>}\). What we don't know is the exact function which takes in (\(S^{<t-1>}, a^{<t'>}\)) and maps it to \(e^{<t, t'>}\). Therefore, we use a small neural network to learn this function for us.
 
@@ -313,7 +313,7 @@ In speech recognition, produce a transcript \(y\) given an audio clip, \(x\). Th
 
 In truth, even the human brain doesn't process _raw sound_. We typically perform a series of pre-processing steps, eventually generating a spectrogram, a 3D representation of sound (x: time, y: frequency, z: amplitude)
 
-[![speech_recognition_problem.png](https://s19.postimg.cc/rxzuhrxk3/speech_recognition_problem.png)](https://postimg.cc/image/eh2vywn8f/)
+![speech_recognition_problem.png](../img/speech-recognition-problem.png)
 
 > The human ear performs something similar to this preprocessing.
 
@@ -323,7 +323,7 @@ Traditionally, speech recognition was solved by first learning to classify __pho
 
 One way to build a speech recognition system is to use the seq2seq model with attention that we explored previously, where the audio clip (divided into small timeframes) is the input and the audio transcript is the output
 
-[![seq2seq_attention_model_clean.png](https://s19.postimg.cc/us2zv74v7/seq2seq_attention_model_clean.png)](https://postimg.cc/image/yboxl07kv/)
+![seq2seq_attention_model_clean-2.png](../img/seq2seq-attention-model-clean-2.png)
 
 ### CTC cost for speech recognition
 
@@ -357,4 +357,4 @@ The literature on trigger word detection is still evolving, and there is not wid
 
 Our task is to take an audio clip, possibly perform preprocessing to compute a spectrogram and then the features that we will eventually pass to an RNN, and predict at which timesteps the wake word was uttered. One strategy, is to have the neural network output the label 0 for all timesteps before a wake word is mentioned and then 1 directly after it is mentioned. The slight problem with this is that our training set becomes very unbalanced (many more 0's than 1's). Instead, we typically have the model predict a few 1's for the timesteps that come directly after the wake word was mentioned.
 
-[![trigger_word_detection.png](https://s19.postimg.cc/sar8nwq3n/trigger_word_detection.png)](https://postimg.cc/image/7dv0j8s2n/)
+![trigger_word_detection.png](../img/trigger-word-detection.png)

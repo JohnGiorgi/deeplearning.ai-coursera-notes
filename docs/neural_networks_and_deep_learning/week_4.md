@@ -52,7 +52,7 @@ For a \\(l\\)-layered neural network, our dimensions are as follows:
 
 Where \\(n^{[l]}\\) is the number of units in layer \\(l\\).
 
-> See [this](https://www.coursera.org/learn/neural-networks-deep-learning/lecture/rz9xJ/why-deep-representations) video for a derivation of these dimensions.
+> See [this](https://www.coursera.org/learn/neural-networks-deep-learning/lecture/Rz47X/getting-your-matrix-dimensions-right) video for a derivation of these dimensions.
 
 When implementing backpropagation, the dimensions are the same, i.e., the dimensions of \\(W\\), \\(b\\), \\(A\\) and \\(Z\\) are the same as \\(dW\\), \\(db\\), ...
 
@@ -68,7 +68,7 @@ The next layer can use the outputs from the previous layer, which can roughly be
 
 Finally, the output layer uses the output of the previous layer, detected features of a face, and compose them together to recognize a whole face.
 
-[![deep_representations.png](https://s19.postimg.cc/57hzx2doj/deep_representations.png)](https://postimg.cc/image/slpz8zvlr/)
+![deep_representations.png](../img/deep-representations.png)
 
 > The main intuition is that earlier layers detect "simpler" structures, and pass this information onto the next layer which can use it to detect increasingly complex structures.
 
@@ -84,7 +84,7 @@ Circuit theory also provides us with a possible explanation as to why deep netwo
 
 Lets take a more holistic approach and talk about all the building blocks of deep neural networks. Here is a deep neural network with a few hidden layers
 
-[![simple_deep_nn_2.png](https://s19.postimg.cc/wtuvboc5v/simple_deep_nn_2.png)](https://postimg.cc/image/fgkkwtgun/)
+![simple_deep_nn_2.png](../img/simple-deep-nn-2.png)
 
 Lets pick one layer, \\(l\\) and look at the computations involved.
 
@@ -97,7 +97,7 @@ __Forward Propagation__
 - Linear function: \\(z^{[l]} = W^{[l]}a^{[l-1] + b^{[l]}}\\)
 - Activation function: \\(a^{[l]} = g^{[l]}(z^{[l]})\\)
 
-Because \\(z^{[l]}, W^{[l]} and b^{[l]}\\) are used in then backpropagation steps, it helps to cache theses values during forward propagation.
+Because \\(z^{[l]}, W^{[l]}, b^{[l]}\\) are used in then backpropagation steps, it helps to cache these values during forward propagation.
 
 __Backwards Propagation__
 
@@ -106,7 +106,7 @@ __Backwards Propagation__
 
 The key insight, is that for every computation in forward propagation there is a corresponding computation in backwards propagation
 
-[![forward_backward.png](https://s19.postimg.cc/nfx5yyrtf/forward_backward.png)](https://postimg.cc/image/ct3ctjjnz/)
+![forward_backward.png](../img/forward-backward.png)
 
 So one iteration of training with a neural network involves feeding our inputs into the network (\\(a^{[0]})\\), performing forward propagation computing \\(\hat y\\), and using it to compute the loss and perform backpropagation through the network. This will produce all the derivatives of the parameters w.r.t the loss that we need to update the parameters for gradient descent.
 
@@ -124,7 +124,7 @@ Examples include:
 - number of hidden units \\(n^{[1]}, n^{[2]}, ...\\)
 - choice of activation function
 
-> the learning rate is sometimes called a parameter. We will follow the convetion of calling it a hyperparameter.
+> the learning rate is sometimes called a parameter. We will follow the convention of calling it a hyperparameter.
 
 It can be difficult to know the optimal hyperparameters in advance. Often, we start by simply trying out many values to see what works best, this allows us to build our intuition about the best hyperparameters to use. We will defer a deep discussion on how to choose hyperparameters to the next course.
 

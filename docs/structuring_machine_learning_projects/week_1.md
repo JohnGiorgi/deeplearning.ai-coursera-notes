@@ -30,7 +30,7 @@ Take another example, driving a __car__. Imagine if there was multiple joysticks
 
 __Orthogonal__ refers to the idea that the _inputs_ are aligned to the dimensions we want to control.
 
-[![speed_v_angle_orth.png](https://s19.postimg.cc/51dg3e5v7/speed_v_angle_orth.png)](https://postimg.cc/image/t547roobz/)
+![speed_v_angle_orth.png](../img/speed-v-angle-orth.png)
 
 _How does this related to machine learning?_
 
@@ -68,13 +68,13 @@ Lets look at an example.
 
 As we discussed previously, __applied machine learning__ is a very empirical process.
 
-[![using_a_single_number.png](https://s19.postimg.cc/3mbveorxf/using_a_single_number.png)](https://postimg.cc/image/6t6eybcdb/)
+![using_a_single_number.png](../img/using-a-single-number.png)
 
 Lets say that we start with classifier A, and end up with classifier B after some change to the model. We could look at __precision__ and __recall__ as a means of improvements. What we really want is to improve _both_ precision and recall. The problem is that it can become difficult to choose the "best" classifier if we are monitoring two different performance metrics, especially when we are making many modifications to our network.
 
 This is when it becomes important to chose a single performance metric. In this case specifically, we can chose the __F1-score__, the harmonic mean of the precision and recall (less formally, think of this as an average).
 
-[![chosing_f1_score.png](https://s19.postimg.cc/ovzhpj0ib/chosing_f1_score.png)](https://postimg.cc/image/uwx6mln4f/)
+![chosing_f1_score.png](../img/chosing-f1-score.png)
 
 We can see very quickly that classifier A has a better F1-score, and therefore we chose classifier A over classifier B.
 
@@ -84,7 +84,7 @@ It is not always easy to combine all the metrics we care about into a single rea
 
 Lets say we are building a classifier, and we care about both our __accuracy__ (measured as F1-score, traditional accuracy or some other metric) _and_ the __running time__ to classify a new example.
 
-[![two_metrics_optimize.png](https://s19.postimg.cc/px8x67gur/two_metrics_optimize.png)](https://postimg.cc/image/aoizsfn67/)
+![two_metrics_optimize.png](../img/two-metrics-optimize.png)
 
 One thing we can do, is to combine accuracy and run-time into a __single-metric__, possibly by taking a weighted linear sum of the two metrics.
 
@@ -191,7 +191,7 @@ In the last few years, comparing machine learning systems to human level perform
 
 It is also instructive to look at the performance of machine learning over time (note this is an obvious abstraction)
 
-[![ai_progress_over_time.png](https://s19.postimg.cc/8ij85de7n/ai_progress_over_time.png)](https://postimg.cc/image/wm9ztnwof/)
+![ai_progress_over_time.png](../img/ai-progress-over-time.png)
 
 Roughly speaking, performance (e.g., in a research domain or for a certain task) progresses quickly until we reach human-level performance, and tails off quickly. _Why?_ mainly because human level performance is typically very close to the [__Bayes optimal error__](http://www.wikiwand.com/en/Bayes_error_rate). Bayes optimal error is the best possible error; there is no way for any function mapping from \\(x \rightarrow y\\) to do any better. A second reason is that so long as ML performs worse than humans for a given task, we can:
 
