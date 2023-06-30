@@ -35,7 +35,7 @@ The formula for the sigmoid function is given by: \\(\sigma(z) = \frac{1}{1 + e^
 
 Thus, logistic regression attempts to learn parameters which will classify images based on their probability of belonging to one class or the other. The classification decision is decided by applying the sigmoid function to \\(w^Tx + b\\) .
 
-> Note, with neural networks, it is easier to keep the weights \\(w\\) and the biases \\(b\\) separate. Another notation involves adding an extra parameters (\\(w_0\\) which plays the role of the bias.
+> Note, with neural networks, it is easier to keep the weights \\(w\\) and the biases \\(b\\) separate. Another notation involves adding an extra parameters, \\(w_0\\), which plays the role of the bias.
 
 __Loss function__
 
