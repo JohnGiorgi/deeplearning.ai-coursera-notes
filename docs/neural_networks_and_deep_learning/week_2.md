@@ -41,12 +41,12 @@ __Loss function__
 
 Our prediction for a given example \\(x^{(i)}\\) is \\(\hat y^{(i)} = \sigma(w^Tx^{(i)} + b)\\) .
 
-We chose __loss function__, \\(\ell(\hat y, y) = -(y \; log\; \hat y + (1-y) \;log(1-\hat y))\\).
+We chose the __loss function__, \\(\ell(\hat y, y) = -(y \; \log\; \hat y + (1-y) \;\log(1-\hat y))\\).
 
 We note that:
 
-- If \\(y=1\\) , then the loss function is \\(\ell(\hat y, y) = -log\; \hat y\\) . Thus, the loss approaches zero as \\(\hat y\\) approaches 1.
-- If \\(y=0\\) , then the loss function is \\(\ell(\hat y, y) = -log\; (1 -\hat y)\\) . Thus, the loss approaches zero as \\(\hat y\\) approaches 0.
+- If \\(y=1\\) , then the loss function is \\(\ell(\hat y, y) = -\log\; \hat y\\) . Thus, the loss approaches zero as \\(\hat y\\) approaches 1.
+- If \\(y=0\\) , then the loss function is \\(\ell(\hat y, y) = -\log\; (1 -\hat y)\\) . Thus, the loss approaches zero as \\(\hat y\\) approaches 0.
 
 > Note, while \\(\ell_2\\) loss is taught in many courses and seems like an appropriate choice, it is non-convex and so we cannot use gradient descent to optimize it.
 
@@ -54,7 +54,7 @@ We note that:
 
 Note that the __loss function__ measures how well we are doing on a _single example_. We now define a __cost function__, which captures how well we are doing on the entire dataset:
 
-\\(J(w,b) = \frac{1}{m}\sum^m_{i=1} \ell(\hat y^{(i)}, y^{(i)}) = - \frac{1}{m}\sum^m_{i=1}(y^{(i)} \; log\; \hat y^{(i)} + (1-y^{(i)}) \;log(1-\hat y^{(i)}))\\)
+\\(J(w,b) = \frac{1}{m}\sum^m_{i=1} \ell(\hat y^{(i)}, y^{(i)}) = - \frac{1}{m}\sum^m_{i=1}(y^{(i)} \; \log\; \hat y^{(i)} + (1-y^{(i)}) \;\log(1-\hat y^{(i)}))\\)
 
 > Note that this notation is somewhat unique, typically the cost/loss functions are just interchangeable terms. However in this course, we will define the __loss function__ as computing the error for a single training example and the __cost function__ as the average of the loss functions of the entire training set.
 
@@ -168,7 +168,7 @@ Logistic regression recap:
 
 \\[z = w^Tx + b\\]
 \\[\hat y = a = \sigma(z)\\]
-\\[\ell(a,y) = -(ylog(a) + (1-y)log(1-a))\\]
+\\[\ell(a,y) = -(y \log(a) + (1-y) \log(1-a))\\]
 
 > \\(\ell\\) is our loss for a single example, and \\(\hat y\\) are our predictions.
 
@@ -202,7 +202,7 @@ __Extending to \\(m\\) examples__
 
 Lets first remind ourself of the logistic regression __cost__ function:
 
-\\[J(w,b) = \frac{1}{m}\sum^m_{i=1} \ell(\hat y^{(i)}, y^{(i)}) = - \frac{1}{m}\sum^m_{i=1}(y^{(i)} \; log\; \hat y^{(i)} + (1-y^{(i)}) \;log(1-\hat y^{(i)}))\\]
+\\[J(w,b) = \frac{1}{m}\sum^m_{i=1} \ell(\hat y^{(i)}, y^{(i)}) = - \frac{1}{m}\sum^m_{i=1}(y^{(i)} \; \log\; \hat y^{(i)} + (1-y^{(i)}) \; \log(1-\hat y^{(i)}))\\]
 
 Where,
 
@@ -224,7 +224,7 @@ for \\(i=1\\) to \\(m\\):
 
 - \\(z^{(i)} = w^Tx^{(i)}\\)
 - \\(a^{(i)} = \sigma(z^{(i)})\\)
-- \\(J \text{+= } -[y^{(i)}log(a^{(i)}) + (1-y^{(i)})log(1-a^{(i)})]\\)
+- \\(J \text{+= } -[y^{(i)} \log(a^{(i)}) + (1-y^{(i)}) \log(1-a^{(i)})]\\)
 - \\(dz^{(i)} = a^{(i)} - y^{(i)}\\)
 - for \\(j = 1\\) to \\(n\\)
   - \\(dw_j \text{+= } x_j^{(i)}dz^{(i)}\\)
