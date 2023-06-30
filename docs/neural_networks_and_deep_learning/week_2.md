@@ -48,7 +48,7 @@ We note that:
 - If \\(y=1\\) , then the loss function is \\(\ell(\hat y, y) = -\log\; \hat y\\) . Thus, the loss approaches zero as \\(\hat y\\) approaches 1.
 - If \\(y=0\\) , then the loss function is \\(\ell(\hat y, y) = -\log\; (1 -\hat y)\\) . Thus, the loss approaches zero as \\(\hat y\\) approaches 0.
 
-> Note, while \\(\ell_2\\) loss is taught in many courses and seems like an appropriate choice, it is non-convex and so we cannot use gradient descent to optimize it.
+> Note, while \\(\ell_2\\) loss is taught in many courses and seems like an appropriate choice, it is non-convex and more difficult to optimize with gradient descent.
 
 > An optional video is given further justifying the use of this loss function. Watch it and add notes here!
 
